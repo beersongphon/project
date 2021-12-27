@@ -42,6 +42,8 @@ if (isset($_POST["txtSearch"])) {
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" href="#register">สมัครสมาชิก</a></li>
+          <li class="nav-item"><a class="nav-link" href="#login">เข้าสู่ระบบ</a></li>
         </ul>
       </div>
     </div>
@@ -140,36 +142,36 @@ if (isset($_POST["txtSearch"])) {
               ?>
         </div>
         <?php
-$sql2 = "SELECT * FROM product";
-$query2 = mysqli_query($conn, $sql2);
-$total_record = mysqli_num_rows($query2);
-$total_page = ceil($total_record / $perpage);
-?>
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="admin.php?use=fix&page=1" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <?php
-    for ($i = 1; $i <= $total_page; $i++) {
-    ?>
-      <li class="page-item">
-        <a class="page-link" href="admin.php?use=fix&page=<?php echo $i; ?>">
-          <?php echo $i; ?>
-        </a>
-      </li>
-    <?php
-    }
-    ?>
-    <li class="page-item">
-      <a class="page-link" href="admin.php?use=fix&page=<?php echo $total_page; ?>">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+        $sql2 = "SELECT * FROM product";
+        $query2 = mysqli_query($conn, $sql2);
+        $total_record = mysqli_num_rows($query2);
+        $total_page = ceil($total_record / $perpage);
+        ?>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="index.php?page=1#product" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <?php
+            for ($i = 1; $i <= $total_page; $i++) {
+            ?>
+              <li class="page-item">
+                <a class="page-link" href="index.php?page=<?php echo $i; ?>#product">
+                  <?php echo $i; ?>
+                </a>
+              </li>
+            <?php
+            }
+            ?>
+            <li class="page-item">
+              <a class="page-link" href="index.php?&page=<?php echo $total_page; ?>#product">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </section>
   </div>
@@ -465,6 +467,44 @@ $total_page = ceil($total_record / $perpage);
     } //while condition closing bracket
   }  //if condition closing bracket
   ?>
+  <!-- Portfolio Modals-->
+  <!-- Portfolio item 1 modal popup-->
+  <div class="portfolio-modal modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="close-modal" data-bs-dismiss="modal"><img src="./assets/front-end/assets/img/close-icon.svg" alt="Close modal" /></div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="modal-body">
+                <!-- Project details-->
+                <h2 class="text-uppercase"><?php echo $row['name']; ?></h2>
+                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                <img class="img-fluid d-block mx-auto" src="./assets/img/<?php echo $row['img']; ?>" alt="..." />
+                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
+                  blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
+                  expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <ul class="list-inline">
+                  <li>
+                    <strong>Client:</strong>
+                    Threads
+                  </li>
+                  <li>
+                    <strong>Category:</strong>
+                    Illustration
+                  </li>
+                </ul>
+                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                  <i class="fas fa-times me-1"></i>
+                  Close Project
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Core theme JS-->
