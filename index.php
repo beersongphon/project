@@ -27,7 +27,7 @@ if (isset($_SESSION["username_badminton"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Agency - Start Bootstrap Theme</title>
+  <title><?php echo $toptitle; ?></title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
@@ -39,13 +39,14 @@ if (isset($_SESSION["username_badminton"])) {
   <link href="./assets/front-end/css/styles.css" rel="stylesheet" />
 
   <script src="./assets/js/jquery-3.5.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Petemoss&display=swap" rel="stylesheet">
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="#page-top"><img src="./assets/front-end/assets/img/navbar-logo.svg" alt="..." /></a>
+    <a class="navbar-brand" href="#page-top" style="font-family: 'Finger Paint', cursive; font-size: 20px;">Luxury by Fon</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars ms-1"></i>
@@ -176,8 +177,8 @@ if (isset($_SESSION["username_badminton"])) {
                   ?>
 
                   <div class="portfolio-caption">
-                    <div class="portfolio-caption-heading">Threads</div>
-                    <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                    <div class="portfolio-caption-heading"><?php echo $row["name"]; ?></div>
+                    <div class="portfolio-caption-subheading text-muted"><?php echo $row["price"]; ?></div>
                   </div>
                 </div>
               </div>
@@ -493,7 +494,7 @@ if (isset($_SESSION["username_badminton"])) {
   <footer class="footer py-4">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2021</div>
+        <div class="col-lg-4 text-lg-start"><?php echo $footer; ?></div>
         <div class="col-lg-4 my-3 my-lg-0">
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>

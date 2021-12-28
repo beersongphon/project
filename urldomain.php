@@ -1,9 +1,9 @@
 <?php
 	$url = "project";
 	$domain = "localhost";
-	$toptitle = "Biriya Badminton";
+	$toptitle = "Luxury by Fon";
 	
 	$sessiontime = 32400;
-	$footer = "&copy; 2021 Copyright";
+	$footer = "Copyright &copy; Your Website 2021";
 	$icon = "img/png.png";
 ?>

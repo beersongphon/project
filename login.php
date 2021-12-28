@@ -3,7 +3,7 @@ session_start();
 date_default_timezone_set('Asia/Bangkok');
 include("urldomain.php");
 if (isset($_POST["usr"])) {
-  include("connect.php");
+  include("./connect.php");
   $Username = $_POST["usr"];
   $Password = md5($_POST["pwd_login"]);
   $sql = "SELECT * FROM member Where member_user ='" . $Username . "' and member_pass ='" . $Password . "' ";
