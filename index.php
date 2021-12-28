@@ -42,7 +42,7 @@ if (isset($_SESSION["username_badminton"])) {
   <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Petemoss&display=swap" rel="stylesheet">
 </head>
 
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+<body id="page-top" data-spy="scroll" data-target=".navbar" data-offset="50">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
@@ -55,8 +55,8 @@ if (isset($_SESSION["username_badminton"])) {
         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
           <?php
           if (!isset($_SESSION['username_badminton'])) {
-            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-target='#myModalRegis' href='#myModalRegis'>สมัครสมาชิก</a></li>";
-            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-target='#myModalLogin' href='#myModalLogin'>เข้าสู่ระบบ</a></li>";
+            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-bs-target='#myModalRegis' href='#myModalRegis'>สมัครสมาชิก</a></li>";
+            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-bs-target='#myModalLogin' href='#login'>เข้าสู่ระบบ</a></li>";
           } else {
             echo "<li class='nav-item'><a class='nav-link' href='#services'>Services</a></li>";
             echo "<li class='nav-item'><a class='nav-link' href='#product'>สินค้า</a></li>";
@@ -441,7 +441,7 @@ if (isset($_SESSION["username_badminton"])) {
             </div>
             <div class="form-group">
               <!-- Email address input-->
-              <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+              <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required" />
               <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
               <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
             </div>
@@ -801,7 +801,7 @@ if (isset($_SESSION["username_badminton"])) {
             $('[data-toggle="tooltip"]').tooltip();
 
             // scrolling to all links in navbar + footer link [ ^ ]
-            $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+            $(".navbar a, footer a[href='#page-top']").on('click', function(event) {
 
                 // Make sure this.hash has a value before overriding default behavior
                 if (this.hash !== "") {
