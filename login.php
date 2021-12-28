@@ -1,50 +1,29 @@
-<html>
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<!-- Custom styles for this template -->
-<link href="./assets/css/signin.css" rel="stylesheet">
-<style>
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+<?php
+session_start();
+date_default_timezone_set('Asia/Bangkok');
+include("urldomain.php");
+if (isset($_POST["usr"])) {
+  include("connect.php");
+  $Username = $_POST["usr"];
+  $Password = md5($_POST["pwd_login"]);
+  $sql = "SELECT * FROM member Where member_user ='" . $Username . "' and member_pass ='" . $Password . "' ";
+  $result = mysqli_query($con, $sql);
+
+  if (mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_array($result);
+
+    $_SESSION["memberid_badminton"] = $row["member_id"];
+    $_SESSION["username_badminton"] = $row["member_tel"];
+    $_SESSION["firstname_badminton"] = $row["member_user"];
+    $_SESSION["lastname_badminton"] = $row["member_pass"];
+    $_SESSION["permission_badminton"] = $row["member_permission"];
+    $_SESSION["login_timestamp"] = time();
+    echo "login_success";
+  } else {
+    //   echo "<script>";
+    echo "alert('Sorry Username or Password something is wrong! \\nTake you back homepage! ');";
+    // echo "window.history.back()";
+    //   echo "window.location.replace('http://".$domain."/".$url."');";
+    //   echo "</script>";
   }
-
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
-</style>
-<!-- Custom styles for this template -->
-<link href="signin.css" rel="stylesheet">
-<body class="text-center">
-  <main class="form-signin">
-    <form>
-      <img class="mb-4" src="./assets/img/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-      <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
-
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </form>
-  </main>
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-</html>
+}
