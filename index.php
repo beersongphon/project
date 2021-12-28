@@ -37,6 +37,8 @@ if (isset($_SESSION["username_badminton"])) {
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="./assets/front-end/css/styles.css" rel="stylesheet" />
+
+  <script src="./assets/js/jquery-3.5.1.min.js"></script>
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -52,8 +54,8 @@ if (isset($_SESSION["username_badminton"])) {
         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
           <?php
           if (!isset($_SESSION['username_badminton'])) {
-            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-target='#myModalRegis' href='#register'>สมัครสมาชิก</a></li>";
-            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-target='#myModalLogin' href='#login'>เข้าสู่ระบบ</a></li>";
+            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-target='#myModalRegis' href='#myModalRegis'>สมัครสมาชิก</a></li>";
+            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-target='#myModalLogin' href='#myModalLogin'>เข้าสู่ระบบ</a></li>";
           } else {
             echo "<li class='nav-item'><a class='nav-link' href='#services'>Services</a></li>";
             echo "<li class='nav-item'><a class='nav-link' href='#product'>สินค้า</a></li>";
@@ -124,16 +126,26 @@ if (isset($_SESSION["username_badminton"])) {
         </div>
         <div class="row">
           <?php
-          $perpage = 6;
-          if (isset($_GET['page'])) {
-            $page = $_GET['page'];
+          if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+            $page_no = $_GET['page_no'];
           } else {
-            $page = 1;
+            $page_no = 1;
           }
-          $start = ($page - 1) * $perpage;
+
+          $total_records_per_page = 6;
+          $offset = ($page_no - 1) * $total_records_per_page;
+          $previous_page = $page_no - 1;
+          $next_page = $page_no + 1;
+          $adjacents = "2";
+
+          $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `product`");
+          $total_records = mysqli_fetch_array($result_count);
+          $total_records = $total_records['total_records'];
+          $total_no_of_pages = ceil($total_records / $total_records_per_page);
+          $second_last = $total_no_of_pages - 1; // total page minus 1
 
           $sql = "SELECT * FROM product WHERE product_id LIKE '%" . $strKeyword . "%' OR Name LIKE '%" . $strKeyword . "%'
-            limit {$start} , {$perpage} 
+            LIMIT $offset, $total_records_per_page
             ";
           $result = $conn->query($sql);
 
@@ -174,37 +186,85 @@ if (isset($_SESSION["username_badminton"])) {
           }  //if condition closing bracket
           ?>
         </div>
-        <?php
-        $sql2 = "SELECT * FROM product";
-        $query2 = mysqli_query($conn, $sql2);
-        $total_record = mysqli_num_rows($query2);
-        $total_page = ceil($total_record / $perpage);
-        ?>
-        <nav aria-label="Page navigation example">
+        <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Page <?php echo $page_no . " of " . $total_no_of_pages; ?></strong>
+          </div>
+
           <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="index.php?page=1#product" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <?php
-            for ($i = 1; $i <= $total_page; $i++) {
+            <?php // if($page_no > 1){ echo "<li class='page-item'><a class='page-link' href='?page_no=1'>First Page</a></li>"; } 
             ?>
-              <li class="page-item">
-                <a class="page-link" href="index.php?page=<?php echo $i; ?>#product">
-                  <?php echo $i; ?>
-                </a>
-              </li>
+
+            <li <?php if ($page_no <= 1) {
+                echo "class='page-item disabled'";
+              } ?>>
+              <a class="page-link" <?php if ($page_no > 1) {
+                echo "href='?page_no=$previous_page'";
+              } ?>>Previous</a>
+            </li>
+
             <?php
+            if ($total_no_of_pages <= 10) {
+              for ($counter = 1; $counter <= $total_no_of_pages; $counter++) {
+                if ($counter == $page_no) {
+                  echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                } else {
+                  echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                }
+              }
+            } elseif ($total_no_of_pages > 10) {
+
+              if ($page_no <= 4) {
+                for ($counter = 1; $counter < 8; $counter++) {
+                  if ($counter == $page_no) {
+                    echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                  } else {
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                  }
+                }
+                echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
+                echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
+              } elseif ($page_no > 4 && $page_no < $total_no_of_pages - 4) {
+                echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
+                echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
+                echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {
+                  if ($counter == $page_no) {
+                    echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                  } else {
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                  }
+                }
+                echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
+                echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
+              } else {
+                echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
+                echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
+                echo "<li class='page-item'><a class='page-link'>...</a></li>";
+
+                for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
+                  if ($counter == $page_no) {
+                    echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                  } else {
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                  }
+                }
+              }
             }
             ?>
-            <li class="page-item">
-              <a class="page-link" href="index.php?&page=<?php echo $total_page; ?>#product">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
+
+            <li <?php if ($page_no >= $total_no_of_pages) {
+                  echo "class='page-item disabled'";
+                } ?>>
+              <a class="page-link" <?php if ($page_no < $total_no_of_pages) {
+                    echo "href='?page_no=$next_page'";
+                  } ?>>Next</a>
             </li>
+            <?php if ($page_no < $total_no_of_pages) {
+              echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
+            } ?>
           </ul>
-        </nav>
       </div>
     </section>
   </div>
@@ -375,12 +435,12 @@ if (isset($_SESSION["username_badminton"])) {
           <div class="col-md-6">
             <div class="form-group">
               <!-- Name input-->
-              <input class="form-control" id="name_contact" type="text" placeholder="ชื่อ *" data-sb-validations="required" />
+              <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
               <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
             </div>
             <div class="form-group">
               <!-- Email address input-->
-              <input class="form-control" id="email_contact" type="email" placeholder="อีเมล *" data-sb-validations="required,email" />
+              <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
               <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
               <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
             </div>
@@ -393,7 +453,7 @@ if (isset($_SESSION["username_badminton"])) {
           <div class="col-md-6">
             <div class="form-group form-group-textarea mb-md-0">
               <!-- Message input-->
-              <textarea class="form-control" id="comments_contact" placeholder="ความคิดเห็น *" data-sb-validations="required"></textarea>
+              <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
               <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
             </div>
           </div>
@@ -417,6 +477,7 @@ if (isset($_SESSION["username_badminton"])) {
         <div class="d-none" id="submitErrorMessage">
           <div class="text-center text-danger mb-3">Error sending message!</div>
         </div>
+        <!-- Submit Button-->
         <?php
         if (isset($_SESSION['username_badminton'])) {
           echo "<div class='text-center'><button class='btn btn-primary btn-xl text-uppercase' id='btn_contact' type='submit'>ส่ง</button></div>";
@@ -425,7 +486,6 @@ if (isset($_SESSION["username_badminton"])) {
           echo "<div class='text-center'><label class='section-heading text-uppercase' for='email'>&nbsp&nbspกรุณา Login ก่อนทำรายการ</label></div>";      
         }
         ?>
-       
       </form>
     </div>
   </section>
@@ -436,12 +496,8 @@ if (isset($_SESSION["username_badminton"])) {
         <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2021</div>
         <div class="col-lg-4 my-3 my-lg-0">
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-          <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/Biriya-Badminton-%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B9%81%E0%B8%9A%E0%B8%94%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%95%E0%B8%B1%E0%B8%99%E0%B8%9E%E0%B8%B4%E0%B8%A3%E0%B8%B4%E0%B8%A2%E0%B8%B0-252610451461385/?ref=page_internal"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
           <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-          <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-            <span class="glyphicon glyphicon-chevron-up"></span>
-        </a><br><br>
-        <p>Page Facebook : <a href="https://www.facebook.com/Biriya-Badminton-%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B9%81%E0%B8%9A%E0%B8%94%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%95%E0%B8%B1%E0%B8%99%E0%B8%9E%E0%B8%B4%E0%B8%A3%E0%B8%B4%E0%B8%A2%E0%B8%B0-252610451461385/?ref=page_internal" data-toggle="tooltip" title="Biriya Badminton">Biriya Badminton - สนามแบดมินตันพิริยะ</a></p>
         </div>
         <div class="col-lg-4 text-lg-end">
           <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
@@ -504,7 +560,7 @@ if (isset($_SESSION["username_badminton"])) {
   ?>
   <!-- Portfolio Modals-->
   <!-- Portfolio item 1 modal popup-->
-  <div class="portfolio-modal modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="portfolio-modal modal fade" id="myModalRegis" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="close-modal" data-bs-dismiss="modal"><img src="./assets/front-end/assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -665,28 +721,11 @@ if (isset($_SESSION["username_badminton"])) {
                         Security code required
                       </div>
                     </div>
-                    <div class="form-group">
-                            <label for="idcard_regis"><span class="glyphicon glyphicon-book"></span> IDCard</label>
-                            <input type="number" class="form-control" id="idcard_regis" placeholder="Enter IDCard">
-                        </div>
-                        <div class="form-group">
-                            <label for="optradio"><span class="glyphicon glyphicon-heart"></span> Sex</label>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" value="1" checked>Male</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio" value="0">Female</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tel_regis"><span class="glyphicon glyphicon-earphone"></span> Telephone number</label>
-                            <input type="number" class="form-control" id="tel_regis" placeholder="Enter Telephone number">
-                        </div>
                   </div>
 
                   <hr class="my-4">
 
-                  <button class="w-100 btn btn-primary btn-lg" type="button" id="btn_regis" >Continue to checkout</button>
+                  <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
                 </form>
                 <hr>
                 <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
@@ -749,7 +788,6 @@ if (isset($_SESSION["username_badminton"])) {
       </div>
     </div>
   </div>
-  
   <!-- Action jQuery -->
   <script>
         const price_per_hour = 150;
