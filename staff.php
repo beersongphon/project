@@ -133,43 +133,47 @@ include('./connect.php');
           <div class="card mb-4">
             <div class="card-body">
               <table id="datatablesSimple">
-                <thead>
+              <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>ID Card</th>
+                    <th>Tel</th>
+                    <th>Sex</th>
+                    <th>Datetime</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
+                    <th>ID</th>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>ID Card</th>
+                    <th>Tel</th>
+                    <th>Sex</th>
+                    <th>Datetime</th>
                   </tr>
                 </tfoot>
                 <tbody>
+                  <?php
+                  $sql = "SELECT * FROM member";
+                  $result = $conn->query($sql);
+
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                  ?>
                   <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
+                    <td><?php echo $row["member_id"]; ?></td>
+                    <td><?php echo $row["member_name"]; ?> <?php echo $row["member_lastname"]; ?></td>
+                    <td><?php echo $row["member_idcard"]; ?></td>
+                    <td><?php echo $row["member_tel"]; ?></td>
+                    <td><?php echo $row["member_sex"]; ?></td>
+                    <td><?php echo $row["member_datetime"]; ?></td>
                   </tr>
-                  <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011/07/25</td>
-                    <td>$170,750</td>
-                  </tr>
+                  <?php
+                    } //while condition closing bracket
+                  }  //if condition closing bracket
+                  ?>
                 </tbody>
               </table>
             </div>
