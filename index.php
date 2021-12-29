@@ -1,7 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set("Asia/Bangkok");
-include("urldomain.php");
+include("./urldomain.php");
 include('./connect.php');
 
 $strKeyword = null;
@@ -573,16 +573,16 @@ if (isset($_SESSION["username_badminton"])) {
                 <form class="needs-validation" novalidate>
                   <div class="row g-3">
                     <div class="col-sm-6">
-                      <label for="firstName" class="form-label">First name</label>
-                      <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                      <label for="firstname_regis" class="form-label">First name</label>
+                      <input type="text" class="form-control" id="firstname_regis" placeholder="" value="" required>
                       <div class="invalid-feedback">
                         Valid first name is required.
                       </div>
                     </div>
 
                     <div class="col-sm-6">
-                      <label for="lastName" class="form-label">Last name</label>
-                      <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                      <label for="lastname_regis" class="form-label">Last name</label>
+                      <input type="text" class="form-control" id="lastname_regis" placeholder="" value="" required>
                       <div class="invalid-feedback">
                         Valid last name is required.
                       </div>
@@ -600,15 +600,15 @@ if (isset($_SESSION["username_badminton"])) {
                     </div>
 
                     <div class="col-12">
-                      <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                      <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" placeholder="1234 Main St" required>
                       <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
+                        Please enter your shipping address.
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="address" class="form-label">Address</label>
+                      <label for="address" class="form-label">Confirm Password</label>
                       <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
                       <div class="invalid-feedback">
                         Please enter your shipping address.
