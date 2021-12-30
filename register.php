@@ -1,8 +1,8 @@
 <?php
 session_start();
-include("urldomain.php");
+include("./urldomain.php");
 date_default_timezone_set('Asia/Bangkok');
-include("connection.php");
+include("./connect.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname_regis = $_POST["firstname_regis"];
     $lastname_regis = $_POST["lastname_regis"];
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $sql_chk = "SELECT * FROM member WHERE member_user = '" . $username_regis . "'";
-    $result_chk = mysqli_query($con, $sql_chk);
+    $result_chk = mysqli_query($conn, $sql_chk);
     if (mysqli_num_rows($result_chk) == 0) {
         $sql = "INSERT INTO member (member_user,
         member_pass,
@@ -36,10 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         '" . $tel_regis . "',
         'U')";
 
-        if ($con->query($sql) == TRUE) {
+        if ($conn->query($sql) == TRUE) {
             echo "success";
         } else {
-            echo "error " . $con->error;
+            echo "error " . $conn->error;
         }
     } else {
         echo "already";

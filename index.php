@@ -29,7 +29,7 @@ if (isset($_SESSION["username_badminton"])) {
   <meta name="author" content="" />
   <title><?php echo $toptitle; ?></title>
   <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
   <!-- Google fonts-->
@@ -40,6 +40,8 @@ if (isset($_SESSION["username_badminton"])) {
 
   <script src="./assets/js/jquery-3.5.1.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Petemoss&display=swap" rel="stylesheet">
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -55,7 +57,7 @@ if (isset($_SESSION["username_badminton"])) {
         <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
           <?php
           if (!isset($_SESSION['username_badminton'])) {
-            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-bs-target='#myModalRegis' href='#myModalRegis'>สมัครสมาชิก</a></li>";
+            echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-bs-target='#myModalRegis' href='#register'>สมัครสมาชิก</a></li>";
             echo "<li class='nav-item'><a class='nav-link' data-bs-toggle='modal' data-bs-target='#myModalLogin' href='#login'>เข้าสู่ระบบ</a></li>";
           } else {
             echo "<li class='nav-item'><a class='nav-link' href='#services'>Services</a></li>";
@@ -72,10 +74,10 @@ if (isset($_SESSION["username_badminton"])) {
     </div>
   </nav>
   <!-- Masthead-->
-  <header class="masthead">
+  <header class="masthead" style="background-image: url('./assets/img/120147340_174353087560378_7822624992769419733_n.jpg');">
     <div class="container">
-      <div class="masthead-subheading">Welcome Luxury by Fon</div>
-      <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+      <div class="masthead-subheading" style="color: black;">Welcome Luxury by Fon</div>
+      <div class="masthead-heading text-uppercase" style="color: black;">It's Nice To Meet You</div>
       <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
     </div>
   </header>
@@ -520,41 +522,51 @@ if (isset($_SESSION["username_badminton"])) {
       <!-- Portfolio Modals-->
       <!-- Portfolio item 1 modal popup-->
       <div class="portfolio-modal modal fade" id="cart<?php echo $row['product_id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="close-modal" data-bs-dismiss="modal"><img src="./assets/front-end/assets/img/close-icon.svg" alt="Close modal" /></div>
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div class="modal-body">
-                    <!-- Project details-->
-                    <h2 class="text-uppercase"><?php echo $row['name']; ?></h2>
-                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                    <img class="img-fluid d-block mx-auto" src="./assets/img/<?php echo $row['img']; ?>" alt="..." />
-                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-                      blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
-                      expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                    <ul class="list-inline">
-                      <li>
-                        <strong>Client:</strong>
-                        Threads
-                      </li>
-                      <li>
-                        <strong>Category:</strong>
-                        Illustration
-                      </li>
-                    </ul>
-                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                      <i class="fas fa-times me-1"></i>
-                      Close Project
-                    </button>
+    <div class="modal-dialog">
+      <div class="modal-content" style="text-align: left;">
+        <div class="close-modal" data-bs-dismiss="modal"><img src="./assets/front-end/assets/img/close-icon.svg" alt="Close modal" /></div>
+        <div class="container">
+          <div class="row justify-content-center">
+       
+              <div class="modal-body">
+                <div class="py-5">
+                  <div class="container px-4 px-lg-5 my-5">
+                      <div class="row gx-4 gx-lg-5 align-items-center">
+                          <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                          <div class="col-md-6">
+                              <div class="small mb-1"><?php echo $row['product_id']; ?></div>
+                              <h1 class="display-5 fw-bolder"><?php echo $row['name']; ?></h1>
+                              <div class="fs-5 mb-5">
+                                  <span class="text-decoration-line-through">$45.00</span>
+                                  <span>$<?php echo $row['price']; ?></span>
+                              </div>
+                              <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                              <div class="d-flex">
+                                  <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                                  <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                      <i class="bi-cart-fill me-1"></i>
+                                      Add to cart
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
                   </div>
                 </div>
+                <hr>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                    <i class="fas fa-times me-1"></i>
+                    Close Project
+                  </button>
+                </div>
               </div>
-            </div>
+           
           </div>
         </div>
       </div>
+    </div>
+  </div>
+    
   <?php
       $i++;
     } //while condition closing bracket
@@ -564,176 +576,98 @@ if (isset($_SESSION["username_badminton"])) {
   <!-- Portfolio item 1 modal popup-->
   <div class="portfolio-modal modal fade" id="myModalRegis" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" style="text-align: left;">
         <div class="close-modal" data-bs-dismiss="modal"><img src="./assets/front-end/assets/img/close-icon.svg" alt="Close modal" /></div>
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-8">
               <div class="modal-body">
                 <!-- Project details-->
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" role="form" novalidate>
                   <div class="row g-3">
-                    <div class="col-sm-6">
-                      <label for="firstname_regis" class="form-label">First name</label>
-                      <input type="text" class="form-control" id="firstname_regis" placeholder="" value="" required>
-                      <div class="invalid-feedback">
-                        Valid first name is required.
-                      </div>
-                    </div>
 
-                    <div class="col-sm-6">
-                      <label for="lastname_regis" class="form-label">Last name</label>
-                      <input type="text" class="form-control" id="lastname_regis" placeholder="" value="" required>
+                    <div class="col-12">
+                      <label for="firstname_regis" class="form-label"><span class="glyphicon glyphicon-shopping-cart"></span>Firstname</label>
+                      <input type="text" class="form-control" id="firstname_regis" placeholder="Enter Firstname">
                       <div class="invalid-feedback">
-                        Valid last name is required.
+                        Please enter a valid email address for shipping updates.
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="username" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text">@</span>
-                        <input type="text" class="form-control" id="username" placeholder="Username" required>
-                        <div class="invalid-feedback">
-                          Your username is required.
-                        </div>
+                      <label for="lastname_regis" class="form-label"><span class="glyphicon glyphicon-shopping-cart"></span>Lastname</label>
+                      <input type="text" class="form-control" id="lastname_regis" placeholder="Enter Lastname">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="username_regis" class="form-label"><span class="glyphicon glyphicon-shopping-cart"></span>Username</label>
+                      <input type="text" class="form-control" id="username_regis" placeholder="Enter Username">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="1234 Main St" required>
+                      <label for="pwd_regis" class="form-label"><span class="glyphicon glyphicon-user"></span>Password</label></label>
+                      <input type="password" class="form-control" id="pwd_regis" placeholder="Enter Password" required>
                       <div class="invalid-feedback">
                         Please enter your shipping address.
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="address" class="form-label">Confirm Password</label>
-                      <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                      <label for="confirm_pwd" class="form-label"><span class="glyphicon glyphicon-shopping-cart"></span>Confirm Password</label>
+                      <input type="password" class="form-control" id="confirm_pwd" placeholder="Enter Confirm Password">
                       <div class="invalid-feedback">
-                        Please enter your shipping address.
+                        Please enter a valid email address for shipping updates.
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-                      <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                    </div>
-
-                    <div class="col-md-5">
-                      <label for="country" class="form-label">Country</label>
-                      <select class="form-select" id="country" required>
-                        <option value="">Choose...</option>
-                        <option>United States</option>
-                      </select>
+                      <label for="idcard_regis" class="form-label"><span class="glyphicon glyphicon-shopping-cart"></span>IDCard</label>
+                      <input type="text" class="form-control" id="idcard_regis" placeholder="Enter IDCard">
                       <div class="invalid-feedback">
-                        Please select a valid country.
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="optradio" class="form-label"><span class="glyphicon glyphicon-shopping-cart"></span>Username</label>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio" value="1" checked>Male</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio" value="0">Female</label>
+                      </div>
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
                       </div>
                     </div>
 
-                    <div class="col-md-4">
-                      <label for="state" class="form-label">State</label>
-                      <select class="form-select" id="state" required>
-                        <option value="">Choose...</option>
-                        <option>California</option>
-                      </select>
+                    <div class="col-12">
+                      <label for="tel_regis" class="form-label"><span class="glyphicon glyphicon-user"></span>Telephone number</label></label>
+                      <input type="number" class="form-control" id="tel_regis" placeholder="Enter Telephone number" required>
                       <div class="invalid-feedback">
-                        Please provide a valid state.
+                        Please enter your shipping address.
                       </div>
                     </div>
+                    <hr class="my-4">
 
-                    <div class="col-md-3">
-                      <label for="zip" class="form-label">Zip</label>
-                      <input type="text" class="form-control" id="zip" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Zip code required.
-                      </div>
-                    </div>
+                    <button class="w-100 btn btn-primary btn-lg" type="button" id="btn_regis">Register<span class="glyphicon glyphicon-ok"></span></button>
                   </div>
 
-                  <hr class="my-4">
 
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="same-address">
-                    <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-                  </div>
-
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="save-info">
-                    <label class="form-check-label" for="save-info">Save this information for next time</label>
-                  </div>
-
-                  <hr class="my-4">
-
-                  <h4 class="mb-3">Payment</h4>
-
-                  <div class="my-3">
-                    <div class="form-check">
-                      <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                      <label class="form-check-label" for="credit">Credit card</label>
-                    </div>
-                    <div class="form-check">
-                      <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-                      <label class="form-check-label" for="debit">Debit card</label>
-                    </div>
-                    <div class="form-check">
-                      <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-                      <label class="form-check-label" for="paypal">PayPal</label>
-                    </div>
-                  </div>
-
-                  <div class="row gy-3">
-                    <div class="col-md-6">
-                      <label for="cc-name" class="form-label">Name on card</label>
-                      <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                      <small class="text-muted">Full name as displayed on card</small>
-                      <div class="invalid-feedback">
-                        Name on card is required
-                      </div>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label for="cc-number" class="form-label">Credit card number</label>
-                      <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Credit card number is required
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <label for="cc-expiration" class="form-label">Expiration</label>
-                      <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Expiration date required
-                      </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                      <label for="floatingInput">Email address</label>
-                    </div>
-                    <div class="form-floating">
-                      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                      <label for="floatingPassword">Password</label>
-                    </div>
-                    <div class="col-md-3">
-                      <label for="cc-cvv" class="form-label">CVV</label>
-                      <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                      <div class="invalid-feedback">
-                        Security code required
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr class="my-4">
-
-                  <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
                 </form>
                 <hr>
-                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                  <i class="fas fa-times me-1"></i>
-                  Close Project
-                </button>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                    <i class="fas fa-times me-1"></i>
+                    Close Project
+                  </button>
+                </div>
               </div>
             </div>
           </div>
