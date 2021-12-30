@@ -7,7 +7,7 @@ if (isset($_POST["usr"])) {
   $Username = $_POST["usr"];
   $Password = md5($_POST["pwd_login"]);
   $sql = "SELECT * FROM member Where member_user ='" . $Username . "' and member_pass ='" . $Password . "' ";
-  $result = mysqli_query($con, $sql);
+  $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
