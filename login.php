@@ -1,29 +1,49 @@
 <?php
-session_start();
-date_default_timezone_set('Asia/Bangkok');
-include("urldomain.php");
-if (isset($_POST["usr"])) {
-  include("./connect.php");
-  $Username = $_POST["usr"];
-  $Password = md5($_POST["pwd_login"]);
-  $sql = "SELECT * FROM member Where member_user ='" . $Username . "' and member_pass ='" . $Password . "' ";
-  $result = mysqli_query($conn, $sql);
+include("./head.php");
+include("./header.php");
+?>
 
-  if (mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_array($result);
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb__links">
+          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
+          <span>Shop</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
 
-    $_SESSION["memberid_badminton"] = $row["member_id"];
-    $_SESSION["username_badminton"] = $row["member_tel"];
-    $_SESSION["firstname_badminton"] = $row["member_user"];
-    $_SESSION["lastname_badminton"] = $row["member_pass"];
-    $_SESSION["permission_badminton"] = $row["member_permission"];
-    $_SESSION["login_timestamp"] = time();
-    echo "login_success";
-  } else {
-    //   echo "<script>";
-    echo "alert('Sorry Username or Password something is wrong! \\nTake you back homepage! ');";
-    // echo "window.history.back()";
-    //   echo "window.location.replace('http://".$domain."/".$url."');";
-    //   echo "</script>";
-  }
-}
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+  <div class="container">
+    <form role="form" class="checkout__form">
+      <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <h5>Login</h5>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="checkout__form__input">
+                <p for="user_name">Username <span>*</span></p>
+                <input type="text" id="user_name" placeholder="Enter username">
+              </div>
+              <div class="checkout__form__input">
+                <p for="pwd_login">Password <span>*</span></p>
+                <input type="password" id="pwd_login" placeholder="Enter password">
+              </div>
+            </div>  
+            <button type="button" class="site-btn" id="login">login</button>
+          </div>
+        </div>
+       
+      </div>
+    </form>
+  </div>
+</section>
+<!-- Checkout Section End -->
+
+<?php include("./footer.php"); ?>
