@@ -99,7 +99,7 @@
             <a href="#">Register</a>
           <?php
           } else {
-            echo "<a href='#' id='user_detail'>".strtoupper($_SESSION["firstname_badminton"])."</a>";
+            echo "<a href='#' id='user_detail'>".$_SESSION["member_user"]."</a>";
             ?>
             <a href="./logout.php">ออกจากระบบ</a>
             <?php
@@ -112,7 +112,7 @@
                 <div class="tip">2</div>
               </a></li>
             <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
+                <div class="tip"><?php if(isset($_SESSION["shopping_cart"])) { echo count($_SESSION["shopping_cart"]); } else { echo '0';}?></div>
               </a></li>
           </ul>
         </div>

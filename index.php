@@ -84,7 +84,7 @@ include("./header.php");
     </div>
     <div class="row property__gallery">
       <?php 
-      $strSQL = "SELECT * FROM product";
+      $strSQL = "SELECT * FROM product limit 8";
       $objQuery = mysqli_query($conn, $strSQL);
       while($objResult = mysqli_fetch_array($objQuery)){
       ?>
@@ -115,7 +115,7 @@ include("./header.php");
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
             </div>
-            <div class="product__price">$ 59.0</div>
+            <div class="product__price">฿ 59.0</div>
           </div>
         </div>
       </div>

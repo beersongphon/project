@@ -14,7 +14,7 @@ if (isset($_POST["usr"])) {
 
     $_SESSION["memberid_badminton"] = $row["member_id"];
     $_SESSION["username_badminton"] = $row["member_tel"];
-    $_SESSION["firstname_badminton"] = $row["member_user"];
+    $_SESSION["member_user"] = $row["member_user"];
     $_SESSION["lastname_badminton"] = $row["member_pass"];
     $_SESSION["permission_badminton"] = $row["member_permission"];
     $_SESSION["login_timestamp"] = time();

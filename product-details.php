@@ -90,17 +90,19 @@ while($row = mysqli_fetch_array($result)) {
               <i class="fa fa-star"></i>
               <span>( 138 reviews )</span>
             </div>
-            <div class="product__details__price">$ <?php echo $row["price"]; ?> <span>$ 83.0</span></div>
+            <div class="product__details__price">฿ <?php echo $row["price"]; ?> <span>฿ 83.0</span></div>
             <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
               magni lores eos qui ratione voluptatem sequi nesciunt.</p>
             <div class="product__details__button">
               <div class="quantity">
                 <span>จำนวน:</span>
                 <div class="pro-qty">
-                  <input type="text" value="1">
+                  <input type="text" name="quantity" id="quantity<?php echo $row["product_id"]; ?>" value="1">
                 </div>
-              </div>
-              <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+              </div>  
+              <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["name"]; ?>" />  
+              <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["price"]; ?>" />  
+              <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> Add to cart</a>
               <ul>
                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>

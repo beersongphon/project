@@ -19,7 +19,10 @@ include("./header.php");
 
 <!-- Shop Cart Section Begin -->
 <section class="shop-cart spad">
-  <div class="container">
+  <?php  
+  if(!empty($_SESSION["shopping_cart"])) {
+  ?>  
+  <div class="container" id="order_table">
     <div class="row">
       <div class="col-lg-12">
         <div class="shop__cart__table">
@@ -34,11 +37,16 @@ include("./header.php");
               </tr>
             </thead>
             <tbody>
+            <?php  
+              $total = 0;  
+              foreach($_SESSION["shopping_cart"] as $keys => $values)  
+            {
+            ?>  
               <tr>
                 <td class="cart__product__item">
                   <img src="./assets/front-end/img/shop-cart/cp-1.jpg" alt="">
                   <div class="cart__product__item__title">
-                    <h6>Chain bucket bag</h6>
+                    <h6><?php echo $values["product_name"]; ?></h6>
                     <div class="rating">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -48,84 +56,22 @@ include("./header.php");
                     </div>
                   </div>
                 </td>
-                <td class="cart__price">$ 150.0</td>
+                <td class="cart__price">฿ <?php echo number_format($values["product_price"], 2); ?></td>
                 <td class="cart__quantity">
                   <div class="pro-qty">
-                    <input type="text" value="1">
+                    <!-- <input type="text" value="1"> -->
+                    <input type="text" value="<?php echo $values["product_quantity"]; ?>" style="width: 60px;" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="form-control quantity" min="1">
+                    <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
                   </div>
                 </td>
-                <td class="cart__total">$ 300.0</td>
-                <td class="cart__close"><span class="icon_close"></span></td>
+                <td class="cart__total">฿ <?php echo number_format($values["product_quantity"] * $values["product_price"], 2); ?></td>
+                <td class="cart__close"><span class="icon_close delete" name="delete" id="<?php echo $values["product_id"]; ?>"></span></td>
+                
               </tr>
-              <tr>
-                <td class="cart__product__item">
-                  <img src="./assets/front-end/img/shop-cart/cp-2.jpg" alt="">
-                  <div class="cart__product__item__title">
-                    <h6>Zip-pockets pebbled tote briefcase</h6>
-                    <div class="rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                </td>
-                <td class="cart__price">$ 170.0</td>
-                <td class="cart__quantity">
-                  <div class="pro-qty">
-                    <input type="text" value="1">
-                  </div>
-                </td>
-                <td class="cart__total">$ 170.0</td>
-                <td class="cart__close"><span class="icon_close"></span></td>
-              </tr>
-              <tr>
-                <td class="cart__product__item">
-                  <img src="./assets/front-end/img/shop-cart/cp-3.jpg" alt="">
-                  <div class="cart__product__item__title">
-                    <h6>Black jean</h6>
-                    <div class="rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                </td>
-                <td class="cart__price">$ 85.0</td>
-                <td class="cart__quantity">
-                  <div class="pro-qty">
-                    <input type="text" value="1">
-                  </div>
-                </td>
-                <td class="cart__total">$ 170.0</td>
-                <td class="cart__close"><span class="icon_close"></span></td>
-              </tr>
-              <tr>
-                <td class="cart__product__item">
-                  <img src="./assets/front-end/img/shop-cart/cp-4.jpg" alt="">
-                  <div class="cart__product__item__title">
-                    <h6>Cotton Shirt</h6>
-                    <div class="rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                </td>
-                <td class="cart__price">$ 55.0</td>
-                <td class="cart__quantity">
-                  <div class="pro-qty">
-                    <input type="text" value="1">
-                  </div>
-                </td>
-                <td class="cart__total">$ 110.0</td>
-                <td class="cart__close"><span class="icon_close"></span></td>
-              </tr>
+              <?php  
+              $total = $total + ($values["product_quantity"] * $values["product_price"]);  
+              }  
+              ?> 
             </tbody>
           </table>
         </div>
@@ -157,13 +103,16 @@ include("./header.php");
         <div class="cart__total__procced">
           <h6>Cart total</h6>
           <ul>
-            <li>Subtotal <span>$ 750.0</span></li>
-            <li>Total <span>$ 750.0</span></li>
+            <!-- <li>Subtotal <span>$ 750.0</span></li> -->
+            <li>Total <span>฿ <?php echo number_format($total, 2); ?></span></li>
           </ul>
-          <a href="#" class="primary-btn">Proceed to checkout</a>
+          <a href="./checkout.php" class="primary-btn">Proceed to checkout</a>
         </div>
       </div>
     </div>
+    <?php  
+    }  
+    ?>  
   </div>
 </section>
 <!-- Shop Cart Section End -->

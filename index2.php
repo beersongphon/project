@@ -65,7 +65,7 @@ if (isset($_SESSION["username_badminton"])) {
             echo "<li class='nav-item'><a class='nav-link' href='#about'>About</a></li>";
             echo "<li class='nav-item'><a class='nav-link' href='#team'>Team</a></li>";
             echo "<li class='nav-item'><a class='nav-link' href='#contact'>ติดต่อเรา</a></li>";
-            echo "<li class='nav-item'><a class='nav-link' href='#' id='user_detail'>" . strtoupper($_SESSION["firstname_badminton"]) . "</a></li>";
+            echo "<li class='nav-item'><a class='nav-link' href='#' id='user_detail'>" . strtoupper($_SESSION["member_user"]) . "</a></li>";
             echo "<li class='nav-item'><a class='nav-link' href='logout.php'>ออกจากระบบ</a></li>";
           }
           ?>
