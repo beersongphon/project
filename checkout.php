@@ -1,6 +1,6 @@
 <?php
-include("./head.php");
-include("./header.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 ?>
 
 
@@ -33,10 +33,16 @@ include("./header.php");
         <div class="col-lg-8">
           <h5>Billing detail</h5>
           <div class="row">
+          <div class="col-lg-12">
+              <div class="checkout__form__input">
+                <p>ID <span>*</span></p>
+                <input type="text" name="customer_id" value="<?php echo $_SESSION['member_id']; ?>">
+              </div>
+            </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>First Name <span>*</span></p>
-                <input type="text">
+                <input type="text" name="name" value="<?php echo $_SESSION['member_name']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -171,4 +177,4 @@ include("./header.php");
 </section>
 <!-- Checkout Section End -->
 
-<?php include("./footer.php"); ?>
+<?php include("./footer_front-end.php"); ?>

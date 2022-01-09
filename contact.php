@@ -1,6 +1,6 @@
 <?php
-include("./head.php");
-include("./header.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 ?>
 
 <!-- Breadcrumb Begin -->
@@ -44,11 +44,17 @@ include("./header.php");
           <div class="contact__form">
             <h5>SEND MESSAGE</h5>
             <form action="#">
-              <input type="text" placeholder="Name">
-              <input type="text" placeholder="Email">
+              <input type="text" id="name_contact" name="name" placeholder="Name">
+              <input type="email" id="email_contact" name="email" placeholder="Email">
               <!-- <input type="text" placeholder="Website"> -->
-              <textarea placeholder="Message"></textarea>
-              <button type="submit" class="site-btn">Send Message</button>
+              <textarea id="comments_contact" name="comments" placeholder="Message"></textarea>
+              <?php
+              if (isset($_SESSION['username_badminton'])) {
+                echo "<button type='button' id='btn_contact' class='site-btn'>Send Message</button>";
+              } else {
+                echo "<label for='email'>&nbsp&nbspกรุณา Login ก่อนทำรายการ</label>";
+              }
+              ?>
             </form>
           </div>
         </div>
@@ -64,4 +70,4 @@ include("./header.php");
 </section>
 <!-- Contact Section End -->
 
-<?php include("./footer.php"); ?>
+<?php include("./footer_front-end.php"); ?>

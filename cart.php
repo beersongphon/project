@@ -17,9 +17,10 @@
                 <?php  
                 if(isset($_POST["place_order"]))  
                 {  
+                     $id = $_POST['customer_id'];
                      $insert_order = "  
                      INSERT INTO tbl_order(customer_id, creation_date, order_status)  
-                     VALUES('1', '".date('Y-m-d')."', 'pending')  
+                     VALUES('$id', '".date('Y-m-d')."', 'pending')  
                      ";  
                      $order_id = "";  
                      if(mysqli_query($connect, $insert_order))  

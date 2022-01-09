@@ -14,7 +14,7 @@ if (isset($_SESSION["username_badminton"])) {
   if ((time() - $_SESSION["login_timestamp"]) > $sessiontime) {
     header("location: logout.php");
   } else {
-    if ($_SESSION["permission_badminton"] == "S" || $_SESSION["permission_badminton"] == "A") {
+    if ($_SESSION["member_permission"] == "S" || $_SESSION["member_permission"] == "A") {
       header("Location: /" . $url . "/" . "staff.php");
     }
   }

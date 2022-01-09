@@ -1,6 +1,6 @@
 <?php
-include("./head.php");
-include("./header.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 ?>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
@@ -117,4 +117,4 @@ include("./header.php");
 </section>
 <!-- Shop Cart Section End -->
 
-<?php include("./footer.php"); ?>
+<?php include("./footer_front-end.php"); ?>

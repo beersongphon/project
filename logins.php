@@ -12,11 +12,12 @@ if (isset($_POST["usr"])) {
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
 
-    $_SESSION["memberid_badminton"] = $row["member_id"];
+    $_SESSION["member_id"] = $row["member_id"];
     $_SESSION["username_badminton"] = $row["member_tel"];
     $_SESSION["member_user"] = $row["member_user"];
+    $_SESSION["member_name"] = $row["member_name"];
     $_SESSION["lastname_badminton"] = $row["member_pass"];
-    $_SESSION["permission_badminton"] = $row["member_permission"];
+    $_SESSION["member_permission"] = $row["member_permission"];
     $_SESSION["login_timestamp"] = time();
     echo "login_success";
   } else {

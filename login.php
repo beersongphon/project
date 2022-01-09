@@ -1,6 +1,6 @@
 <?php
-include("./head.php");
-include("./header.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 ?>
 
 <!-- Breadcrumb Begin -->
@@ -10,7 +10,7 @@ include("./header.php");
       <div class="col-lg-12">
         <div class="breadcrumb__links">
           <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-          <span>Shop</span>
+          <span>Login</span>
         </div>
       </div>
     </div>
@@ -46,4 +46,4 @@ include("./header.php");
 </section>
 <!-- Checkout Section End -->
 
-<?php include("./footer.php"); ?>
+<?php include("./footer_front-end.php"); ?>

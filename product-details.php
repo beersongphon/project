@@ -1,6 +1,6 @@
 <?php
-include("./head.php");
-include("./header.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 
 $product_id = $_GET["product_id"];
 $query = "SELECT * FROM product WHERE product_id = '$product_id' ORDER BY product_id ASC";  
@@ -90,7 +90,7 @@ while($row = mysqli_fetch_array($result)) {
               <i class="fa fa-star"></i>
               <span>( 138 reviews )</span>
             </div>
-            <div class="product__details__price">฿ <?php echo $row["price"]; ?> <span>฿ 83.0</span></div>
+            <div class="product__details__price">฿ <?php echo number_format($row["price"], 2); ?> <span>฿ 83.0</span></div>
             <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
               magni lores eos qui ratione voluptatem sequi nesciunt.</p>
             <div class="product__details__button">
@@ -167,7 +167,7 @@ while($row = mysqli_fetch_array($result)) {
           </div>
         </div>
         <?php  
-        }  
+        }
         ?>  
         <div class="col-lg-12">
           <div class="product__details__tab">
@@ -327,4 +327,4 @@ while($row = mysqli_fetch_array($result)) {
   </section>
   <!-- Product Details Section End -->
 
-  <?php include("./footer.php"); ?>
+  <?php include("./footer_front-end.php"); ?>

@@ -1,47 +1,49 @@
 <?php
-session_start();
-include("./urldomain.php");
-date_default_timezone_set('Asia/Bangkok');
-include("./connect.php");
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstname_regis = $_POST["firstname_regis"];
-    $lastname_regis = $_POST["lastname_regis"];
-    $username_regis = $_POST["username_regis"];
-    $pwd_regis = $_POST["pwd_regis"];
-    $idcard_regis = $_POST["idcard_regis"];
-    $tel_regis = $_POST["tel_regis"];
-    $sex_regis = $_POST["sex_regis"];
-    $pwd_regis = md5($pwd_regis);
+include("./head_front-end.php");
+include("./header_front-end.php");
+?>
 
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb__links">
+          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
+          <span>Login</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
 
-    $sql_chk = "SELECT * FROM member WHERE member_user = '" . $username_regis . "'";
-    $result_chk = mysqli_query($conn, $sql_chk);
-    if (mysqli_num_rows($result_chk) == 0) {
-        $sql = "INSERT INTO member (member_user,
-        member_pass,
-        member_name,
-        member_lastname,
-        member_idcard,
-        member_time_progress,
-        member_sex,
-        member_tel,
-        member_permission) 
-      VALUES ('" . $username_regis . "',
-       '" . $pwd_regis . "',
-        '" . $firstname_regis . "',
-        '" . $lastname_regis . "',
-        '" . $idcard_regis . "',
-        0,
-        " . $sex_regis . ",
-        '" . $tel_regis . "',
-        'U')";
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+  <div class="container">
+    <form role="form" class="checkout__form">
+      <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <h5>Login</h5>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="checkout__form__input">
+                <p for="user_name">Username <span>*</span></p>
+                <input type="text" id="user_name" placeholder="Enter username">
+              </div>
+              <div class="checkout__form__input">
+                <p for="pwd_login">Password <span>*</span></p>
+                <input type="password" id="pwd_login" placeholder="Enter password">
+              </div>
+            </div>  
+            <button type="button" class="site-btn" id="login">login</button>
+          </div>
+        </div>
+       
+      </div>
+    </form>
+  </div>
+</section>
+<!-- Checkout Section End -->
 
-        if ($conn->query($sql) == TRUE) {
-            echo "success";
-        } else {
-            echo "error " . $conn->error;
-        }
-    } else {
-        echo "already";
-    }
-}
+<?php include("./footer_front-end.php"); ?>

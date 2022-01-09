@@ -1,8 +1,8 @@
 <?php
 session_start();
-include("urldomain.php");
+include("./urldomain.php");
 date_default_timezone_set('Asia/Bangkok');
-include("connection.php");
+include("./connect.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name_con = $_POST["name_con"];
     $email_con = $_POST["email_con"];
@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        '" . $email_con . "',
         '" . $comments_con . "')";
 
-    if ($con->query($sql) == TRUE) {
+    if ($conn->query($sql) == TRUE) {
         echo "ส่งข้อมูลสำเร็จ";
     } else {
-        echo "error " . $con->error;
+        echo "error " . $conn->error;
     }
 }

@@ -1,6 +1,6 @@
 <?php
-include("./head.php");
-include("./header.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 ?>
 
 <!-- Categories Section Begin -->
@@ -83,10 +83,13 @@ include("./header.php");
       </div>
     </div>
     <div class="row property__gallery">
-      <?php 
-      $strSQL = "SELECT * FROM product limit 8";
-      $objQuery = mysqli_query($conn, $strSQL);
-      while($objResult = mysqli_fetch_array($objQuery)){
+      <?php
+      $sql = "SELECT * FROM product LIMIT 8";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix women">
         <div class="product__item">
@@ -97,7 +100,7 @@ include("./header.php");
               if (isset($_SESSION['username_badminton'])) {
                 echo "<li><a href='./assets/front-end/img/product/product-1.jpg' class='image-popup'><span class='arrow_expand'></span></a></li>";
                 echo "<li><a href='#'><span class='icon_heart_alt'></span></a></li>";
-                echo "<li><a href='./product-details.php?product_id=$objResult[product_id]'><span class='icon_bag_alt'></span></a></li>";
+                echo "<li><a href='./product-details.php?product_id=$row[product_id]'><span class='icon_bag_alt'></span></a></li>";
               } else {
                 echo "<li><a href='./assets/front-end/img/product/product-1.jpg' class='image-popup'><span class='arrow_expand'></span></a></li>";
                 echo "<li><a href='#'><span class='icon_heart_alt'></span></a></li>";
@@ -107,7 +110,7 @@ include("./header.php");
             </ul>
           </div>
           <div class="product__item__text">
-            <h6><a href="#">Buttons tweed blazer</a></h6>
+            <h6><a href="#"><?php echo $row["name"]; ?></a></h6>
             <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -115,12 +118,13 @@ include("./header.php");
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
             </div>
-            <div class="product__price">฿ 59.0</div>
+            <div class="product__price">฿ <?php echo number_format($row["price"], 2); ?></div>
           </div>
         </div>
       </div>
-      <?php 
-      }
+      <?php
+        } //while condition closing bracket
+      }  //if condition closing bracket
       ?>
       <!-- <div class="col-lg-3 col-md-4 col-sm-6 mix men">
         <div class="product__item">
@@ -571,4 +575,4 @@ include("./header.php");
 </section>
 <!-- Services Section End -->
 
-<?php include("./footer.php"); ?>
+<?php include("./footer_front-end.php"); ?>
