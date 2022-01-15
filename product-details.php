@@ -111,9 +111,10 @@ $row = mysqli_fetch_array($result);
                   <input type="text" name="quantity" id="quantity<?php echo $row["product_id"]; ?>" value="1">
                 </div>
               </div>  
-              <input type="hidden" name="hidden_img" id="img<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_img"]; ?>" />  
-              <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_name"]; ?>" />  
-              <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />  
+              <input type="hidden" name="hidden_img" id="img<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_img"]; ?>" />
+              <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_name"]; ?>" />
+              <input type="hidden" name="hidden_qty" id="qty<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_qty"]; ?>" />
+              <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />
               <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> Add to cart</a>
               <ul>
                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -248,11 +249,28 @@ $row = mysqli_fetch_array($result);
         if ($result->num_rows > 0) {
           // output data of each row
           while ($row = $result->fetch_assoc()) {
+            if($row['product_qty'] == 0){
+              //สินค้าหมด
+              $disabled = "return false;";
+              $tableClass = "label stockout";
+              $txtTitle = "Out Of Stock";
+            }elseif($row['product_qty'] <= 5) {
+              //สินค้ากำลังจะหมด
+              $disabled = "return true;";
+              $tableClass = "label stockblue";
+              $txtTitle = "Running Out";
+            }else{
+              //เหลือ > 10 ชิ้น
+              $disabled = "return true;";
+              $tableClass = "table-info";
+              $txtTitle = "";
+            }
         ?>
         <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="product__item">
             <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
-              <div class="label new">New</div>
+              <!-- <div class="label new">New</div> -->
+              <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
               <ul class="product__hover">
                 <?php include("./permission.php"); ?>
               </ul>

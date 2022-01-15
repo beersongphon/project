@@ -151,6 +151,7 @@
       var product_id = $(this).attr("id");
       var product_img = $('#img' + product_id).val();
       var product_name = $('#name' + product_id).val();
+      var product_qty = $('#qty' + product_id).val();
       var product_price = $('#price' + product_id).val();
       var product_quantity = $('#quantity' + product_id).val();
       var action = "add";
@@ -163,6 +164,7 @@
             product_id: product_id,
             product_img: product_img,
             product_name: product_name,
+            product_qty: product_qty,
             product_price: product_price,
             product_quantity: product_quantity,
             action: action

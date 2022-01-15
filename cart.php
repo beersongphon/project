@@ -23,6 +23,22 @@ include("./header_front-end.php");
     $_SESSION["order_id"] = $order_id;
     $order_details = "";
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+      
+      $sql	= "SELECT * FROM tb_product WHERE product_id=$values[product_id]";
+      $result	= mysqli_query($conn, $sql);
+      $row	= mysqli_fetch_array($result);
+      $count=mysqli_num_rows($result);
+      for($i=0; $i<$count; $i++){
+        $have =  $row['product_qty'];
+        
+        $stc = $have - $values["product_quantity"];
+        
+        $sql2 = "UPDATE tb_product SET  
+        product_qty=$stc
+        WHERE  product_id=$values[product_id] ";
+        $query2 = mysqli_query($conn, $sql2);  
+      }
+
       $order_details .= "  
                               INSERT INTO tb_order_detail(order_id, product_id, order_price, order_quantity)  
                               VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[product_quantity]');  

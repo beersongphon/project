@@ -19,6 +19,7 @@ if (isset($_POST["product_id"])) {
           'product_id'               =>     $_POST["product_id"],
           'product_img'               =>     $_POST["product_img"],
           'product_name'               =>     $_POST["product_name"],
+          'product_qty'               =>     $_POST["product_qty"],
           'product_price'               =>     $_POST["product_price"],
           'product_quantity'          =>     $_POST["product_quantity"]
         );
@@ -29,6 +30,7 @@ if (isset($_POST["product_id"])) {
         'product_id'               =>     $_POST["product_id"],
         'product_img'               =>     $_POST["product_img"],
         'product_name'               =>     $_POST["product_name"],
+        'product_qty'               =>     $_POST["product_qty"],
         'product_price'               =>     $_POST["product_price"],
         'product_quantity'          =>     $_POST["product_quantity"]
       );
