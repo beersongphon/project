@@ -39,7 +39,6 @@ include("./header_front-end.php");
             <button type="button" class="site-btn" id="login">login</button>
           </div>
         </div>
-       
       </div>
     </form>
   </div>

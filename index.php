@@ -84,33 +84,45 @@ include("./header_front-end.php");
     </div>
     <div class="row property__gallery">
       <?php
-      $sql = "SELECT * FROM product LIMIT 8";
+      $sql = "SELECT * FROM tb_product ORDER BY product_id DESC LIMIT 8";
       $result = $conn->query($sql);
-
       if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
+          //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
+          if($row['product_quantity'] == 0){
+            //สินค้าหมด
+            $disabled = "return false;";
+            $tableClass = "label stockout";
+            $txtTitle = "Out Of Stock";
+          }elseif($row['product_quantity'] <= 5) {
+            //สินค้ากำลังจะหมด
+            $disabled = "return true;";
+            $tableClass = "label stockblue";
+            $txtTitle = "Running Out";
+          }elseif($row['product_quantity'] <= 20) {
+            //สินค้ากำลังจะหมด
+            $disabled = "return true;";
+            $tableClass = "";
+            $txtTitle = "";
+          }else{
+            //เหลือ > 20 ชิ้น
+            $disabled = "return true;";
+            $tableClass = "label new";
+            $txtTitle = "New";
+          }
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix women">
         <div class="product__item">
-          <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/product/product-1.jpg">
-            <div class="label new">New</div>
+          <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
+            <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
+            <!-- <div class="label new">New</div> -->
             <ul class="product__hover">
-              <?php
-              if (isset($_SESSION['username_badminton'])) {
-                echo "<li><a href='./assets/front-end/img/product/product-1.jpg' class='image-popup'><span class='arrow_expand'></span></a></li>";
-                echo "<li><a href='#'><span class='icon_heart_alt'></span></a></li>";
-                echo "<li><a href='./product-details.php?product_id=$row[product_id]'><span class='icon_bag_alt'></span></a></li>";
-              } else {
-                echo "<li><a href='./assets/front-end/img/product/product-1.jpg' class='image-popup'><span class='arrow_expand'></span></a></li>";
-                echo "<li><a href='#'><span class='icon_heart_alt'></span></a></li>";
-                echo "<li><a href='./login.php'><span class='icon_bag_alt'></span></a></li>";
-              }
-              ?>
+              <?php include("./permission.php"); ?>
             </ul>
           </div>
           <div class="product__item__text">
-            <h6><a href="#"><?php echo $row["name"]; ?></a></h6>
+            <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
             <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -118,7 +130,7 @@ include("./header_front-end.php");
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
             </div>
-            <div class="product__price">฿ <?php echo number_format($row["price"], 2); ?></div>
+            <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
           </div>
         </div>
       </div>

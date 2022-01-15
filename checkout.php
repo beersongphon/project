@@ -3,7 +3,6 @@ include("./head_front-end.php");
 include("./header_front-end.php");
 ?>
 
-
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
   <div class="container">
@@ -33,16 +32,16 @@ include("./header_front-end.php");
         <div class="col-lg-8">
           <h5>Billing detail</h5>
           <div class="row">
-          <div class="col-lg-12">
+            <div class="col-lg-12">
               <div class="checkout__form__input">
                 <p>ID <span>*</span></p>
-                <input type="text" name="customer_id" value="<?php echo $_SESSION['member_id']; ?>">
+                <input type="text" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>First Name <span>*</span></p>
-                <input type="text" name="name" value="<?php echo $_SESSION['member_name']; ?>">
+                <input type="text" name="name" value="<?php echo $_SESSION['user_name']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -58,7 +57,7 @@ include("./header_front-end.php");
               </div>
               <div class="checkout__form__input">
                 <p>Address <span>*</span></p>
-                <input type="text" placeholder="Street Address">
+                <input type="text" name="order_address" placeholder="Street Address">
                 <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
               </div>
               <div class="checkout__form__input">
@@ -77,13 +76,13 @@ include("./header_front-end.php");
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>Phone <span>*</span></p>
-                <input type="text">
+                <input type="text" name="order_tel">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>Email <span>*</span></p>
-                <input type="text">
+                <input type="text" name="order_email">
               </div>
             </div>
             <div class="col-lg-12">
@@ -143,6 +142,7 @@ include("./header_front-end.php");
               <ul>
                 <!-- <li>Subtotal <span>$ 750.0</span></li> -->
                 <li>Total <span>฿ <?php echo number_format($total, 2); ?></span></li>
+                <input type="hidden" name="order_total" value="<?php echo $total; ?>">
               </ul>
             </div>
          

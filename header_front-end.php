@@ -23,13 +23,13 @@
   <div id="mobile-menu-wrap"></div>
   <div class="offcanvas__auth">
   <?php
-  if (!isset($_SESSION['username_badminton'])) {
+  if (!isset($_SESSION['user_username'])) {
   ?>
     <a href="./login.php">Login</a>
     <a href="./register.php">Register</a>
   <?php
   } else {
-    echo "<a href='#' id='user_detail'>".$_SESSION["member_user"]."</a>";
+    echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
   ?>
     <a href="./logout.php">ออกจากระบบ</a>
   <?php
@@ -53,15 +53,15 @@
         <nav class="header__menu">
           <ul>
           <?php
-          if (!isset($_SESSION['username_badminton'])) {
+          if (!isset($_SESSION['user_username'])) {
             ?>
             <li class="<?php if (basename($_SERVER['PHP_SELF']) == "index.php") {
                                                 echo "active";
                                               } else {
                                                 echo "";
                                               } ?>"><a href="./index.php">Home</a></li>
-            <li><a href="#">Women’s</a></li>
-            <li><a href="#">Men’s</a></li>
+            <!-- <li><a href="#">Women’s</a></li>
+            <li><a href="#">Men’s</a></li> -->
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">Shop</a></li>
             <li><a href="#">Pages</a>
               <ul class="dropdown">
@@ -71,7 +71,7 @@
                 <li><a href="./blog-details.html">Blog Details</a></li>
               </ul>
             </li>
-            <li><a href="./blog.html">Blog</a></li>
+            <!-- <li><a href="./blog.html">Blog</a></li> -->
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">Contact</a></li>
             <?php
              } else {
@@ -81,18 +81,18 @@
                                               } else {
                                                 echo "";
                                               } ?>"><a href="./index.php">Home</a></li>
-            <li><a href="#">Women’s</a></li>
-            <li><a href="#">Men’s</a></li>
+            <!-- <li><a href="#">Women’s</a></li>
+            <li><a href="#">Men’s</a></li> -->
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">Shop</a></li>
-            <li><a href="#">Pages</a>
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "checkout.php") ? "active" : ""; ?>"><a href="#">Pages</a>
               <ul class="dropdown">
                 <li><a href="./product-details.html">Product Details</a></li>
                 <li><a href="./shop-cart.html">Shop Cart</a></li>
-                <li><a href="./checkout.html">Checkout</a></li>
+                <li><a href="./checkout.php">Checkout</a></li>
                 <li><a href="./blog-details.html">Blog Details</a></li>
               </ul>
             </li>
-            <li><a href="./blog.html">Blog</a></li>
+            <!-- <li><a href="./blog.html">Blog</a></li> -->
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">Contact</a></li>
              <?php
              }
@@ -104,13 +104,13 @@
         <div class="header__right">
           <div class="header__right__auth">
           <?php
-          if (!isset($_SESSION['username_badminton'])) {
+          if (!isset($_SESSION['user_username'])) {
           ?>
             <a href="./login.php">Login</a>
             <a href="./register.php">Register</a>
           <?php
           } else {
-            echo "<a href='#' id='user_detail'>".$_SESSION["member_user"]."</a>";
+            echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
             ?>
             <a href="./logout.php">ออกจากระบบ</a>
             <?php
@@ -119,12 +119,48 @@
           </div>
           <ul class="header__right__widget">
             <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-              </a></li>
-            <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
-                <div class="tip"><?php if(isset($_SESSION["shopping_cart"])) { echo count($_SESSION["shopping_cart"]); } else { echo '0';}?></div>
-              </a></li>
+            <?php
+            if (!isset($_SESSION['user_username'])) {
+            ?>
+            <li>
+              <a href="#">
+                <span class="icon_heart_alt"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="icon_bag_alt"></span>
+              </a>
+            </li>
+            <?php
+            } else {
+            ?>
+            <li>
+              <a href="#">
+                <span class="icon_heart_alt"></span>
+                <div class="tip">
+                  2
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="./shop-cart.php">
+                <span class="icon_bag_alt"></span>
+                <div class="tip">
+                  <?php 
+                  if(isset($_SESSION["shopping_cart"])) { 
+                    echo count($_SESSION["shopping_cart"]); 
+                  } 
+                  else { 
+                    echo '0';
+                  }
+                  ?>
+                </div>
+              </a>
+            </li>
+            <?php
+            }
+            ?>
           </ul>
         </div>
       </div>

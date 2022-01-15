@@ -245,33 +245,49 @@ include("./header_front-end.php");
           $next_page = $page_no + 1;
           $adjacents = "2";
 
-          $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `product`");
+          $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
           $total_records = mysqli_fetch_array($result_count);
           $total_records = $total_records['total_records'];
           $total_no_of_pages = ceil($total_records / $total_records_per_page);
           $second_last = $total_no_of_pages - 1; // total page minus 1
 
-          $sql = "SELECT * FROM product WHERE product_id LIKE '%" . $strKeyword . "%' OR name LIKE '%" . $strKeyword . "%'
-          LIMIT $offset, $total_records_per_page
+          $sql = "SELECT * FROM tb_product WHERE product_id LIKE '%" . $strKeyword . "%' OR product_name LIKE '%" . $strKeyword . "%'
+          ORDER BY product_id DESC LIMIT $offset, $total_records_per_page
           ";
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
+              //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
+              if($row['product_quantity'] == 0){
+                //สินค้าหมด
+                $disabled = "return false;";
+                $tableClass = "label stockout";
+                $txtTitle = "Out Of Stock";
+              }elseif($row['product_quantity'] <= 5) {
+                //สินค้ากำลังจะหมด
+                $disabled = "return true;";
+                $tableClass = "label stockblue";
+                $txtTitle = "Running Out";
+              }else{
+                //เหลือ > 10 ชิ้น
+                $disabled = "return true;";
+                $tableClass = "table-info";
+                $txtTitle = "";
+              }
           ?>
           <div class="col-lg-4 col-md-6">
             <div class="product__item">
-              <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/shop/shop-1.jpg">
-                <div class="label new">New</div>
+              <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
+                <!-- <div class="label new">New</div> -->
+                <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
                 <ul class="product__hover">
-                  <li><a href="img/shop/shop-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                  <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                  <li><a href="./product-details.php?product_id=<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span></a></li>
+                  <?php include("./permission.php"); ?>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#"><?php echo $row["name"]; ?></a></h6>
+                <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
                 <div class="rating">
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
@@ -279,7 +295,7 @@ include("./header_front-end.php");
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
                 </div>
-                <div class="product__price">฿ <?php echo number_format($row["price"], 2); ?></div>
+                <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
               </div>
             </div>
           </div>

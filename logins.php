@@ -6,18 +6,18 @@ if (isset($_POST["usr"])) {
   include("./connect.php");
   $Username = $_POST["usr"];
   $Password = md5($_POST["pwd_login"]);
-  $sql = "SELECT * FROM member Where member_user ='" . $Username . "' and member_pass ='" . $Password . "' ";
+  $sql = "SELECT * FROM tb_user WHERE user_username = '$Username' AND user_password = '$Password' ";
   $result = mysqli_query($conn, $sql);
 
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
 
-    $_SESSION["member_id"] = $row["member_id"];
-    $_SESSION["username_badminton"] = $row["member_tel"];
-    $_SESSION["member_user"] = $row["member_user"];
-    $_SESSION["member_name"] = $row["member_name"];
-    $_SESSION["lastname_badminton"] = $row["member_pass"];
-    $_SESSION["member_permission"] = $row["member_permission"];
+    $_SESSION["user_id"] = $row["user_id"];
+    $_SESSION["user_tel"] = $row["user_tel"];
+    $_SESSION["user_username"] = $row["user_username"];
+    $_SESSION["user_firstname"] = $row["user_firstname"];
+    $_SESSION["user_lastname"] = $row["user_lastname"];
+    $_SESSION["user_permission"] = $row["user_permission"];
     $_SESSION["login_timestamp"] = time();
     echo "login_success";
   } else {

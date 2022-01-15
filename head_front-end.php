@@ -10,11 +10,11 @@ if (isset($_POST["txtSearch"])) {
   $strKeyword = $_POST["txtSearch"];
 }
 
-if (isset($_SESSION["username_badminton"])) {
+if (isset($_SESSION["user_username"])) {
   if ((time() - $_SESSION["login_timestamp"]) > $sessiontime) {
     header("location: logout.php");
   } else {
-    if ($_SESSION["member_permission"] == "S" || $_SESSION["member_permission"] == "A") {
+    if ($_SESSION["user_permission"] == "S" || $_SESSION["user_permission"] == "A") {
       header("Location: /" . $url . "/" . "staff.php");
     }
   }
@@ -34,7 +34,6 @@ if (isset($_SESSION["username_badminton"])) {
   <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   
   <!-- Google Font -->

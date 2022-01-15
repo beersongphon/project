@@ -3,10 +3,10 @@ include("./head_front-end.php");
 include("./header_front-end.php");
 
 $product_id = $_GET["product_id"];
-$query = "SELECT * FROM product WHERE product_id = '$product_id' ORDER BY product_id ASC";  
+$query = "SELECT * FROM tb_product WHERE product_id = '$product_id' ORDER BY product_id ASC";  
 $result = mysqli_query($conn, $query);  
-while($row = mysqli_fetch_array($result)) {  
-?> 
+$row = mysqli_fetch_array($result);
+?>
   <!-- Breadcrumb Begin -->
   <div class="breadcrumb-option">
     <div class="container">
@@ -14,8 +14,8 @@ while($row = mysqli_fetch_array($result)) {
         <div class="col-lg-12">
           <div class="breadcrumb__links">
             <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-            <a href="#">Women’s </a>
-            <span><?php echo $row["name"]; ?></span>
+            <a href="./shop.php">Shop</a>
+            <span><?php echo $row["product_name"]; ?></span>
           </div>
         </div>
       </div>
@@ -30,27 +30,38 @@ while($row = mysqli_fetch_array($result)) {
         <div class="col-lg-6">
           <div class="product__details__pic">
             <div class="product__details__pic__left product__thumb nice-scroll">
-              <a class="pt active" href="#product-1">
-                <img src="./assets/front-end/img/product/details/thumb-1.jpg" alt="">
+              <?php
+              $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row1 = $result->fetch_assoc()) {
+              ?> 
+              <a class="pt <?php if (basename($_SERVER['PHP_SELF']) == "#product-$row1[img_pro_id]") {
+                                                echo "active";
+                                              } else {
+                                                echo "";
+                                              } ?>" href="#product-<?php echo $row1["img_pro_id"]; ?>">
+                <img src="./upload/<?php echo $row1["img_product"]; ?>" alt="">
               </a>
-              <a class="pt" href="#product-2">
-                <img src="./assets/front-end/img/product/details/thumb-2.jpg" alt="">
-              </a>
-              <a class="pt" href="#product-3">
-                <img src="./assets/front-end/img/product/details/thumb-3.jpg" alt="">
-              </a>
-              <a class="pt" href="#product-4">
-                <img src="./assets/front-end/img/product/details/thumb-4.jpg" alt="">
-              </a>
+              <?php  
+                } //while condition closing bracket
+              }  //if condition closing bracket
+              ?>
             </div>
             <div class="product__details__slider__content">
               <div class="product__details__pic__slider owl-carousel">
-                <img data-hash="product-1" class="product__big__img" src="./assets/front-end/img/product/details/product-1.jpg" alt="">
-                <img data-hash="product-2" class="product__big__img" src="./assets/front-end/img/product/details/product-3.jpg" alt="">
-                <img data-hash="product-3" class="product__big__img" src="./assets/front-end/img/product/details/product-2.jpg" alt="">
-                <img data-hash="product-4" class="product__big__img" src="./assets/front-end/img/product/details/product-4.jpg" alt="">
+                <?php
+                $query = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC";  
+                $result = mysqli_query($conn, $query);  
+                while($row2 = mysqli_fetch_array($result)) {  
+                ?>
+                <img data-hash="product-<?php echo $row2["img_pro_id"]; ?>" class="product__big__img" src="./upload/<?php echo $row2["img_product"]; ?>" alt="">
+                <?php  
+                }
+                ?>
               </div>
-            </div>
+            </div>  
           </div>
         </div>
         <!-- <div class="col-lg-6">
@@ -81,7 +92,7 @@ while($row = mysqli_fetch_array($result)) {
         </div> -->
         <div class="col-lg-6">
           <div class="product__details__text">
-            <h3><?php echo $row["name"]; ?> <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
+            <h3><?php echo $row["product_name"]; ?> <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
             <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -90,7 +101,7 @@ while($row = mysqli_fetch_array($result)) {
               <i class="fa fa-star"></i>
               <span>( 138 reviews )</span>
             </div>
-            <div class="product__details__price">฿ <?php echo number_format($row["price"], 2); ?> <span>฿ 83.0</span></div>
+            <div class="product__details__price">฿ <?php echo number_format($row["product_price"], 2); ?> <span>฿ 83.0</span></div>
             <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
               magni lores eos qui ratione voluptatem sequi nesciunt.</p>
             <div class="product__details__button">
@@ -100,8 +111,9 @@ while($row = mysqli_fetch_array($result)) {
                   <input type="text" name="quantity" id="quantity<?php echo $row["product_id"]; ?>" value="1">
                 </div>
               </div>  
-              <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["name"]; ?>" />  
-              <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["price"]; ?>" />  
+              <input type="hidden" name="hidden_img" id="img<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_img"]; ?>" />  
+              <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_name"]; ?>" />  
+              <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />  
               <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> Add to cart</a>
               <ul>
                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
@@ -166,9 +178,6 @@ while($row = mysqli_fetch_array($result)) {
             </div>
           </div>
         </div>
-        <?php  
-        }
-        ?>  
         <div class="col-lg-12">
           <div class="product__details__tab">
             <ul class="nav nav-tabs" role="tablist">
@@ -232,18 +241,24 @@ while($row = mysqli_fetch_array($result)) {
             <h5>RELATED PRODUCTS</h5>
           </div>
         </div>
+        <?php
+        $sql = "SELECT * FROM tb_product ORDER BY product_id DESC LIMIT 4";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+        ?>
         <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/product/related/rp-1.jpg">
+            <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
               <div class="label new">New</div>
               <ul class="product__hover">
-                <li><a href="./assets/front-end/img/product/related/rp-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                <?php include("./permission.php"); ?>
               </ul>
             </div>
             <div class="product__item__text">
-              <h6><a href="#">Buttons tweed blazer</a></h6>
+              <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
               <div class="rating">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -251,11 +266,16 @@ while($row = mysqli_fetch_array($result)) {
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
               </div>
-              <div class="product__price">$ 59.0</div>
+              <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <?php
+          } //while condition closing bracket
+        }  //if condition closing bracket
+        ?>  
+
+        <!-- <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="product__item">
             <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/product/related/rp-2.jpg">
               <ul class="product__hover">
@@ -321,7 +341,7 @@ while($row = mysqli_fetch_array($result)) {
               <div class="product__price">$ 59.0</div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

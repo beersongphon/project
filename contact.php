@@ -9,7 +9,7 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
           <span>Contact</span>
         </div>
       </div>
@@ -49,7 +49,7 @@ include("./header_front-end.php");
               <!-- <input type="text" placeholder="Website"> -->
               <textarea id="comments_contact" name="comments" placeholder="Message"></textarea>
               <?php
-              if (isset($_SESSION['username_badminton'])) {
+              if (isset($_SESSION['user_username'])) {
                 echo "<button type='button' id='btn_contact' class='site-btn'>Send Message</button>";
               } else {
                 echo "<label for='email'>&nbsp&nbspกรุณา Login ก่อนทำรายการ</label>";

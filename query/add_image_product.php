@@ -1,8 +1,8 @@
 <?php
 include('./../connect.php');
-$Img = $_POST['Img'];
+$img_product = $_POST['img_product'];
 $product_id = $_POST['product_id'];
-$sql = "INSERT INTO img_product (Img, product_id) VALUES ('$Img', '$product_id')";
+$sql = "INSERT INTO tb_img_product (img_product, product_id) VALUES ('$img_product', '$product_id')";
 $result = $conn->query($sql);
 if ($result == True) {
   echo True;

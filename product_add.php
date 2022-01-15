@@ -11,9 +11,6 @@ include('./header_back-end.php');
         <div class="col-md-12">
           <!-- DATA TABLE -->
           <h3 class="title-5 m-b-35">เพิ่มข้อมูลสินค้า</h3>
-          <div class="row p-5">
-            <table id="image_list" class="table"></table>
-          </div>
           <form method="POST" action="" enctype="multipart/form-data">
             <div class="col-lg-12">
               <div class="card">
@@ -22,27 +19,45 @@ include('./header_back-end.php');
                   <small> Form</small>
                 </div>
                 <div class="card-body card-block">
+                  <div class="row p-5">
+                    <table id="image_list1" class="table"></table>
+                  </div>
                   <div class="row">
                     <div class="col-8">
-                      <input id="file" name="file" type="file" class="form-control-file" required>
+                      <input id="file1" name="file1" type="file" class="form-control-file" required>
                     </div>
                     <div class="col-4">
-                      <button onclick="uploadImage()" class="btn btn-primary" id="btn_upload" name="btn_upload" type="button">
+                      <button onclick="uploadImage1()" class="btn btn-primary" id="btn_upload1" name="btn_upload1" type="button">
+                        อัปโหลดรูปภาพ
+                      </button>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row p-5">
+                    <table id="image_list2" class="table"></table>
+                  </div>
+                  <div class="row">
+                    <div class="col-8">
+                    <label for="file2" class=" form-control-label">image</label>
+                      <input id="file2" name="file2" type="file" class="form-control-file" required>
+                    </div>
+                    <div class="col-4">
+                      <button onclick="uploadImage2()" class="btn btn-primary" id="btn_upload2" name="btn_upload2" type="button">
                         อัปโหลดรูปภาพ
                       </button>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="name" class=" form-control-label">name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your company name" class="form-control">
+                    <label for="product_name" class=" form-control-label">name</label>
+                    <input type="text" id="product_name" name="product_name" placeholder="Enter your company name" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label for="vat" class=" form-control-label">price</label>
-                    <input type="text" id="price" name="price" placeholder="DE1234567890" class="form-control">
+                    <label for="product_price" class=" form-control-label">price</label>
+                    <input type="text" id="product_price" name="product_price" placeholder="DE1234567890" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label for="street" class=" form-control-label">description</label>
-                    <input type="text" id="description" name="description" placeholder="Enter street name" class="form-control">
+                    <label for="product_description" class=" form-control-label">description</label>
+                    <input type="text" id="product_description" name="product_description" placeholder="Enter street name" class="form-control">
                   </div>
                   <button class="btn btn-primary btn-block" type="button" onclick="createProduct()">
                     ยืนยัน
@@ -67,9 +82,12 @@ include('./header_back-end.php');
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script>
-  var listImage = new Array();
-  var image_list = $("#image_list");
-  var upload = $("#btn_upload");
+  var listImage1 = new Array();
+  var listImage2 = new Array();
+  var image_list1 = $("#image_list1");
+  var image_list2 = $("#image_list2");
+  var upload1 = $("#btn_upload1");
+  var upload2 = $("#btn_upload2");
   var model_list = $("#model_id");
 
   $('document').ready(function() {
@@ -111,9 +129,9 @@ include('./header_back-end.php');
     });
   }
 
-  async function uploadImage() {
+  async function uploadImage1() {
     var fd = new FormData();
-    var files = $('#file')[0].files;
+    var files = $('#file1')[0].files;
     if (files.length > 0) {
       fd.append('file', files[0]);
       $.ajax({
@@ -124,51 +142,125 @@ include('./header_back-end.php');
         processData: false,
         success: function(response) {
           console.log(response);
-          image_list.empty();
-          listImage.push(response);
-          listImage.forEach((response) => {
-            image_list.append(`
-                        <tr id="${response}" name="${response}">
-                            <td>
-                                <img src="upload/${response}" style="width: 150px;">
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" onclick="deleteImage('${response}')">ลบ</button>
-                            </td>
-                        </tr>`);
+          image_list1.empty();
+          listImage1.push(response);
+          listImage1.forEach((response) => {
+            image_list1.append(`
+            <tr id="${response}" name="${response}">
+              <td>
+                <img src="upload/${response}" style="width: 150px;">
+              </td>
+              <td>
+                <button class="btn btn-danger" onclick="deleteImage1('${response}')">ลบ</button>
+              </td>
+            </tr>`);
           });
         }
       });
     }
   }
 
-  function deleteImage(data) {
-    listImage = listImage.filter((value) => value != data);
-    image_list.empty();
-    listImage.forEach((response) => {
-      image_list.append(`<tr id="${response}" name="${response}"><td><img src="upload/${response}" style="width: 150px;"></td><td><button class="btn btn-danger" onclick="deleteImage('${response}')">ลบ</button></td></tr>`);
+  function deleteImage1(data) {
+    listImage1 = listImage1.filter((value) => value != data);
+    image_list1.empty();
+    listImage1.forEach((response) => {
+      image_list1.append(`
+        <tr id="${response}" name="${response}">
+          <td>
+            <img src="upload/${response}" style="width: 150px;">
+          </td>
+          <td>
+            <button class="btn btn-danger" onclick="deleteImage1('${response}')">ลบ</button>
+          </td>
+        </tr>`
+      );
     });
   }
 
+  async function uploadImage2() {
+    var fd = new FormData();
+    var files = $('#file2')[0].files;
+    if (files.length > 0) {
+      fd.append('file', files[0]);
+      $.ajax({
+        url: 'upload_image.php',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+          console.log(response);
+          image_list2.empty();
+          listImage2.push(response);
+          listImage2.forEach((response) => {
+            image_list2.append(`
+            <tr id="${response}" name="${response}">
+              <td>
+                <img src="upload/${response}" style="width: 150px;">
+              </td>
+              <td>
+                <button class="btn btn-danger" onclick="deleteImage2('${response}')">ลบ</button>
+              </td>
+            </tr>`);
+          });
+        }
+      });
+    }
+  }
+
+  function deleteImage2(data) {
+    listImage2 = listImage2.filter((value) => value != data);
+    image_list2.empty();
+    listImage2.forEach((response) => {
+      image_list2.append(`
+        <tr id="${response}" name="${response}">
+          <td>
+            <img src="upload/${response}" style="width: 150px;">
+          </td>
+          <td>
+            <button class="btn btn-danger" onclick="deleteImage2('${response}')">ลบ</button>
+          </td>
+        </tr>`
+      );
+    });
+  }
+
+
+ 
+
   function createProduct() {
-    let name = $('#name').val();
-    let price = $('#price').val();
-    let description = $('#description').val();
-    listImage.forEach((image) => {
+    let product_name = $('#product_name').val();
+    let product_price = $('#product_price').val();
+    let product_description = $('#product_description').val();
+    listImage1.forEach((image1) => {
       $.ajax({
         url: 'query/add_product.php',
         type: 'post',
         data: {
-          'img': image,
-          'name': name,
-          'price': price,
-          'description': description
+          'product_img': image1,
+          'product_name': product_name,
+          'product_price': product_price,
+          'product_description': product_description
         },
         success: function(response) {
           console.log(response);
+          let product_id = response;
+          listImage2.forEach((image2) => {
+            $.ajax({
+              url: 'query/add_image_product.php',
+              type: 'post',
+              data: {
+                'img_product': image2,
+                'product_id': product_id
+              },
+              success: function(response) {
+                console.log(response);
+              }
+            });
+          });
           setTimeout(function() {
             window.location.replace('product.php');
-            // console.log(name, price, description, response);
+            // console.log(product_name, product_price, product_description, response);
           }, 300);
         }
       });

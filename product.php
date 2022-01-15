@@ -69,7 +69,7 @@ if (isset($_POST["txtSearch"])) {
           <div class="table-responsive table--no-card m-b-30">
             <table class="table table-borderless table-striped table-earning">
               <thead>
-                <tr>สินค้า
+                <tr>
                   <th>ลำดับ</th>
                   <th>รูปสินค้า</th>
                   <th>ชื่อสินค้า</th>
@@ -92,13 +92,13 @@ if (isset($_POST["txtSearch"])) {
                 $next_page = $page_no + 1;
                 $adjacents = "2";
 
-                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `product`");
+                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
                 $total_records = mysqli_fetch_array($result_count);
                 $total_records = $total_records['total_records'];
                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
                 $second_last = $total_no_of_pages - 1; // total page minus 1
 
-                $sql = "SELECT * FROM product WHERE product_id LIKE '%" . $strKeyword . "%' OR name LIKE '%" . $strKeyword . "%'
+                $sql = "SELECT * FROM tb_product WHERE product_id LIKE '%" . $strKeyword . "%' OR product_name LIKE '%" . $strKeyword . "%'
                   LIMIT $offset, $total_records_per_page
                   ";
                 $result = $conn->query($sql);
@@ -111,12 +111,12 @@ if (isset($_POST["txtSearch"])) {
                   <td><?php echo $row['product_id']; ?></td>
                   <td>
                     <div class="row">
-                      <img class="col" src="./upload/<?php echo $row['img']; ?>" width="290" height="228" />
+                      <img class="col-12" src="./upload/<?php echo $row['product_img']; ?>" width="290" height="228" />
                     </div>
                   </td>
-                  <td><?php echo $row['name']; ?></td>
-                  <td class="text-center"><?php echo $row['price']; ?></td>
-                  <td><?php echo $row['description']; ?></td>
+                  <td><?php echo $row['product_name']; ?></td>
+                  <td class="text-center"><?php echo $row['product_price']; ?></td>
+                  <td><?php echo $row['product_description']; ?></td>
                   <td>
                     <div class="table-data-feature">
                       <a class="item" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
@@ -132,11 +132,11 @@ if (isset($_POST["txtSearch"])) {
                   <td colspan="6">
                     <div class="row">
                       <?php
-                      $sql = "SELECT * FROM img_product WHERE product_id = '$row[product_id]'";
+                      $sql = "SELECT * FROM tb_img_product WHERE product_id = '$row[product_id]'";
                       $image = $conn->query($sql);
                       while ($image_item = $image->fetch_assoc()) {
                       ?>
-                        <img class="col-2" src="./upload/<?php echo $image_item["Img"]; ?>" style="width: 290; height: 228;">
+                        <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" style="width: 290; height: 228;">
                       <?php
                       }
                       ?>

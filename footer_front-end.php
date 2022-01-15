@@ -5,48 +5,48 @@
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
         <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-1.jpg">
           <div class="instagram__text">
-            <i class="fa fa-instagram"></i>
-            <a href="#">@ ashion_shop</a>
+            <i class="fa fa-facebook"></i>
+            <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
           </div>
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
         <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-2.jpg">
           <div class="instagram__text">
-            <i class="fa fa-instagram"></i>
-            <a href="#">@ ashion_shop</a>
+            <i class="fa fa-facebook"></i>
+            <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
           </div>
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
         <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-3.jpg">
           <div class="instagram__text">
-            <i class="fa fa-instagram"></i>
-            <a href="#">@ ashion_shop</a>
+            <i class="fa fa-facebook"></i>
+            <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
           </div>
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
         <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-4.jpg">
           <div class="instagram__text">
-            <i class="fa fa-instagram"></i>
-            <a href="#">@ ashion_shop</a>
+            <i class="fa fa-facebook"></i>
+            <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
           </div>
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
         <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-5.jpg">
           <div class="instagram__text">
-            <i class="fa fa-instagram"></i>
-            <a href="#">@ ashion_shop</a>
+            <i class="fa fa-facebook"></i>
+            <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
           </div>
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
         <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-6.jpg">
           <div class="instagram__text">
-            <i class="fa fa-instagram"></i>
-            <a href="#">@ ashion_shop</a>
+            <i class="fa fa-facebook"></i>
+            <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
           </div>
         </div>
       </div>
@@ -65,8 +65,9 @@
             <a href="./index.php" style="font-family: 'Finger Paint', cursive; font-size: 20px; color:#000000;">Luxury by Fon</a>
             <!-- <a href="./index.php"><img src="./assets/front-end/img/logo.png" alt=""></a> -->
           </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            cilisis.</p>
+          <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            cilisis.</p> -->
+          <p>ชื่อบัญชี : น.ส.กรกนก ลีลาคุณารักษ์<br>ประเภทของบัญชี : ออมทรัพย์<br>ธนาคารกสิกร 052-1-3744-2</p>
           <div class="footer__payment">
             <a href="#"><img src="./assets/front-end/img/payment/payment-1.png" alt=""></a>
             <a href="#"><img src="./assets/front-end/img/payment/payment-2.png" alt=""></a>
@@ -134,8 +135,9 @@
 <div class="search-model">
   <div class="h-100 d-flex align-items-center justify-content-center">
     <div class="search-close-switch">+</div>
-    <form class="search-model-form">
-      <input type="text" id="search-input" placeholder="Search here.....">
+    <form class="search-model-form" method="post" action="./shop.php">
+      <input type="search" name="txtSearch" id="search-input" placeholder="Search here....." value="<?php echo $strKeyword; ?>">
+      <!-- <input class="form-control" type="search" name="txtSearch" id="search" placeholder="ค้นหา" aria-label="Search" value="<?php echo $strKeyword; ?>"> -->
     </form>
   </div>
 </div>
@@ -143,90 +145,92 @@
 
 <script src="./assets/js/jquery-3.5.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>  
- $(document).ready(function(data){  
-      $('.add_to_cart').click(function(){  
-           var product_id = $(this).attr("id");  
-           var product_name = $('#name'+product_id).val();  
-           var product_price = $('#price'+product_id).val();  
-           var product_quantity = $('#quantity'+product_id).val();  
-           var action = "add";  
-           if(product_quantity > 0)  
-           {  
-                $.ajax({  
-                     url:"action.php",  
-                     method:"POST",  
-                     dataType:"json",  
-                     data:{  
-                          product_id:product_id,   
-                          product_name:product_name,   
-                          product_price:product_price,   
-                          product_quantity:product_quantity,   
-                          action:action  
-                     },  
-                     success:function(data)  
-                     {  
-                          $('#order_table').html(data.order_table);  
-                          $('.badge').text(data.cart_item);  
-                          //alert("Product has been Added into Cart");  
-                          Swal.fire({
-                            icon: 'success',
-                            title: ("Product has been Added into Cart"),
-                            showConfirmButton: false,
-                            timer: 1500
-                          }).then((result) => {
-                            if (result.isDismissed) {
-                              window.location.replace("shop-cart.php");
-                            }
-                          });
-                     }  
-                });  
-           }  
-           else  
-           {  
-              alert("Please Enter Number of Quantity")  
-           }  
-      });  
-      $(document).on('click', '.delete', function(){  
-           var product_id = $(this).attr("id");  
-           var action = "remove";  
-           if(confirm("Are you sure you want to remove this product?"))  
-           {  
-                $.ajax({  
-                     url:"action.php",  
-                     method:"POST",  
-                     dataType:"json",  
-                     data:{product_id:product_id, action:action},  
-                     success:function(data){  
-                          $('#order_table').html(data.order_table);  
-                          $('.badge').text(data.cart_item);  
-                     }  
-                });  
-           }  
-           else  
-           {  
-                return false;  
-           }  
-      });  
-      $(document).on('keyup', '.quantity', function(){  
-           var product_id = $(this).data("product_id");  
-           var quantity = $(this).val();  
-           var action = "quantity_change";  
-           if(quantity != '')  
-           {  
-                $.ajax({  
-                     url :"action.php",  
-                     method:"POST",  
-                     dataType:"json",  
-                     data:{product_id:product_id, quantity:quantity, action:action},  
-                     success:function(data){  
-                          $('#order_table').html(data.order_table);  
-                     }  
-                });  
-           }  
-      });  
- });  
- </script>
+<script>
+  $(document).ready(function(data) {
+    $('.add_to_cart').click(function() {
+      var product_id = $(this).attr("id");
+      var product_img = $('#img' + product_id).val();
+      var product_name = $('#name' + product_id).val();
+      var product_price = $('#price' + product_id).val();
+      var product_quantity = $('#quantity' + product_id).val();
+      var action = "add";
+      if (product_quantity > 0) {
+        $.ajax({
+          url: "action.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            product_id: product_id,
+            product_img: product_img,
+            product_name: product_name,
+            product_price: product_price,
+            product_quantity: product_quantity,
+            action: action
+          },
+          success: function(data) {
+            $('#order_table').html(data.order_table);
+            $('.badge').text(data.cart_item);
+            //alert("Product has been Added into Cart");  
+            Swal.fire({
+              icon: 'success',
+              title: ("Product has been Added into Cart"),
+              showConfirmButton: false,
+              timer: 1500
+            }).then((result) => {
+              if (result.isDismissed) {
+                window.location.replace("shop-cart.php");
+                //console.log(product_id,product_img,product_name,product_price,product_quantity);
+              }
+            });
+          }
+        });
+      } else {
+        alert("Please Enter Number of Quantity")
+      }
+    });
+    $(document).on('click', '.delete', function() {
+      var product_id = $(this).attr("id");
+      var action = "remove";
+      if (confirm("Are you sure you want to remove this product?")) {
+        $.ajax({
+          url: "action.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            product_id: product_id,
+            action: action
+          },
+          success: function(data) {
+            $('#order_table').html(data.order_table);
+            $('.badge').text(data.cart_item);
+          }
+        });
+      } else {
+        return false;
+      }
+    });
+    $(document).on('keyup', '.quantity', function() {
+      var product_id = $(this).data("product_id");
+      var quantity = $(this).val();
+      var action = "quantity_change";
+      if (quantity != '') {
+        $.ajax({
+          url: "action.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            product_id: product_id,
+            quantity: quantity,
+            action: action
+          },
+          success: function(data) {
+            $('#order_table').html(data.order_table);
+          }
+        });
+      }
+    });
+  });
+</script>
 
 <!-- Action jQuery -->
 <script>
@@ -275,6 +279,7 @@
           //location.reload();
           window.location.replace("index.php");
         } else {
+          console.log(usr,pwd_login);
           alert("เกิดข้อผิดพลาด กรุณาตรวจสอบ Username หรือ Password");
         }
       });
@@ -316,7 +321,7 @@
       var username_regis = $("#username_regis").val();
       var pwd_regis = $("#pwd_regis").val();
       var confirm_pwd = $("#confirm_pwd").val();
-      var idcard_regis = $("#idcard_regis").val();
+      var address_regis = $("#address_regis").val();
       var tel_regis = $("#tel_regis").val();
       var sex_regis = $("input[name=optradio]:checked").val();
 
@@ -332,7 +337,7 @@
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (confirm_pwd == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      } else if (idcard_regis == "") {
+      } else if (address_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (tel_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
@@ -347,7 +352,7 @@
           username_regis: username_regis,
           pwd_regis: pwd_regis,
           confirm_pwd: confirm_pwd,
-          idcard_regis: idcard_regis,
+          address_regis: address_regis,
           sex_regis: sex_regis,
           tel_regis: tel_regis
         }, function(datacallback) {
@@ -358,7 +363,7 @@
             $("#username_regis").val("");
             $("#pwd_regis").val("");
             $("#confirm_pwd").val("");
-            $("#idcard_regis").val("");
+            $("#address_regis").val("");
             $("#tel_regis").val("");
           } else if (datacallback == "already") {
             alert("มีชื่อผู้ใช้นี้อยู่ในระบบแล้ว");
@@ -621,5 +626,4 @@
 <script src="./assets/front-end/js/jquery.nicescroll.min.js"></script>
 <script src="./assets/front-end/js/main.js"></script>
 </body>
-
 </html>
