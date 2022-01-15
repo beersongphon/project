@@ -13,9 +13,9 @@ include("./header_front-end.php");
     $order_total = $_POST['order_total'];
 
     $insert_order = "  
-                         INSERT INTO tb_order(user_id, order_address, order_tel, order_email, creation_date, order_status, order_total)  
-                         VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', 'pending', '$order_total')  
-                         ";
+                     INSERT INTO tb_order(user_id, order_address, order_tel, order_email, creation_date, order_status, order_total)  
+                     VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', 'pending', '$order_total')  
+                     ";
     $order_id = "";
     if (mysqli_query($conn, $insert_order)) {
       $order_id = mysqli_insert_id($conn);
