@@ -1,7 +1,7 @@
 <?php
 //action.php  
 session_start();
-include('./connect.php');
+include("./connect.php");
 if (isset($_POST["product_id"])) {
   $order_table = '';
   $message = '';
@@ -85,10 +85,10 @@ if (isset($_POST["product_id"])) {
                       </div>
                     </div>
                   </td>
-                  <td class="cart__price">฿ ' . $values["product_price"] . '</td>
+                  <td class="cart__price">฿ ' . number_format($values["product_price"], 2) . '</td>
                   <td class="cart__quantity">
                     <div class="pro-qty">
-                      <input type="text" value="' . $values["product_quantity"] . '" style="width: 60px;" name="quantity[]" id="quantity' . $values["product_id"] . '" data-product_id="' . $values["product_id"] . '" class="form-control quantity">
+                      <input type="text" value="' . $values["product_quantity"] . '" style="width: 60px;" name="quantity[]" id="quantity' . $values["product_id"] . '" data-product_id="' . $values["product_id"] . '" class="quantity">
                       <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
                     </div>
                   </td>
@@ -107,7 +107,7 @@ if (isset($_POST["product_id"])) {
      <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="cart__btn">
-          <a href="#">Continue Shopping</a>
+          <a href="./shop.php">Continue Shopping</a>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6">

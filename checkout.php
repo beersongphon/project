@@ -41,7 +41,7 @@ include("./header_front-end.php");
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>First Name <span>*</span></p>
-                <input type="text" name="name" value="<?php echo $_SESSION['user_name']; ?>">
+                <input type="text" name="name" value="<?php echo $_SESSION['user_firstname']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">

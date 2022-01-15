@@ -24,8 +24,8 @@ include("./header_front-end.php");
     $order_details = "";
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
       $order_details .= "  
-                              INSERT INTO tb_order_detail(order_id, product_id, product_name, order_price, order_quantity)  
-                              VALUES('$order_id', '$values[product_id]', '$values[product_name]', '$values[product_price]', '$values[product_quantity]');  
+                              INSERT INTO tb_order_detail(order_id, product_id, order_price, order_quantity)  
+                              VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[product_quantity]');  
                               ";
     }
     if (mysqli_multi_query($conn, $order_details)) {
@@ -52,7 +52,7 @@ include("./header_front-end.php");
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
       $customer_details = '  
-                          <label>' . $row["user_name"] . '</label>  
+                          <label>' . $row["user_firstname"] .' '. $row["user_lastname"] . '</label>  
                           <p>' . $row["order_address"] . '</p>  
                           <p>' . $row["order_tel"] . ', ' . $row["order_email"] . '</p>  
                           <p>' . $row["order_address"] . '</p>  
