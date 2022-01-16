@@ -6,7 +6,7 @@ include("connection.php");
 $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
 
 // (1) ข้อมูลชั่วโมง member
-$sql_member_data = "SELECT member_time_progress FROM member WHERE member_id = " . $_SESSION["memberid_badminton"];
+$sql_member_data = "SELECT member_time_progress FROM member WHERE member_id = " . $_SESSION["member_id"];
 $result_member_data = mysqli_query($con, $sql_member_data);
 $row_member_data = mysqli_fetch_assoc($result_member_data);
 $sum_time = $row_member_data['member_time_progress'];
@@ -18,7 +18,7 @@ $sql_user_detail = "SELECT member.member_name, member.member_lastname, member.me
         pay.pay_time, pay.pay_cost, pay.pay_datetime 
         FROM pay 
         INNER JOIN member on pay.pay_member_id = member.member_id 
-        WHERE pay.pay_confirm = 0 AND pay.pay_member_id = ". $_SESSION['memberid_badminton'];
+        WHERE pay.pay_confirm = 0 AND pay.pay_member_id = ". $_SESSION['member_id'];
 $result_user = mysqli_query($con, $sql_user_detail);
 
 // (2) ข้อมูล pay
@@ -45,7 +45,7 @@ echo "<ul class='list-group'>";
 for ($i = 1; $i <= 6; $i++) {
     $sql_user_racket = "SELECT * FROM stadium_mastic_" . $i . " 
     WHERE stadium_mastic_reserve_datetime > NOW() 
-    AND stadium_mastic_member = " . $_SESSION['memberid_badminton'];
+    AND stadium_mastic_member = " . $_SESSION['member_id'];
     $result_racket = mysqli_query($con, $sql_user_racket);
     if (mysqli_num_rows($result_racket) == 0) {
         $nodata++;
@@ -71,7 +71,7 @@ echo "<ul class='list-group'>";
 for ($i = 1; $i <= 6; $i++) {
     $sql_user_racket = "SELECT * FROM stadium_rubber_" . $i . " 
     WHERE stadium_rubber_reserve_datetime > NOW() 
-    AND stadium_rubber_member = " . $_SESSION['memberid_badminton'];
+    AND stadium_rubber_member = " . $_SESSION['member_id'];
     $result_racket = mysqli_query($con, $sql_user_racket);
     if (mysqli_num_rows($result_racket) == 0) {
         $nodata++;
@@ -96,7 +96,7 @@ echo "<ul class='list-group'>";
 
 $sql_user_racket = "SELECT * FROM lend_racket 
     WHERE lend_racket_status != 2
-    AND lend_racket_member = " . $_SESSION['memberid_badminton'];
+    AND lend_racket_member = " . $_SESSION['member_id'];
 $result_racket = mysqli_query($con, $sql_user_racket);
 if (mysqli_num_rows($result_racket) == 0) {
     echo "<div class='alert alert-danger'>";
@@ -121,7 +121,7 @@ echo "<ul class='list-group'>";
 
 $sql_user_shoes = "SELECT * FROM lend_shoes 
     WHERE lend_shoes_status != 2
-    AND lend_shoes_member = " . $_SESSION['memberid_badminton'];
+    AND lend_shoes_member = " . $_SESSION['member_id'];
 $result_shoes = mysqli_query($con, $sql_user_shoes);
 if (mysqli_num_rows($result_shoes) == 0) {
     echo "<div class='alert alert-danger'>";
@@ -146,7 +146,7 @@ echo "<ul class='list-group'>";
 for ($i = 1; $i <= 6; $i++) {
     $sql_user_racket = "SELECT * FROM stadium_mastic_" . $i . " 
     WHERE stadium_mastic_reserve_datetime < NOW() 
-    AND stadium_mastic_member = " . $_SESSION['memberid_badminton']. " LIMIT 10";
+    AND stadium_mastic_member = " . $_SESSION['member_id']. " LIMIT 10";
     $result_racket = mysqli_query($con, $sql_user_racket);
     if (mysqli_num_rows($result_racket) == 0) {
         $nodata++;
@@ -172,7 +172,7 @@ echo "<ul class='list-group'>";
 for ($i = 1; $i <= 6; $i++) {
     $sql_user_racket = "SELECT * FROM stadium_rubber_" . $i . " 
     WHERE stadium_rubber_reserve_datetime < NOW() 
-    AND stadium_rubber_member = " . $_SESSION['memberid_badminton'] . " LIMIT 10";
+    AND stadium_rubber_member = " . $_SESSION['member_id'] . " LIMIT 10";
     $result_racket = mysqli_query($con, $sql_user_racket);
     if (mysqli_num_rows($result_racket) == 0) {
         $nodata++;
@@ -197,7 +197,7 @@ echo "<ul class='list-group'>";
 
 $sql_user_racket = "SELECT * FROM lend_racket 
     WHERE lend_racket_status = 2
-    AND lend_racket_member = " . $_SESSION['memberid_badminton'] . " LIMIT 10";
+    AND lend_racket_member = " . $_SESSION['member_id'] . " LIMIT 10";
 $result_racket = mysqli_query($con, $sql_user_racket);
 if (mysqli_num_rows($result_racket) == 0) {
     echo "<div class='alert alert-danger'>";
@@ -219,7 +219,7 @@ echo "<ul class='list-group'>";
 
 $sql_user_shoes = "SELECT * FROM lend_shoes 
     WHERE lend_shoes_status = 2
-    AND lend_shoes_member = " . $_SESSION['memberid_badminton']. " LIMIT 10";
+    AND lend_shoes_member = " . $_SESSION['member_id']. " LIMIT 10";
 $result_shoes = mysqli_query($con, $sql_user_shoes);
 if (mysqli_num_rows($result_shoes) == 0) {
     echo "<div class='alert alert-danger'>";
