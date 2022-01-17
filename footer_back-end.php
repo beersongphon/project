@@ -1,29 +1,20 @@
+      <footer>
+        <div class="footer clearfix mb-0 text-muted">
+          <div class="float-start">
+            <p>2021 &copy; Luxury by Fon.</p>
+          </div>
+          <div class="float-end">
+            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="http://ahmadsaugi.com">A. Saugi</a></p>
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
-  <!-- Jquery JS-->
-  <script src="./assets/back-end/vendor/jquery-3.2.1.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Bootstrap JS-->
-  <script src="./assets/back-end/vendor/bootstrap-4.1/popper.min.js"></script>
-  <script src="./assets/back-end/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-  <!-- Vendor JS       -->
-  <script src="./assets/back-end/vendor/slick/slick.min.js">
-  </script>
-  <script src="./assets/back-end/vendor/wow/wow.min.js"></script>
-  <script src="./assets/back-end/vendor/animsition/animsition.min.js"></script>
-  <script src="./assets/back-end/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-  </script>
-  <script src="./assets/back-end/vendor/counter-up/jquery.waypoints.min.js"></script>
-  <script src="./assets/back-end/vendor/counter-up/jquery.counterup.min.js">
-  </script>
-  <script src="./assets/back-end/vendor/circle-progress/circle-progress.min.js"></script>
-  <script src="./assets/back-end/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="./assets/back-end/vendor/chartjs/Chart.bundle.min.js"></script>
-  <script src="./assets/back-end/vendor/select2/select2.min.js">
-  </script>
+  <script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Main JS-->
-  <script src="./assets/back-end/js/main.js"></script>
+  <script src="./assets/back-end/mazer/dist/assets/js/mazer.js"></script>
 
+  <script src="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.js"></script>
 </body>
 </html>
-<!-- end document-->

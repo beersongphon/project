@@ -21,7 +21,7 @@ include("./header_front-end.php");
 <section class="shop-cart spad">
   <?php  
   if(!empty($_SESSION["shopping_cart"])) {
-  ?>  
+  ?>
   <div class="container" id="order_table">
     <div class="row">
       <div class="col-lg-12">
@@ -37,11 +37,10 @@ include("./header_front-end.php");
               </tr>
             </thead>
             <tbody>
-            <?php  
-              $total = 0;  
-              foreach($_SESSION["shopping_cart"] as $keys => $values)  
-            {
-            ?>  
+              <?php
+              $total = 0;
+              foreach($_SESSION["shopping_cart"] as $keys => $values) {
+              ?>
               <tr>
                 <td class="cart__product__item">
                   <img class="col-2" src="./upload/<?php echo $values['product_img']; ?>" alt="">
@@ -67,10 +66,10 @@ include("./header_front-end.php");
                 <td class="cart__total">฿ <?php echo number_format($values["product_quantity"] * $values["product_price"], 2); ?></td>
                 <td class="cart__close"><span class="icon_close delete" name="delete" id="<?php echo $values["product_id"]; ?>"></span></td>
               </tr>
-              <?php  
-              $total = $total + ($values["product_quantity"] * $values["product_price"]);  
-              }  
-              ?> 
+              <?php
+              $total = $total + ($values["product_quantity"] * $values["product_price"]);
+              }
+              ?>
             </tbody>
           </table>
         </div>
@@ -109,9 +108,9 @@ include("./header_front-end.php");
         </div>
       </div>
     </div>
-    <?php  
-    }  
-    ?>  
+    <?php
+    }
+    ?>
   </div>
 </section>
 <!-- Shop Cart Section End -->
