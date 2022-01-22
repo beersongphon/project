@@ -38,6 +38,12 @@
               <span>ข้อมูลสินค้า</span>
             </a>
           </li>
+          <li class="sidebar-item ">
+            <a href="./logout.php" class='sidebar-link'>
+              <i class="bi bi-grid-fill"></i>
+              <span>ออกจากระบบ</span>
+            </a>
+          </li>
 
           <li class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>

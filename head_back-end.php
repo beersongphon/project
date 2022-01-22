@@ -14,8 +14,8 @@ include('./connect.php');
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Petemoss&display=swap" rel="stylesheet">
   
-  <!-- <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/css/bootstrap.css"> -->
-  <link rel="stylesheet" href="./assets/css/bootstrap.css">
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/css/bootstrap.css">
+  <!-- <link rel="stylesheet" href="./assets/css/bootstrap.css"> -->
 
   <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/iconly/bold.css">
 
