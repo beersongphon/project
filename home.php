@@ -42,10 +42,21 @@ include('./header_back-end.php');
                     <i class="iconly-boldProfile"></i>
                   </div>
                 </div>
+                <?php
+                $sql = "SELECT COUNT(user_id) AS user_id FROM tb_user";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  // output data of each row
+                  while ($row = $result->fetch_assoc()) {
+                ?>
                 <div class="col-md-8">
-                  <h6 class="text-muted font-semibold">Followers</h6>
-                  <h6 class="font-extrabold mb-0">183.000</h6>
+                  <h6 class="text-muted font-semibold">ข้อมูลลูกค้า</h6>
+                  <h6 class="font-extrabold mb-0"><?php echo $row["user_id"]; ?></h6>
                 </div>
+                <?php
+                  } //while condition closing bracket
+                }  //if condition closing bracket
+                ?>
               </div>
             </div>
           </div>

@@ -19,14 +19,14 @@ if (isset($_POST["txtSearch"])) {
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>ข้อมูลสินค้า</h3>
+        <h3>ข้อมูลลูกค้า</h3>
         <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
       </div>
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">ข้อมูลสินค้า</li>
+            <li class="breadcrumb-item active" aria-current="page">ข้อมูลลูกค้า</li>
           </ol>
         </nav>
       </div>
@@ -47,10 +47,10 @@ if (isset($_POST["txtSearch"])) {
                   <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                   <input type="search" name="txtSearch" class="form-control" placeholder="ค้นหา" aria-label="Search" aria-describedby="button-addon2" value="<?php echo $strKeyword; ?>">
                   <button class="input-group-text fa-1x" name="Search" type="submit" value="Search">ค้นหา</button>
-                  <a class="btn btn-primary" style="float: right;" href="product_add.php">
+                  <!-- <a class="btn btn-primary" style="float: right;" href="product_add.php">
                     <i class="fa fa-plus-circle"></i>
                     เพิ่มลูกค้า
-                  </a>
+                  </a> -->
                 </div>
               </form>
             </div>
@@ -60,12 +60,14 @@ if (isset($_POST["txtSearch"])) {
                 <thead>
                   <tr>
                     <th class="text-center">ลำดับ</th>
-                    <th>รูปสินค้า</th>
-                    <th>ชื่อสินค้า</th>
-                    <th class="text-center">ราคา</th>
-                    <th class="text-center">จำนวน</th>
-                    <th class="text-left">รายละเอียดสินค้า</th>
-                    <th class="text-right"></th>
+                    <th>ชื่อผู้ใช้</th>
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th class="text-left">ที่อยู่</th>
+                    <th>เบอร์โทรศัพท์</th>
+                    <th>เพศ</th>
+                    <th class="text-left">DateTime</th>
+                    <!-- <th class="text-right"></th> -->
                     <!-- <th>ACTION</th> -->
                   </tr>
                 </thead>
@@ -77,19 +79,21 @@ if (isset($_POST["txtSearch"])) {
                   $page_no = 1;
                 }
 
-                $total_records_per_page = 6;
+                $total_records_per_page = 10;
                 $offset = ($page_no - 1) * $total_records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
                 $adjacents = "2";
 
-                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
+                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_user`");
                 $total_records = mysqli_fetch_array($result_count);
                 $total_records = $total_records['total_records'];
                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
                 $second_last = $total_no_of_pages - 1; // total page minus 1
 
-                $sql = "SELECT * FROM tb_product WHERE product_id LIKE '%" . $strKeyword . "%' OR product_name LIKE '%" . $strKeyword . "%'
+                $i = 1;
+
+                $sql = "SELECT * FROM tb_user WHERE user_id LIKE '%$strKeyword%' OR user_firstname LIKE '%$strKeyword%'
                   LIMIT $offset, $total_records_per_page
                   ";
                 $result = $conn->query($sql);
@@ -97,70 +101,31 @@ if (isset($_POST["txtSearch"])) {
                 if ($result->num_rows > 0) {
                   // output data of each row
                   while ($row = $result->fetch_assoc()) {
-                    foreach($result as $row) {
-
-                      //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-                      if($row['product_qty'] == 0){
-                        //สินค้าหมด
-                        $tableClass = "text-center table-danger";
-                        $txtTitle = "<font color='red'> สินค้าหมด !! </font>";
-                      }elseif($row['product_qty'] <= 5) {
-                        //สินค้ากำลังจะหมด
-                        $tableClass = "text-center table-warning";
-                        $txtTitle = "";
-                      }else{
-                        //เหลือ > 10 ชิ้น
-                        $tableClass = "text-center table-info";
-                        $txtTitle = "";
-                      }
                 ?>
                 <tr>
-                  <td class="text-center"><?php echo $row['product_id']; ?></td>
-                  <td>
-                    <div class="row">
-                      <img class="col-6" src="./upload/<?php echo $row['product_img']; ?>" width="40" height="70" />
-                    </div>
-                  </td>
-                  <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
-                  <td class="text-center"><?php echo $row['product_price']; ?></td>
-                  <td class="<?= $tableClass;?>">
-                    <?=$row['product_qty'];?>
-                    <br>
-                    <?=$txtTitle;?>
-                  </td>
-                  <td><?php echo $row['product_description']; ?></td>
-                  <td>
-                      <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                        <i class="fas fa-edit"></i>
-                      </a>
-                      <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                        <i class="fas fa-trash-alt"></i>
-                      </a>
-                  </td>
-                </tr>
-                <tr>
-                  <!-- <td colspan="1"></td> -->
-                  <td colspan="7">
-                    <div class="row">
-                      <?php
-                      $sql = "SELECT * FROM tb_img_product WHERE product_id = '$row[product_id]'";
-                      $image = $conn->query($sql);
-                      while ($image_item = $image->fetch_assoc()) {
-                      ?>
-                        <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" width="40" height="140" >
-                      <?php
-                      }
-                      ?>
-                      </div>
-                    </td>
-                  </tr>
-                  <?php
-                    }
-                    } //while condition closing bracket
-                  }  //if condition closing bracket
+                  <td class="text-center"><?php echo $i; ?></td>
+                  <td><?php echo $row['user_username']; ?></td>
+                  <td class="text-bold-500"><?php echo $row['user_firstname']; ?></td>
+                  <td class="text-bold-500"><?php echo $row['user_lastname']; ?></td>
+                  <td class="text-left"><?php echo $row['user_address']; ?></td>
+                  <td><?php echo $row['user_tel']; ?></td>
+                  <?php 
+                  if($row['user_sex'] == "0") {
+                    echo    "<td>หญิง</td>";
+                  } else {
+                    echo    "<td>ชาย</td>";
+                  }
                   ?>
+                  <td><?php echo $row['user_datetime']; ?></td>
+                </tr>
+                <?php
+                $i++;
+                  } //while condition closing bracket
+                }  //if condition closing bracket
+                ?>
                 </tbody>
               </table>
+
               <hr>
               <!-- <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
                 <strong>Page <?php //echo $page_no . " of " . $total_no_of_pages; ?></strong>
