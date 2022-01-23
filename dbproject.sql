@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2022 at 10:57 AM
+-- Generation Time: Jan 23, 2022 at 11:16 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -250,12 +250,12 @@ CREATE TABLE `tb_user` (
   `user_lastname` varchar(200) DEFAULT NULL COMMENT 'นามสกุล',
   `user_address` varchar(255) DEFAULT NULL COMMENT 'ที่อยู่',
   `user_tel` varchar(20) DEFAULT NULL COMMENT 'เบอร์โทรศัพท์',
+  `user_email` varchar(30) DEFAULT NULL COMMENT 'อีเมล',
+  `user_sex` int(11) DEFAULT NULL COMMENT 'เพศ',
   `user_username` varchar(100) DEFAULT NULL COMMENT 'ชื่อผู้ใช้งาน',
   `user_password` varchar(100) DEFAULT NULL COMMENT 'รหัสผ่าน',
   `user_time_progress` int(11) DEFAULT NULL COMMENT 'เวลา',
   `permission_id` int(10) DEFAULT NULL COMMENT 'รหัสสิทธิ์การใช้งาน',
-  `user_sex` int(11) DEFAULT NULL COMMENT 'เพศ',
-  `user_email` varchar(50) DEFAULT NULL,
   `user_datetime` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลผู้ใช้งาน';
 
@@ -263,9 +263,9 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`user_id`, `user_firstname`, `user_lastname`, `user_address`, `user_tel`, `user_username`, `user_password`, `user_time_progress`, `permission_id`, `user_sex`, `user_email`, `user_datetime`) VALUES
-(1, 'Administrator', 'Administrator', '1234567890', '0999999999', 'admin', 'e807f1fcf82d132f9bb018ca6738a19f', 0, 0, 0, NULL, '2021-03-09 18:37:11'),
-(2, 'ทรงพล', 'คุ้มคำ', '1749900588454', '0827183510', 'beer', 'e807f1fcf82d132f9bb018ca6738a19f', 0, 0, 1, NULL, '2021-12-27 18:18:15');
+INSERT INTO `tb_user` (`user_id`, `user_firstname`, `user_lastname`, `user_address`, `user_tel`, `user_email`, `user_sex`, `user_username`, `user_password`, `user_time_progress`, `permission_id`, `user_datetime`) VALUES
+(1, 'Administrator', 'Administrator', '1234567890', '0999999999', NULL, 1, 'admin', 'e807f1fcf82d132f9bb018ca6738a19f', 0, 1, '2021-03-09 18:37:11'),
+(2, 'ทรงพล', 'คุ้มคำ', '1749900588454', '0827183510', NULL, 1, 'beer', 'e807f1fcf82d132f9bb018ca6738a19f', 0, 3, '2021-12-27 18:18:15');
 
 --
 -- Indexes for dumped tables
@@ -336,7 +336,8 @@ ALTER TABLE `tb_status`
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `permission_id` (`permission_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -432,6 +433,12 @@ ALTER TABLE `tb_order_detail`
 ALTER TABLE `tb_product`
   ADD CONSTRAINT `tb_product_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `tb_brand` (`brand_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `tb_product_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `tb_category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  ADD CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`permission_id`) REFERENCES `tb_permission` (`permission_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
