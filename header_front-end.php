@@ -59,11 +59,11 @@
                                                 echo "active";
                                               } else {
                                                 echo "";
-                                              } ?>"><a href="./index.php">Home</a></li>
+                                              } ?>"><a href="./index.php">หน้าแรก</a></li>
             <!-- <li><a href="#">Women’s</a></li>
             <li><a href="#">Men’s</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">Shop</a></li>
-            <li><a href="#">Pages</a>
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
+            <!-- <li><a href="#">Pages</a>
               <ul class="dropdown">
                 <li><a href="./product-details.html">Product Details</a></li>
                 <li><a href="./shop-cart.html">Shop Cart</a></li>
@@ -71,8 +71,8 @@
                 <li><a href="./blog-details.html">Blog Details</a></li>
               </ul>
             </li>
-            <!-- <li><a href="./blog.html">Blog</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">Contact</a></li>
+            <li><a href="./blog.html">Blog</a></li> -->
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
             <?php
              } else {
              ?>
@@ -80,20 +80,20 @@
                                                 echo "active";
                                               } else {
                                                 echo "";
-                                              } ?>"><a href="./index.php">Home</a></li>
+                                              } ?>"><a href="./index.php">หน้าแรก</a></li>
             <!-- <li><a href="#">Women’s</a></li>
             <li><a href="#">Men’s</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">Shop</a></li>
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "checkout.php") ? "active" : ""; ?>"><a href="#">Pages</a>
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "checkout.php" || "shop-cart.php") ? "active" : ""; ?>"><a href="#">Pages</a>
               <ul class="dropdown">
                 <li><a href="./product-details.html">Product Details</a></li>
-                <li><a href="./shop-cart.html">Shop Cart</a></li>
+                <li><a href="./shop-cart.php">Shop Cart</a></li>
                 <li><a href="./checkout.php">Checkout</a></li>
                 <li><a href="./blog-details.html">Blog Details</a></li>
               </ul>
             </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">Contact</a></li>
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
              <?php
              }
              ?>

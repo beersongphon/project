@@ -40,20 +40,16 @@ include("./header_front-end.php");
             </div>
             <div class="col-lg-12">
               <div class="checkout__form__input">
-                <p for="username_regis">Username <span>*</span></p>
-                <input type="text" id="username_regis" placeholder="Enter Username">
-              </div>
-              <div class="checkout__form__input">
-                <p for="pwd_regis">Password <span>*</span></p>
-                <input type="password" id="pwd_regis" placeholder="Enter Password">
-              </div>
-              <div class="checkout__form__input">
-                <p for="confirm_pwd">Confirm Password <span>*</span></p>
-                <input type="password" id="confirm_pwd" placeholder="Confirm password">
-              </div>
-              <div class="checkout__form__input">
                 <p for="address_regis">Address <span>*</span> </p>
                 <input type="text" id="address_regis" placeholder="Enter Address">
+              </div>
+              <div class="checkout__form__input">
+                <p for="tel_regis">Telephone number <span>*</span></p>
+                <input type="number" id="tel_regis" placeholder="Enter Telephone number">
+              </div>
+              <div class="checkout__form__input">
+                <p for="email_regis">Email <span>*</span></p>
+                <input type="email" id="email_regis" placeholder="Enter Email">
               </div>
               <div class="checkout__form__input">
                 <p for="optradio">Sex <span>*</span></p>
@@ -67,9 +63,17 @@ include("./header_front-end.php");
                 </div>
               </div>
               <div class="checkout__form__input">
-                <p for="tel_regis">Telephone number <span>*</span></p>
-                <input type="number" id="tel_regis" placeholder="Enter Telephone number">
+                <p for="username_regis">Username <span>*</span></p>
+                <input type="text" id="username_regis" placeholder="Enter Username">
               </div>
+              <div class="checkout__form__input">
+                <p for="pwd_regis">Password <span>*</span></p>
+                <input type="password" id="pwd_regis" placeholder="Enter Password">
+              </div>
+              <div class="checkout__form__input">
+                <p for="confirm_pwd">Confirm Password <span>*</span></p>
+                <input type="password" id="confirm_pwd" placeholder="Confirm password">
+              </div>          
             </div>  
             <button type="button" class="site-btn" id="btn_regis">Register</button>
           </div>

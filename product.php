@@ -25,7 +25,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
             <li class="breadcrumb-item active" aria-current="page">ข้อมูลสินค้า</li>
           </ol>
         </nav>
@@ -49,7 +49,7 @@ if (isset($_POST["txtSearch"])) {
                   <button class="input-group-text fa-1x" name="Search" type="submit" value="Search">ค้นหา</button>
                   <a class="btn btn-primary" style="float: right;" href="product_add.php">
                     <i class="fa fa-plus-circle"></i>
-                    เพิ่มลูกค้า
+                    เพิ่มสินค้า
                   </a>
                 </div>
               </form>
@@ -60,7 +60,6 @@ if (isset($_POST["txtSearch"])) {
                 <thead>
                   <tr>
                     <th class="text-center">ลำดับ</th>
-                    <th>รูปสินค้า</th>
                     <th>ชื่อสินค้า</th>
                     <th class="text-center">ราคา</th>
                     <th class="text-center">จำนวน</th>
@@ -77,7 +76,7 @@ if (isset($_POST["txtSearch"])) {
                   $page_no = 1;
                 }
 
-                $total_records_per_page = 6;
+                $total_records_per_page = 10;
                 $offset = ($page_no - 1) * $total_records_per_page;
                 $previous_page = $page_no - 1;
                 $next_page = $page_no + 1;
@@ -89,8 +88,17 @@ if (isset($_POST["txtSearch"])) {
                 $total_no_of_pages = ceil($total_records / $total_records_per_page);
                 $second_last = $total_no_of_pages - 1; // total page minus 1
 
-                $sql = "SELECT * FROM tb_product WHERE product_id LIKE '%" . $strKeyword . "%' OR product_name LIKE '%" . $strKeyword . "%'
-                  LIMIT $offset, $total_records_per_page
+                $sql = "SELECT * FROM tb_product 
+                LEFT JOIN
+                tb_brand
+                ON
+                tb_product.brand_id = tb_brand.brand_id
+                LEFT JOIN
+                tb_category
+                ON
+                tb_product.category_id = tb_category.category_id
+                WHERE product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%'
+                LIMIT $offset, $total_records_per_page
                   ";
                 $result = $conn->query($sql);
 
@@ -116,11 +124,6 @@ if (isset($_POST["txtSearch"])) {
                 ?>
                 <tr>
                   <td class="text-center"><?php echo $row['product_id']; ?></td>
-                  <td>
-                    <div class="row">
-                      <img class="col-6" src="./upload/<?php echo $row['product_img']; ?>" width="40" height="70" />
-                    </div>
-                  </td>
                   <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
                   <td class="text-center"><?php echo $row['product_price']; ?></td>
                   <td class="<?= $tableClass;?>">
@@ -147,7 +150,7 @@ if (isset($_POST["txtSearch"])) {
                       $image = $conn->query($sql);
                       while ($image_item = $image->fetch_assoc()) {
                       ?>
-                        <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" width="40" height="140" >
+                        <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" width="10" height="140" >
                       <?php
                       }
                       ?>

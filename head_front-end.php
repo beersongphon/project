@@ -14,7 +14,7 @@ if (isset($_SESSION["user_username"])) {
   if ((time() - $_SESSION["login_timestamp"]) > $sessiontime) {
     header("location: logout.php");
   } else {
-    if ($_SESSION["user_permission"] == "S" || $_SESSION["user_permission"] == "A") {
+    if ($_SESSION["permission_id"] == "1" || $_SESSION["permission_id"] == "2") {
       header("Location: /" . $url . "/" . "home.php");
     }
   }

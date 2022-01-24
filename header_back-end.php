@@ -38,6 +38,18 @@
               <span>ข้อมูลสินค้า</span>
             </a>
           </li>
+          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "brand.php") ? "active" : ""; ?>">
+            <a href="./brand.php" class='sidebar-link'>
+              <i class="bi bi-grid-fill"></i>
+              <span>ข้อมูลแบรนด์</span>
+            </a>
+          </li>
+          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "category.php") ? "active" : ""; ?>">
+            <a href="./category.php" class='sidebar-link'>
+              <i class="bi bi-grid-fill"></i>
+              <span>ข้อมูลประเภท</span>
+            </a>
+          </li>
           <li class="sidebar-item ">
             <a href="./logout.php" class='sidebar-link'>
               <i class="bi bi-grid-fill"></i>
@@ -45,7 +57,21 @@
             </a>
           </li>
 
-          <li class="sidebar-item  has-sub">
+          <li class="sidebar-title">รายงาน</li>
+          <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_product.php") ? "active" : ""; ?>">
+            <a href="./report_product.php" class='sidebar-link'>
+              <i class="bi bi-file-earmark-medical-fill"></i>
+              <span>รายงานสินค้าคงเหลือ</span>
+            </a>
+          </li>
+          <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_sale.php") ? "active" : ""; ?>">
+            <a href="./report_sale.php" class='sidebar-link'>
+              <i class="bi bi-file-earmark-medical-fill"></i>
+              <span>รายงานการขายสินค้า</span>
+            </a>
+          </li>
+
+          <!-- <li class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>
               <i class="bi bi-stack"></i>
               <span>Components</span>
@@ -142,7 +168,7 @@
                 <a href="layout-horizontal.html">Horizontal Menu</a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
           <li class="sidebar-title">Forms &amp; Tables</li>
 

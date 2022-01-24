@@ -43,7 +43,7 @@ include("./header_front-end.php");
               ?>
               <tr>
                 <td class="cart__product__item">
-                  <img class="col-2" src="./upload/<?php echo $values['product_img']; ?>" alt="">
+                  <img class="col-2" src="./upload/<?php echo $values['img_product']; ?>" alt="">
                   <div class="cart__product__item__title">
                     <h6><?php echo $values["product_name"]; ?></h6>
                     <div class="rating">

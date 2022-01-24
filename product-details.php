@@ -3,7 +3,18 @@ include("./head_front-end.php");
 include("./header_front-end.php");
 
 $product_id = $_GET["product_id"];
-$query = "SELECT * FROM tb_product WHERE product_id = '$product_id' ORDER BY product_id ASC";  
+$query = "SELECT DISTINCT tb_product.product_id,
+(SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+tb_product.product_name,
+tb_product.product_price,
+tb_product.product_qty,
+tb_product.product_description
+FROM tb_product
+LEFT JOIN
+tb_img_product
+ON
+tb_product.product_id = tb_img_product.product_id
+WHERE tb_product.product_id = '$product_id' ORDER BY tb_product.product_id ASC";  
 $result = mysqli_query($conn, $query);  
 $row = mysqli_fetch_array($result);
 ?>
@@ -111,7 +122,7 @@ $row = mysqli_fetch_array($result);
                   <input type="text" name="quantity" id="quantity<?php echo $row["product_id"]; ?>" value="1">
                 </div>
               </div>  
-              <input type="hidden" name="hidden_img" id="img<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_img"]; ?>" />
+              <input type="hidden" name="hidden_img" id="img<?php echo $row["product_id"]; ?>" value="<?php echo $row["img_product"]; ?>" />
               <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_name"]; ?>" />
               <input type="hidden" name="hidden_qty" id="qty<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_qty"]; ?>" />
               <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />
