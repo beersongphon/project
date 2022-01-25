@@ -76,10 +76,8 @@ if (isset($_POST["txtSearch"])) {
                       <table id="image_list" class="table"></table>
                     </div>
                     <div class="row">
-                      <div class="col-8">
-                        <input id="file" name="file" type="file" class="form-control-file" required>
-                      </div>
-                      <div class="col-4">
+                      <div class="input-group mb-3">
+                        <input id="file" name="file" type="file" class="form-control" required>
                         <button onclick="uploadImage()" class="btn btn-primary" id="btn_upload" name="btn_upload" type="button">
                           อัปโหลดรูปภาพ
                         </button>

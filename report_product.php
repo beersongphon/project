@@ -19,14 +19,14 @@ if (isset($_POST["txtSearch"])) {
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>ข้อมูลสินค้า</h3>
+        <h3>รายงานสินค้าคงเหลือ</h3>
         <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
       </div>
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">ข้อมูลสินค้า</li>
+            <li class="breadcrumb-item active" aria-current="page">รายงานสินค้าคงเหลือ</li>
           </ol>
         </nav>
       </div>

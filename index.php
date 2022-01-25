@@ -101,28 +101,7 @@ include("./header_front-end.php");
       if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-          //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-          if($row['product_qty'] == 0){
-            //สินค้าหมด
-            $disabled = "return false;";
-            $tableClass = "label stockout";
-            $txtTitle = "Out Of Stock";
-          }elseif($row['product_qty'] <= 5) {
-            //สินค้ากำลังจะหมด
-            $disabled = "return true;";
-            $tableClass = "label stockblue";
-            $txtTitle = "Running Out";
-          }elseif($row['product_qty'] <= 20) {
-            //สินค้ากำลังจะหมด
-            $disabled = "return true;";
-            $tableClass = "";
-            $txtTitle = "";
-          }else{
-            //เหลือ > 20 ชิ้น
-            $disabled = "return true;";
-            $tableClass = "label new";
-            $txtTitle = "New";
-          }
+          include("./checkstock.php");
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix women">
         <div class="product__item">

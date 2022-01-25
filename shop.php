@@ -270,23 +270,7 @@ include("./header_front-end.php");
           if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-              //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-              if($row['product_qty'] == 0){
-                //สินค้าหมด
-                $disabled = "return false;";
-                $tableClass = "label stockout";
-                $txtTitle = "Out Of Stock";
-              }elseif($row['product_qty'] <= 5) {
-                //สินค้ากำลังจะหมด
-                $disabled = "return true;";
-                $tableClass = "label stockblue";
-                $txtTitle = "Running Out";
-              }else{
-                //เหลือ > 10 ชิ้น
-                $disabled = "return true;";
-                $tableClass = "table-info";
-                $txtTitle = "";
-              }
+              include("./checkstock.php");
           ?>
           <div class="col-lg-4 col-md-6">
             <div class="product__item">

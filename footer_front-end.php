@@ -158,6 +158,15 @@
 
 <script src="./assets/js/jquery-3.5.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+ $(function(){
+    $(".dropdown-menu").on('click', 'li a', function(){
+      $(".dropdown-toggle").text($(this).text());
+   });
+});
+</script>
+
 <script>
   $(document).ready(function(data) {
     $('.add_to_cart').click(function() {
@@ -303,7 +312,8 @@
 
 
     $("#btn_contact").click(function() {
-      // alert("success");
+      // alert("success");'
+      var user_id_con = $("#user_id_con").val();
       var name_con = $("#name_contact").val();
       var email_con = $("#email_contact").val();
       var comments_con = $("#comments_contact").val();
@@ -315,6 +325,7 @@
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else {
         $.post("contacts.php", {
+          user_id_con: user_id_con,
           name_con: name_con,
           email_con: email_con,
           comments_con: comments_con

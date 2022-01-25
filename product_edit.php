@@ -84,10 +84,8 @@ if (isset($_POST["txtSearch"])) {
                     </div>
                     <div class="row">
                       <input type="text" id="product_id" name="product_id" class="form-control" hidden value="<?php echo $product_id; ?>" />
-                      <div class="col-8">
-                        <input id="file" name="file" type="file" class="form-control-file" required>
-                      </div>
-                      <div class="col-4">
+                      <div class="input-group mb-3">
+                        <input id="file" name="file" type="file" class="form-control" required>
                         <button onclick="uploadImage()" class="btn btn-primary" id="btn_upload" name="btn_upload" type="button">
                           อัปโหลดรูปภาพ
                         </button>

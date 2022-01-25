@@ -44,15 +44,24 @@ include("./header_front-end.php");
           <div class="contact__form">
             <h5>SEND MESSAGE</h5>
             <form action="#">
+              <?php
+              if (isset($_SESSION['user_username'])) {
+              ?>
+              <input type="hidden" id="user_id_con" name="user_id" placeholder="id" value="<?php echo $_SESSION['user_id']; ?>">
               <input type="text" id="name_contact" name="name" placeholder="Name">
               <input type="email" id="email_contact" name="email" placeholder="Email">
               <!-- <input type="text" placeholder="Website"> -->
               <textarea id="comments_contact" name="comments" placeholder="Message"></textarea>
+              <button type='button' id='btn_contact' class='site-btn'>Send Message</button>
               <?php
-              if (isset($_SESSION['user_username'])) {
-                echo "<button type='button' id='btn_contact' class='site-btn'>Send Message</button>";
               } else {
-                echo "<label for='email'>&nbsp&nbspกรุณา Login ก่อนทำรายการ</label>";
+              ?>
+              <input type="text" id="name_contact" name="name" placeholder="Name">
+              <input type="email" id="email_contact" name="email" placeholder="Email">
+              <!-- <input type="text" placeholder="Website"> -->
+              <textarea id="comments_contact" name="comments" placeholder="Message"></textarea>
+              <label for='email'>&nbsp&nbspกรุณา Login ก่อนทำรายการ</label>
+              <?php
               }
               ?>
             </form>

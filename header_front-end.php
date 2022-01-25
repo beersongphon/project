@@ -13,7 +13,14 @@
         <div class="tip">2</div>
       </a></li>
     <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
-        <div class="tip"><?php if(isset($_SESSION["shopping_cart"])) { echo count($_SESSION["shopping_cart"]); } else { echo '0';}?></div>
+        <div class="tip">
+          <?php 
+          if(isset($_SESSION["shopping_cart"])) { 
+            echo count($_SESSION["shopping_cart"]); 
+          } else { 
+            echo '0';
+          }?>
+        </div>
       </a></li>
   </ul>
   <div class="offcanvas__logo">
@@ -84,7 +91,13 @@
             <!-- <li><a href="#">Women’s</a></li>
             <li><a href="#">Men’s</a></li> -->
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "checkout.php" || "shop-cart.php") ? "active" : ""; ?>"><a href="#">Pages</a>
+            <li class="<?php if (basename($_SERVER['PHP_SELF']) == "shop-cart.php") {
+                                                echo "active";
+                                              } elseif (basename($_SERVER['PHP_SELF']) == "checkout.php") {
+                                                echo "active";
+                                              } else {
+                                                echo "";
+                                              } ?>"><a href="#">Pages</a>
               <ul class="dropdown">
                 <li><a href="./product-details.html">Product Details</a></li>
                 <li><a href="./shop-cart.php">Shop Cart</a></li>
@@ -122,11 +135,11 @@
             <?php
             if (!isset($_SESSION['user_username'])) {
             ?>
-            <li>
+            <!-- <li>
               <a href="#">
                 <span class="icon_heart_alt"></span>
               </a>
-            </li>
+            </li> -->
             <li>
               <a href="#">
                 <span class="icon_bag_alt"></span>
@@ -135,14 +148,14 @@
             <?php
             } else {
             ?>
-            <li>
+            <!-- <li>
               <a href="#">
                 <span class="icon_heart_alt"></span>
                 <div class="tip">
                   2
                 </div>
               </a>
-            </li>
+            </li> -->
             <li>
               <a href="./shop-cart.php">
                 <span class="icon_bag_alt"></span>

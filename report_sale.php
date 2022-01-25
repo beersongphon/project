@@ -1,6 +1,14 @@
 <?php
 include('./head_back-end.php');
 include('./header_back-end.php');
+
+$date1 = null;
+$date2 = null;
+
+if(ISSET($_POST['search'])){
+  $date1 = date("Y-m-d", strtotime($_POST['date1']));
+  $date2 = date("Y-m-d", strtotime($_POST['date2']));
+}
 ?>
 
 <header class="mb-3">
@@ -13,14 +21,14 @@ include('./header_back-end.php');
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>ข้อมูลสินค้า</h3>
+        <h3>รายงานการขายสินค้า</h3>
         <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
       </div>
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">ข้อมูลสินค้า</li>
+            <li class="breadcrumb-item active" aria-current="page">รายงานการขายสินค้า</li>
           </ol>
         </nav>
       </div>
@@ -36,17 +44,14 @@ include('./header_back-end.php');
           </div> -->
           <div class="card-content">
             <div class="card-body">
-            <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
-            <div class="col-md-3">  
-                     <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date" />  
-                </div>  
-                <div class="col-md-3">  
-                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date" />  
-                </div>  
-                <div class="col-md-5">  
-                     <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />  
-                </div>  
-               </form>
+              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+                <label>Date:</label>
+                <input type="date" class="form-control" placeholder="Start"  name="date1"/>
+                <label>To</label>
+                <input type="date" class="form-control" placeholder="End"  name="date2"/>
+                <button class="btn btn-primary" name="search"><i class="bi bi-search"></i></button>
+                <a href="./report_sale.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+              </form>
             </div>
             <!-- table hover -->
             <div id="order_table"> 
@@ -67,43 +72,17 @@ include('./header_back-end.php');
                 </thead>
                 <tbody>
                   <?php
-                if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-                  $page_no = $_GET['page_no'];
-                } else {
-                  $page_no = 1;
-                }
+                  $i = 1;
+                  $sql = "SELECT * FROM tb_order 
+                  LEFT JOIN
+                  tb_user
+                  ON
+                  tb_order.user_id = tb_user.user_id WHERE tb_order.order_date BETWEEN '$date1' AND '$date2'";
+                  $result = mysqli_query($conn, $sql);
 
-                $total_records_per_page = 10;
-                $offset = ($page_no - 1) * $total_records_per_page;
-                $previous_page = $page_no - 1;
-                $next_page = $page_no + 1;
-                $adjacents = "2";
-
-                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_order`");
-                $total_records = mysqli_fetch_array($result_count);
-                $total_records = $total_records['total_records'];
-                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                $second_last = $total_no_of_pages - 1; // total page minus 1
-
-                $i = 1;
-
-                $sql = "SELECT * FROM tb_order 
-                LEFT JOIN
-                tb_user
-                ON
-                tb_order.user_id = tb_user.user_id
-                LEFT JOIN
-                tb_order_detail
-                ON
-                tb_order_detail.order_id = tb_order_detail.order_id
-                LIMIT $offset, $total_records_per_page
-                ";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                  // output data of each row
-                  while ($row = $result->fetch_assoc()) {
-                ?>
+                  if(!empty($result))	 { 
+                    while($row = mysqli_fetch_array($result)) {
+                  ?>
                   <tr>
                     <td class="text-center"><?php echo $i; ?></td>
                     <td class="text-center"><?php echo $row['order_date']; ?></td>
@@ -127,82 +106,6 @@ include('./header_back-end.php');
                 <strong>Page <?php //echo $page_no . " of " . $total_no_of_pages; ?></strong>
               </div> -->
 
-              <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-primary  justify-content-center">
-                  <?php // if($page_no > 1){ echo "<li class='page-item'><a class='page-link' href='?page_no=1'>First Page</a></li>"; } 
-                  ?>
-
-                  <li <?php if ($page_no <= 1) {
-                    echo "class='page-item disabled'";
-                    } ?>>
-                    <a class="page-link" <?php if ($page_no > 1) {
-                      echo "href='?page_no=$previous_page'";
-                    } ?>>Previous</a>
-                  </li>
-                  <?php
-                if ($total_no_of_pages <= 10) {
-                  for ($counter = 1; $counter <= $total_no_of_pages; $counter++) {
-                    if ($counter == $page_no) {
-                      echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                    } else {
-                      echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                    }
-                  }
-                } elseif ($total_no_of_pages > 10) {
-
-                  if ($page_no <= 4) {
-                    for ($counter = 1; $counter < 8; $counter++) {
-                      if ($counter == $page_no) {
-                        echo "<li class='page-item active'><a>$counter</a></li>";
-                      } else {
-                        echo "<li class='page-item><a href='?page_no=$counter'>$counter</a></li>";
-                      }
-                    }
-                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                  } elseif ($page_no > 4 && $page_no < $total_no_of_pages - 4) {
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
-                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
-                    for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {
-                      if ($counter == $page_no) {
-                        echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                      } else {
-                        echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                      }
-                    }
-                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-                  } else {
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
-                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
-
-                    for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                      if ($counter == $page_no) {
-                        echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                      } else {
-                        echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                      }
-                    }
-                  }
-                }
-                ?>
-
-                <li <?php if ($page_no >= $total_no_of_pages) {
-                      echo "class='page-item disabled'";
-                    } ?>>
-                  <a class="page-link" <?php if ($page_no < $total_no_of_pages) {
-                        echo "href='?page_no=$next_page'";
-                      } ?>>Next</a>
-                </li>
-                <?php if ($page_no < $total_no_of_pages) {
-                  echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-                } ?>
-                </ul>
-              </nav>
 
               <?php
               if (isset($_GET['m'])) { ?>
@@ -217,39 +120,6 @@ include('./header_back-end.php');
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-
-<script>  
-      $(document).ready(function(){  
-           $.datepicker.setDefaults({  
-                dateFormat: 'yy-mm-dd'   
-           });  
-           $(function(){  
-                $("#from_date").datepicker();  
-                $("#to_date").datepicker();  
-           });  
-           $('#filter').click(function(){  
-                var from_date = $('#from_date').val();  
-                var to_date = $('#to_date').val();  
-                if(from_date != '' && to_date != '')  
-                {  
-                     $.ajax({  
-                          url:"filter.php",  
-                          method:"POST",  
-                          data:{from_date:from_date, to_date:to_date},  
-                          success:function(data)  
-                          {  
-                               $('#order_table').html(data);  
-                          }  
-                     });  
-                }  
-                else  
-                {  
-                     alert("Please Select Date");  
-                }  
-           });  
-      });  
- </script>
 
 <script>
     $('.del-btn').on('click', function(e) {

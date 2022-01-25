@@ -70,97 +70,107 @@ if (isset($_POST["txtSearch"])) {
                 </thead>
                 <tbody>
                   <?php
-                if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-                  $page_no = $_GET['page_no'];
-                } else {
-                  $page_no = 1;
-                }
+                  if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+                    $page_no = $_GET['page_no'];
+                  } else {
+                    $page_no = 1;
+                  }
 
-                $total_records_per_page = 10;
-                $offset = ($page_no - 1) * $total_records_per_page;
-                $previous_page = $page_no - 1;
-                $next_page = $page_no + 1;
-                $adjacents = "2";
+                  $total_records_per_page = 10;
+                  $offset = ($page_no - 1) * $total_records_per_page;
+                  $previous_page = $page_no - 1;
+                  $next_page = $page_no + 1;
+                  $adjacents = "2";
 
-                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
-                $total_records = mysqli_fetch_array($result_count);
-                $total_records = $total_records['total_records'];
-                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                $second_last = $total_no_of_pages - 1; // total page minus 1
+                  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
+                  $total_records = mysqli_fetch_array($result_count);
+                  $total_records = $total_records['total_records'];
+                  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                  $second_last = $total_no_of_pages - 1; // total page minus 1
 
-                $sql = "SELECT * FROM tb_product 
-                LEFT JOIN
-                tb_brand
-                ON
-                tb_product.brand_id = tb_brand.brand_id
-                LEFT JOIN
-                tb_category
-                ON
-                tb_product.category_id = tb_category.category_id
-                WHERE product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%'
-                LIMIT $offset, $total_records_per_page
-                  ";
-                $result = $conn->query($sql);
+                  $i = 1;
 
-                if ($result->num_rows > 0) {
-                  // output data of each row
-                  while ($row = $result->fetch_assoc()) {
-                    foreach($result as $row) {
+                  $sql = "SELECT * FROM tb_product 
+                  LEFT JOIN
+                  tb_brand
+                  ON
+                  tb_product.brand_id = tb_brand.brand_id
+                  LEFT JOIN
+                  tb_category
+                  ON
+                  tb_product.category_id = tb_category.category_id
+                  WHERE product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%'
+                  LIMIT $offset, $total_records_per_page
+                    ";
+                  $result = $conn->query($sql);
 
-                      //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-                      if($row['product_qty'] == 0){
-                        //สินค้าหมด
-                        $tableClass = "text-center table-danger";
-                        $txtTitle = "<font color='red'> สินค้าหมด !! </font>";
-                      }elseif($row['product_qty'] <= 5) {
-                        //สินค้ากำลังจะหมด
-                        $tableClass = "text-center table-warning";
-                        $txtTitle = "";
-                      }else{
-                        //เหลือ > 10 ชิ้น
-                        $tableClass = "text-center table-info";
-                        $txtTitle = "";
-                      }
-                ?>
-                <tr>
-                  <td class="text-center"><?php echo $row['product_id']; ?></td>
-                  <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
-                  <td class="text-center"><?php echo $row['product_price']; ?></td>
-                  <td class="<?= $tableClass;?>">
-                    <?=$row['product_qty'];?>
-                    <br>
-                    <?=$txtTitle;?>
-                  </td>
-                  <td><?php echo $row['product_description']; ?></td>
-                  <td>
-                      <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                        <i class="fas fa-edit"></i>
-                      </a>
-                      <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                        <i class="fas fa-trash-alt"></i>
-                      </a>
-                  </td>
-                </tr>
-                <tr>
-                  <!-- <td colspan="1"></td> -->
-                  <td colspan="7">
-                    <div class="row">
-                      <?php
-                      $sql = "SELECT * FROM tb_img_product WHERE product_id = '$row[product_id]'";
-                      $image = $conn->query($sql);
-                      while ($image_item = $image->fetch_assoc()) {
-                      ?>
-                        <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" width="10" height="140" >
-                      <?php
-                      }
-                      ?>
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                      foreach($result as $row) {
+
+                        //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
+                        if($row['product_qty'] == 0){
+                          //สินค้าหมด
+                          $tableClass = "text-center table-danger";
+                          $txtTitle = "<font color='red'> สินค้าหมด !! </font>";
+                        }elseif($row['product_qty'] <= 5) {
+                          //สินค้ากำลังจะหมด
+                          $tableClass = "text-center table-warning";
+                          $txtTitle = "";
+                        }else{
+                          //เหลือ > 10 ชิ้น
+                          $tableClass = "text-center table-info";
+                          $txtTitle = "";
+                        }
+                  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $i; ?></td>
+                    <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
+                    <td class="text-center"><?php echo $row['product_price']; ?></td>
+                    <td class="<?= $tableClass;?>">
+                      <?=$row['product_qty'];?>
+                      <br>
+                      <?=$txtTitle;?>
+                    </td>
+                    <td><?php echo $row['product_description']; ?></td>
+                    <td>
+                        <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td colspan="1"></td> -->
+                    <td colspan="7">
+                      <div class="row">
+                        <?php
+                        $sql = "SELECT * FROM tb_img_product WHERE product_id = '$row[product_id]'";
+                        $image = $conn->query($sql);
+                        while ($image_item = $image->fetch_assoc()) {
+                        ?>
+                          <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" width="10" height="140" >
+                        <?php
+                        }
+                        ?>
                       </div>
                     </td>
                   </tr>
                   <?php
-                    }
+                        $i++;
+                      }
                     } //while condition closing bracket
                   }  //if condition closing bracket
+                  else{
+                  ?>
+                  <tr>
+                    <td colspan = "6"><center>Record Not Found</center></td>
+                  </tr>
+                  <?php
+                  }
                   ?>
                 </tbody>
               </table>

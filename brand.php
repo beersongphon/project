@@ -85,6 +85,8 @@ if (isset($_POST["txtSearch"])) {
                   $total_no_of_pages = ceil($total_records / $total_records_per_page);
                   $second_last = $total_no_of_pages - 1; // total page minus 1
 
+                  $i = 1;
+
                   $sql = "SELECT * FROM tb_brand WHERE brand_id LIKE '%$strKeyword%' OR brand_name LIKE '%$strKeyword%'
                   LIMIT $offset, $total_records_per_page
                     ";
@@ -95,7 +97,7 @@ if (isset($_POST["txtSearch"])) {
                     while ($row = $result->fetch_assoc()) {
                   ?>
                   <tr>
-                    <td class="text-center"><?php echo $row['brand_id']; ?></td>
+                    <td class="text-center"><?php echo $i; ?></td>
                     <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
                     <td>
                         <a class="btn btn-warning" href="./brand_edit.php?brand_id=<?php echo $row["brand_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
@@ -107,8 +109,16 @@ if (isset($_POST["txtSearch"])) {
                     </td>
                   </tr>
                   <?php
+                      $i++;
                     } //while condition closing bracket
                   }  //if condition closing bracket
+                  else{
+                  ?>
+                  <tr>
+                    <td colspan = "3"><center>Record Not Found</center></td>
+                  </tr>
+                  <?php
+                  }
                   ?>
                 </tbody>
               </table>
