@@ -28,3 +28,4 @@
     <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
   </div>
 </div>
+test
