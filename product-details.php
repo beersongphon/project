@@ -40,39 +40,52 @@ $row = mysqli_fetch_array($result);
       <div class="row"> 
         <div class="col-lg-6">
           <div class="product__details__pic">
+            <?php
+            $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 3";
+            $result = $conn->query($sql);
+            $setActive = 0;				
+			      $sliderHtml = '';
+            if ($result->num_rows > 0) {
+            ?> 
             <div class="product__details__pic__left product__thumb nice-scroll">
               <?php
-              $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC";
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row1 = $result->fetch_assoc()) {
+              // output data of each row
+              while ($row1 = $result->fetch_assoc()) {
+                $activeClass = "";			
+                if(!$setActive) {
+                  $setActive = 1;
+                  $activeClass = 'active';						
+                }	
               ?> 
-              <a class="pt <?php if (basename($_SERVER['PHP_SELF']) == "#product-$row1[img_pro_id]") {
-                                                echo "active";
-                                              } else {
-                                                echo "";
-                                              } ?>" href="#product-<?php echo $row1["img_pro_id"]; ?>">
+              <a class="pt <?php echo "$activeClass"; ?>" href="#product-<?php echo $row1["img_pro_id"]; ?>">
                 <img src="./upload/<?php echo $row1["img_product"]; ?>" alt="">
               </a>
               <?php  
-                } //while condition closing bracket
-              }  //if condition closing bracket
+              } //while condition closing bracket
               ?>
             </div>
+            <?php  
+            }  //if condition closing bracket
+
+            $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 3";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+            ?>
             <div class="product__details__slider__content">
               <div class="product__details__pic__slider owl-carousel">
                 <?php
-                $query = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC";  
-                $result = mysqli_query($conn, $query);  
-                while($row2 = mysqli_fetch_array($result)) {  
+                  // output data of each row
+                  while ($row1 = $result->fetch_assoc()) { 
                 ?>
-                <img data-hash="product-<?php echo $row2["img_pro_id"]; ?>" class="product__big__img" src="./upload/<?php echo $row2["img_product"]; ?>" alt="">
+                <img data-hash="product-<?php echo $row1["img_pro_id"]; ?>" class="product__big__img" src="./upload/<?php echo $row1["img_product"]; ?>" alt="">
                 <?php  
-                }
+                  } //while condition closing bracket
                 ?>
               </div>
             </div>  
+            <?php  
+              } //while condition closing bracket
+            ?>
           </div>
         </div>
         <!-- <div class="col-lg-6">
@@ -274,26 +287,7 @@ $row = mysqli_fetch_array($result);
             include("./checkstock.php");
         ?>
         <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['img_product']; ?>">
-              <!-- <div class="label new">New</div> -->
-              <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
-              <ul class="product__hover">
-                <?php include("./permission.php"); ?>
-              </ul>
-            </div>
-            <div class="product__item__text">
-              <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
-            </div>
-          </div>
+          <?php include("./permission.php"); ?>
         </div>
         <?php
           } //while condition closing bracket

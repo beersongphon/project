@@ -9,9 +9,11 @@
   <div class="offcanvas__close">+</div>
   <ul class="offcanvas__widget">
     <li><span class="icon_search search-switch"></span></li>
-    <li><a href="#"><span class="icon_heart_alt"></span>
+    <!-- <li>
+      <a href="#"><span class="icon_heart_alt"></span>
         <div class="tip">2</div>
-      </a></li>
+      </a>
+    </li> -->
     <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
         <div class="tip">
           <?php 

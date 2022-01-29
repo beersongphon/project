@@ -45,13 +45,16 @@ if(ISSET($_POST['search'])){
           <div class="card-content">
             <div class="card-body">
               <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
-                <label>Date:</label>
-                <input type="date" class="form-control" placeholder="Start"  name="date1"/>
-                <label>To</label>
-                <input type="date" class="form-control" placeholder="End"  name="date2"/>
-                <button class="btn btn-primary" name="search"><i class="bi bi-search"></i></button>
-                <a href="./report_sale.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+                <div class="input-group mb-3">
+                  <label class="input-group-text">Date:</label>
+                  <input type="date" class="form-control" placeholder="Start"  name="date1"/>
+                  <label class="input-group-text">To</label>
+                  <input type="date" class="form-control" placeholder="End"  name="date2"/>
+                  <button class="btn-primary input-group-text" name="search"><i class="bi bi-search"></i></button>
+                  <a href="./report_sale.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+                </div>
               </form>
+              
             </div>
             <!-- table hover -->
             <div id="order_table"> 
