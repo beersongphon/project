@@ -17,7 +17,7 @@ include("./header_front-end.php");
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 p-0">
             <div class="categories__item set-bg" data-setbg="./assets/front-end/img/categories/category-2.jpg">
@@ -56,7 +56,7 @@ include("./header_front-end.php");
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>

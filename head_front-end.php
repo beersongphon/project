@@ -49,6 +49,6 @@ if (isset($_SESSION["user_username"])) {
   <link rel="stylesheet" href="./assets/front-end/css/magnific-popup.css" type="text/css">
   <link rel="stylesheet" href="./assets/front-end/css/owl.carousel.min.css" type="text/css">
   <link rel="stylesheet" href="./assets/front-end/css/slicknav.min.css" type="text/css">
-  <link rel="stylesheet" href="./assets/front-end/css/style.css" type="text/css">
+  <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
 </head>
 <body>
