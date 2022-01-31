@@ -15,7 +15,7 @@ if (isset($_SESSION["user_username"])) {
     header("location: logout.php");
   } else {
     if ($_SESSION["user_permission"] == "S" || $_SESSION["user_permission"] == "A") {
-      header("Location: /" . $url . "/" . "staff.php");
+      header("Location: /" . $url . "/" . "home.php");
     }
   }
 }

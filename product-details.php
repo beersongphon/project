@@ -243,7 +243,18 @@ $row = mysqli_fetch_array($result);
           </div>
         </div>
         <?php
-        $sql = "SELECT * FROM tb_product ORDER BY product_id DESC LIMIT 4";
+        $sql = "SELECT DISTINCT tb_product.product_id,
+        (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+        tb_product.product_name,
+        tb_product.product_price,
+        tb_product.product_qty,
+        tb_product.product_description
+        FROM tb_product
+        LEFT JOIN
+        tb_img_product
+        ON
+        tb_product.product_id = tb_img_product.product_id 
+        ORDER BY product_id DESC LIMIT 4";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -268,7 +279,7 @@ $row = mysqli_fetch_array($result);
         ?>
         <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
+            <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['img_product']; ?>">
               <!-- <div class="label new">New</div> -->
               <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
               <ul class="product__hover">

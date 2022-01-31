@@ -84,7 +84,19 @@ include("./header_front-end.php");
     </div>
     <div class="row property__gallery">
       <?php
-      $sql = "SELECT * FROM tb_product ORDER BY product_id DESC LIMIT 8";
+      $sql = "SELECT DISTINCT tb_product.product_id,
+      (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+      tb_product.product_name,
+      tb_product.product_price,
+      tb_product.product_qty,
+      tb_product.product_description
+      FROM tb_product
+      LEFT JOIN
+      tb_img_product
+      ON
+      tb_product.product_id = tb_img_product.product_id
+      ORDER BY tb_product.product_id DESC
+      LIMIT 8";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         // output data of each row
@@ -114,7 +126,7 @@ include("./header_front-end.php");
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix women">
         <div class="product__item">
-          <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
+          <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['img_product']; ?>">
             <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
             <!-- <div class="label new">New</div> -->
             <ul class="product__hover">

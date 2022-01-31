@@ -6,40 +6,24 @@ include('./connect.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Required meta tags-->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="au theme template">
-  <meta name="author" content="Hau Nguyen">
-  <meta name="keywords" content="au theme template">
-
-  <!-- Title Page-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $toptitle; ?></title>
 
-  <!-- Fontfaces CSS-->
-  <link href="./assets/back-end/css/font-face.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Petemoss&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/css/bootstrap.css">
+  <!-- <link rel="stylesheet" href="./assets/css/bootstrap.css"> -->
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/iconly/bold.css">
 
-  <!-- Bootstrap CSS-->
-  <link href="./assets/back-end/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/css/app.css">
+  <link rel="shortcut icon" href="./assets/back-end/mazer/dist/assets/images/favicon.svg" type="image/x-icon">
 
-  <!-- Vendor CSS-->
-  <link href="./assets/back-end/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/wow/animate.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/slick/slick.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-  <link href="./assets/back-end/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
-  <!-- Main CSS-->
-  <link href="./assets/back-end/css/theme.css" rel="stylesheet" media="all">
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.css">
 </head>
-<body class="animsition">
+<body>

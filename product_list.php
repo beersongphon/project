@@ -27,10 +27,10 @@
                         <tbody>
                             <?php
                             //เรียกไฟล์เชื่อมต่อฐานข้อมูล
-                            require_once 'connect2.php';
+                            require_once 'connect.php';
                             //คิวรี่ข้อมูลมาแสดงในตาราง
-                            $stmt = $conn->prepare("SELECT* FROM tbl_product");
-                            $sql = "SELECT* FROM tbl_product";
+                            $stmt = $conn->prepare("SELECT* FROM tb_product");
+                            $sql = "SELECT* FROM tb_product";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -54,7 +54,7 @@
                               }
                             ?>
                             <tr>
-                                <td><?= $row['no'];?></td>
+                                <td><?= $row['product_id'];?></td>
                                  <td><img src="upload/<?= $row['product_img'];?>" width="60%"></td>
                                 <td><?= $row['product_name'];?></td>
                                 <td align="right"><?= number_format($row['product_price'],2);?></td>
