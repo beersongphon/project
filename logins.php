@@ -17,7 +17,7 @@ if (isset($_POST["usr"])) {
     $_SESSION["user_username"] = $row["user_username"];
     $_SESSION["user_firstname"] = $row["user_firstname"];
     $_SESSION["user_lastname"] = $row["user_lastname"];
-    $_SESSION["user_permission"] = $row["user_permission"];
+    $_SESSION["permission_id"] = $row["permission_id"];
     $_SESSION["login_timestamp"] = time();
     echo "login_success";
   } else {

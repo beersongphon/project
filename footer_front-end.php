@@ -92,20 +92,33 @@
         <div class="footer__widget">
           <h6>Account</h6>
           <ul>
+          <?php
+          if (!isset($_SESSION['user_username'])) {
+          ?>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Orders Tracking</a></li>
+            <li><a href="./login.php">Checkout</a></li>
+            <!-- <li><a href="#">Wishlist</a></li> -->
+          <?php
+          } else {
+          ?>
             <li><a href="#">My Account</a></li>
             <li><a href="#">Orders Tracking</a></li>
             <li><a href="./checkout.php">Checkout</a></li>
-            <li><a href="#">Wishlist</a></li>
+            <!-- <li><a href="#">Wishlist</a></li> -->
+          <?php
+          }
+          ?>
           </ul>
         </div>
       </div>
       <div class="col-lg-4 col-md-8 col-sm-8">
         <div class="footer__newslatter">
           <h6>NEWSLETTER</h6>
-          <form action="#">
+          <!-- <form action="#">
             <input type="text" placeholder="Email">
             <button type="submit" class="site-btn">Subscribe</button>
-          </form>
+          </form> -->
           <div class="footer__social">
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank"><i class="fa fa-facebook"></i></a>
             <!-- <a href="#"><i class="fa fa-twitter"></i></a>
@@ -145,11 +158,20 @@
 
 <script src="./assets/js/jquery-3.5.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+ $(function(){
+    $(".dropdown-menu").on('click', 'li a', function(){
+      $(".dropdown-toggle").text($(this).text());
+   });
+});
+</script>
+
 <script>
   $(document).ready(function(data) {
     $('.add_to_cart').click(function() {
       var product_id = $(this).attr("id");
-      var product_img = $('#img' + product_id).val();
+      var img_product = $('#img' + product_id).val();
       var product_name = $('#name' + product_id).val();
       var product_qty = $('#qty' + product_id).val();
       var product_price = $('#price' + product_id).val();
@@ -162,7 +184,7 @@
           dataType: "json",
           data: {
             product_id: product_id,
-            product_img: product_img,
+            img_product: img_product,
             product_name: product_name,
             product_qty: product_qty,
             product_price: product_price,
@@ -190,6 +212,7 @@
         alert("Please Enter Number of Quantity")
       }
     });
+    
     $(document).on('click', '.delete', function() {
       var product_id = $(this).attr("id");
       var action = "remove";
@@ -289,7 +312,8 @@
 
 
     $("#btn_contact").click(function() {
-      // alert("success");
+      // alert("success");'
+      var user_id_con = $("#user_id_con").val();
       var name_con = $("#name_contact").val();
       var email_con = $("#email_contact").val();
       var comments_con = $("#comments_contact").val();
@@ -301,6 +325,7 @@
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else {
         $.post("contacts.php", {
+          user_id_con: user_id_con,
           name_con: name_con,
           email_con: email_con,
           comments_con: comments_con
@@ -320,28 +345,31 @@
     $("#btn_regis").click(function() {
       var firstname_regis = $("#firstname_regis").val();
       var lastname_regis = $("#lastname_regis").val();
+      var address_regis = $("#address_regis").val();
+      var tel_regis = $("#tel_regis").val();
+      var email_regis = $("#email_regis").val();
+      var sex_regis = $("input[name=optradio]:checked").val();
       var username_regis = $("#username_regis").val();
       var pwd_regis = $("#pwd_regis").val();
       var confirm_pwd = $("#confirm_pwd").val();
-      var address_regis = $("#address_regis").val();
-      var tel_regis = $("#tel_regis").val();
-      var sex_regis = $("input[name=optradio]:checked").val();
 
       // console.log(firstname_regis + lastname_regis + username_regis + pwd_regis + confirm_pwd + idcard_regis + tel_regis);
-
+      
       if (firstname_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (lastname_regis == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (address_regis == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (tel_regis == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (email_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (username_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (pwd_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (confirm_pwd == "") {
-        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      } else if (address_regis == "") {
-        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-      } else if (tel_regis == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else if (pwd_regis != confirm_pwd) {
         alert("กรุณาตรวจสอบรหัสผ่านของคุณอีกครั้ง");
@@ -351,22 +379,25 @@
         $.post("registers.php", {
           firstname_regis: firstname_regis,
           lastname_regis: lastname_regis,
+          address_regis: address_regis,
+          tel_regis: tel_regis,
+          email_regis: email_regis,
+          sex_regis: sex_regis,
           username_regis: username_regis,
           pwd_regis: pwd_regis,
-          confirm_pwd: confirm_pwd,
-          address_regis: address_regis,
-          sex_regis: sex_regis,
-          tel_regis: tel_regis
+          confirm_pwd: confirm_pwd
         }, function(datacallback) {
           if (datacallback == "success") {
             alert("ลงทะเบียนสำเร็จ");
             $("#firstname_regis").val("");
             $("#lastname_regis").val("");
+            $("#address_regis").val("");
+            $("#tel_regis").val("");
+            $("#email_regis").val("");
             $("#username_regis").val("");
             $("#pwd_regis").val("");
             $("#confirm_pwd").val("");
-            $("#address_regis").val("");
-            $("#tel_regis").val("");
+            window.location.replace("login.php");
           } else if (datacallback == "already") {
             alert("มีชื่อผู้ใช้นี้อยู่ในระบบแล้ว");
             $("#username_regis").val("");

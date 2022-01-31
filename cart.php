@@ -12,10 +12,10 @@ include("./header_front-end.php");
     $order_email = $_POST['order_email'];
     $order_total = $_POST['order_total'];
 
-    $insert_order = "  
-                     INSERT INTO tb_order(user_id, order_address, order_tel, order_email, creation_date, order_status, order_total)  
-                     VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', 'pending', '$order_total')  
-                     ";
+    $insert_order = "
+                    INSERT INTO tb_order(user_id, order_address, order_tel, order_email, creation_date, order_status, order_total)  
+                    VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', 'pending', '$order_total')  
+                    ";
     $order_id = "";
     if (mysqli_query($conn, $insert_order)) {
       $order_id = mysqli_insert_id($conn);
@@ -24,25 +24,25 @@ include("./header_front-end.php");
     $order_details = "";
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
       
-      $sql	= "SELECT * FROM tb_product WHERE product_id=$values[product_id]";
+      $sql	= "SELECT * FROM tb_product WHERE product_id = $values[product_id]";
       $result	= mysqli_query($conn, $sql);
       $row	= mysqli_fetch_array($result);
-      $count=mysqli_num_rows($result);
+      $count = mysqli_num_rows($result);
       for($i=0; $i<$count; $i++){
         $have =  $row['product_qty'];
         
         $stc = $have - $values["product_quantity"];
         
         $sql2 = "UPDATE tb_product SET  
-        product_qty=$stc
-        WHERE  product_id=$values[product_id] ";
+        product_qty = $stc
+        WHERE  product_id = $values[product_id]";
         $query2 = mysqli_query($conn, $sql2);  
       }
 
-      $order_details .= "  
-                              INSERT INTO tb_order_detail(order_id, product_id, order_price, order_quantity)  
-                              VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[product_quantity]');  
-                              ";
+      $order_details .= "
+                        INSERT INTO tb_order_detail(order_id, product_id, order_price, order_quantity)  
+                        VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[product_quantity]');  
+                        ";
     }
     if (mysqli_multi_query($conn, $order_details)) {
       unset($_SESSION["shopping_cart"]);
@@ -52,35 +52,34 @@ include("./header_front-end.php");
   }
 
   if (isset($_SESSION["order_id"])) {
-    $customer_details = '';
-    $order_details = '';
+    $customer_details = "";
+    $order_details = "";
     $total = 0;
-    $query = '  
-                     SELECT * FROM tb_order 
-                     INNER JOIN tb_order_detail 
-                     ON tb_order_detail.order_id = tb_order.order_id 
-                     INNER JOIN tb_product
-                     ON tb_product.product_id = tb_order_detail.product_id 
-                     INNER JOIN tb_user 
-                     ON tb_user.user_id = tb_order.user_id 
-                     WHERE tb_order.order_id = "' . $_SESSION["order_id"] . '"  
-                     ';
+    $query = "SELECT * FROM tb_order 
+              INNER JOIN tb_order_detail 
+              ON tb_order_detail.order_id = tb_order.order_id 
+              INNER JOIN tb_product
+              ON tb_product.product_id = tb_order_detail.product_id 
+              INNER JOIN tb_user 
+              ON tb_user.user_id = tb_order.user_id 
+              WHERE tb_order.order_id = '$_SESSION[order_id]'  
+              ";
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
-      $customer_details = '  
-                          <label>' . $row["user_firstname"] .' '. $row["user_lastname"] . '</label>  
-                          <p>' . $row["order_address"] . '</p>  
-                          <p>' . $row["order_tel"] . ', ' . $row["order_email"] . '</p>  
-                          <p>' . $row["order_address"] . '</p>  
-                          ';
-      $order_details .= "  
-                               <tr>  
-                                    <td>" . $row["product_name"] . "</td>  
-                                    <td>" . $row["order_quantity"] . "</td>  
-                                    <td>" . $row["order_price"] . "</td>  
-                                    <td>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
-                               </tr>  
+      $customer_details = "  
+                          <label>" . $row["user_firstname"] ." ". $row["user_lastname"] . "</label>  
+                          <p>" . $row["order_address"] . "</p>  
+                          <p>" . $row["order_tel"] . ", " . $row["order_email"] . "</p>  
+                          <p>" . $row["order_address"] . "</p>  
                           ";
+      $order_details .= "  
+                          <tr>  
+                            <td>" . $row["product_name"] . "</td>  
+                            <td>" . $row["order_quantity"] . "</td>  
+                            <td>" . $row["order_price"] . "</td>  
+                            <td>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
+                          </tr>  
+                        ";
       $total = $total + ($row["order_quantity"] * $row["order_price"]);
     }
   ?>

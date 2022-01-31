@@ -251,53 +251,29 @@ include("./header_front-end.php");
           $total_no_of_pages = ceil($total_records / $total_records_per_page);
           $second_last = $total_no_of_pages - 1; // total page minus 1
 
-          $sql = "SELECT * FROM tb_product WHERE product_id LIKE '%" . $strKeyword . "%' OR product_name LIKE '%" . $strKeyword . "%'
-          ORDER BY product_id DESC LIMIT $offset, $total_records_per_page
+          $sql = "SELECT DISTINCT tb_product.product_id,
+          (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+          tb_product.product_name,
+          tb_product.product_price,
+          tb_product.product_qty,
+          tb_product.product_description
+          FROM tb_product
+          LEFT JOIN
+          tb_img_product
+          ON
+          tb_product.product_id = tb_img_product.product_id 
+          WHERE tb_product.product_id LIKE '%" . $strKeyword . "%' OR tb_product.product_name LIKE '%" . $strKeyword . "%'
+          ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page
           ";
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-              //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-              if($row['product_qty'] == 0){
-                //สินค้าหมด
-                $disabled = "return false;";
-                $tableClass = "label stockout";
-                $txtTitle = "Out Of Stock";
-              }elseif($row['product_qty'] <= 5) {
-                //สินค้ากำลังจะหมด
-                $disabled = "return true;";
-                $tableClass = "label stockblue";
-                $txtTitle = "Running Out";
-              }else{
-                //เหลือ > 10 ชิ้น
-                $disabled = "return true;";
-                $tableClass = "table-info";
-                $txtTitle = "";
-              }
+              include("./checkstock.php");
           ?>
           <div class="col-lg-4 col-md-6">
-            <div class="product__item">
-              <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
-                <!-- <div class="label new">New</div> -->
-                <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
-                <ul class="product__hover">
-                  <?php include("./permission.php"); ?>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
-              </div>
-            </div>
+            <?php include("./permission.php"); ?>
           </div>
           <?php
             } //while condition closing bracket

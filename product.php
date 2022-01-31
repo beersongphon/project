@@ -9,263 +9,270 @@ if (isset($_POST["txtSearch"])) {
 }
 ?>
 
-<!-- MAIN CONTENT-->
-<div class="main-content">
-  <div class="section__content section__content--p30">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- DATA TABLE -->
-          <h3 class="title-5 m-b-35">ข้อมูลสินค้า</h3>
-          <div class="table-data__tool">
-            <!-- <div class="table-data__tool-left">
-              <div class="rs-select2--light rs-select2--md">
-                <select class="js-select2" name="property">
-                  <option selected="selected">All Properties</option>
-                  <option value="">Option 1</option>
-                  <option value="">Option 2</option>
-                </select>
-                <div class="dropDownSelect2"></div>
-              </div>
-              <div class="rs-select2--light rs-select2--sm">
-                <select class="js-select2" name="time">
-                  <option selected="selected">Today</option>
-                  <option value="">3 Days</option>
-                  <option value="">1 Week</option>
-                </select>
-                <div class="dropDownSelect2"></div>
-              </div>
-              <button class="au-btn-filter">
-                <i class="zmdi zmdi-filter-list"></i>filters
-              </button>
-            </div> -->
-            <!-- <div class="table-data__tool-right">
-              
-              <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                <i class="zmdi zmdi-plus"></i>add item</button>
-              <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                <select class="js-select2" name="type">
-                  <option selected="selected">Export</option>
-                  <option value="">Option 1</option>
-                  <option value="">Option 2</option>
-                </select>
-                <div class="dropDownSelect2"></div>
-              </div>
-            </div> -->
-            <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
-              <input class="form-control" type="search" name="txtSearch" id="search" placeholder="ค้นหา" aria-label="Search" value="<?php echo $strKeyword; ?>">
-              <div class="input-group-append">
-                <button class="input-group-text fa-1x" name="Search" type="submit" value="Search">ค้นหา</button>
-                <a class="btn au-btn au-btn-icon au-btn--green au-btn--small" style="float: right;" href="product_add.php">
-                  <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                  เพิ่มลูกค้า
-                </a>
-                <br style="clear:both;" />
-              </div>
-            </form>
-          </div>
+<header class="mb-3">
+  <a href="#" class="burger-btn d-block d-xl-none">
+    <i class="bi bi-justify fs-3"></i>
+  </a>
+</header>
 
+<div class="page-heading">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>ข้อมูลสินค้า</h3>
+        <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
+      </div>
+      <div class="col-12 col-md-6 order-md-2 order-first">
+        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ข้อมูลสินค้า</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+    <!-- Hoverable rows start -->
+  <section class="section">
+    <div class="row" id="table-hover-row">
+      <div class="col-12">
+        <div class="card">
+          <!-- <div class="card-header">
+            <h4 class="card-title">ข้อมูลสินค้า</h4>
+          </div> -->
+          <div class="card-content">
+            <div class="card-body">
+              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                  <input type="search" name="txtSearch" class="form-control" placeholder="ค้นหา" aria-label="Search" aria-describedby="button-addon2" value="<?php echo $strKeyword; ?>">
+                  <button class="input-group-text fa-1x" name="Search" type="submit" value="Search">ค้นหา</button>
+                  <a class="btn btn-primary" style="float: right;" href="product_add.php">
+                    <i class="fa fa-plus-circle"></i>
+                    เพิ่มสินค้า
+                  </a>
+                </div>
+              </form>
+            </div>
+            <!-- table hover -->
+            <div class="table-responsive">
+              <table class="table table-hover table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center">ลำดับ</th>
+                    <th>ชื่อสินค้า</th>
+                    <th class="text-center">ราคา</th>
+                    <th class="text-center">จำนวน</th>
+                    <th class="text-left">รายละเอียดสินค้า</th>
+                    <th class="text-right"></th>
+                    <!-- <th>ACTION</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+                    $page_no = $_GET['page_no'];
+                  } else {
+                    $page_no = 1;
+                  }
 
-          <div class="table-responsive table--no-card m-b-30">
-            <table class="table table-borderless table-striped table-earning">
-              <thead>
-                <tr>
-                  <th>ลำดับ</th>
-                  <th>รูปสินค้า</th>
-                  <th>ชื่อสินค้า</th>
-                  <th class="text-center">ราคา</th>
-                  <th class="text-left">รายละเอียดสินค้า</th>
-                  <th class="text-right"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-                  $page_no = $_GET['page_no'];
-                } else {
-                  $page_no = 1;
-                }
+                  $total_records_per_page = 10;
+                  $offset = ($page_no - 1) * $total_records_per_page;
+                  $previous_page = $page_no - 1;
+                  $next_page = $page_no + 1;
+                  $adjacents = "2";
 
-                $total_records_per_page = 6;
-                $offset = ($page_no - 1) * $total_records_per_page;
-                $previous_page = $page_no - 1;
-                $next_page = $page_no + 1;
-                $adjacents = "2";
+                  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
+                  $total_records = mysqli_fetch_array($result_count);
+                  $total_records = $total_records['total_records'];
+                  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                  $second_last = $total_no_of_pages - 1; // total page minus 1
 
-                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
-                $total_records = mysqli_fetch_array($result_count);
-                $total_records = $total_records['total_records'];
-                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                $second_last = $total_no_of_pages - 1; // total page minus 1
+                  $i = 1;
 
-                $sql = "SELECT * FROM tb_product WHERE product_id LIKE '%" . $strKeyword . "%' OR product_name LIKE '%" . $strKeyword . "%'
+                  $sql = "SELECT * FROM tb_product 
+                  LEFT JOIN
+                  tb_brand
+                  ON
+                  tb_product.brand_id = tb_brand.brand_id
+                  LEFT JOIN
+                  tb_category
+                  ON
+                  tb_product.category_id = tb_category.category_id
+                  WHERE product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%'
                   LIMIT $offset, $total_records_per_page
-                  ";
-                $result = $conn->query($sql);
+                    ";
+                  $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                  // output data of each row
-                  while ($row = $result->fetch_assoc()) {
-                ?>
-                <tr>
-                  <td><?php echo $row['product_id']; ?></td>
-                  <td>
-                    <div class="row">
-                      <img class="col-12" src="./upload/<?php echo $row['product_img']; ?>" width="290" height="228" />
-                    </div>
-                  </td>
-                  <td><?php echo $row['product_name']; ?></td>
-                  <td class="text-center"><?php echo $row['product_price']; ?></td>
-                  <td><?php echo $row['product_description']; ?></td>
-                  <td>
-                    <div class="table-data-feature">
-                      <a class="item" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                        <i class="zmdi zmdi-edit"></i>
-                      </a>
-                      <a class="del-btn item" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                        <i class="zmdi zmdi-delete"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="6">
-                    <div class="row">
-                      <?php
-                      $sql = "SELECT * FROM tb_img_product WHERE product_id = '$row[product_id]'";
-                      $image = $conn->query($sql);
-                      while ($image_item = $image->fetch_assoc()) {
-                      ?>
-                        <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" style="width: 290; height: 228;">
-                      <?php
-                      }
-                      ?>
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                      foreach($result as $row) {
+
+                        //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
+                        if($row['product_qty'] == 0){
+                          //สินค้าหมด
+                          $tableClass = "text-center table-danger";
+                          $txtTitle = "<font color='red'> สินค้าหมด !! </font>";
+                        }elseif($row['product_qty'] <= 5) {
+                          //สินค้ากำลังจะหมด
+                          $tableClass = "text-center table-warning";
+                          $txtTitle = "";
+                        }else{
+                          //เหลือ > 10 ชิ้น
+                          $tableClass = "text-center table-info";
+                          $txtTitle = "";
+                        }
+                  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $i; ?></td>
+                    <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
+                    <td class="text-center"><?php echo $row['product_price']; ?></td>
+                    <td class="<?= $tableClass;?>">
+                      <?=$row['product_qty'];?>
+                      <br>
+                      <?=$txtTitle;?>
+                    </td>
+                    <td><?php echo $row['product_description']; ?></td>
+                    <td>
+                        <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td colspan="1"></td> -->
+                    <td colspan="7">
+                      <div class="row">
+                        <?php
+                        $sql = "SELECT * FROM tb_img_product WHERE product_id = '$row[product_id]'";
+                        $image = $conn->query($sql);
+                        while ($image_item = $image->fetch_assoc()) {
+                        ?>
+                          <img class="col-2" src="./upload/<?php echo $image_item["img_product"]; ?>" width="10" height="140" >
+                        <?php
+                        }
+                        ?>
                       </div>
                     </td>
                   </tr>
-                  <!-- <tr>
-                    <td>2018-09-29 05:57</td>
-                    <td>Accesories</td>
-                    <td>Smartwatch 4.0 LTE Wifi</td>
-                    <td class="denied">Denied</td>
-                    <td>$199.00</td>
-                  </tr>
+                  <?php
+                        $i++;
+                      }
+                    } //while condition closing bracket
+                  }  //if condition closing bracket
+                  else{
+                  ?>
                   <tr>
-                    <td>2018-09-24 19:10</td>
-                    <td>Camera</td>
-                    <td>Camera C430W 4k</td>
-                    <td class="process">Processed</td>
-                    <td>$699.00</td>
-                  </tr> -->
-                <?php
-                  } //while condition closing bracket
-                }  //if condition closing bracket
+                    <td colspan = "6"><center>Record Not Found</center></td>
+                  </tr>
+                  <?php
+                  }
+                  ?>
+                </tbody>
+              </table>
+              <hr>
+              <!-- <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+                <strong>Page <?php //echo $page_no . " of " . $total_no_of_pages; ?></strong>
+              </div> -->
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-primary  justify-content-center">
+                  <?php // if($page_no > 1){ echo "<li class='page-item'><a class='page-link' href='?page_no=1'>First Page</a></li>"; } 
+                  ?>
+
+                  <li <?php if ($page_no <= 1) {
+                    echo "class='page-item disabled'";
+                    } ?>>
+                    <a class="page-link" <?php if ($page_no > 1) {
+                      echo "href='?page_no=$previous_page'";
+                    } ?>>Previous</a>
+                  </li>
+                  <?php
+                if ($total_no_of_pages <= 10) {
+                  for ($counter = 1; $counter <= $total_no_of_pages; $counter++) {
+                    if ($counter == $page_no) {
+                      echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                    } else {
+                      echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                    }
+                  }
+                } elseif ($total_no_of_pages > 10) {
+
+                  if ($page_no <= 4) {
+                    for ($counter = 1; $counter < 8; $counter++) {
+                      if ($counter == $page_no) {
+                        echo "<li class='page-item active'><a>$counter</a></li>";
+                      } else {
+                        echo "<li class='page-item><a href='?page_no=$counter'>$counter</a></li>";
+                      }
+                    }
+                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
+                  } elseif ($page_no > 4 && $page_no < $total_no_of_pages - 4) {
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
+                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                    for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {
+                      if ($counter == $page_no) {
+                        echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                      } else {
+                        echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                      }
+                    }
+                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
+                  } else {
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
+                    echo "<li class='page-item'><a class='page-link'>...</a></li>";
+
+                    for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
+                      if ($counter == $page_no) {
+                        echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
+                      } else {
+                        echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
+                      }
+                    }
+                  }
+                }
                 ?>
-              </tbody>
-            </table>
-            <?php
-            if (isset($_GET['m'])) { ?>
-              <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
-            <?php } ?>
-          </div>
 
-          <!-- END DATA TABLE -->
-          <div class="pagination justify-content-center" style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-            <strong>Page <?php echo $page_no . " of " . $total_no_of_pages; ?></strong>
-          </div>
+                <li <?php if ($page_no >= $total_no_of_pages) {
+                      echo "class='page-item disabled'";
+                    } ?>>
+                  <a class="page-link" <?php if ($page_no < $total_no_of_pages) {
+                        echo "href='?page_no=$next_page'";
+                      } ?>>Next</a>
+                </li>
+                <?php if ($page_no < $total_no_of_pages) {
+                  echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
+                } ?>
+                </ul>
+              </nav>
 
-          <ul class="pagination justify-content-center">
-            <?php if ($page_no > 1) {
-              echo "<li class='page-item'><a class='page-link' href='?page_no=1'>First Page</a></li>";
-            }
-            ?>
-
-            <li <?php if ($page_no <= 1) {
-                  echo "class='page-item disabled'";
-                } ?>>
-              <a class="page-link" <?php if ($page_no > 1) {
-                                      echo "href='?page_no=$previous_page'";
-                                    } ?>>Previous</a>
-            </li>
-
-            <?php
-            if ($total_no_of_pages <= 10) {
-              for ($counter = 1; $counter <= $total_no_of_pages; $counter++) {
-                if ($counter == $page_no) {
-                  echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                } else {
-                  echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                }
-              }
-            } elseif ($total_no_of_pages > 10) {
-
-              if ($page_no <= 4) {
-                for ($counter = 1; $counter < 8; $counter++) {
-                  if ($counter == $page_no) {
-                    echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                  } else {
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                  }
-                }
-                echo "<li class='page-item'><a class='page-link'>...</a></li>";
-                echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-              } elseif ($page_no > 4 && $page_no < $total_no_of_pages - 4) {
-                echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
-                echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
-                echo "<li class='page-item'><a class='page-link'>...</a></li>";
-                for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {
-                  if ($counter == $page_no) {
-                    echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                  } else {
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                  }
-                }
-                echo "<li class='page-item'><a class='page-link'>...</a></li>";
-                echo "<li class='page-item'><a class='page-link' href='?page_no=$second_last'>$second_last</a></li>";
-                echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
-              } else {
-                echo "<li class='page-item'><a class='page-link' href='?page_no=1'>1</a></li>";
-                echo "<li class='page-item'><a class='page-link' href='?page_no=2'>2</a></li>";
-                echo "<li class='page-item'><a class='page-link'>...</a></li>";
-
-                for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
-                  if ($counter == $page_no) {
-                    echo "<li class='page-item active'><a class='page-link'>$counter</a></li>";
-                  } else {
-                    echo "<li class='page-item'><a class='page-link' href='?page_no=$counter'>$counter</a></li>";
-                  }
-                }
-              }
-            }
-            ?>
-
-            <li <?php if ($page_no >= $total_no_of_pages) {
-                  echo "class='page-item disabled'";
-                } ?>>
-              <a class="page-link" <?php if ($page_no < $total_no_of_pages) {
-                                      echo "href='?page_no=$next_page'";
-                                    } ?>>Next</a>
-            </li>
-            <?php if ($page_no < $total_no_of_pages) {
-              echo "<li class='page-item'><a class='page-link' href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-            } ?>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="copyright">
-            <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+              <?php
+              if (isset($_GET['m'])) { ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
+              <?php } ?>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+  <!-- Hoverable rows end -->
 </div>
 
-</div>
+<script src="./assets/js/jquery-3.5.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
 
 <script>
     $('.del-btn').on('click', function(e) {
@@ -299,6 +306,6 @@ if (isset($_POST["txtSearch"])) {
         }
       })
     }
-  </script>
+</script>
 
-<?php include('./footer_back-end.php'); ?>
+<?php include("./footer_back-end.php"); ?>

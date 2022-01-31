@@ -14,8 +14,8 @@ if (isset($_SESSION["user_username"])) {
   if ((time() - $_SESSION["login_timestamp"]) > $sessiontime) {
     header("location: logout.php");
   } else {
-    if ($_SESSION["user_permission"] == "S" || $_SESSION["user_permission"] == "A") {
-      header("Location: /" . $url . "/" . "staff.php");
+    if ($_SESSION["permission_id"] == "1" || $_SESSION["permission_id"] == "2") {
+      header("Location: /" . $url . "/" . "home.php");
     }
   }
 }
@@ -49,6 +49,6 @@ if (isset($_SESSION["user_username"])) {
   <link rel="stylesheet" href="./assets/front-end/css/magnific-popup.css" type="text/css">
   <link rel="stylesheet" href="./assets/front-end/css/owl.carousel.min.css" type="text/css">
   <link rel="stylesheet" href="./assets/front-end/css/slicknav.min.css" type="text/css">
-  <link rel="stylesheet" href="./assets/front-end/css/style.css" type="text/css">
+  <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
 </head>
 <body>

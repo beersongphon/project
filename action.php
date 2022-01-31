@@ -17,7 +17,7 @@ if (isset($_POST["product_id"])) {
       if ($is_available < 1) {
         $item_array = array(
           'product_id'               =>     $_POST["product_id"],
-          'product_img'               =>     $_POST["product_img"],
+          'img_product'               =>     $_POST["img_product"],
           'product_name'               =>     $_POST["product_name"],
           'product_qty'               =>     $_POST["product_qty"],
           'product_price'               =>     $_POST["product_price"],
@@ -28,7 +28,7 @@ if (isset($_POST["product_id"])) {
     } else {
       $item_array = array(
         'product_id'               =>     $_POST["product_id"],
-        'product_img'               =>     $_POST["product_img"],
+        'img_product'               =>     $_POST["img_product"],
         'product_name'               =>     $_POST["product_name"],
         'product_qty'               =>     $_POST["product_qty"],
         'product_price'               =>     $_POST["product_price"],
@@ -75,7 +75,7 @@ if (isset($_POST["product_id"])) {
       $order_table .= ' 
                 <tr>
                   <td class="cart__product__item">
-                    <img class="col-2" src="./upload/' . $values["product_img"] . '" alt="">
+                    <img class="col-2" src="./upload/' . $values["img_product"] . '" alt="">
                     <div class="cart__product__item__title">
                       <h6>' . $values["product_name"] . '</h6>
                       <div class="rating">

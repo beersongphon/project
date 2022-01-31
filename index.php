@@ -17,7 +17,7 @@ include("./header_front-end.php");
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 p-0">
             <div class="categories__item set-bg" data-setbg="./assets/front-end/img/categories/category-2.jpg">
@@ -56,7 +56,7 @@ include("./header_front-end.php");
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -84,55 +84,27 @@ include("./header_front-end.php");
     </div>
     <div class="row property__gallery">
       <?php
-      $sql = "SELECT * FROM tb_product ORDER BY product_id DESC LIMIT 8";
+      $sql = "SELECT DISTINCT tb_product.product_id,
+      (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+      tb_product.product_name,
+      tb_product.product_price,
+      tb_product.product_qty,
+      tb_product.product_description
+      FROM tb_product
+      LEFT JOIN
+      tb_img_product
+      ON
+      tb_product.product_id = tb_img_product.product_id
+      ORDER BY tb_product.product_id DESC
+      LIMIT 8";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-          //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-          if($row['product_qty'] == 0){
-            //สินค้าหมด
-            $disabled = "return false;";
-            $tableClass = "label stockout";
-            $txtTitle = "Out Of Stock";
-          }elseif($row['product_qty'] <= 5) {
-            //สินค้ากำลังจะหมด
-            $disabled = "return true;";
-            $tableClass = "label stockblue";
-            $txtTitle = "Running Out";
-          }elseif($row['product_qty'] <= 20) {
-            //สินค้ากำลังจะหมด
-            $disabled = "return true;";
-            $tableClass = "";
-            $txtTitle = "";
-          }else{
-            //เหลือ > 20 ชิ้น
-            $disabled = "return true;";
-            $tableClass = "label new";
-            $txtTitle = "New";
-          }
+          include("./checkstock.php");
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-        <div class="product__item">
-          <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['product_img']; ?>">
-            <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
-            <!-- <div class="label new">New</div> -->
-            <ul class="product__hover">
-              <?php include("./permission.php"); ?>
-            </ul>
-          </div>
-          <div class="product__item__text">
-            <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
-          </div>
-        </div>
+        <?php include("./permission.php"); ?>
       </div>
       <?php
         } //while condition closing bracket
