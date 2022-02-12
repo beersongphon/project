@@ -108,6 +108,7 @@
               </ul>
             </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "payment.php") ? "active" : ""; ?>"><a href="./payment.php">การชำระเงิน</a></li>
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
              <?php
              }

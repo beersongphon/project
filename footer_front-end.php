@@ -342,6 +342,50 @@
     });
 
 
+    $("#form_payment").submit(function(e) {
+    // alert("N");
+    e.preventDefault();
+    var formData = new FormData(this);
+    // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
+    let order_id = $('#order_id').val();
+    let pay_total = $('#pay_total').val();
+    let fileToUpload = $("#fileToUpload").val();
+    let pay_tel = $('#pay_tel').val();
+      $.ajax({
+        type: "POST",
+        url: "payments.php",
+        data: formData,
+        success: function(data) {
+          if (data == "imageonly") {
+            alert("อนุญาติเฉพาะรูปภาพเท่านั้น");
+          } else if (data == "exists") {
+            alert("ชื่อไฟล์นี้มีในระบบแล้ว");
+          } else if (data == "success") {
+            alert("ดำเนินการเสร็จสิ้น");
+            order_id
+            pay_total
+            fileToUpload
+            pay_tel
+            location.reload();
+          } else if (data == "error") {
+            alert("เกิดปัญหาการ insert db ผิดพลาด");
+          } else if (data == "movefilefail") {
+            alert("เกิดปัญหาการการย้ายไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
+          } else {
+            alert("ERROR: " + data);
+            console.log(order_id,
+            pay_total,
+            fileToUpload,
+            pay_tel);
+            console.log(data);
+          }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+      });
+    });
+
     $("#btn_regis").click(function() {
       var firstname_regis = $("#firstname_regis").val();
       var lastname_regis = $("#lastname_regis").val();
@@ -558,42 +602,6 @@
       var cost = hr * price_per_hour;
       $("#cost_add").text(cost);
       $("#addtime_cost").val(cost);
-    });
-
-
-    $("#form_addtime").submit(function(e) {
-      // alert("N");
-      e.preventDefault();
-      var formData = new FormData(this);
-      // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
-      $.ajax({
-        type: "POST",
-        url: "payment.php",
-        data: formData,
-        success: function(data) {
-          if (data == "imageonly") {
-            alert("อนุญาติเฉพาะรูปภาพเท่านั้น");
-          } else if (data == "exists") {
-            alert("ชื่อไฟล์นี้มีในระบบแล้ว");
-          } else if (data == "success") {
-            alert("ดำเนินการเสร็จสิ้น");
-            $("#addtime_cost").val(price_per_hour);
-            $("#time_add").val("1");
-            $("#cost_add").text(price_per_hour);
-            $("#fileToUpload").val("");
-            $("#myModalAddtime").modal("hide");
-          } else if (data == "error") {
-            alert("เกิดปัญหาการ insert db ผิดพลาด");
-          } else if (data == "movefilefail") {
-            alert("เกิดปัญหาการการย้านไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
-          } else {
-            alert("ERROR: " + data);
-          }
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-      });
     });
 
 

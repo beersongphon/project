@@ -2322,6 +2322,330 @@ ol {
 	color: #ca1515;
 }
 
+.login__form h5 {
+	color: #111111;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 20px;
+	margin-bottom: 25px;
+}
+
+.login__form .login__form__input p {
+	color: #444444;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.login__form .login__form__input p span {
+	color: #ca1515;
+}
+
+.login__form .login__form__input input {
+	height: 50px;
+	width: 100%;
+	border: 1px solid #e1e1e1;
+	border-radius: 2px;
+	margin-bottom: 25px;
+	font-size: 14px;
+	padding-left: 20px;
+	color: #666666;
+}
+
+.login__form .login__form__input input::-webkit-input-placeholder {
+	color: #666666;
+}
+
+.login__form .login__form__input input::-moz-placeholder {
+	color: #666666;
+}
+
+.login__form .login__form__input input:-ms-input-placeholder {
+	color: #666666;
+}
+
+.login__form .login__form__input input::-ms-input-placeholder {
+	color: #666666;
+}
+
+.login__form .login__form__input input::placeholder {
+	color: #666666;
+}
+
+.login__form .login__form__checkbox {
+	margin-bottom: 20px;
+}
+
+.login__form .login__form__checkbox label {
+	display: block;
+	padding-left: 24px;
+	font-size: 14px;
+	color: #444444;
+	font-weight: 500;
+	position: relative;
+	cursor: pointer;
+	margin-bottom: 16px;
+}
+
+.login__form .login__form__checkbox label input {
+	position: absolute;
+	visibility: hidden;
+}
+
+.login__form .login__form__checkbox label input:checked~.checkmark {
+	border-color: #ca1515;
+}
+
+.login__form .login__form__checkbox label input:checked~.checkmark:after {
+	border-color: #ca1515;
+	opacity: 1;
+}
+
+.login__form .login__form__checkbox label .checkmark {
+	position: absolute;
+	left: 0;
+	top: 4px;
+	height: 10px;
+	width: 10px;
+	border: 1px solid #444444;
+	border-radius: 2px;
+}
+
+.login__form .login__form__checkbox label .checkmark:after {
+	position: absolute;
+	left: 0px;
+	top: -2px;
+	width: 11px;
+	height: 5px;
+	border: solid #ffffff;
+	border-width: 1.5px 1.5px 0px 0px;
+	-webkit-transform: rotate(127deg);
+	-ms-transform: rotate(127deg);
+	transform: rotate(127deg);
+	opacity: 0;
+	content: "";
+}
+
+.login__form .login__form__checkbox p {
+	margin-bottom: 0;
+}
+
+.register__form h5 {
+	color: #111111;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 20px;
+	margin-bottom: 25px;
+}
+
+.register__form .register__form__input p {
+	color: #444444;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.register__form .register__form__input p span {
+	color: #ca1515;
+}
+
+.register__form .register__form__input input {
+	height: 50px;
+	width: 100%;
+	border: 1px solid #e1e1e1;
+	border-radius: 2px;
+	margin-bottom: 25px;
+	font-size: 14px;
+	padding-left: 20px;
+	color: #666666;
+}
+
+.register__form .register__form__input input::-webkit-input-placeholder {
+	color: #666666;
+}
+
+.register__form .register__form__input input::-moz-placeholder {
+	color: #666666;
+}
+
+.register__form .register__form__input input:-ms-input-placeholder {
+	color: #666666;
+}
+
+.register__form .register__form__input input::-ms-input-placeholder {
+	color: #666666;
+}
+
+.register__form .register__form__input input::placeholder {
+	color: #666666;
+}
+
+.register__form .register__form__checkbox {
+	margin-bottom: 20px;
+}
+
+.register__form .register__form__checkbox label {
+	display: block;
+	padding-left: 24px;
+	font-size: 14px;
+	color: #444444;
+	font-weight: 500;
+	position: relative;
+	cursor: pointer;
+	margin-bottom: 16px;
+}
+
+.register__form .register__form__checkbox label input {
+	position: absolute;
+	visibility: hidden;
+}
+
+.register__form .register__form__checkbox label input:checked~.checkmark {
+	border-color: #ca1515;
+}
+
+.register__form .register__form__checkbox label input:checked~.checkmark:after {
+	border-color: #ca1515;
+	opacity: 1;
+}
+
+.register__form .register__form__checkbox label .checkmark {
+	position: absolute;
+	left: 0;
+	top: 4px;
+	height: 10px;
+	width: 10px;
+	border: 1px solid #444444;
+	border-radius: 2px;
+}
+
+.register__form .register__form__checkbox label .checkmark:after {
+	position: absolute;
+	left: 0px;
+	top: -2px;
+	width: 11px;
+	height: 5px;
+	border: solid #ffffff;
+	border-width: 1.5px 1.5px 0px 0px;
+	-webkit-transform: rotate(127deg);
+	-ms-transform: rotate(127deg);
+	transform: rotate(127deg);
+	opacity: 0;
+	content: "";
+}
+
+.register__form .register__form__checkbox p {
+	margin-bottom: 0;
+}
+
+.payment__form h5 {
+	color: #111111;
+	font-weight: 600;
+	text-transform: uppercase;
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 20px;
+	margin-bottom: 25px;
+}
+
+.payment__form .payment__form__input p {
+	color: #444444;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.payment__form .payment__form__input p span {
+	color: #ca1515;
+}
+
+.payment__form .payment__form__input input, select {
+	height: 50px;
+	width: 100%;
+	border: 1px solid #e1e1e1;
+	border-radius: 2px;
+	margin-bottom: 25px;
+	font-size: 14px;
+	padding-left: 20px;
+	color: #666666;
+}
+
+.payment__form .payment__form__input input::-webkit-input-placeholder {
+	color: #666666;
+}
+
+.payment__form .payment__form__input input::-moz-placeholder {
+	color: #666666;
+}
+
+.payment__form .payment__form__input input:-ms-input-placeholder {
+	color: #666666;
+}
+
+.payment__form .payment__form__input input::-ms-input-placeholder {
+	color: #666666;
+}
+
+.payment__form .payment__form__input input::placeholder {
+	color: #666666;
+}
+
+.payment__form .payment__form__checkbox {
+	margin-bottom: 20px;
+}
+
+.payment__form .payment__form__checkbox label {
+	display: block;
+	padding-left: 24px;
+	font-size: 14px;
+	color: #444444;
+	font-weight: 500;
+	position: relative;
+	cursor: pointer;
+	margin-bottom: 16px;
+}
+
+.payment__form .payment__form__checkbox label input {
+	position: absolute;
+	visibility: hidden;
+}
+
+.payment__form .payment__form__checkbox label input:checked~.checkmark {
+	border-color: #ca1515;
+}
+
+.payment__form .payment__form__checkbox label input:checked~.checkmark:after {
+	border-color: #ca1515;
+	opacity: 1;
+}
+
+.payment__form .payment__form__checkbox label .checkmark {
+	position: absolute;
+	left: 0;
+	top: 4px;
+	height: 10px;
+	width: 10px;
+	border: 1px solid #444444;
+	border-radius: 2px;
+}
+
+.payment__form .payment__form__checkbox label .checkmark:after {
+	position: absolute;
+	left: 0px;
+	top: -2px;
+	width: 11px;
+	height: 5px;
+	border: solid #ffffff;
+	border-width: 1.5px 1.5px 0px 0px;
+	-webkit-transform: rotate(127deg);
+	-ms-transform: rotate(127deg);
+	transform: rotate(127deg);
+	opacity: 0;
+	content: "";
+}
+
+.payment__form .payment__form__checkbox p {
+	margin-bottom: 0;
+}
+
 .checkout__form h5 {
 	color: #111111;
 	font-weight: 600;

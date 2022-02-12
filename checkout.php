@@ -9,7 +9,7 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
           <span>Shopping cart</span>
         </div>
       </div>
@@ -21,12 +21,12 @@ include("./header_front-end.php");
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
   <div class="container">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-12">
         <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
           here to enter your code.</h6>
       </div>
-    </div>
+    </div> -->
     <form action="cart.php" method="post" class="checkout__form">
       <div class="row">
         <div class="col-lg-8">
@@ -85,7 +85,7 @@ include("./header_front-end.php");
                 <input type="text" name="order_email">
               </div>
             </div>
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
               <div class="checkout__form__checkbox">
                 <label for="acc">
                   Create an acount?
@@ -110,14 +110,14 @@ include("./header_front-end.php");
                 <p>Oder notes <span>*</span></p>
                 <input type="text" placeholder="Note about your order, e.g, special noe for delivery">
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-lg-4">
-        <?php  
-            $i = 1;
-            if(!empty($_SESSION["shopping_cart"])) {
-            ?> 
+          <?php  
+          $i = 1;
+          if(!empty($_SESSION["shopping_cart"])) {
+          ?> 
           <div class="checkout__order">
             <h5>Your order</h5>
             <div class="checkout__order__product">
@@ -127,14 +127,14 @@ include("./header_front-end.php");
                   <span class="top__text__right">Total</span>
                 </li>
                 <?php  
-                  $total = 0;  
-                  foreach($_SESSION["shopping_cart"] as $keys => $values) {
+                $total = 0;  
+                foreach($_SESSION["shopping_cart"] as $keys => $values) {
                 ?> 
-                    <li><?php echo $i; ?>. <?php echo $values['product_name']; ?> <span>฿ <?php echo number_format($values["product_price"], 2); ?></span></li>
-                    <?php  
-                  $total = $total + ($values["product_quantity"] * $values["product_price"]);  
-                  $i++;
-                  }
+                <li><?php echo $i; ?>. <?php echo $values['product_name']; ?> <span>฿ <?php echo number_format($values["product_price"], 2); ?></span></li>
+                <?php  
+                $total = $total + ($values["product_quantity"] * $values["product_price"]);  
+                $i++;
+                }
                 ?> 
               </ul>
             </div>
@@ -146,7 +146,7 @@ include("./header_front-end.php");
               </ul>
             </div>
          
-            <div class="checkout__order__widget">
+            <!-- <div class="checkout__order__widget">
               <label for="o-acc">
                 Create an acount?
                 <input type="checkbox" id="o-acc">
@@ -164,12 +164,12 @@ include("./header_front-end.php");
                 <input type="checkbox" id="paypal">
                 <span class="checkmark"></span>
               </label>
-            </div>
+            </div> -->
             <button type="submit" name="place_order" class="site-btn">Place oder</button>
           </div>
           <?php  
             }
-            ?> 
+          ?> 
         </div>
       </div>
     </form>

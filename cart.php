@@ -13,13 +13,14 @@ include("./header_front-end.php");
     $order_total = $_POST['order_total'];
 
     $insert_order = "
-                    INSERT INTO tb_order(user_id, order_address, order_tel, order_email, creation_date, order_status, order_total)  
-                    VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', 'pending', '$order_total')  
+                    INSERT INTO tb_order(user_id, order_address, order_tel, order_email, order_date, order_total, status_id)  
+                    VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', '$order_total', '1')  
                     ";
     $order_id = "";
     if (mysqli_query($conn, $insert_order)) {
       $order_id = mysqli_insert_id($conn);
     }
+
     $_SESSION["order_id"] = $order_id;
     $order_details = "";
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
@@ -35,7 +36,7 @@ include("./header_front-end.php");
         
         $sql2 = "UPDATE tb_product SET  
         product_qty = $stc
-        WHERE  product_id = $values[product_id]";
+        WHERE product_id = $values[product_id]";
         $query2 = mysqli_query($conn, $sql2);  
       }
 

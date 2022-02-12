@@ -13,7 +13,7 @@ include("./header_front-end.php");
             <h1>Women’s fashion</h1>
             <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
               edolore magna aliquapendisse ultrices gravida.</p>
-            <a href="#">Shop now</a>
+            <a href="./shop.php">Shop now</a>
           </div>
         </div>
       </div>
@@ -282,21 +282,21 @@ include("./header_front-end.php");
             <div class="banner__text">
               <span>The Chloe Collection</span>
               <h1>The Project Jacket</h1>
-              <a href="#">Shop now</a>
+              <a href="./shop.php">Shop now</a>
             </div>
           </div>
           <div class="banner__item">
             <div class="banner__text">
               <span>The Chloe Collection</span>
               <h1>The Project Jacket</h1>
-              <a href="#">Shop now</a>
+              <a href="./shop.php">Shop now</a>
             </div>
           </div>
           <div class="banner__item">
             <div class="banner__text">
               <span>The Chloe Collection</span>
               <h1>The Project Jacket</h1>
-              <a href="#">Shop now</a>
+              <a href="./shop.php">Shop now</a>
             </div>
           </div>
         </div>
@@ -307,7 +307,7 @@ include("./header_front-end.php");
 <!-- Banner Section End -->
 
 <!-- Trend Section Begin -->
-<section class="trend spad">
+<!-- <section class="trend spad">
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6">
@@ -477,11 +477,11 @@ include("./header_front-end.php");
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- Trend Section End -->
 
 <!-- Discount Section Begin -->
-<section class="discount">
+<!-- <section class="discount">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 p-0">
@@ -519,7 +519,7 @@ include("./header_front-end.php");
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- Discount Section End -->
 
 <!-- Services Section Begin -->
