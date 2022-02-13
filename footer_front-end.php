@@ -373,11 +373,11 @@
             alert("เกิดปัญหาการการย้ายไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
           } else {
             alert("ERROR: " + data);
-            console.log(order_id);
-            console.log(pay_total);
-            console.log(fileToUpload);
-            console.log(pay_tel);
-            console.log(data);
+            console.log("order_id: " + order_id);
+            console.log("pay_total: " + pay_total);
+            console.log("pay_slip: " + fileToUpload);
+            console.log("pay_tel: " + pay_tel);
+            console.log("data: " + data);
           }
         },
         cache: false,
