@@ -32,12 +32,12 @@ include("./header_front-end.php");
                 <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id']; ?>">
               </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>ชื่อ <span>*</span></p>
                 <input type="text" name="name" id="name">
               </div>
-            </div>
+            </div> -->
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>เบอร์โทรศัพท์ <span>*</span></p>
@@ -85,9 +85,6 @@ include("./header_front-end.php");
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>หลักฐานการโอน <span>*</span></p>
-              </div>
-              <div class="row p-5">
-                <table id="image_list" class="table"></table>
               </div>
               <div class="row">
                 <div class="input-group mb-3">

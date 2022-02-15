@@ -20,16 +20,17 @@ if ($FileType != "jpg" && $FileType != "JPG" && $FileType != "jpeg" && $FileType
     $changeName = $target_dir . md5(basename($_FILES["fileToUpload"]["name"])) . ".jpg";
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], iconv('utf-8', 'windows-874', $changeName))) {
-      $sql2 = "UPDATE tb_order SET  
-      status_id = '2'
-      WHERE  order_id = $order_id";
-      $result = $conn->query($sql2);
+        $sql2 = "UPDATE tb_order SET  
+        status_id = '2'
+        WHERE order_id = '$order_id'";
+        $result = $conn->query($sql2);
         $sql = "INSERT INTO tb_payment (order_id, pay_date, pay_total, pay_slip, pay_tel) VALUES 
         ('$order_id', 
         '".date('Y-m-d')."', 
         '$pay_total', 
         '". md5(basename($_FILES["fileToUpload"]["name"])) ."',
         '$pay_tel')";
+        $result = $conn->query($sql);
         if ($conn->query($sql) == TRUE) {
             echo "success";
         } else {

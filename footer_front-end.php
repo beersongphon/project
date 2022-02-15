@@ -369,6 +369,11 @@
             location.reload();
           } else if (data == "error") {
             alert("เกิดปัญหาการ insert db ผิดพลาด");
+            console.log("order_id: " + order_id);
+            console.log("pay_total: " + pay_total);
+            console.log("pay_slip: " + fileToUpload);
+            console.log("pay_tel: " + pay_tel);
+            console.log("data: " + data);
           } else if (data == "movefilefail") {
             alert("เกิดปัญหาการการย้ายไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
           } else {
