@@ -103,7 +103,7 @@ if(ISSET($_POST['search'])){
                   ?>
                 </tbody>
               </table>
-              <button onclick="window.print()">Print </button> 
+              <!-- <button onclick="window.print()">Print </button>  -->
               <hr>
               <!-- <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
                 <strong>Page <?php //echo $page_no . " of " . $total_no_of_pages; ?></strong>
