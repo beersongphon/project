@@ -2136,6 +2136,16 @@ ol {
 	width: 190px;
 }
 
+.shop__cart__table tbody tr .cart__not .cart__not__item__title {
+	overflow: hidden;
+	padding-top: 23px;
+}
+
+.shop__cart__table tbody tr .cart__not .cart__not__item__title h6 {
+	color: #111111;
+	font-weight: 600;
+}
+
 .shop__cart__table tbody tr .cart__quantity {
 	width: 190px;
 }
@@ -2294,32 +2304,12 @@ ol {
 }
 
 /*---------------------
-  Checkout
+  Login
 -----------------------*/
 
-.checkout {
+.login {
 	padding-top: 80px;
 	padding-bottom: 70px;
-}
-
-.coupon__link {
-	font-size: 14px;
-	color: #444444;
-	padding: 14px 0;
-	background: #f5f5f5;
-	border-top: 2px solid #ca1515;
-	text-align: center;
-	margin-bottom: 50px;
-}
-
-.coupon__link a {
-	font-size: 14px;
-	color: #444444;
-}
-
-.coupon__link span {
-	font-size: 14px;
-	color: #ca1515;
 }
 
 .login__form h5 {
@@ -2430,6 +2420,15 @@ ol {
 	margin-bottom: 0;
 }
 
+/*---------------------
+  Register
+-----------------------*/
+
+.register {
+	padding-top: 80px;
+	padding-bottom: 70px;
+}
+
 .register__form h5 {
 	color: #111111;
 	font-weight: 600;
@@ -2538,6 +2537,15 @@ ol {
 	margin-bottom: 0;
 }
 
+/*---------------------
+  Payment
+-----------------------*/
+
+.payment {
+	padding-top: 80px;
+	padding-bottom: 70px;
+}
+
 .payment__form h5 {
 	color: #111111;
 	font-weight: 600;
@@ -2644,6 +2652,35 @@ ol {
 
 .payment__form .payment__form__checkbox p {
 	margin-bottom: 0;
+}
+
+/*---------------------
+  Checkout
+-----------------------*/
+
+.checkout {
+	padding-top: 80px;
+	padding-bottom: 70px;
+}
+
+.coupon__link {
+	font-size: 14px;
+	color: #444444;
+	padding: 14px 0;
+	background: #f5f5f5;
+	border-top: 2px solid #ca1515;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.coupon__link a {
+	font-size: 14px;
+	color: #444444;
+}
+
+.coupon__link span {
+	font-size: 14px;
+	color: #ca1515;
 }
 
 .checkout__form h5 {

@@ -9,8 +9,8 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-          <span>Contact</span>
+          <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
+          <span>ติดต่อเรา</span>
         </div>
       </div>
     </div>
@@ -25,41 +25,42 @@ include("./header_front-end.php");
       <div class="col-lg-6 col-md-6">
         <div class="contact__content">
           <div class="contact__address">
-            <h5>Contact info</h5>
+            <h5>ข้อมูลติดต่อ</h5>
             <ul>
               <li>
-                <h6><i class="fa fa-map-marker"></i> Address</h6>
+                <h6><i class="fa fa-map-marker"></i> ที่อยู่</h6>
                 <p>160 Pennsylvania Ave NW, Washington, Castle, PA 16101-5161</p>
               </li>
               <li>
-                <h6><i class="fa fa-phone"></i> Phone</h6>
-                <p><span>082 459 6429</span><span>125-668-886</span></p>
+                <h6><i class="fa fa-phone"></i> เบอร์โทร</h6>
+                <p><span>082 459 6429</span></p>
+                <!-- <p><span>082 459 6429</span><span>125-668-886</span></p> -->
               </li>
               <li>
-                <h6><i class="fa fa-headphones"></i> Support</h6>
+                <h6><i class="fa fa-headphones"></i> สนับสนุน</h6>
                 <p>thanapa5050@gmail.com</p>
               </li>
             </ul>
           </div>
           <div class="contact__form">
-            <h5>SEND MESSAGE</h5>
+            <h5>ส่งข้อความ</h5>
             <form action="#">
               <?php
               if (isset($_SESSION['user_username'])) {
               ?>
               <input type="hidden" id="user_id_con" name="user_id" placeholder="id" value="<?php echo $_SESSION['user_id']; ?>">
-              <input type="text" id="name_contact" name="name" placeholder="Name">
-              <input type="email" id="email_contact" name="email" placeholder="Email">
+              <input type="text" id="name_contact" name="name" placeholder="ชื่อ">
+              <input type="email" id="email_contact" name="email" placeholder="อีเมล">
               <!-- <input type="text" placeholder="Website"> -->
-              <textarea id="comments_contact" name="comments" placeholder="Message"></textarea>
-              <button type='button' id='btn_contact' class='site-btn'>Send Message</button>
+              <textarea id="comments_contact" name="comments" placeholder="แสดงความคิดเห็น"></textarea>
+              <button type='button' id='btn_contact' class='site-btn'>ส่งข้อความ</button>
               <?php
               } else {
               ?>
-              <input type="text" id="name_contact" name="name" placeholder="Name">
-              <input type="email" id="email_contact" name="email" placeholder="Email">
+              <input type="text" id="name_contact" name="name" placeholder="ชื่อ">
+              <input type="email" id="email_contact" name="email" placeholder="อีเมล">
               <!-- <input type="text" placeholder="Website"> -->
-              <textarea id="comments_contact" name="comments" placeholder="Message"></textarea>
+              <textarea id="comments_contact" name="comments" placeholder="แสดงความคิดเห็น"></textarea>
               <label for='email'>&nbsp&nbspกรุณา Login ก่อนทำรายการ</label>
               <?php
               }

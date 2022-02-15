@@ -68,10 +68,10 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-4 col-md-4">
         <div class="section-title">
-          <h4>New product</h4>
+          <h4>สินค้าใหม่</h4>
         </div>
       </div>
-      <div class="col-lg-8 col-md-8">
+      <!-- <div class="col-lg-8 col-md-8">
         <ul class="filter__controls">
           <li class="active" data-filter="*">All</li>
           <li data-filter=".women">Women’s</li>
@@ -80,12 +80,12 @@ include("./header_front-end.php");
           <li data-filter=".accessories">Accessories</li>
           <li data-filter=".cosmetic">Cosmetics</li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <div class="row property__gallery">
       <?php
       $sql = "SELECT DISTINCT tb_product.product_id,
-      (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+      (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
       tb_product.product_name,
       tb_product.product_price,
       tb_product.product_qty,

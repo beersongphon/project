@@ -9,8 +9,8 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-          <span>Shop</span>
+          <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
+          <span>สินค้า</span>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-3 col-md-3">
         <div class="shop__sidebar">
-          <div class="sidebar__categories">
+          <!-- <div class="sidebar__categories">
             <div class="section-title">
               <h4>Categories</h4>
             </div>
@@ -117,7 +117,7 @@ include("./header_front-end.php");
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="sidebar__filter">
             <div class="section-title">
               <h4>Shop by price</h4>
@@ -134,7 +134,7 @@ include("./header_front-end.php");
             </div>
             <a href="#">Filter</a>
           </div>
-          <div class="sidebar__sizes">
+          <!-- <div class="sidebar__sizes">
             <div class="section-title">
               <h4>Shop by size</h4>
             </div>
@@ -227,7 +227,7 @@ include("./header_front-end.php");
                 <span class="checkmark"></span>
               </label>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-lg-9 col-md-9">

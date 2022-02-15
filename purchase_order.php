@@ -1,62 +1,22 @@
 <?php
-session_start();
-require_once("connect.php");
+include("./head_front-end.php");
+include("./header_front-end.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-874" />
-<title>ใบสั่งซื้อสินค้า</title>
-<style type="text/css">
-.order-container {
-	font-family:Tahoma, Geneva, sans-serif;
-	margin:0px auto;
-	width:950px;
-	font-size:14px;
-}
-.order-head {
-	margin:50px 0 10px 0;
-}
-.order-title {
-	text-align:center;
-	font-size:24px;
-	font-weight:bold;
-}
-.order-head .order-customer {
-	float:left;
-	margin:10px 0 10px 0;
-	padding:5px;
-	border:1px solid #000;
-}
-.order-head .order-date {
-	text-align:right;
-	margin:10px 0 10px 0;
-	float:right;
-	padding:5px;
-	border:1px solid #000;
-}
-.order-underline {
-	border-bottom:#000 1px dashed;
-}
-.clear {
-	clear:both;
-}
-</style>
-</head>
-<body>
+<br />
 <div class="order-container">
   <div class="order-title">ใบสั่งซื้อ</div>
   <?php
   if (isset($_POST["place_order"])) {
     $id = $_POST['user_id'];
+    $order_name = $_POST['order_name'];
     $order_address = $_POST['order_address'];
     $order_tel = $_POST['order_tel'];
     $order_email = $_POST['order_email'];
     $order_total = $_POST['order_total'];
 
     $insert_order = "
-                    INSERT INTO tb_order(user_id, order_address, order_tel, order_email, order_date, order_total, status_id)  
-                    VALUES('$id', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', '$order_total', '1')  
+                    INSERT INTO tb_order(user_id, order_name, order_address, order_tel, order_email, order_date, order_total, status_id)  
+                    VALUES('$id', '$order_name', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', '$order_total', '1')  
                     ";
     $order_id = "";
     if (mysqli_query($conn, $insert_order)) {
@@ -90,7 +50,7 @@ require_once("connect.php");
     if (mysqli_multi_query($conn, $order_details)) {
       unset($_SESSION["shopping_cart"]);
       echo '<script>alert("You have successfully place an order...Thank you")</script>';
-      echo '<script>window.location.href="cart.php"</script>';
+      echo '<script>window.location.href="purchase_order.php"</script>';
     }
   }
 
@@ -112,11 +72,13 @@ require_once("connect.php");
       $customer_details = "  
                           <div class='order-head'>
                             <div class='order-customer'> <b>ชื่อ-สกุล</b> 
-                              <span class='order-underline'>" . $row["user_firstname"] ." ". $row["user_lastname"] . "</span><br />
+                              <span class='order-underline'>" . $row["order_name"] ."</span><br />
                               <b>ที่อยู่</b> 
                               <span class='order-underline'>" . $row['order_address'] ." </span><br />
                               <b>เบอร์โทรศัพท์</b> 
-                              <span class='order-underline'>" . $row['order_tel'] ." </span>
+                              <span class='order-underline'>" . $row['order_tel'] ." </span><br />
+                              <b>อีเมล</b> 
+                              <span class='order-underline'>" . $row['order_email'] ." </span>
                             </div>
                             <div class='order-date'> 
                               <b>เลขที่ใบสั่งซื้อ</b>
@@ -129,14 +91,13 @@ require_once("connect.php");
  
       $order_details .= "  
                           <tr>  
-                            <td>" . $row["product_id"] . "</td>  
                             <td>" . $row["product_name"] . "</td>  
-                            <td>" . $row["order_quantity"] . "</td>  
-                            <td>" . $row["order_price"] . "</td>  
-                            <td>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
+                            <td align='center'>" . $row["order_price"] . "</td>  
+                            <td align='center'>" . $row["order_quantity"] . "</td>  
+                            <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
                           </tr>  
                         ";
-      $total = $total + ($row["order_quantity"] * $row["order_price"]);
+      $total = number_format($total + $row["order_quantity"] * $row["order_price"], 2);
     }
   ?>
 
@@ -146,16 +107,15 @@ require_once("connect.php");
   <div class="order-content">
     <table width="100%" border="1" cellpadding="3" cellspacing="0">
       <tr>
-        <td><strong>รหัสสินค้า</strong></td>
-        <td><strong>รายการ</strong></td>
-        <td><strong>จำนวน</strong></td>
-        <td><strong>ราคา/หน่วย</strong></td>
-        <td><strong>ราคารวม</strong></td>
+        <td><strong>สินค้า</strong></td>
+        <td align="center"><strong>ราคา</strong></td>
+        <td align="center"><strong>จำนวน</strong></td>
+        <td align="right"><strong>ราคารวม</strong></td>
       </tr>
       <?php echo $order_details ?>
       <tr>
-        <td colspan="4" align="right"><strong>รวมเงินทั้งสิ้น</strong></td>
-        <td><?=$total?></td>
+        <td colspan="3" align="right"><strong>รวมเงินทั้งสิ้น</strong></td>
+        <td align="right"><?=$total?></td>
       </tr>
     </table>
   </div>
@@ -163,6 +123,6 @@ require_once("connect.php");
       }
     ?>
 </div>
-</body>
-</html>
-<? $conn->Close();//ปิดการเชื่อมต่อกับฐานข้อมูล?>
+
+<br>
+<?php include("./footer_front-end.php"); ?>

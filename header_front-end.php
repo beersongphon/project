@@ -34,8 +34,8 @@
   <?php
   if (!isset($_SESSION['user_username'])) {
   ?>
-    <a href="./login.php">Login</a>
-    <a href="./register.php">Register</a>
+    <a href="./login.php">เข้าสู่ระบบ</a>
+    <a href="./register.php">สมัครสมาชิก</a>
   <?php
   } else {
     echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
@@ -119,19 +119,19 @@
       <div class="col-lg-3">
         <div class="header__right">
           <div class="header__right__auth">
-          <?php
-          if (!isset($_SESSION['user_username'])) {
-          ?>
-            <a href="./login.php">Login</a>
-            <a href="./register.php">Register</a>
-          <?php
-          } else {
+            <?php
+            if (!isset($_SESSION['user_username'])) {
+            ?>
+            <a href="./login.php">เข้าสู่ระบบ</a>
+            <a href="./register.php">สมัครสมาชิก</a>
+            <?php
+            } else {
             echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
             ?>
             <a href="./logout.php">ออกจากระบบ</a>
             <?php
-          }
-          ?>
+            }
+            ?>
           </div>
           <ul class="header__right__widget">
             <li><span class="icon_search search-switch"></span></li>

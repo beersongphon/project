@@ -4,8 +4,9 @@ include("./header_front-end.php");
 
 $product_id = $_GET["product_id"];
 $query = "SELECT DISTINCT tb_product.product_id,
-(SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+(SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
 tb_product.product_name,
+tb_brand.brand_name,
 tb_product.product_price,
 tb_product.product_qty,
 tb_product.product_description
@@ -14,6 +15,14 @@ LEFT JOIN
 tb_img_product
 ON
 tb_product.product_id = tb_img_product.product_id
+LEFT JOIN
+tb_brand
+ON
+tb_product.brand_id = tb_brand.brand_id
+LEFT JOIN
+tb_category
+ON
+tb_product.category_id = tb_category.category_id
 WHERE tb_product.product_id = '$product_id' ORDER BY tb_product.product_id ASC";  
 $result = mysqli_query($conn, $query);  
 $row = mysqli_fetch_array($result);
@@ -24,9 +33,9 @@ $row = mysqli_fetch_array($result);
       <div class="row">
         <div class="col-lg-12">
           <div class="breadcrumb__links">
-            <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-            <a href="./shop.php">Shop</a>
-            <span><?php echo $row["product_name"]; ?></span>
+            <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
+            <a href="./shop.php">สินค้า</a>
+            <span>รายละเอียดสินค้า</span>
           </div>
         </div>
       </div>
@@ -116,18 +125,17 @@ $row = mysqli_fetch_array($result);
         </div> -->
         <div class="col-lg-6">
           <div class="product__details__text">
-            <h3><?php echo $row["product_name"]; ?> <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
-            <div class="rating">
+            <h3><?php echo $row["product_name"]; ?> <span>ยี่ห้อ: <?php echo $row["brand_name"]; ?></span></h3>
+            <!-- <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <span>( 138 reviews )</span>
-            </div>
+            </div> -->
             <div class="product__details__price">฿ <?php echo number_format($row["product_price"], 2); ?> <span>฿ 83.0</span></div>
-            <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
-              magni lores eos qui ratione voluptatem sequi nesciunt.</p>
+            <p><?php echo $row["product_description"]; ?></p>
             <div class="product__details__button">
               <div class="quantity">
                 <span>จำนวน:</span>
@@ -207,7 +215,7 @@ $row = mysqli_fetch_array($result);
           <div class="product__details__tab">
             <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">รายละเอียด</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
@@ -218,17 +226,8 @@ $row = mysqli_fetch_array($result);
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                <h6>Description</h6>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                  quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                  Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                  voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                  consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                  consequat massa quis enim.</p>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                  dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                  nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                  quis, sem.</p>
+                <h6>รายละเอียด</h6>
+                <p><?php echo $row["product_description"]; ?></p>
               </div>
               <div class="tab-pane" id="tabs-2" role="tabpanel">
                 <h6>Specification</h6>
@@ -263,12 +262,12 @@ $row = mysqli_fetch_array($result);
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="related__title">
-            <h5>RELATED PRODUCTS</h5>
+            <h5>สินค้าที่เกี่ยวข้อง</h5>
           </div>
         </div>
         <?php
         $sql = "SELECT DISTINCT tb_product.product_id,
-        (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+        (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
         tb_product.product_name,
         tb_product.product_price,
         tb_product.product_qty,

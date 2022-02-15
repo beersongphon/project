@@ -83,7 +83,7 @@
           <ul>
             <li><a href="#">About</a></li>
             <li><a href="#">Blogs</a></li>
-            <li><a href="./contact.php">Contact</a></li>
+            <li><a href="./contact.php">ติดต่อเรา</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>
         </div>

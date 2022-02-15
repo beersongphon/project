@@ -51,5 +51,41 @@ if (isset($_SESSION["user_username"])) {
   <link rel="stylesheet" href="./assets/front-end/css/slicknav.min.css" type="text/css">
   <!-- <link rel="stylesheet" href="./assets/front-end/css/style.css" type="text/css"> -->
   <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
+
+  <style type="text/css">
+.order-container {
+	font-family:Tahoma, Geneva, sans-serif;
+	margin:0px auto;
+	width:950px;
+	font-size:14px;
+}
+.order-head {
+	margin:50px 0 10px 0;
+}
+.order-title {
+	text-align:center;
+	font-size:24px;
+	font-weight:bold;
+}
+.order-head .order-customer {
+	float:left;
+	margin:10px 0 10px 0;
+	padding:5px;
+	border:1px solid #000;
+}
+.order-head .order-date {
+	text-align:right;
+	margin:10px 0 10px 0;
+	float:right;
+	padding:5px;
+	border:1px solid #000;
+}
+.order-underline {
+	border-bottom:#000 1px dashed;
+}
+.clear {
+	clear:both;
+}
+</style>
 </head>
 <body>

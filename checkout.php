@@ -9,8 +9,10 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-          <span>Shopping cart</span>
+          <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
+          <a href="./shop.php">สินค้า</a>
+          <a href="./shop-cart.php">ตะกร้าสินค้า</a>
+          <span>รายละเอียดการเรียกเก็บเงิน</span>
         </div>
       </div>
     </div>
@@ -27,10 +29,10 @@ include("./header_front-end.php");
           here to enter your code.</h6>
       </div>
     </div> -->
-    <form action="cart.php" method="post" class="checkout__form">
+    <form action="purchase_order.php" method="post" class="checkout__form">
       <div class="row">
         <div class="col-lg-8">
-          <h5>Billing detail</h5>
+          <h5>รายละเอียดการเรียกเก็บเงิน</h5>
           <div class="row">
             <div class="col-lg-12">
               <div class="checkout__form__input">
@@ -38,9 +40,15 @@ include("./header_front-end.php");
                 <input type="text" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
               </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-12">
               <div class="checkout__form__input">
-                <p>First Name <span>*</span></p>
+                <p>ชื่อ <span>*</span></p>
+                <input type="text" name="order_name">
+              </div>
+            </div>
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="checkout__form__input">
+                <p>ชื่อ <span>*</span></p>
                 <input type="text" name="name" value="<?php echo $_SESSION['user_firstname']; ?>">
               </div>
             </div>
@@ -49,18 +57,18 @@ include("./header_front-end.php");
                 <p>Last Name <span>*</span></p>
                 <input type="text">
               </div>
-            </div>
+            </div> -->
             <div class="col-lg-12">
-              <div class="checkout__form__input">
+              <!-- <div class="checkout__form__input">
                 <p>Country <span>*</span></p>
                 <input type="text">
-              </div>
+              </div> -->
               <div class="checkout__form__input">
                 <p>Address <span>*</span></p>
                 <input type="text" name="order_address" placeholder="Street Address">
-                <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
+                <!-- <input type="text" placeholder="Apartment. suite, unite ect ( optinal )"> -->
               </div>
-              <div class="checkout__form__input">
+              <!-- <div class="checkout__form__input">
                 <p>Town/City <span>*</span></p>
                 <input type="text">
               </div>
@@ -71,17 +79,17 @@ include("./header_front-end.php");
               <div class="checkout__form__input">
                 <p>Postcode/Zip <span>*</span></p>
                 <input type="text">
-              </div>
+              </div> -->
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
-                <p>Phone <span>*</span></p>
+                <p>เบอร์โทร <span>*</span></p>
                 <input type="text" name="order_tel">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
-                <p>Email <span>*</span></p>
+                <p>อีเมล <span>*</span></p>
                 <input type="text" name="order_email">
               </div>
             </div>
@@ -119,12 +127,12 @@ include("./header_front-end.php");
           if(!empty($_SESSION["shopping_cart"])) {
           ?> 
           <div class="checkout__order">
-            <h5>Your order</h5>
+            <h5>การสั่งซื้อของคุณ</h5>
             <div class="checkout__order__product">
               <ul>
                 <li>
-                  <span class="top__text">Product</span>
-                  <span class="top__text__right">Total</span>
+                  <span class="top__text">สินค้า</span>
+                  <span class="top__text__right">ราคารวม</span>
                 </li>
                 <?php  
                 $total = 0;  
@@ -141,7 +149,7 @@ include("./header_front-end.php");
             <div class="checkout__order__total">
               <ul>
                 <!-- <li>Subtotal <span>$ 750.0</span></li> -->
-                <li>Total <span>฿ <?php echo number_format($total, 2); ?></span></li>
+                <li>ราคารวม <span>฿ <?php echo number_format($total, 2); ?></span></li>
                 <input type="hidden" name="order_total" value="<?php echo $total; ?>">
               </ul>
             </div>
@@ -165,7 +173,7 @@ include("./header_front-end.php");
                 <span class="checkmark"></span>
               </label>
             </div> -->
-            <button type="submit" name="place_order" class="site-btn">Place oder</button>
+            <button type="submit" name="place_order" class="site-btn">สั่งซื้อ</button>
           </div>
           <?php  
             }
