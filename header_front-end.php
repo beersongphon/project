@@ -38,7 +38,7 @@
     <a href="./register.php">สมัครสมาชิก</a>
   <?php
   } else {
-    echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
+    echo "<a href='./profile.php' id='user_detail'>".$_SESSION["user_username"]."</a>";
   ?>
     <a href="./logout.php">ออกจากระบบ</a>
   <?php
@@ -126,7 +126,7 @@
             <a href="./register.php">สมัครสมาชิก</a>
             <?php
             } else {
-            echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
+            echo "<a href='./profile.php' id='user_detail'>".$_SESSION["user_username"]."</a>";
             ?>
             <a href="./logout.php">ออกจากระบบ</a>
             <?php
