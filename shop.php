@@ -118,7 +118,7 @@ include("./header_front-end.php");
               </div>
             </div>
           </div> -->
-          <div class="sidebar__filter">
+          <!-- <div class="sidebar__filter">
             <div class="section-title">
               <h4>Shop by price</h4>
             </div>
@@ -133,7 +133,7 @@ include("./header_front-end.php");
               </div>
             </div>
             <a href="#">Filter</a>
-          </div>
+          </div> -->
           <!-- <div class="sidebar__sizes">
             <div class="section-title">
               <h4>Shop by size</h4>
@@ -230,7 +230,7 @@ include("./header_front-end.php");
           </div> -->
         </div>
       </div>
-      <div class="col-lg-9 col-md-9">
+      <div class="col-lg-12 col-md-12">
         <div class="row">
           <?php
           if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
