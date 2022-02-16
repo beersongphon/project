@@ -108,7 +108,6 @@
                 <li><a href="./shop-cart.php">ตะกร้าสินค้า</a></li>
                 <li><a href="./checkout.php">การชำระเงิน</a></li>
                 <li><a href="./orders_status.php">สถานะการสั่งซื้อ</a></li>
-                <li><a href="./shop-cart.php">ติดตามการสั่งซื้อ</a></li>
               </ul>
             </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
