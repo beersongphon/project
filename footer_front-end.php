@@ -62,7 +62,7 @@
       <div class="col-lg-4 col-md-6 col-sm-7">
         <div class="footer__about">
           <div class="footer__logo">
-            <a href="./index.php" style="font-family: 'Finger Paint', cursive; font-size: 20px; color:#000000;">Luxury by Fon</a>
+            <a href="./index.php" style="color: #111111; font-weight: 600; text-transform: uppercase; margin-bottom: 12px;">Luxury by Fon</a>
             <!-- <a href="./index.php"><img src="./assets/front-end/img/logo.png" alt=""></a> -->
           </div>
           <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -79,7 +79,7 @@
       </div>
       <div class="col-lg-2 col-md-3 col-sm-5">
         <div class="footer__widget">
-          <h6>Quick links</h6>
+          <h6>ลิงค์ด่วน</h6>
           <ul>
             <li><a href="#">About</a></li>
             <li><a href="#">Blogs</a></li>
@@ -90,21 +90,21 @@
       </div>
       <div class="col-lg-2 col-md-3 col-sm-4">
         <div class="footer__widget">
-          <h6>Account</h6>
+          <h6>บัญชี</h6>
           <ul>
           <?php
           if (!isset($_SESSION['user_username'])) {
           ?>
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Orders Tracking</a></li>
-            <li><a href="./login.php">Checkout</a></li>
+            <li><a href="./login.php">บัญชีของฉัน</a></li>
+            <li><a href="./login.php">ติดตามการสั่งซื้อ</a></li>
+            <li><a href="./login.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
           } else {
           ?>
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Orders Tracking</a></li>
-            <li><a href="./checkout.php">Checkout</a></li>
+            <li><a href="./profile.php">บัญชีของฉัน</a></li>
+            <li><a href="./orders_tracking.php">ติดตามการสั่งซื้อ</a></li>
+            <li><a href="./checkout.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
           }
@@ -114,7 +114,7 @@
       </div>
       <div class="col-lg-4 col-md-8 col-sm-8">
         <div class="footer__newslatter">
-          <h6>NEWSLETTER</h6>
+          <h6>จดหมายข่าว</h6>
           <!-- <form action="#">
             <input type="text" placeholder="Email">
             <button type="submit" class="site-btn">Subscribe</button>
@@ -313,7 +313,6 @@
 
     $("#btn_contact").click(function() {
       // alert("success");'
-      var user_id_con = $("#user_id_con").val();
       var name_con = $("#name_contact").val();
       var email_con = $("#email_contact").val();
       var comments_con = $("#comments_contact").val();
@@ -325,7 +324,6 @@
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else {
         $.post("contacts.php", {
-          user_id_con: user_id_con,
           name_con: name_con,
           email_con: email_con,
           comments_con: comments_con
@@ -459,204 +457,80 @@
       }
     });
 
-    // ปุ่มจองพื้นมาสติกถูกกด
-    $("#stadium_mastic").click(function() {
-      var d = new Date();
-      // ไม่ให้เลือกวันที่ที่เป็นอดีต https://stackoverflow.com/questions/43274559/how-do-i-restrict-past-dates-in-html5-input-type-date
-      // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_input_max_min
-      // ค่าเดือนจะได้ค่า 0-11 : 0หมายถึงมกราคม, 11หมายถึงเดือนธันวาคม
-      var month = d.getMonth();
-      month = month + 1; // เพิ่ม month บวก 1 เข้าไปเพื่อให้อ่านเดือนได้แบบปกติ คือเดือน 1-12
-      if (month < 10) {
-        // <input type="date" id="datemin" name="datemin" min="2021-03-17"> แอตทิบิ้ว min="" คือการกำหนดให้วันสุดท้ายสุดที่เลือกได้
-        $('#date_reserve_mastic').attr('min', d.getFullYear() + "-0" + month + "-" + d.getDate());
+    $("#btn_profile").click(function() {
+      var user_id_profile = $("#user_id_profile").val();
+      var firstname_profile = $("#firstname_profile").val();
+      var lastname_profile = $("#lastname_profile").val();
+      var address_profile = $("#address_profile").val();
+      var tel_profile = $("#tel_profile").val();
+      var email_profile = $("#email_profile").val();
+      var sex_profile = $("input[name=optradio]:checked").val();
+      var username_profile = $("#username_profile").val();
+      var pwd_profile = $("#pwd_profile").val();
+      var confirm_pwd = $("#confirm_pwd").val();
+
+      // console.log(firstname_regis + lastname_regis + username_regis + pwd_regis + confirm_pwd + idcard_regis + tel_regis);
+      
+      if (user_id_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (firstname_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (lastname_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (address_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (tel_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (email_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (username_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (pwd_profile == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (confirm_pwd == "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      } else if (pwd_profile != confirm_pwd) {
+        alert("กรุณาตรวจสอบรหัสผ่านของคุณอีกครั้ง");
+        $("#pwd_profile").val("");
+        $("#confirm_pwd").val("");
       } else {
-        // <input type="date" id="datemin" name="datemin" min="2021-03-17"> แอตทิบิ้ว min="" คือการกำหนดให้วันสุดท้ายสุดที่เลือกได้
-        $('#date_reserve_mastic').attr('min', d.getFullYear() + "-" + month + "-" + d.getDate());
-      }
-      $("#myModalReserveMastic").modal("show"); // สั่งให้ modal แสดง
-    });
-
-    // ปุ่มจองพื้นยางถูกกด
-    $("#stadium_rubber").click(function() {
-      var d = new Date();
-      var month = d.getMonth();
-      month = month + 1; // เพิ่ม month บวก 1 เข้าไปเพื่อให้อ่านเดือนได้แบบปกติ คือเดือน 1-12
-      if (month < 10) {
-        // <input type="date" id="datemin" name="datemin" min="2021-03-17"> แอตทิบิ้ว min="" คือการกำหนดให้วันสุดท้ายสุดที่เลือกได้
-        $('#date_reserve_mastic').attr('min', d.getFullYear() + "-0" + month + "-" + d.getDate());
-      } else {
-        // <input type="date" id="datemin" name="datemin" min="2021-03-17"> แอตทิบิ้ว min="" คือการกำหนดให้วันสุดท้ายสุดที่เลือกได้
-        $('#date_reserve_mastic').attr('min', d.getFullYear() + "-" + month + "-" + d.getDate());
-      }
-      $("#myModalReserveRubber").modal("show");
-    });
-
-
-    // ปุ่มยืมไม้แบตมินตัน
-    $("#btlend_bad").click(function() {
-      $("#myModalbad").modal("show"); // สั่งให้ modal แสดง
-    });
-    $("#bt_lend_modal_bad").click(function() {
-      var lend_modal_bad = $("#lend_modal_bad").val();
-      $.post("lend_racket.php", {
-        lend_modal_bad: lend_modal_bad
-      }, function(datacallback) {
-        if (datacallback == "success") {
-          alert("ยืมสำเร็จ");
-          $("#myModalbad").modal("hide"); // สั่งให้ modal ปิด
-        } else {
-          alert("ยืมไม่สำเร็จ");
-          alert(datacallback);
-        }
-      });
-    });
-
-
-    // ปุ่มยืมรองเท้า
-    $("#btlend_shoes").click(function() {
-      $("#myModalshoes").modal("show"); // สั่งให้ modal แสดง
-    });
-    $("#bt_lend_modal_shoes").click(function() {
-      var lend_modal_shoes = $("#lend_modal_shoes").val();
-      $.post("lend_shoes.php", {
-        lend_modal_shoes: lend_modal_shoes
-      }, function(datacallback) {
-        if (datacallback == "success") {
-          alert("ยืมสำเร็จ");
-          $("#myModalshoes").modal("hide"); // สั่งให้ modal ปิด
-        } else {
-          alert("ยืมไม่สำเร็จ");
-          alert(datacallback);
-        }
-      });
-    });
-
-    $("#btn_submit_stadium_mastic").click(function() {
-      var date_reserve_mastic = $("#date_reserve_mastic").val();
-      var time_reserve_mastic = $("#time_reserve_mastic").val();
-      var stadium_reserve_mastic = $("#stadium_reserve_mastic").val();
-      // Debug
-      // alert(date_reserve_mastic + " " + time_reserve_mastic); // แสดงวัน/เวลาที่ได้
-
-      // ตรวจสอบค่าว่าง
-      if (date_reserve_mastic == "") {
-        alert("กรุณากรอกวันที่จอง");
-      } else if (time_reserve_mastic == "") {
-        alert("กรุณากรอกเวลาจอง");
-      } else {
-        $.post("stadium_mastic.php", {
-          date_reserve_mastic: date_reserve_mastic,
-          time_reserve_mastic: time_reserve_mastic,
-          stadium_reserve_mastic: stadium_reserve_mastic
+        $.post("profiles.php", {
+          user_id_profile: user_id_profile,
+          firstname_profile: firstname_profile,
+          lastname_profile: lastname_profile,
+          address_profile: address_profile,
+          tel_profile: tel_profile,
+          email_profile: email_profile,
+          sex_profile: sex_profile,
+          username_profile: username_profile,
+          pwd_profile: pwd_profile,
+          confirm_pwd: confirm_pwd
         }, function(datacallback) {
           if (datacallback == "success") {
-            alert("การจองเสร็จสิ้น");
-            $("#date_reserve_mastic").val("");
-            $("#time_reserve_mastic").val("13");
-            $("#stadium_reserve_mastic").val("1"); // เช็ตค่าเริ่มต้นที่ <option value='1'></option>
-            $("#myModalReserveMastic").modal("hide");
-          } else if (datacallback == "timealready") {
-            alert("กรุณาเลือกวัน/เวลาใหม่เนื่องจากสนามไม่ว่าง");
-          } else if (datacallback == "timeout") {
-            alert("จำนวนชั่วโมงไม่พอในการจอง");
+            alert("แก้ไขข้อมูลสำเร็จ");
+            $("#user_id_profile").val();
+            $("#firstname_profile").val();
+            $("#lastname_profile").val();
+            $("#address_profile").val();
+            $("#tel_profile").val();
+            $("#email_profile").val();
+            $("#username_profile").val();
+            $("#pwd_profile").val("");
+            $("#confirm_pwd").val("");
+            window.location.replace("profile.php");
+          } else if (datacallback == "already") {
+            alert("มีชื่อผู้ใช้นี้อยู่ในระบบแล้ว");
+            $("#username_profile").val("");
+            $("#pwd_profile").val("");
+            $("#confirm_pwd").val("");
           } else {
-            alert("ERROR Please check #btn_submit_stadium_mastic.click : " + datacallback);
+            alert("เกิดขึ้นผิดพลาด: " + datacallback);
           }
         });
       }
     });
 
-    $("#btn_submit_stadium_rubber").click(function() {
-      var date_reserve_rubber = $("#date_reserve_rubber").val();
-      var time_reserve_rubber = $("#time_reserve_rubber").val();
-      var stadium_reserve_rubber = $("#stadium_reserve_rubber").val();
-      // Debug
-      // alert(date_reserve_rubber + " " + time_reserve_rubber); // แสดงวัน/เวลาที่ได้
-
-      // ตรวจสอบค่าว่าง
-      if (date_reserve_rubber == "") {
-        alert("กรุณากรอกวันที่จอง");
-      } else if (time_reserve_rubber == "") {
-        alert("กรุณากรอกเวลาจอง");
-      } else {
-        $.post("stadium_rubber.php", {
-          date_reserve_rubber: date_reserve_rubber,
-          time_reserve_rubber: time_reserve_rubber,
-          stadium_reserve_rubber: stadium_reserve_rubber
-        }, function(datacallback) {
-          if (datacallback == "success") {
-            alert("การจองเสร็จสิ้น");
-            $("#date_reserve_rubber").val("");
-            $("#time_reserve_rubber").val("13");
-            $("#stadium_reserve_rubber").val("1"); // เช็ตค่าเริ่มต้นที่ <option value='1'></option>
-            $("#myModalReserveRubber").modal("hide");
-          } else if (datacallback == "timealready") {
-            alert("กรุณาเลือกวัน/เวลาใหม่เนื่องจากสนามไม่ว่าง");
-          } else if (datacallback == "timeout") {
-            alert("จำนวนชั่วโมงไม่พอในการจอง");
-          } else {
-            alert("ERROR Please check #btn_submit_stadium_rubber.click : " + datacallback);
-          }
-        });
-      }
-    });
-
-    $("#time_add").change(function() {
-      var hr = $("#time_add").val();
-      var cost = hr * price_per_hour;
-      $("#cost_add").text(cost);
-      $("#addtime_cost").val(cost);
-    });
-
-
-    $(".btn_package").click(function() {
-      var pck_time = $(this).data("package");
-      var pck_cost = $(this).data("packagecost");
-      // alert(pck_cost+" "+pck_time);
-      $("#addtime_cost_package").val(pck_cost);
-      $("#addtime_package").val(pck_time);
-      $("#alertcost_add_package").text(pck_time);
-      $("#myModalAddtimePackage").modal("show");
-    });
-
-
-    $("#form_addtime_package").submit(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-      $.ajax({
-        type: "POST",
-        url: "payment_package.php",
-        data: formData,
-        success: function(data) {
-          if (data == "imageonly") {
-            alert("อนุญาติเฉพาะรูปภาพเท่านั้น");
-          } else if (data == "exists") {
-            alert("ชื่อไฟล์นี้มีในระบบแล้ว");
-          } else if (data == "success") {
-            alert("ดำเนินการเสร็จสิ้น");
-            $("#addtime_cost_package").val("");
-            $("#addtime_package").val("");
-            $("#fileToUploadPackage").val("");
-            $("#myModalAddtimePackage").modal("hide");
-          } else if (data == "error") {
-            alert("เกิดปัญหาการ insert db ผิดพลาด");
-          } else if (data == "movefilefail") {
-            alert("เกิดปัญหาการการย้านไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
-          }
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-      });
-    });
-
-    $("#user_detail").click(function() {
-      $.get("user_detail.php", function(datacallback) {
-        $("#user_modal_body").html(datacallback);
-      });
-      $("#myModalUser").modal("show");
-    });
+    
   });
 </script>
 

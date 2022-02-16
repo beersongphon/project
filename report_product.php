@@ -70,7 +70,6 @@ if (isset($_POST["txtSearch"])) {
                   tb_category
                   ON
                   tb_product.category_id = tb_category.category_id
-                  LIMIT $offset, $total_records_per_page
                   ";
                   $result = $conn->query($sql);
 

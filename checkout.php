@@ -12,7 +12,7 @@ include("./header_front-end.php");
           <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
           <a href="./shop.php">สินค้า</a>
           <a href="./shop-cart.php">ตะกร้าสินค้า</a>
-          <span>รายละเอียดการเรียกเก็บเงิน</span>
+          <span>การสั่งซื้อ</span>
         </div>
       </div>
     </div>
@@ -29,15 +29,14 @@ include("./header_front-end.php");
           here to enter your code.</h6>
       </div>
     </div> -->
-    <form action="purchase_order.php" method="post" class="checkout__form">
+    <form action="save_order.php" method="post" class="checkout__form">
       <div class="row">
         <div class="col-lg-8">
-          <h5>รายละเอียดการเรียกเก็บเงิน</h5>
+          <h5>การสั่งซื้อ</h5>
           <div class="row">
-            <div class="col-lg-12">
+          <div class="col-lg-12">
               <div class="checkout__form__input">
-                <p>ID <span>*</span></p>
-                <input type="text" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
               </div>
             </div>
             <div class="col-lg-12">

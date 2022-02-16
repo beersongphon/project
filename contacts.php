@@ -4,7 +4,6 @@ include("./urldomain.php");
 date_default_timezone_set('Asia/Bangkok');
 include("./connect.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $user_id_con = $_POST["user_id_con"];
   $name_con = $_POST["name_con"];
   $email_con = $_POST["email_con"];
   $comments_con = $_POST["comments_con"];
@@ -13,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       contact_member,
       contact_email,
       contact_comment)
-      VALUES ('$user_id_con',
+      VALUES ('1',
       '$name_con',
       '$email_con',
       '$comments_con')";

@@ -48,7 +48,6 @@ include("./header_front-end.php");
               <?php
               if (isset($_SESSION['user_username'])) {
               ?>
-              <input type="hidden" id="user_id_con" name="user_id" placeholder="id" value="<?php echo $_SESSION['user_id']; ?>">
               <input type="text" id="name_contact" name="name" placeholder="ชื่อ">
               <input type="email" id="email_contact" name="email" placeholder="อีเมล">
               <!-- <input type="text" placeholder="Website"> -->

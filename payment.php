@@ -10,7 +10,7 @@ include("./header_front-end.php");
       <div class="col-lg-12">
         <div class="breadcrumb__links">
           <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
-          <span>การชำระเงิน</span>
+          <span>แจ้งชำระเงิน</span>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@ include("./header_front-end.php");
     <form class="payment__form" role="form" method="post" id="form_payment" name="form_payment" enctype="multipart/form-data">
       <div class="row">
         <div class="col-lg-8">
-          <h5>การชำระเงิน</h5>
+          <h5>แจ้งชำระเงิน</h5>
           <div class="row">
             <div class="col-lg-12">
               <div class="payment__form__input">

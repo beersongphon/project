@@ -14,7 +14,7 @@
         <div class="tip">2</div>
       </a>
     </li> -->
-    <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
+    <li><a href="./checkout.php"><span class="icon_bag_alt"></span>
         <div class="tip">
           <?php 
           if(isset($_SESSION["shopping_cart"])) { 
@@ -38,7 +38,7 @@
     <a href="./register.php">สมัครสมาชิก</a>
   <?php
   } else {
-    echo "<a href='./profile.php' id='user_detail'>".$_SESSION["user_username"]."</a>";
+    echo "<a href='./profile.php'>".$_SESSION["user_username"]."</a>";
   ?>
     <a href="./logout.php">ออกจากระบบ</a>
   <?php
@@ -97,18 +97,22 @@
                                                 echo "active";
                                               } elseif (basename($_SERVER['PHP_SELF']) == "checkout.php") {
                                                 echo "active";
+                                              } elseif (basename($_SERVER['PHP_SELF']) == "orders_status.php") {
+                                                echo "active";
+                                              } elseif (basename($_SERVER['PHP_SELF']) == "checkout.php") {
+                                                echo "active";
                                               } else {
                                                 echo "";
-                                              } ?>"><a href="#">Pages</a>
+                                              } ?>"><a href="#">รายการ</a>
               <ul class="dropdown">
-                <li><a href="./product-details.html">Product Details</a></li>
-                <li><a href="./shop-cart.php">Shop Cart</a></li>
-                <li><a href="./checkout.php">Checkout</a></li>
-                <li><a href="./blog-details.html">Blog Details</a></li>
+                <li><a href="./shop-cart.php">ตะกร้าสินค้า</a></li>
+                <li><a href="./checkout.php">การชำระเงิน</a></li>
+                <li><a href="./orders_status.php">สถานะการสั่งซื้อ</a></li>
+                <li><a href="./shop-cart.php">ติดตามการสั่งซื้อ</a></li>
               </ul>
             </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "payment.php") ? "active" : ""; ?>"><a href="./payment.php">การชำระเงิน</a></li>
+            <li class="<?= (basename($_SERVER['PHP_SELF']) == "payment.php") ? "active" : ""; ?>"><a href="./payment.php">แจ้งชำระเงิน</a></li>
             <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
              <?php
              }
@@ -126,7 +130,7 @@
             <a href="./register.php">สมัครสมาชิก</a>
             <?php
             } else {
-            echo "<a href='./profile.php' id='user_detail'>".$_SESSION["user_username"]."</a>";
+            echo "<a href='./profile.php'>".$_SESSION["user_username"]."</a>";
             ?>
             <a href="./logout.php">ออกจากระบบ</a>
             <?php
@@ -160,7 +164,7 @@
               </a>
             </li> -->
             <li>
-              <a href="./shop-cart.php">
+              <a href="./checkout.php">
                 <span class="icon_bag_alt"></span>
                 <div class="tip">
                   <?php 
