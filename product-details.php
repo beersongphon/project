@@ -7,6 +7,7 @@ $query = "SELECT DISTINCT tb_product.product_id,
 (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
 tb_product.product_name,
 tb_brand.brand_name,
+tb_category.category_name,
 tb_product.product_price,
 tb_product.product_qty,
 tb_product.product_description
@@ -50,7 +51,7 @@ $row = mysqli_fetch_array($result);
         <div class="col-lg-6">
           <div class="product__details__pic">
             <?php
-            $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 3";
+            $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 8";
             $result = $conn->query($sql);
             $setActive = 0;				
 			      $sliderHtml = '';
@@ -67,7 +68,7 @@ $row = mysqli_fetch_array($result);
                 }	
               ?> 
               <a class="pt <?php echo "$activeClass"; ?>" href="#product-<?php echo $row1["img_pro_id"]; ?>">
-                <img src="./upload/<?php echo $row1["img_product"]; ?>" alt="">
+                <img src="./upload/<?php echo $row1["img_product"]; ?>" height="35" alt="">
               </a>
               <?php  
               } //while condition closing bracket
@@ -76,7 +77,7 @@ $row = mysqli_fetch_array($result);
             <?php  
             }  //if condition closing bracket
 
-            $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 3";
+            $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 8";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
             ?>
@@ -125,7 +126,7 @@ $row = mysqli_fetch_array($result);
         </div> -->
         <div class="col-lg-6">
           <div class="product__details__text">
-            <h3><?php echo $row["product_name"]; ?> <span>ยี่ห้อ: <?php echo $row["brand_name"]; ?></span></h3>
+            <h3><?php echo $row["product_name"]; ?> <span>ยี่ห้อ: <?php echo $row["brand_name"]; ?> </span> <span>ประเภท: <?php echo $row["category_name"]; ?></span></h3>
             <!-- <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -134,7 +135,7 @@ $row = mysqli_fetch_array($result);
               <i class="fa fa-star"></i>
               <span>( 138 reviews )</span>
             </div> -->
-            <div class="product__details__price">฿ <?php echo number_format($row["product_price"], 2); ?> <span>฿ 83.0</span></div>
+            <div class="product__details__price">฿ <?php echo number_format($row["product_price"], 2); ?> <!-- <span>฿ 83.0</span> --></div>
             <p><?php echo $row["product_description"]; ?></p>
             <div class="product__details__button">
               <div class="quantity">
@@ -147,13 +148,13 @@ $row = mysqli_fetch_array($result);
               <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_name"]; ?>" />
               <input type="hidden" name="hidden_qty" id="qty<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_qty"]; ?>" />
               <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />
-              <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> Add to cart</a>
+              <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> ใส่ในรถเข็น</a>
               <ul>
                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
               </ul>
             </div>
-            <div class="product__details__widget">
+            <!-- <div class="product__details__widget">
               <ul>
                 <li>
                   <span>Availability:</span>
@@ -208,7 +209,7 @@ $row = mysqli_fetch_array($result);
                   <p>Free shipping</p>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-lg-12">
@@ -217,19 +218,19 @@ $row = mysqli_fetch_array($result);
               <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">รายละเอียด</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Specification</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews ( 2 )</a>
-              </li>
+              </li> -->
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <h6>รายละเอียด</h6>
                 <p><?php echo $row["product_description"]; ?></p>
               </div>
-              <div class="tab-pane" id="tabs-2" role="tabpanel">
+              <!-- <div class="tab-pane" id="tabs-2" role="tabpanel">
                 <h6>Specification</h6>
                 <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
                   quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
@@ -254,7 +255,7 @@ $row = mysqli_fetch_array($result);
                   dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
                   nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
                   quis, sem.</p>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

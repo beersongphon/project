@@ -115,9 +115,9 @@ $rowcategory = $resultcategory->fetch_assoc();
             <div class="categories__accordion">
               <div class="accordion" id="accordionExample">
                 <div class="card">
-                  <div class="card-heading active">
-                    <!-- <a data-toggle="collapse" data-target="#collapseOne">Women</a> -->
-                  </div>
+                  <!-- <div class="card-heading active">
+                    <a data-toggle="collapse" data-target="#collapseOne">Women</a>
+                  </div> -->
                   <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                     <div class="card-body">
                       <ul>

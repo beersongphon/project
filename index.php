@@ -8,9 +8,9 @@ include("./header_front-end.php");
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-6 p-0">
-        <div class="categories__item categories__large__item set-bg" data-setbg="./assets/front-end/img/categories/category-1.jpg">
+        <div class="categories__item categories__large__item set-bg" data-setbg="./assets/img/category-1.jpg">
           <div class="categories__text">
-            <h1>Women’s fashion</h1>
+            <h1>Product</h1>
             <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
               edolore magna aliquapendisse ultrices gravida.</p>
             <a href="./shop.php">Shop now</a>
@@ -273,7 +273,7 @@ include("./header_front-end.php");
 <!-- Product Section End -->
 
 <!-- Banner Section Begin -->
-<section class="banner set-bg" data-setbg="./assets/front-end/img/banner/banner-1.jpg">
+<section class="banner set-bg" data-setbg="./assets/img/banner-1.jpg">
   <div class="container">
     <div class="row">
       <div class="col-xl-7 col-lg-8 m-auto">
@@ -526,7 +526,7 @@ include("./header_front-end.php");
 <section class="services spad">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6">
+      <!-- <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="services__item">
           <i class="fa fa-car"></i>
           <h6>Free Shipping</h6>
@@ -539,19 +539,20 @@ include("./header_front-end.php");
           <h6>Money Back Guarantee</h6>
           <p>If good have Problems</p>
         </div>
-      </div>
+      </div> -->
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="services__item">
           <i class="fa fa-support"></i>
-          <h6>Online Support 24/7</h6>
-          <p>Dedicated support</p>
+          <!-- <h6>Online Support 24/7</h6> -->
+          <h6>การสนับสนุนออนไลน์</h6>
+          <p>การสนับสนุนโดยเฉพาะ</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="services__item">
           <i class="fa fa-headphones"></i>
-          <h6>Payment Secure</h6>
-          <p>100% secure payment</p>
+          <h6>การชำระเงินที่ปลอดภัย</h6>
+          <p>การชำระเงินที่ปลอดภัย 100%</p>
         </div>
       </div>
     </div>

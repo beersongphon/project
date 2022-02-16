@@ -51,7 +51,7 @@ if(ISSET($_POST['search'])){
                   <label class="input-group-text">To</label>
                   <input type="date" class="form-control" placeholder="End"  name="date2"/>
                   <button class="btn-primary input-group-text" name="search"><i class="bi bi-search"></i></button>
-                  <a href="./report_sale.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+                  <a href="./report_sale.php" type="button" class="btn btn-success"><i class="fa fa-refresh"></i></a>
                 </div>
               </form>
               

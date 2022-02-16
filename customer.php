@@ -25,7 +25,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="home.php">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">ข้อมูลลูกค้า</li>
           </ol>
         </nav>
@@ -125,7 +125,7 @@ if (isset($_POST["txtSearch"])) {
                   else{
                   ?>
                   <tr>
-                    <td colspan = "8"><center>Record Not Found</center></td>
+                    <td colspan = "8"><center>ไม่มีข้อมูล</center></td>
                   </tr>
                   <?php
                   }
@@ -261,7 +261,7 @@ if (isset($_POST["txtSearch"])) {
         timer: 2000
       }).then((result) => {
         if (result.isDismissed) {
-          window.location.href = 'product.php';
+          window.location.href = 'customer.php';
         }
       })
     }

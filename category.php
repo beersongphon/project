@@ -25,7 +25,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="home.php">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">ข้อมูลประเภท</li>
           </ol>
         </nav>
@@ -101,10 +101,10 @@ if (isset($_POST["txtSearch"])) {
                     <td class="text-bold-500"><?php echo $row['category_name']; ?></td>
                     <td>
                         <a class="btn btn-warning" href="./category_edit.php?category_id=<?php echo $row["category_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                          <i class="fas fa-edit"></i>
+                          <i class="fa fa-edit"></i>
                         </a>
                         <a class="del-btn btn btn-danger" href="./category_delete.php?category_id=<?php echo $row["category_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                          <i class="fas fa-trash-alt"></i>
+                          <i class="fa fa-trash"></i>
                         </a>
                     </td>
                   </tr>
@@ -115,7 +115,7 @@ if (isset($_POST["txtSearch"])) {
                   else{
                   ?>
                   <tr>
-                    <td colspan = "3"><center>Record Not Found</center></td>
+                    <td colspan = "3"><center>ไม่มีข้อมูล</center></td>
                   </tr>
                   <?php
                   }
@@ -250,7 +250,7 @@ if (isset($_POST["txtSearch"])) {
         timer: 2000
       }).then((result) => {
         if (result.isDismissed) {
-          window.location.href = 'product.php';
+          window.location.href = 'category.php';
         }
       })
     }

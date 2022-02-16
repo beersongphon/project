@@ -50,6 +50,12 @@
               <span>ข้อมูลประเภท</span>
             </a>
           </li>
+          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "feedback.php") ? "active" : ""; ?>">
+            <a href="./feedback.php" class='sidebar-link'>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ข้อมูล Feedback</span>
+            </a>
+          </li>
 
           <li class="sidebar-title">รายงาน</li>
           <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_product.php") ? "active" : ""; ?>">

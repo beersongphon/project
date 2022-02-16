@@ -25,7 +25,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="./home.php">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">ข้อมูลสินค้า</li>
           </ol>
         </nav>
@@ -135,12 +135,12 @@ if (isset($_POST["txtSearch"])) {
                     </td>
                     <td><?php echo $row['product_description']; ?></td>
                     <td>
-                        <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                          <i class="fas fa-edit"></i>
-                        </a>
-                        <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                          <i class="fas fa-trash-alt"></i>
-                        </a>
+                      <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <i class="fa fa-trash"></i>
+                      </a>
                     </td>
                   </tr>
                   <tr>
@@ -167,7 +167,7 @@ if (isset($_POST["txtSearch"])) {
                   else{
                   ?>
                   <tr>
-                    <td colspan = "6"><center>Record Not Found</center></td>
+                    <td colspan = "6"><center>ไม่มีข้อมูล</center></td>
                   </tr>
                   <?php
                   }

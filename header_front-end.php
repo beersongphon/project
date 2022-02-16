@@ -14,7 +14,7 @@
         <div class="tip">2</div>
       </a>
     </li> -->
-    <li><a href="./checkout.php"><span class="icon_bag_alt"></span>
+    <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
         <div class="tip">
           <?php 
           if(isset($_SESSION["shopping_cart"])) { 
@@ -164,7 +164,7 @@
               </a>
             </li> -->
             <li>
-              <a href="./checkout.php">
+              <a href="./shop-cart.php">
                 <span class="icon_bag_alt"></span>
                 <div class="tip">
                   <?php 

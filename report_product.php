@@ -25,7 +25,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="./home.php">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">รายงานสินค้าคงเหลือ</li>
           </ol>
         </nav>
@@ -94,11 +94,6 @@ if (isset($_POST["txtSearch"])) {
               </table>
               <!-- <button onclick="window.print()">Print </button>  -->
               <hr>
-              
-              <?php
-              if (isset($_GET['m'])) { ?>
-                <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
-              <?php } ?>
             </div>
           </div>
         </div>
@@ -112,39 +107,5 @@ if (isset($_POST["txtSearch"])) {
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    $('.del-btn').on('click', function(e) {
-      e.preventDefault();
-      const href = $(this).attr('href')
-      Swal.fire({
-        title: 'คุณแน่ใจหรือไม่?',
-        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.value) {
-          document.location.href = href;
-        }
-      })
-    })
-
-    const flashdata = $('.flash-data').data('flashdata')
-    if (flashdata) {
-      Swal.fire({
-        icon: 'success',
-        title: 'ลบข้อมูลสำเร็จ',
-        showConfirmButton: false,
-        timer: 2000
-      }).then((result) => {
-        if (result.isDismissed) {
-          window.location.href = 'product.php';
-        }
-      })
-    }
-</script>
 
 <?php include("./footer_back-end.php"); ?>

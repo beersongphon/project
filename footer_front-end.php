@@ -68,23 +68,23 @@
           <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             cilisis.</p> -->
           <p>ชื่อบัญชี : น.ส.กรกนก ลีลาคุณารักษ์<br>ประเภทของบัญชี : ออมทรัพย์<br>ธนาคารกสิกร 052-1-3744-2</p>
-          <div class="footer__payment">
+          <!-- <div class="footer__payment">
             <a href="#"><img src="./assets/front-end/img/payment/payment-1.png" alt=""></a>
             <a href="#"><img src="./assets/front-end/img/payment/payment-2.png" alt=""></a>
             <a href="#"><img src="./assets/front-end/img/payment/payment-3.png" alt=""></a>
             <a href="#"><img src="./assets/front-end/img/payment/payment-4.png" alt=""></a>
             <a href="#"><img src="./assets/front-end/img/payment/payment-5.png" alt=""></a>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-lg-2 col-md-3 col-sm-5">
         <div class="footer__widget">
           <h6>ลิงค์ด่วน</h6>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blogs</a></li>
+            <!-- <li><a href="#">About</a></li>
+            <li><a href="#">Blogs</a></li> -->
             <li><a href="./contact.php">ติดต่อเรา</a></li>
-            <li><a href="#">FAQ</a></li>
+            <!-- <li><a href="#">FAQ</a></li> -->
           </ul>
         </div>
       </div>

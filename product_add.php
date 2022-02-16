@@ -51,7 +51,7 @@ if (isset($_POST["txtSearch"])) {
           <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="./home.php">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="./home.php">หน้าแรก</a></li>
                 <li class="breadcrumb-item"><a href="./product.php">ข้อมูลสินค้า</a></li>
                 <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลสินค้า</li>
               </ol>
