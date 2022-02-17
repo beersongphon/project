@@ -30,7 +30,6 @@ if ($FileType != "jpg" && $FileType != "JPG" && $FileType != "jpeg" && $FileType
         '$pay_total', 
         '". md5(basename($_FILES["fileToUpload"]["name"])) ."',
         '$pay_tel')";
-        $result = $conn->query($sql);
         if ($conn->query($sql) == TRUE) {
             echo "success";
         } else {

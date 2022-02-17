@@ -104,16 +104,6 @@ if(ISSET($_POST['search'])){
                 </tbody>
               </table>
               <!-- <button onclick="window.print()">Print </button>  -->
-              <hr>
-              <!-- <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
-                <strong>Page <?php //echo $page_no . " of " . $total_no_of_pages; ?></strong>
-              </div> -->
-
-
-              <?php
-              if (isset($_GET['m'])) { ?>
-                <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
-              <?php } ?>
             </div>
           </div>
           </div>
@@ -123,39 +113,5 @@ if(ISSET($_POST['search'])){
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script>
-    $('.del-btn').on('click', function(e) {
-      e.preventDefault();
-      const href = $(this).attr('href')
-      Swal.fire({
-        title: 'คุณแน่ใจหรือไม่?',
-        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.value) {
-          document.location.href = href;
-        }
-      })
-    })
-
-    const flashdata = $('.flash-data').data('flashdata')
-    if (flashdata) {
-      Swal.fire({
-        icon: 'success',
-        title: 'ลบข้อมูลสำเร็จ',
-        showConfirmButton: false,
-        timer: 2000
-      }).then((result) => {
-        if (result.isDismissed) {
-          window.location.href = 'product.php';
-        }
-      })
-    }
-</script>
 
 <?php include("./footer_back-end.php"); ?>

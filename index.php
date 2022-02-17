@@ -278,7 +278,26 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-xl-7 col-lg-8 m-auto">
         <div class="banner__slider owl-carousel">
+          <?php
+          $sql = "SELECT* FROM tb_category";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+          ?>
           <div class="banner__item">
+            <div class="banner__text">
+              <!-- <span>The Chloe Collection</span> -->
+              <h1><?php echo $row['category_name'];?></h1>
+              <!-- <a href="./shop.php">Shop now</a> -->
+              <a href="./shop.php?category_id=<?= $row['category_id'];?>&category_name=<?= $row['category_name'];?>">Shop now</a>
+            </div>
+          </div>
+          <?php
+            } //while condition closing bracket
+          }  //if condition closing bracket
+          ?>
+          <!-- <div class="banner__item">
             <div class="banner__text">
               <span>The Chloe Collection</span>
               <h1>The Project Jacket</h1>
@@ -291,14 +310,7 @@ include("./header_front-end.php");
               <h1>The Project Jacket</h1>
               <a href="./shop.php">Shop now</a>
             </div>
-          </div>
-          <div class="banner__item">
-            <div class="banner__text">
-              <span>The Chloe Collection</span>
-              <h1>The Project Jacket</h1>
-              <a href="./shop.php">Shop now</a>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
