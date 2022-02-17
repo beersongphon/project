@@ -1,218 +1,446 @@
-/*
-Navicat MySQL Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 23, 2022 at 11:16 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
-Source Server         : localhost_3306
-Source Server Version : 50505
-Source Host           : localhost:3306
-Source Database       : dbproject
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-Target Server Type    : MYSQL
-Target Server Version : 50505
-File Encoding         : 65001
 
-Date: 2022-01-20 16:04:36
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-SET FOREIGN_KEY_CHECKS=0;
+--
+-- Database: `dbproject`
+--
 
--- ----------------------------
--- Table structure for `tb_category`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_category`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_brand`
+--
+
+CREATE TABLE `tb_brand` (
+  `brand_id` int(10) NOT NULL COMMENT 'รหัสแบรนด์',
+  `brand_name` varchar(255) DEFAULT NULL COMMENT 'ชื่อแบรนด์'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลแบรนด์';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_category`
+--
+
 CREATE TABLE `tb_category` (
-  `category_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประเภท',
-  `category_name` varchar(255) NOT NULL COMMENT 'ชื่อประเภท',
-  PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลประเภท';
+  `category_id` int(10) NOT NULL COMMENT 'รหัสประเภท',
+  `category_name` varchar(255) DEFAULT NULL COMMENT 'ชื่อประเภท'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลประเภท';
 
--- ----------------------------
--- Records of tb_category
--- ----------------------------
-INSERT INTO `tb_category` VALUES ('1', 'กระเป๋าที่มีสายสะพายข้ามตัว');
-INSERT INTO `tb_category` VALUES ('2', 'กระเป๋าทรงขนมจีบ');
-INSERT INTO `tb_category` VALUES ('3', 'เด็ก');
+--
+-- Dumping data for table `tb_category`
+--
 
--- ----------------------------
--- Table structure for `tb_contact`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_contact`;
+INSERT INTO `tb_category` (`category_id`, `category_name`) VALUES
+(1, 'กระเป๋าที่มีสายสะพายข้ามตัว'),
+(2, 'กระเป๋าทรงขนมจีบ'),
+(3, 'เด็ก');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_contact`
+--
+
 CREATE TABLE `tb_contact` (
-  `contact_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการติดต่อ',
+  `contact_id` int(11) NOT NULL COMMENT 'รหัสการติดต่อ',
   `contact_member` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT 'ชื่อ',
   `contact_email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT 'อีเมล',
   `contact_comment` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'แสดงความเห็น',
-  `contact_datetime` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่',
-  PRIMARY KEY (`contact_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+  `contact_datetime` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ----------------------------
--- Records of tb_contact
--- ----------------------------
-INSERT INTO `tb_contact` VALUES ('18', 'อริสา', 'emmyreah3941@hotmail.com', 'aaaaaa', '2021-04-16 14:27:53');
-INSERT INTO `tb_contact` VALUES ('19', 'ngtest', 'noomnook4g@hotmail.com', 'aa', '2021-04-16 14:36:15');
-INSERT INTO `tb_contact` VALUES ('20', 'aaa', 'aaa', 'aaaa', '2021-04-16 14:36:20');
-INSERT INTO `tb_contact` VALUES ('21', 'เทส', 'เทส', 'เเทส', '2021-05-13 14:16:42');
-INSERT INTO `tb_contact` VALUES ('22', 'ทรงพล', 'beersongphon2010@gmail.com', 'test', '2022-01-08 23:00:42');
+--
+-- Dumping data for table `tb_contact`
+--
 
--- ----------------------------
--- Table structure for `tb_img_product`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_img_product`;
+INSERT INTO `tb_contact` (`contact_id`, `contact_member`, `contact_email`, `contact_comment`, `contact_datetime`) VALUES
+(18, 'อริสา', 'emmyreah3941@hotmail.com', 'aaaaaa', '2021-04-16 14:27:53'),
+(19, 'ngtest', 'noomnook4g@hotmail.com', 'aa', '2021-04-16 14:36:15'),
+(20, 'aaa', 'aaa', 'aaaa', '2021-04-16 14:36:20'),
+(21, 'เทส', 'เทส', 'เเทส', '2021-05-13 14:16:42'),
+(22, 'ทรงพล', 'beersongphon2010@gmail.com', 'test', '2022-01-08 23:00:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_img_product`
+--
+
 CREATE TABLE `tb_img_product` (
-  `img_pro_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสรูปภาพสินค้า',
-  `img_product` varchar(150) NOT NULL COMMENT 'รูปภาพสินค้า',
-  `product_id` int(10) NOT NULL COMMENT 'รหัสสินค้า',
-  PRIMARY KEY (`img_pro_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลรูปภาพสินค้า';
+  `img_pro_id` int(10) NOT NULL COMMENT 'รหัสรูปภาพสินค้า',
+  `img_product` varchar(150) DEFAULT NULL COMMENT 'รูปภาพสินค้า',
+  `product_id` int(10) DEFAULT NULL COMMENT 'รหัสสินค้า'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลรูปภาพสินค้า';
 
--- ----------------------------
--- Records of tb_img_product
--- ----------------------------
-INSERT INTO `tb_img_product` VALUES ('4', '1649104113product-4.jpg', '2');
-INSERT INTO `tb_img_product` VALUES ('5', '1651008419product-5.jpg', '2');
-INSERT INTO `tb_img_product` VALUES ('6', '1642741599product-6.jpg', '2');
-INSERT INTO `tb_img_product` VALUES ('7', '1649158935product-6.jpg', '3');
-INSERT INTO `tb_img_product` VALUES ('8', '1642903393product-16.jpg', '6');
-INSERT INTO `tb_img_product` VALUES ('12', '1643322273product-1.jpg', '1');
-INSERT INTO `tb_img_product` VALUES ('13', '1648899248product-3.jpg', '1');
-INSERT INTO `tb_img_product` VALUES ('14', '1643016162product-2.jpg', '1');
-INSERT INTO `tb_img_product` VALUES ('16', '1652512439product-17.jpg', '4');
+--
+-- Dumping data for table `tb_img_product`
+--
 
--- ----------------------------
--- Table structure for `tb_order`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_order`;
+INSERT INTO `tb_img_product` (`img_pro_id`, `img_product`, `product_id`) VALUES
+(4, '1649104113product-4.jpg', 2),
+(5, '1651008419product-5.jpg', 2),
+(6, '1642741599product-6.jpg', 2),
+(7, '1649158935product-6.jpg', 3),
+(8, '1642903393product-16.jpg', 6),
+(12, '1643322273product-1.jpg', 1),
+(13, '1648899248product-3.jpg', 1),
+(14, '1643016162product-2.jpg', 1),
+(16, '1652512439product-17.jpg', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_order`
+--
+
 CREATE TABLE `tb_order` (
-  `order_id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการสั่งซื้อ',
+  `order_id` int(2) NOT NULL COMMENT 'รหัสการสั่งซื้อ',
   `user_id` int(2) DEFAULT NULL COMMENT 'รหัสผู้ใช้งาน',
   `order_address` text DEFAULT NULL COMMENT 'ที่อยู่',
-  `order_tel` varchar(10) NOT NULL COMMENT 'เบอร์โทรศัพท์',
-  `order_email` varchar(30) NOT NULL COMMENT 'อีเมล',
-  `creation_date` date DEFAULT NULL COMMENT 'วันที่',
-  `order_status` varchar(30) DEFAULT '' COMMENT 'สถานะ',
-  `order_total` varchar(50) NOT NULL COMMENT 'ราคารวม',
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลการสั่งซื้อ';
+  `order_tel` varchar(10) DEFAULT NULL COMMENT 'เบอร์โทรศัพท์',
+  `order_email` varchar(30) DEFAULT NULL COMMENT 'อีเมล',
+  `order_date` date DEFAULT NULL COMMENT 'วันที่',
+  `order_total` varchar(50) DEFAULT NULL COMMENT 'ราคารวม',
+  `status_id` int(10) DEFAULT NULL COMMENT 'รหัสสถานะ'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลการสั่งซื้อ';
 
--- ----------------------------
--- Records of tb_order
--- ----------------------------
-INSERT INTO `tb_order` VALUES ('1', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '1220');
-INSERT INTO `tb_order` VALUES ('2', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '1220');
-INSERT INTO `tb_order` VALUES ('3', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '1220');
-INSERT INTO `tb_order` VALUES ('4', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '1220');
-INSERT INTO `tb_order` VALUES ('5', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '4029');
-INSERT INTO `tb_order` VALUES ('6', '30', '', '', '', '2022-01-15', 'pending', '5250');
-INSERT INTO `tb_order` VALUES ('7', '30', '', '', '', '2022-01-15', 'pending', '5250');
-INSERT INTO `tb_order` VALUES ('8', '30', '', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '122');
-INSERT INTO `tb_order` VALUES ('9', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '122');
-INSERT INTO `tb_order` VALUES ('10', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '122');
-INSERT INTO `tb_order` VALUES ('11', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '122');
-INSERT INTO `tb_order` VALUES ('12', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '122');
-INSERT INTO `tb_order` VALUES ('13', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '4029');
-INSERT INTO `tb_order` VALUES ('14', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', 'pending', '1221');
-INSERT INTO `tb_order` VALUES ('15', '30', '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-16', 'pending', '1343');
+--
+-- Dumping data for table `tb_order`
+--
 
--- ----------------------------
--- Table structure for `tb_order_detail`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_order_detail`;
+INSERT INTO `tb_order` (`order_id`, `user_id`, `order_address`, `order_tel`, `order_email`, `order_date`, `order_total`, `status_id`) VALUES
+(1, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '1220', 1),
+(2, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '1220', 1),
+(3, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '1220', 1),
+(4, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '1220', 1),
+(5, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '4029', 1),
+(6, 2, NULL, NULL, NULL, '2022-01-15', '5250', 1),
+(7, 2, NULL, NULL, NULL, '2022-01-15', '5250', 1),
+(8, 2, NULL, '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '122', 1),
+(9, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '122', 1),
+(10, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '122', 1),
+(11, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '122', 1),
+(12, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '122', 1),
+(13, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '4029', 1),
+(14, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-15', '1221', 1),
+(15, 2, '185/8 ถ.สุทธิวาตวิถี', '0827183510', 'beersongphon2010@gmail.com', '2022-01-16', '1343', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_order_detail`
+--
+
 CREATE TABLE `tb_order_detail` (
-  `id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'รหัสรายละเอียดการสั่งซื้อ',
-  `order_id` int(2) NOT NULL COMMENT 'รหัสการสั่งซื้อ',
+  `order_detail_id` int(2) NOT NULL COMMENT 'รหัสรายละเอียดการสั่งซื้อ',
+  `order_id` int(2) DEFAULT NULL COMMENT 'รหัสการสั่งซื้อ',
   `product_id` int(10) DEFAULT NULL COMMENT 'รหัสสินค้า',
   `order_price` varchar(30) DEFAULT '' COMMENT 'ราคา',
-  `order_quantity` varchar(30) DEFAULT '' COMMENT 'จำนวน',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลรายละเอียดการสั่งซื้อ';
+  `order_quantity` varchar(30) DEFAULT '' COMMENT 'จำนวน'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลรายละเอียดการสั่งซื้อ';
 
--- ----------------------------
--- Records of tb_order_detail
--- ----------------------------
-INSERT INTO `tb_order_detail` VALUES ('1', '4', '1', '122', '10');
-INSERT INTO `tb_order_detail` VALUES ('2', '10', '1', '122', '1');
-INSERT INTO `tb_order_detail` VALUES ('3', '11', '1', '122', '1');
-INSERT INTO `tb_order_detail` VALUES ('4', '12', '1', '122', '1');
-INSERT INTO `tb_order_detail` VALUES ('5', '13', '1', '122', '3');
-INSERT INTO `tb_order_detail` VALUES ('6', '13', '2', '1221', '3');
-INSERT INTO `tb_order_detail` VALUES ('7', '14', '2', '1221', '1');
-INSERT INTO `tb_order_detail` VALUES ('8', '15', '1', '122', '1');
-INSERT INTO `tb_order_detail` VALUES ('9', '15', '2', '1221', '1');
+--
+-- Dumping data for table `tb_order_detail`
+--
 
--- ----------------------------
--- Table structure for `tb_product`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_product`;
+INSERT INTO `tb_order_detail` (`order_detail_id`, `order_id`, `product_id`, `order_price`, `order_quantity`) VALUES
+(1, 4, 1, '122', '10'),
+(2, 10, 1, '122', '1'),
+(3, 11, 1, '122', '1'),
+(4, 12, 1, '122', '1'),
+(5, 13, 1, '122', '3'),
+(6, 13, 2, '1221', '3'),
+(7, 14, 2, '1221', '1'),
+(8, 15, 1, '122', '1'),
+(9, 15, 2, '1221', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_permission`
+--
+
+CREATE TABLE `tb_permission` (
+  `permission_id` int(10) NOT NULL COMMENT 'รหัสสิทธิ์การใช้งาน',
+  `permission_name` varchar(50) NOT NULL COMMENT 'ชื่อสิทธิ์การใช้งาน'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลสิทธิ์การใช้งาน';
+
+--
+-- Dumping data for table `tb_permission`
+--
+
+INSERT INTO `tb_permission` (`permission_id`, `permission_name`) VALUES
+(1, 'A'),
+(2, 'S'),
+(3, 'U');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_product`
+--
+
 CREATE TABLE `tb_product` (
-  `product_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสสินค้า',
-  `product_img` varchar(255) NOT NULL COMMENT 'รูปภาพสินค้า',
-  `product_name` varchar(255) NOT NULL COMMENT 'ชื่อสินค้า',
-  `product_qty` int(10) NOT NULL COMMENT 'จำนวน',
-  `product_price` int(10) NOT NULL COMMENT 'ราคา',
-  `product_description` text NOT NULL COMMENT 'รายละเอียด',
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลสินค้า';
+  `product_id` int(10) NOT NULL COMMENT 'รหัสสินค้า',
+  `product_name` varchar(255) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `brand_id` int(10) DEFAULT NULL COMMENT 'รหัสแบรนด์',
+  `category_id` int(10) DEFAULT NULL COMMENT 'รหัสประเภท',
+  `product_qty` int(10) DEFAULT NULL COMMENT 'จำนวน',
+  `product_price` int(10) DEFAULT NULL COMMENT 'ราคา',
+  `product_description` text DEFAULT NULL COMMENT 'รายละเอียด'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลสินค้า';
 
--- ----------------------------
--- Records of tb_product
--- ----------------------------
-INSERT INTO `tb_product` VALUES ('1', '1649241497product-1.jpg', 'ทรงพล', '10', '122', '12214545454');
-INSERT INTO `tb_product` VALUES ('2', '1650185999product-4.jpg', 'win', '10', '1221', '12214545454');
-INSERT INTO `tb_product` VALUES ('3', 'product-3.jpg', 'ทรงพล', '10', '1221', '12214545454');
-INSERT INTO `tb_product` VALUES ('4', 'product-4.jpg', 'ทรงพล', '0', '120', '12214545454');
-INSERT INTO `tb_product` VALUES ('5', 'product-5.jpg', 'ทรงพล', '0', '1221', '12214545454');
-INSERT INTO `tb_product` VALUES ('6', '1651009574product-22.jpg', 'ท', '212', '100', '1221211');
+--
+-- Dumping data for table `tb_product`
+--
 
--- ----------------------------
--- Table structure for `tb_status`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_status`;
+INSERT INTO `tb_product` (`product_id`, `product_name`, `brand_id`, `category_id`, `product_qty`, `product_price`, `product_description`) VALUES
+(1, 'ทรงพล', NULL, NULL, 10, 122, '12214545454'),
+(2, 'win', NULL, NULL, 10, 1221, '12214545454'),
+(3, 'ทรงพล', NULL, NULL, 10, 1221, '12214545454'),
+(4, 'ทรงพล', NULL, NULL, 0, 120, '12214545454'),
+(5, 'ทรงพล', NULL, NULL, 0, 1221, '12214545454'),
+(6, 'ท', NULL, NULL, 212, 100, '1221211');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_status`
+--
+
 CREATE TABLE `tb_status` (
-  `status_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสสถานะ',
-  `status` varchar(255) NOT NULL COMMENT 'สถานะ',
-  PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลสถานะ';
+  `status_id` int(11) NOT NULL COMMENT 'รหัสสถานะ',
+  `status` varchar(255) NOT NULL COMMENT 'สถานะ'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลสถานะ';
 
--- ----------------------------
--- Records of tb_status
--- ----------------------------
-INSERT INTO `tb_status` VALUES ('1', 'Waiting');
-INSERT INTO `tb_status` VALUES ('2', 'Success');
+--
+-- Dumping data for table `tb_status`
+--
 
--- ----------------------------
--- Table structure for `tb_user`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_user`;
+INSERT INTO `tb_status` (`status_id`, `status`) VALUES
+(1, 'ยังไม่ชำระ'),
+(2, 'ชำระแล้ว');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user`
+--
+
 CREATE TABLE `tb_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ใช้งาน',
-  `user_username` varchar(100) NOT NULL COMMENT 'ชื่อผู้ใช้งาน',
-  `user_password` varchar(100) NOT NULL COMMENT 'รหัสผ่าน',
-  `user_firstname` varchar(200) NOT NULL COMMENT 'ชื่อ',
-  `user_lastname` varchar(200) NOT NULL COMMENT 'นามสกุล',
-  `user_address` varchar(255) NOT NULL COMMENT 'ที่อยู่',
-  `user_tel` varchar(20) NOT NULL COMMENT 'เบอร์โทรศัพท์',
+  `user_id` int(11) NOT NULL COMMENT 'รหัสผู้ใช้งาน',
+  `user_firstname` varchar(200) DEFAULT NULL COMMENT 'ชื่อ',
+  `user_lastname` varchar(200) DEFAULT NULL COMMENT 'นามสกุล',
+  `user_address` varchar(255) DEFAULT NULL COMMENT 'ที่อยู่',
+  `user_tel` varchar(20) DEFAULT NULL COMMENT 'เบอร์โทรศัพท์',
+  `user_email` varchar(30) DEFAULT NULL COMMENT 'อีเมล',
   `user_sex` int(11) DEFAULT NULL COMMENT 'เพศ',
-  `user_time_progress` int(11) NOT NULL COMMENT 'เวลา',
-  `user_permission` varchar(10) NOT NULL COMMENT 'สิทธิ์การใช้งาน',
-  `user_datetime` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลผู้ใช้งาน';
+  `user_username` varchar(100) DEFAULT NULL COMMENT 'ชื่อผู้ใช้งาน',
+  `user_password` varchar(100) DEFAULT NULL COMMENT 'รหัสผ่าน',
+  `user_time_progress` int(11) DEFAULT NULL COMMENT 'เวลา',
+  `permission_id` int(10) DEFAULT NULL COMMENT 'รหัสสิทธิ์การใช้งาน',
+  `user_datetime` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='ข้อมูลผู้ใช้งาน';
 
--- ----------------------------
--- Records of tb_user
--- ----------------------------
-INSERT INTO `tb_user` VALUES ('1', 'admin', 'e807f1fcf82d132f9bb018ca6738a19f', 'Administrator', 'Administrator', '1234567890', '0999999999', '0', '0', 'A', '2021-03-09 18:37:11');
-INSERT INTO `tb_user` VALUES ('10', 'arisa', '81dc9bdb52d04dc20036dbd8313ed055', 'arisa', 'jiemsirikarn', '1660200088770', '0961619918', '0', '4', 'U', '2021-03-28 23:14:10');
-INSERT INTO `tb_user` VALUES ('11', 'Fern', 'e807f1fcf82d132f9bb018ca6738a19f\r\n\r\n', 'Preeyanut', 'Wannapruk', '1101500973391', '0902536806', '0', '5', 'S', '2021-03-28 23:14:16');
-INSERT INTO `tb_user` VALUES ('12', 'aa', '4124bc0a9335c27f086f24ba207a4912', 'aa', 'Aa', '12345678', '123', '0', '11', 'U', '2021-03-29 01:18:12');
-INSERT INTO `tb_user` VALUES ('14', 'Patipan', '76678fbae686feb3c8b48dae792787e1', 'ปฏิภาณ', 'หงษ์ทอง', '1234567890123', '0969821019', '1', '10', 'U', '2021-03-29 14:52:27');
-INSERT INTO `tb_user` VALUES ('18', 'Patipan', 'fdd2ff799d38ea5438822de2ebd8fcfc', 'Patipan', 'Hongthong', '1234567890000', '0880973510', '1', '0', 'U', '2021-04-15 22:27:05');
-INSERT INTO `tb_user` VALUES ('19', 'Fern1', '827ccb0eea8a706c4c34a16891f84e7b', 'Fern', 'Fernnn', '1111111111111', '0902536806', '0', '0', 'S', '2021-04-15 23:20:22');
-INSERT INTO `tb_user` VALUES ('20', 'arisa', '9c1b9c7b90b56b5a3cdbd7fe0b4f9450', 'Arisa', 'Jiemsirikarn', '1660200088771', '0961619919', '0', '0', 'S', '2021-04-16 14:11:56');
-INSERT INTO `tb_user` VALUES ('26', 'test.t', '202cb962ac59075b964b07152d234b70', 'กกก', 'กกก', '123', '123', '0', '0', 'S', '2021-04-30 22:15:15');
-INSERT INTO `tb_user` VALUES ('27', 'cc', 'e0323a9039add2978bf5b49550572c7c', 'cc', 'cc', '12345', '12345', '0', '0', 'U', '2021-05-07 18:31:04');
-INSERT INTO `tb_user` VALUES ('28', 'ww', 'ad57484016654da87125db86f4227ea3', 'ww', 'ww', '1234', '1234', '0', '0', 'S', '2021-05-07 18:43:12');
-INSERT INTO `tb_user` VALUES ('29', 'preeyanut', '56daea4cd7cd65c913426631d75b5bbe', 'aaaa', 'aaaaa', '1111111111111', '0902536806', '0', '12', 'U', '2021-05-13 11:17:34');
-INSERT INTO `tb_user` VALUES ('30', 'beer', 'e807f1fcf82d132f9bb018ca6738a19f', 'ทรงพล', 'คุ้มคำ', '1749900588454', '0827183510', '1', '0', 'U', '2021-12-27 18:18:15');
-INSERT INTO `tb_user` VALUES ('31', 'beersongphon', 'e807f1fcf82d132f9bb018ca6738a19f', 'ทรงพล', 'คุ้มคำ', '1749900588454', '0827183510', '1', '0', 'U', '2021-12-30 23:21:32');
-INSERT INTO `tb_user` VALUES ('32', 'beersongphon2010', 'e807f1fcf82d132f9bb018ca6738a19f', 'ทรงพล', 'คุ้มคำ', '185/8', '0827183510', '1', '0', 'U', '2022-01-12 18:16:37');
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`user_id`, `user_firstname`, `user_lastname`, `user_address`, `user_tel`, `user_email`, `user_sex`, `user_username`, `user_password`, `user_time_progress`, `permission_id`, `user_datetime`) VALUES
+(1, 'Administrator', 'Administrator', '1234567890', '0999999999', NULL, 1, 'admin', 'e807f1fcf82d132f9bb018ca6738a19f', 0, 1, '2021-03-09 18:37:11'),
+(2, 'ทรงพล', 'คุ้มคำ', '1749900588454', '0827183510', NULL, 1, 'beer', 'e807f1fcf82d132f9bb018ca6738a19f', 0, 3, '2021-12-27 18:18:15');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tb_brand`
+--
+ALTER TABLE `tb_brand`
+  ADD PRIMARY KEY (`brand_id`);
+
+--
+-- Indexes for table `tb_category`
+--
+ALTER TABLE `tb_category`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `tb_contact`
+--
+ALTER TABLE `tb_contact`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Indexes for table `tb_img_product`
+--
+ALTER TABLE `tb_img_product`
+  ADD PRIMARY KEY (`img_pro_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `tb_order`
+--
+ALTER TABLE `tb_order`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `status_id` (`status_id`);
+
+--
+-- Indexes for table `tb_order_detail`
+--
+ALTER TABLE `tb_order_detail`
+  ADD PRIMARY KEY (`order_detail_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `tb_permission`
+--
+ALTER TABLE `tb_permission`
+  ADD PRIMARY KEY (`permission_id`);
+
+--
+-- Indexes for table `tb_product`
+--
+ALTER TABLE `tb_product`
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `brand_id` (`brand_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `tb_status`
+--
+ALTER TABLE `tb_status`
+  ADD PRIMARY KEY (`status_id`);
+
+--
+-- Indexes for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `permission_id` (`permission_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tb_brand`
+--
+ALTER TABLE `tb_brand`
+  MODIFY `brand_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสแบรนด์', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_category`
+--
+ALTER TABLE `tb_category`
+  MODIFY `category_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสประเภท', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_contact`
+--
+ALTER TABLE `tb_contact`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการติดต่อ', AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `tb_img_product`
+--
+ALTER TABLE `tb_img_product`
+  MODIFY `img_pro_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสรูปภาพสินค้า', AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `tb_order`
+--
+ALTER TABLE `tb_order`
+  MODIFY `order_id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการสั่งซื้อ', AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tb_order_detail`
+--
+ALTER TABLE `tb_order_detail`
+  MODIFY `order_detail_id` int(2) NOT NULL AUTO_INCREMENT COMMENT 'รหัสรายละเอียดการสั่งซื้อ', AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tb_permission`
+--
+ALTER TABLE `tb_permission`
+  MODIFY `permission_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสสิทธิ์การใช้งาน', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_product`
+--
+ALTER TABLE `tb_product`
+  MODIFY `product_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสสินค้า', AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tb_status`
+--
+ALTER TABLE `tb_status`
+  MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสสถานะ', AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสผู้ใช้งาน', AUTO_INCREMENT=33;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_img_product`
+--
+ALTER TABLE `tb_img_product`
+  ADD CONSTRAINT `tb_img_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `tb_product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_order`
+--
+ALTER TABLE `tb_order`
+  ADD CONSTRAINT `tb_order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tb_order_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `tb_status` (`status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_order_detail`
+--
+ALTER TABLE `tb_order_detail`
+  ADD CONSTRAINT `tb_order_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `tb_order` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tb_order_detail_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `tb_product` (`product_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_product`
+--
+ALTER TABLE `tb_product`
+  ADD CONSTRAINT `tb_product_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `tb_brand` (`brand_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tb_product_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `tb_category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  ADD CONSTRAINT `tb_user_ibfk_1` FOREIGN KEY (`permission_id`) REFERENCES `tb_permission` (`permission_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

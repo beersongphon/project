@@ -8,10 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email_con = $_POST["email_con"];
   $comments_con = $_POST["comments_con"];
 
-  $sql = "INSERT INTO tb_contact (contact_member,
+  $sql = "INSERT INTO tb_contact (user_id,
+      contact_member,
       contact_email,
       contact_comment)
-      VALUES ('$name_con',
+      VALUES ('1',
+      '$name_con',
       '$email_con',
       '$comments_con')";
 

@@ -25,7 +25,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="home.php">หน้าแรก</a></li>
             <li class="breadcrumb-item active" aria-current="page">ข้อมูลลูกค้า</li>
           </ol>
         </nav>
@@ -73,56 +73,63 @@ if (isset($_POST["txtSearch"])) {
                 </thead>
                 <tbody>
                   <?php
-                if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-                  $page_no = $_GET['page_no'];
-                } else {
-                  $page_no = 1;
-                }
-
-                $total_records_per_page = 10;
-                $offset = ($page_no - 1) * $total_records_per_page;
-                $previous_page = $page_no - 1;
-                $next_page = $page_no + 1;
-                $adjacents = "2";
-
-                $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_user`");
-                $total_records = mysqli_fetch_array($result_count);
-                $total_records = $total_records['total_records'];
-                $total_no_of_pages = ceil($total_records / $total_records_per_page);
-                $second_last = $total_no_of_pages - 1; // total page minus 1
-
-                $i = 1;
-
-                $sql = "SELECT * FROM tb_user WHERE user_id LIKE '%$strKeyword%' OR user_firstname LIKE '%$strKeyword%'
-                  LIMIT $offset, $total_records_per_page
-                  ";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                  // output data of each row
-                  while ($row = $result->fetch_assoc()) {
-                ?>
-                <tr>
-                  <td class="text-center"><?php echo $i; ?></td>
-                  <td><?php echo $row['user_username']; ?></td>
-                  <td class="text-bold-500"><?php echo $row['user_firstname']; ?></td>
-                  <td class="text-bold-500"><?php echo $row['user_lastname']; ?></td>
-                  <td class="text-left"><?php echo $row['user_address']; ?></td>
-                  <td><?php echo $row['user_tel']; ?></td>
-                  <?php 
-                  if($row['user_sex'] == "0") {
-                    echo    "<td>หญิง</td>";
+                  if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+                    $page_no = $_GET['page_no'];
                   } else {
-                    echo    "<td>ชาย</td>";
+                    $page_no = 1;
+                  }
+
+                  $total_records_per_page = 10;
+                  $offset = ($page_no - 1) * $total_records_per_page;
+                  $previous_page = $page_no - 1;
+                  $next_page = $page_no + 1;
+                  $adjacents = "2";
+
+                  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_user`");
+                  $total_records = mysqli_fetch_array($result_count);
+                  $total_records = $total_records['total_records'];
+                  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+                  $second_last = $total_no_of_pages - 1; // total page minus 1
+
+                  $i = 1;
+
+                  $sql = "SELECT * FROM tb_user WHERE user_id LIKE '%$strKeyword%' OR user_firstname LIKE '%$strKeyword%'
+                    LIMIT $offset, $total_records_per_page
+                    ";
+                  $result = $conn->query($sql);
+
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $i; ?></td>
+                    <td><?php echo $row['user_username']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['user_firstname']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['user_lastname']; ?></td>
+                    <td class="text-left"><?php echo $row['user_address']; ?></td>
+                    <td><?php echo $row['user_tel']; ?></td>
+                    <?php 
+                    if($row['user_sex'] == "0") {
+                      echo    "<td>หญิง</td>";
+                    } else {
+                      echo    "<td>ชาย</td>";
+                    }
+                    ?>
+                    <td><?php echo $row['user_datetime']; ?></td>
+                  </tr>
+                  <?php
+                  $i++;
+                    } //while condition closing bracket
+                  }  //if condition closing bracket
+                  else{
+                  ?>
+                  <tr>
+                    <td colspan = "8"><center>ไม่มีข้อมูล</center></td>
+                  </tr>
+                  <?php
                   }
                   ?>
-                  <td><?php echo $row['user_datetime']; ?></td>
-                </tr>
-                <?php
-                $i++;
-                  } //while condition closing bracket
-                }  //if condition closing bracket
-                ?>
                 </tbody>
               </table>
 
@@ -254,7 +261,7 @@ if (isset($_POST["txtSearch"])) {
         timer: 2000
       }).then((result) => {
         if (result.isDismissed) {
-          window.location.href = 'product.php';
+          window.location.href = 'customer.php';
         }
       })
     }

@@ -9,8 +9,8 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-          <span>Register</span>
+          <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
+          <span>สมัครสมาชิก</span>
         </div>
       </div>
     </div>
@@ -18,66 +18,70 @@ include("./header_front-end.php");
 </div>
 <!-- Breadcrumb End -->
 
-<!-- Checkout Section Begin -->
-<section class="checkout spad">
+<!-- Register Section Begin -->
+<section class="register spad">
   <div class="container">
-    <form role="form" class="checkout__form">
+    <form role="form" class="register__form">
       <div class="row">
         <div class="col-lg-6 mx-auto">
-          <h5>Register</h5>
+          <h5>สมัครสมาชิก</h5>
           <div class="row">      
             <div class="col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p for="firstname_regis">Firstname <span>*</span></p>
-                <input type="text" id="firstname_regis" placeholder="Enter Firstname">
+              <div class="register__form__input">
+                <p for="firstname_regis">ชื่อ <span>*</span></p>
+                <input type="text" id="firstname_regis" placeholder="ชื่อ">
               </div>
             </div>
             <div class="col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p for="lastname_regis">Lastname <span>*</span></p>
-                <input type="text" id="lastname_regis" placeholder="Enter Lastname">
+              <div class="register__form__input">
+                <p for="lastname_regis">นามสกุล <span>*</span></p>
+                <input type="text" id="lastname_regis" placeholder="นามสกุล">
               </div>
             </div>
             <div class="col-lg-12">
-              <div class="checkout__form__input">
-                <p for="username_regis">Username <span>*</span></p>
-                <input type="text" id="username_regis" placeholder="Enter Username">
+              <div class="register__form__input">
+                <p for="address_regis">ที่อยู่ <span>*</span> </p>
+                <input type="text" id="address_regis" placeholder="ที่อยู่">
               </div>
-              <div class="checkout__form__input">
-                <p for="pwd_regis">Password <span>*</span></p>
-                <input type="password" id="pwd_regis" placeholder="Enter Password">
+              <div class="register__form__input">
+                <p for="tel_regis">เบอร์โทรศัพท์ <span>*</span></p>
+                <input type="number" id="tel_regis" placeholder="เบอร์โทรศัพท์">
               </div>
-              <div class="checkout__form__input">
-                <p for="confirm_pwd">Confirm Password <span>*</span></p>
-                <input type="password" id="confirm_pwd" placeholder="Confirm password">
+              <div class="register__form__input">
+                <p for="email_regis">อีเมล <span>*</span></p>
+                <input type="email" id="email_regis" placeholder="อีเมล">
               </div>
-              <div class="checkout__form__input">
-                <p for="address_regis">Address <span>*</span> </p>
-                <input type="text" id="address_regis" placeholder="Enter Address">
-              </div>
-              <div class="checkout__form__input">
-                <p for="optradio">Sex <span>*</span></p>
+              <div class="register__form__input">
+                <p for="optradio">เพศ <span>*</span></p>
               </div>
               <div class="form-group">
                 <div class="radio">
-                  <label><input type="radio" name="optradio" value="1" checked>Male</label>
+                  <label><input type="radio" name="optradio" value="1" checked> ชาย</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="optradio" value="0">Female</label>
+                  <label><input type="radio" name="optradio" value="0"> หญิง</label>
                 </div>
               </div>
-              <div class="checkout__form__input">
-                <p for="tel_regis">Telephone number <span>*</span></p>
-                <input type="number" id="tel_regis" placeholder="Enter Telephone number">
+              <div class="register__form__input">
+                <p for="username_regis">ชื่อผู้ใช้ <span>*</span></p>
+                <input type="text" id="username_regis" placeholder="ชื่อผู้ใช้">
               </div>
+              <div class="register__form__input">
+                <p for="pwd_regis">รหัสผ่าน <span>*</span></p>
+                <input type="password" id="pwd_regis" placeholder="รหัสผ่าน">
+              </div>
+              <div class="register__form__input">
+                <p for="confirm_pwd">ยืนยันรหัสผ่าน <span>*</span></p>
+                <input type="password" id="confirm_pwd" placeholder="ยืนยันรหัสผ่าน">
+              </div> 
+              <button type="button" class="site-btn" id="btn_regis">สมัครสมาชิก</button>         
             </div>  
-            <button type="button" class="site-btn" id="btn_regis">Register</button>
           </div>
         </div>
       </div>
     </form>
   </div>
 </section>
-<!-- Checkout Section End -->
+<!-- Register Section End -->
 
 <?php include("./footer_front-end.php"); ?>

@@ -1,9 +1,9 @@
 <?php
   //ตั้งค่าการเชื่อมต่อฐานข้อมูล
   $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "test";
+  $username = "luxurybyfon";
+  $password = "mj95c2gx";
+  $dbname = "luxurybyfon";
 	
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);

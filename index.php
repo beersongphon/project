@@ -8,16 +8,16 @@ include("./header_front-end.php");
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-6 p-0">
-        <div class="categories__item categories__large__item set-bg" data-setbg="./assets/front-end/img/categories/category-1.jpg">
+        <div class="categories__item categories__large__item set-bg" data-setbg="./assets/img/category-1.jpg">
           <div class="categories__text">
-            <h1>Women’s fashion</h1>
-            <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-              edolore magna aliquapendisse ultrices gravida.</p>
-            <a href="#">Shop now</a>
+            <h1 style="font-family: Sriracha, cursive;">สินค้า</h1>
+            <!-- <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
+              edolore magna aliquapendisse ultrices gravida.</p> -->
+            <a href="./shop.php">Shop now</a>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 p-0">
             <div class="categories__item set-bg" data-setbg="./assets/front-end/img/categories/category-2.jpg">
@@ -56,7 +56,7 @@ include("./header_front-end.php");
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -68,10 +68,10 @@ include("./header_front-end.php");
     <div class="row">
       <div class="col-lg-4 col-md-4">
         <div class="section-title">
-          <h4>New product</h4>
+          <h4>สินค้าใหม่</h4>
         </div>
       </div>
-      <div class="col-lg-8 col-md-8">
+      <!-- <div class="col-lg-8 col-md-8">
         <ul class="filter__controls">
           <li class="active" data-filter="*">All</li>
           <li data-filter=".women">Women’s</li>
@@ -80,12 +80,12 @@ include("./header_front-end.php");
           <li data-filter=".accessories">Accessories</li>
           <li data-filter=".cosmetic">Cosmetics</li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <div class="row property__gallery">
       <?php
       $sql = "SELECT DISTINCT tb_product.product_id,
-      (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
+      (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
       tb_product.product_name,
       tb_product.product_price,
       tb_product.product_qty,
@@ -101,50 +101,10 @@ include("./header_front-end.php");
       if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-          //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-          if($row['product_qty'] == 0){
-            //สินค้าหมด
-            $disabled = "return false;";
-            $tableClass = "label stockout";
-            $txtTitle = "Out Of Stock";
-          }elseif($row['product_qty'] <= 5) {
-            //สินค้ากำลังจะหมด
-            $disabled = "return true;";
-            $tableClass = "label stockblue";
-            $txtTitle = "Running Out";
-          }elseif($row['product_qty'] <= 20) {
-            //สินค้ากำลังจะหมด
-            $disabled = "return true;";
-            $tableClass = "";
-            $txtTitle = "";
-          }else{
-            //เหลือ > 20 ชิ้น
-            $disabled = "return true;";
-            $tableClass = "label new";
-            $txtTitle = "New";
-          }
+          include("./checkstock.php");
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-        <div class="product__item">
-          <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['img_product']; ?>">
-            <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
-            <!-- <div class="label new">New</div> -->
-            <ul class="product__hover">
-              <?php include("./permission.php"); ?>
-            </ul>
-          </div>
-          <div class="product__item__text">
-            <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
-          </div>
-        </div>
+        <?php include("./permission.php"); ?>
       </div>
       <?php
         } //while condition closing bracket
@@ -313,32 +273,44 @@ include("./header_front-end.php");
 <!-- Product Section End -->
 
 <!-- Banner Section Begin -->
-<section class="banner set-bg" data-setbg="./assets/front-end/img/banner/banner-1.jpg">
+<section class="banner set-bg" data-setbg="./assets/img/banner-1.jpg">
   <div class="container">
     <div class="row">
       <div class="col-xl-7 col-lg-8 m-auto">
         <div class="banner__slider owl-carousel">
+          <?php
+          $sql = "SELECT* FROM tb_category";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+          ?>
           <div class="banner__item">
+            <div class="banner__text">
+              <!-- <span>The Chloe Collection</span> -->
+              <h1><?php echo $row['category_name'];?></h1>
+              <!-- <a href="./shop.php">Shop now</a> -->
+              <a href="./shop.php?category_id=<?= $row['category_id'];?>&category_name=<?= $row['category_name'];?>">Shop now</a>
+            </div>
+          </div>
+          <?php
+            } //while condition closing bracket
+          }  //if condition closing bracket
+          ?>
+          <!-- <div class="banner__item">
             <div class="banner__text">
               <span>The Chloe Collection</span>
               <h1>The Project Jacket</h1>
-              <a href="#">Shop now</a>
+              <a href="./shop.php">Shop now</a>
             </div>
           </div>
           <div class="banner__item">
             <div class="banner__text">
               <span>The Chloe Collection</span>
               <h1>The Project Jacket</h1>
-              <a href="#">Shop now</a>
+              <a href="./shop.php">Shop now</a>
             </div>
-          </div>
-          <div class="banner__item">
-            <div class="banner__text">
-              <span>The Chloe Collection</span>
-              <h1>The Project Jacket</h1>
-              <a href="#">Shop now</a>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -347,7 +319,7 @@ include("./header_front-end.php");
 <!-- Banner Section End -->
 
 <!-- Trend Section Begin -->
-<section class="trend spad">
+<!-- <section class="trend spad">
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6">
@@ -517,11 +489,11 @@ include("./header_front-end.php");
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- Trend Section End -->
 
 <!-- Discount Section Begin -->
-<section class="discount">
+<!-- <section class="discount">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 p-0">
@@ -559,14 +531,14 @@ include("./header_front-end.php");
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- Discount Section End -->
 
 <!-- Services Section Begin -->
 <section class="services spad">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6">
+      <!-- <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="services__item">
           <i class="fa fa-car"></i>
           <h6>Free Shipping</h6>
@@ -579,19 +551,20 @@ include("./header_front-end.php");
           <h6>Money Back Guarantee</h6>
           <p>If good have Problems</p>
         </div>
-      </div>
+      </div> -->
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="services__item">
           <i class="fa fa-support"></i>
-          <h6>Online Support 24/7</h6>
-          <p>Dedicated support</p>
+          <!-- <h6>Online Support 24/7</h6> -->
+          <h6>การสนับสนุนออนไลน์</h6>
+          <p>การสนับสนุนโดยเฉพาะ</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="services__item">
           <i class="fa fa-headphones"></i>
-          <h6>Payment Secure</h6>
-          <p>100% secure payment</p>
+          <h6>การชำระเงินที่ปลอดภัย</h6>
+          <p>การชำระเงินที่ปลอดภัย 100%</p>
         </div>
       </div>
     </div>

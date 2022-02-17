@@ -1,7 +1,8 @@
 <?php
 include('./../connect.php');
-$product_img = $_POST['product_img'];
 $product_name = $_POST['product_name'];
+$brand_id = $_POST['brand_id'];
+$category_id = $_POST['category_id'];
 $product_price = $_POST['product_price'];
 $product_qty = $_POST['product_qty'];
 $product_description = $_POST['product_description'];
@@ -9,10 +10,11 @@ $product_description = $_POST['product_description'];
 $sql = "SELECT * FROM tb_product";
 $result = $conn->query($sql);
 $product_id = ($result->num_rows + 1);
-$sql = "INSERT INTO tb_product (product_img, product_name, product_price, product_qty, product_description) VALUES 
+$sql = "INSERT INTO tb_product (product_name, brand_id, category_id, product_price, product_qty, product_description) VALUES 
         (
-           '$product_img',
            '$product_name',
+           '$brand_id',
+           '$category_id',
            '$product_price',
            '$product_qty',
            '$product_description'

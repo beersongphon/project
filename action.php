@@ -17,7 +17,7 @@ if (isset($_POST["product_id"])) {
       if ($is_available < 1) {
         $item_array = array(
           'product_id'               =>     $_POST["product_id"],
-          'product_img'               =>     $_POST["product_img"],
+          'img_product'               =>     $_POST["img_product"],
           'product_name'               =>     $_POST["product_name"],
           'product_qty'               =>     $_POST["product_qty"],
           'product_price'               =>     $_POST["product_price"],
@@ -28,7 +28,7 @@ if (isset($_POST["product_id"])) {
     } else {
       $item_array = array(
         'product_id'               =>     $_POST["product_id"],
-        'product_img'               =>     $_POST["product_img"],
+        'img_product'               =>     $_POST["img_product"],
         'product_name'               =>     $_POST["product_name"],
         'product_qty'               =>     $_POST["product_qty"],
         'product_price'               =>     $_POST["product_price"],
@@ -60,10 +60,10 @@ if (isset($_POST["product_id"])) {
               <table>
                 <thead>
                   <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                    <th>สินค้า</th>
+                    <th>ราคา</th>
+                    <th>จำนวน</th>
+                    <th>ราคารวม</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -75,16 +75,16 @@ if (isset($_POST["product_id"])) {
       $order_table .= ' 
                 <tr>
                   <td class="cart__product__item">
-                    <img class="col-2" src="./upload/' . $values["product_img"] . '" alt="">
+                    <img class="col-2" src="./upload/' . $values["img_product"] . '" alt="">
                     <div class="cart__product__item__title">
                       <h6>' . $values["product_name"] . '</h6>
-                      <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
+                      <!-- <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div> -->
                     </div>
                   </td>
                   <td class="cart__price">฿ ' . number_format($values["product_price"], 2) . '</td>
@@ -100,48 +100,70 @@ if (isset($_POST["product_id"])) {
                 ';
       $total = $total + ($values["product_quantity"] * $values["product_price"]);
     }
-    $order_table .= '  
-            </tbody>
-           </table>
-         </div>
-       </div>
-     </div>
+  }
+  else{
+    $order_table .= '
+                <tr>
+                <td class="cart__not" colspan = "5">
+                  <div class="cart__not__item__title">
+                    <center><h6>ไม่มีสินค้าในตะกร้า</h6></center>
+                  </div>
+                </td>
+                </tr>
+                ';
+              }
+              $order_table .= '
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>';
+  
+  $order_table .= '
      <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="cart__btn">
-          <a href="./shop.php">Continue Shopping</a>
+          <a href="./shop.php">ช้อปปิ้งต่อ</a>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="cart__btn update__btn">
-          <a href="#"><span class="icon_loading"></span> Update cart</a>
+          <!-- <a href="#"><span class="icon_loading"></span> Update cart</a> -->
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-6">
         <div class="discount__content">
-          <h6>Discount codes</h6>
+          <!-- <h6>Discount codes</h6>
           <form action="#">
             <input type="text" placeholder="Enter your coupon code">
             <button type="submit" class="site-btn">Apply</button>
-          </form>
+          </form> -->
         </div>
       </div>
       <div class="col-lg-4 offset-lg-2">
         <div class="cart__total__procced">
-          <h6>Cart total</h6>
+          <h6>ยอดรวมในตะกร้า</h6>
           <ul>
             <!-- <li>Subtotal <span>฿ 750.0</span></li> -->
-            <li>Total <span>฿ ' . number_format($total, 2) . '</span></li>
-            <input type="hidden" name="order_total" value="'.$total.'">
+            <li>ราคารวม ';
+            if (!empty($_SESSION["shopping_cart"])) {
+            $order_table .= '
+              <span>฿ ' . number_format($total, 2) . '</span></li>';
+            }
+            else {
+              $total = 0;
+              $order_table .= '
+              <span>฿ ' . number_format($total, 2) . '</span></li>';
+            }
+          $order_table .= '
           </ul>
-          <a href="./checkout.php" class="primary-btn">Proceed to checkout</a>
+          <a href="./checkout.php" class="primary-btn">ดำเนินการชำระเงิน</a>
         </div>
       </div>
     </div>
     <script src="./assets/front-end/js/main.js"></script>';
-  }
   $output = array(
     'order_table'     =>     $order_table,
     'cart_item'          =>     count($_SESSION["shopping_cart"])

@@ -3,9 +3,9 @@
           <div class="float-start">
             <p>2021 &copy; Luxury by Fon.</p>
           </div>
-          <div class="float-end">
+          <!-- <div class="float-end">
             <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="http://ahmadsaugi.com">A. Saugi</a></p>
-          </div>
+          </div> -->
         </div>
       </footer>
     </div>
@@ -15,6 +15,6 @@
     
   <script src="./assets/back-end/mazer/dist/assets/js/mazer.js"></script>
 
-  <script src="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.js"></script>
+  <!-- <script src="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.js"></script> -->
 </body>
 </html>

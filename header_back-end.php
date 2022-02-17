@@ -14,7 +14,7 @@
       </div>
       <div class="sidebar-menu">
         <ul class="menu">
-          <li class="sidebar-title">Menu</li>
+          <li class="sidebar-title">รายการ</li>
 
           <li class="sidebar-item <?php if (basename($_SERVER['PHP_SELF']) == "home.php") {
                                     echo "active";
@@ -22,30 +22,64 @@
                                     echo "";
                                   } ?>">
             <a href="./home.php" class='sidebar-link'>
-              <i class="bi bi-grid-fill"></i>
-              <span>Dashboard</span>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>หน้าแรก</span>
             </a>
           </li>
           <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "customer.php") ? "active" : ""; ?>">
             <a href="./customer.php" class='sidebar-link'>
-              <i class="bi bi-grid-fill"></i>
+              <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูลลูกค้า</span>
             </a>
           </li>
           <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "product.php") ? "active" : ""; ?>">
             <a href="./product.php" class='sidebar-link'>
-              <i class="bi bi-grid-fill"></i>
+              <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูลสินค้า</span>
             </a>
           </li>
+          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "brand.php") ? "active" : ""; ?>">
+            <a href="./brand.php" class='sidebar-link'>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ข้อมูลแบรนด์</span>
+            </a>
+          </li>
+          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "category.php") ? "active" : ""; ?>">
+            <a href="./category.php" class='sidebar-link'>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ข้อมูลประเภท</span>
+            </a>
+          </li>
+          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "feedback.php") ? "active" : ""; ?>">
+            <a href="./feedback.php" class='sidebar-link'>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ข้อมูล Feedback</span>
+            </a>
+          </li>
+
+          <li class="sidebar-title">รายงาน</li>
+          <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_product.php") ? "active" : ""; ?>">
+            <a href="./report_product.php" class='sidebar-link'>
+              <!-- <i class="bi bi-file-earmark-medical-fill"></i> -->
+              <span>รายงานสินค้าคงเหลือ</span>
+            </a>
+          </li>
+          <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_sale.php") ? "active" : ""; ?>">
+            <a href="./report_sale.php" class='sidebar-link'>
+              <!-- <i class="bi bi-file-earmark-medical-fill"></i> -->
+              <span>รายงานการขายสินค้า</span>
+            </a>
+          </li>
+
+          <li class="sidebar-title"></li>
           <li class="sidebar-item ">
             <a href="./logout.php" class='sidebar-link'>
-              <i class="bi bi-grid-fill"></i>
+              <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ออกจากระบบ</span>
             </a>
           </li>
 
-          <li class="sidebar-item  has-sub">
+          <!-- <li class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>
               <i class="bi bi-stack"></i>
               <span>Components</span>
@@ -142,9 +176,9 @@
                 <a href="layout-horizontal.html">Horizontal Menu</a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="sidebar-title">Forms &amp; Tables</li>
+          <!-- <li class="sidebar-title">Forms &amp; Tables</li>
 
           <li class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>
@@ -385,7 +419,7 @@
               <i class="bi bi-cash"></i>
               <span>Donate</span>
             </a>
-          </li>
+          </li> -->
 
         </ul>
       </div>

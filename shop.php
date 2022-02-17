@@ -1,16 +1,100 @@
 <?php
 include("./head_front-end.php");
 include("./header_front-end.php");
-?>
 
+$strKeyword = null;
+
+if (isset($_POST["txtSearch"])) {
+  $strKeyword = $_POST["txtSearch"];
+}
+if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
+  //คิวรี่ข้อมูลสินค้าตามประเภท
+  $category_id = $_GET['category_id'];
+  //คิวรี่ข้อมูลสินค้าทุกรายการ
+  if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+    $page_no = $_GET['page_no'];
+  } else {
+    $page_no = 1;
+  }
+
+  $total_records_per_page = 9;
+  $offset = ($page_no - 1) * $total_records_per_page;
+  $previous_page = $page_no - 1;
+  $next_page = $page_no + 1;
+  $adjacents = "2";
+
+  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
+  $total_records = mysqli_fetch_array($result_count);
+  $total_records = $total_records['total_records'];
+  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+  $second_last = $total_no_of_pages - 1; // total page minus 1
+
+  $sql = "SELECT DISTINCT tb_product.product_id,
+  (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
+  tb_product.product_name,
+  tb_product.product_price,
+  tb_product.product_qty,
+  tb_product.product_description
+  FROM tb_product
+  LEFT JOIN
+  tb_img_product
+  ON
+  tb_product.product_id = tb_img_product.product_id 
+  WHERE tb_product.category_id='$category_id'
+  AND (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%')
+  ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+} else {
+  //คิวรี่ข้อมูลสินค้าทุกรายการ
+  if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+    $page_no = $_GET['page_no'];
+  } else {
+    $page_no = 1;
+  }
+
+  $total_records_per_page = 9;
+  $offset = ($page_no - 1) * $total_records_per_page;
+  $previous_page = $page_no - 1;
+  $next_page = $page_no + 1;
+  $adjacents = "2";
+
+  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
+  $total_records = mysqli_fetch_array($result_count);
+  $total_records = $total_records['total_records'];
+  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+  $second_last = $total_no_of_pages - 1; // total page minus 1
+
+  $sql = "SELECT DISTINCT tb_product.product_id,
+  (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
+  tb_product.product_name,
+  tb_product.product_price,
+  tb_product.product_qty,
+  tb_product.product_description
+  FROM tb_product
+  LEFT JOIN
+  tb_img_product
+  ON
+  tb_product.product_id = tb_img_product.product_id 
+  WHERE (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%')
+  ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+}
+//คิวรี่ข้อมูลประเภทสินค้า
+$sqlcategory = "SELECT* FROM tb_category";
+$resultcategory = $conn->query($sqlcategory);
+$rowcategory = $resultcategory->fetch_assoc();
+
+?>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb__links">
-          <a href="./index.php"><i class="fa fa-home"></i> Home</a>
-          <span>Shop</span>
+          <a href="./index.php"><i class="fa fa-home"></i> หน้าแรก</a>
+          <span>สินค้า</span>
         </div>
       </div>
     </div>
@@ -23,31 +107,28 @@ include("./header_front-end.php");
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-3">
-        <div class="shop__sidebar">
+        <div class="shop__sidebar"> 
           <div class="sidebar__categories">
             <div class="section-title">
-              <h4>Categories</h4>
+              <h4>ประเภทสินค้า</h4>
             </div>
             <div class="categories__accordion">
               <div class="accordion" id="accordionExample">
                 <div class="card">
-                  <div class="card-heading active">
+                  <!-- <div class="card-heading active">
                     <a data-toggle="collapse" data-target="#collapseOne">Women</a>
-                  </div>
+                  </div> -->
                   <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                     <div class="card-body">
                       <ul>
-                        <li><a href="#">Coats</a></li>
-                        <li><a href="#">Jackets</a></li>
-                        <li><a href="#">Dresses</a></li>
-                        <li><a href="#">Shirts</a></li>
-                        <li><a href="#">T-shirts</a></li>
-                        <li><a href="#">Jeans</a></li>
+                        <?php foreach($resultcategory as $rowcategory) {  ?>
+                        <li><a href="./shop.php?category_id=<?= $rowcategory['category_id'];?>&category_name=<?= $rowcategory['category_name'];?>"><?= $rowcategory['category_name'];?></a></li>
+                        <?php } ?>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div class="card">
+                <!-- <div class="card">
                   <div class="card-heading">
                     <a data-toggle="collapse" data-target="#collapseTwo">Men</a>
                   </div>
@@ -114,11 +195,11 @@ include("./header_front-end.php");
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
-          <div class="sidebar__filter">
+          <!-- <div class="sidebar__filter">
             <div class="section-title">
               <h4>Shop by price</h4>
             </div>
@@ -133,8 +214,8 @@ include("./header_front-end.php");
               </div>
             </div>
             <a href="#">Filter</a>
-          </div>
-          <div class="sidebar__sizes">
+          </div> -->
+          <!-- <div class="sidebar__sizes">
             <div class="section-title">
               <h4>Shop by size</h4>
             </div>
@@ -227,91 +308,19 @@ include("./header_front-end.php");
                 <span class="checkmark"></span>
               </label>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-lg-9 col-md-9">
         <div class="row">
           <?php
-          if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-            $page_no = $_GET['page_no'];
-          } else {
-            $page_no = 1;
-          }
-
-          $total_records_per_page = 9;
-          $offset = ($page_no - 1) * $total_records_per_page;
-          $previous_page = $page_no - 1;
-          $next_page = $page_no + 1;
-          $adjacents = "2";
-
-          $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
-          $total_records = mysqli_fetch_array($result_count);
-          $total_records = $total_records['total_records'];
-          $total_no_of_pages = ceil($total_records / $total_records_per_page);
-          $second_last = $total_no_of_pages - 1; // total page minus 1
-
-          $sql = "SELECT DISTINCT tb_product.product_id,
-          (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id limit 1) AS img_product,
-          tb_product.product_name,
-          tb_product.product_price,
-          tb_product.product_qty,
-          tb_product.product_description
-          FROM tb_product
-          LEFT JOIN
-          tb_img_product
-          ON
-          tb_product.product_id = tb_img_product.product_id 
-          WHERE tb_product.product_id LIKE '%" . $strKeyword . "%' OR tb_product.product_name LIKE '%" . $strKeyword . "%'
-          ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page
-          ";
-          $result = $conn->query($sql);
-
-          if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-              //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-              if($row['product_qty'] == 0){
-                //สินค้าหมด
-                $disabled = "return false;";
-                $tableClass = "label stockout";
-                $txtTitle = "Out Of Stock";
-              }elseif($row['product_qty'] <= 5) {
-                //สินค้ากำลังจะหมด
-                $disabled = "return true;";
-                $tableClass = "label stockblue";
-                $txtTitle = "Running Out";
-              }else{
-                //เหลือ > 10 ชิ้น
-                $disabled = "return true;";
-                $tableClass = "table-info";
-                $txtTitle = "";
-              }
+          foreach($result as $row) {
+            include("./checkstock.php");
           ?>
           <div class="col-lg-4 col-md-6">
-            <div class="product__item">
-              <div class="product__item__pic set-bg" data-setbg="./upload/<?php echo $row['img_product']; ?>">
-                <!-- <div class="label new">New</div> -->
-                <div class="<?= $tableClass;?>"><?=$txtTitle;?></div>
-                <ul class="product__hover">
-                  <?php include("./permission.php"); ?>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#"><?php echo $row["product_name"]; ?></a></h6>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product__price">฿ <?php echo number_format($row["product_price"], 2); ?></div>
-              </div>
-            </div>
+            <?php include("./permission.php"); ?>
           </div>
           <?php
-            } //while condition closing bracket
           }  //if condition closing bracket
           ?>
           <!-- <div class="col-lg-4 col-md-6">
