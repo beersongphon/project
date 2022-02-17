@@ -149,10 +149,10 @@ $row = mysqli_fetch_array($result);
               <input type="hidden" name="hidden_qty" id="qty<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_qty"]; ?>" />
               <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />
               <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> ใส่ในรถเข็น</a>
-              <ul>
+              <!-- <ul>
                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
-              </ul>
+              </ul> -->
             </div>
             <!-- <div class="product__details__widget">
               <ul>

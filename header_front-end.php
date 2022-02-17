@@ -8,13 +8,28 @@
 <div class="offcanvas-menu-wrapper">
   <div class="offcanvas__close">+</div>
   <ul class="offcanvas__widget">
-    <li><span class="icon_search search-switch"></span></li>
+    <li>
+      <span class="icon_search search-switch"></span>
+    </li>
+    <?php
+    if (!isset($_SESSION['user_username'])) {
+    ?>
     <!-- <li>
       <a href="#"><span class="icon_heart_alt"></span>
         <div class="tip">2</div>
       </a>
     </li> -->
-    <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
+    <li>
+      <a href="#">
+        <span class="icon_bag_alt"></span>
+      </a>
+    </li>
+    <?php
+    } else {
+    ?>
+    <li>
+      <a href="./shop-cart.php">
+        <span class="icon_bag_alt"></span>
         <div class="tip">
           <?php 
           if(isset($_SESSION["shopping_cart"])) { 
@@ -23,7 +38,11 @@
             echo '0';
           }?>
         </div>
-      </a></li>
+      </a>
+    </li>
+    <?php
+    }
+    ?>
   </ul>
   <div class="offcanvas__logo">
     <a href="./index.php" style="font-family: 'Finger Paint', cursive; font-size: 20px; color:#000000;">Luxury by Fon</a>
@@ -137,7 +156,9 @@
             ?>
           </div>
           <ul class="header__right__widget">
-            <li><span class="icon_search search-switch"></span></li>
+            <li>
+              <span class="icon_search search-switch"></span>
+            </li>
             <?php
             if (!isset($_SESSION['user_username'])) {
             ?>

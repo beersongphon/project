@@ -15,6 +15,8 @@ include("./header_front-end.php");
               ON tb_order_detail.order_id = tb_order.order_id 
               INNER JOIN tb_product
               ON tb_product.product_id = tb_order_detail.product_id 
+              INNER JOIN tb_brand
+              ON tb_brand.brand_id = tb_product.brand_id 
               INNER JOIN tb_user 
               ON tb_user.user_id = tb_order.user_id 
               INNER JOIN tb_status 
@@ -47,7 +49,7 @@ include("./header_front-end.php");
  
       $order_details .= "  
                           <tr>  
-                            <td>" . $row["product_name"] . "</td>  
+                            <td>".$row["product_name"]." ยี่ห้อ : ".$row["brand_name"]."</td>  
                             <td align='center'>" . $row["order_price"] . "</td>  
                             <td align='center'>" . $row["order_quantity"] . "</td>  
                             <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  

@@ -85,12 +85,13 @@ include("./header_front-end.php");
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>หลักฐานการโอน <span>*</span></p>
+                <input id="fileToUpload" name="fileToUpload" type="file" required>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="input-group mb-3">
                   <input id="fileToUpload" name="fileToUpload" type="file" class="form-control" required>
                 </div>
-              </div>
+              </div> -->
               <!-- <div class="form-group">
                 <input type="file" name="fileToUpload" id="fileToUpload">
               </div> -->

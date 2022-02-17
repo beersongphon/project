@@ -42,13 +42,13 @@ include("./header_front-end.php");
             <div class="col-lg-12">
               <div class="checkout__form__input">
                 <p>ชื่อ <span>*</span></p>
-                <input type="text" name="order_name">
+                <input type="text" name="order_name" placeholder="ชื่อ">
               </div>
             </div>
             <!-- <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>ชื่อ <span>*</span></p>
-                <input type="text" name="name" value="<?php echo $_SESSION['user_firstname']; ?>">
+                <input type="text" name="name" value="<?php //echo $_SESSION['user_firstname']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -63,8 +63,8 @@ include("./header_front-end.php");
                 <input type="text">
               </div> -->
               <div class="checkout__form__input">
-                <p>Address <span>*</span></p>
-                <input type="text" name="order_address" placeholder="Street Address">
+                <p>ที่อยู่ <span>*</span></p>
+                <input type="text" name="order_address" placeholder="ที่อยู่">
                 <!-- <input type="text" placeholder="Apartment. suite, unite ect ( optinal )"> -->
               </div>
               <!-- <div class="checkout__form__input">
@@ -83,13 +83,13 @@ include("./header_front-end.php");
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>เบอร์โทร <span>*</span></p>
-                <input type="text" name="order_tel">
+                <input type="text" name="order_tel" placeholder="เบอร์โทร">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>อีเมล <span>*</span></p>
-                <input type="text" name="order_email">
+                <input type="text" name="order_email" placeholder="อีเมล">
               </div>
             </div>
             <!-- <div class="col-lg-12">

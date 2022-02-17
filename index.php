@@ -10,7 +10,7 @@ include("./header_front-end.php");
       <div class="col-lg-6 p-0">
         <div class="categories__item categories__large__item set-bg" data-setbg="./assets/img/category-1.jpg">
           <div class="categories__text">
-            <h1>Product</h1>
+            <h1 style="font-family: Sriracha, cursive;">สินค้า</h1>
             <!-- <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
               edolore magna aliquapendisse ultrices gravida.</p> -->
             <a href="./shop.php">Shop now</a>
