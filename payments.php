@@ -1,5 +1,5 @@
 <?php
-include('./../connect.php');
+include('./connect.php');
 date_default_timezone_set("Asia/Bangkok");
 
 $order_id = $_POST['order_id'];

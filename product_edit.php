@@ -301,44 +301,6 @@ if (isset($_POST["txtSearch"])) {
       success: function(response) {}
     });
   }
-
-  function createProduct() {
-    let product_id = $('#product_id').val();
-    let product_name = $('#product_name').val();
-    let product_price = $('#product_price').val();
-    let product_description = $('#product_description').val();
-    $.ajax({
-      url: 'query/add_product.php',
-      type: 'post',
-      data: {
-        'product_id': product_id,
-        'product_name': product_name,
-        'product_price': product_price,
-        'product_description': product_description
-      },
-      success: function(response) {
-        console.log(response);
-        let product_id = response;
-        listImage.forEach((image) => {
-          $.ajax({
-            url: 'query/add_image_product.php',
-            type: 'post',
-            data: {
-              'img_product': image,
-              'product_id': product_id
-            },
-            success: function(response) {
-              console.log(response);
-            }
-          });
-        });
-        setTimeout(function() {
-          window.location.replace('product.php');
-          // console.log(product_name, product_price, product_description, response);
-        }, 300);
-      }
-    });
-  }
 </script>
 
 <?php include("./footer_back-end.php"); ?>

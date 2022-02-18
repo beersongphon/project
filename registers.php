@@ -1,8 +1,8 @@
 <?php
 session_start();
-include("./../urldomain.php");
+include("./urldomain.php");
 date_default_timezone_set('Asia/Bangkok');
-include("./../connect.php");
+include("./connect.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname_regis = $_POST["firstname_regis"];
     $lastname_regis = $_POST["lastname_regis"];
