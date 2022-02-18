@@ -153,7 +153,6 @@ if (isset($_POST["txtSearch"])) {
       var listImage = new Array();
       var image_list = $("#image_list");
       var upload = $("#btn_upload");
-      var model_list = $("#model_id");
 
       $(document).ready(function() {
         let product_id = $('#product_id').val();
