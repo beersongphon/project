@@ -85,11 +85,11 @@ if (isset($_POST["txtSearch"])) {
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="product_name" class=" form-control-label">name</label>
-                      <input type="text" id="product_name" name="product_name" placeholder="Enter your company name" class="form-control">
+                      <label for="product_name" class=" form-control-label">ชื่อสินค้า</label>
+                      <input type="text" id="product_name" name="product_name" placeholder="ชื่อสินค้า" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="brand_id" class=" form-control-label">brand_id</label>
+                      <label for="brand_id" class=" form-control-label">แบรนด์</label>
                       <select class="form-select" id="brand_id" name="brand_id" required>
                         <?php
                         $sql = "SELECT * FROM tb_brand";
@@ -105,7 +105,7 @@ if (isset($_POST["txtSearch"])) {
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="category_id" class=" form-control-label">category_id</label>
+                      <label for="category_id" class=" form-control-label">ประเภท</label>
                       <select class="form-select" id="category_id" name="category_id" required>
                         <?php
                         $sql = "SELECT * FROM tb_category";
@@ -121,16 +121,16 @@ if (isset($_POST["txtSearch"])) {
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="product_price" class=" form-control-label">price</label>
-                      <input type="text" id="product_price" name="product_price" placeholder="DE1234567890" class="form-control">
+                      <label for="product_price" class=" form-control-label">ราคา</label>
+                      <input type="text" id="product_price" name="product_price" placeholder="ราคา" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="product_qty" class=" form-control-label">qty</label>
-                      <input type="text" id="product_qty" name="product_qty" placeholder="product_qty" class="form-control">
+                      <label for="product_qty" class=" form-control-label">จำนวน</label>
+                      <input type="text" id="product_qty" name="product_qty" placeholder="จำนวน" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="product_description" class=" form-control-label">description</label>
-                      <input type="text" id="product_description" name="product_description" placeholder="Enter street name" class="form-control">
+                      <label for="product_description" class=" form-control-label">รายละเอียด</label>
+                      <input type="text" id="product_description" name="product_description" placeholder="รายละเอียด" class="form-control">
                     </div>
                     <button class="btn btn-primary btn-block" type="button" onclick="createProduct()">
                       ยืนยัน
@@ -155,44 +155,34 @@ if (isset($_POST["txtSearch"])) {
       var upload = $("#btn_upload");
       var model_list = $("#model_id");
 
-      $('document').ready(function() {
-        var brand_id = $('#brand_id').val();
+      $(document).ready(function() {
+        let product_id = $('#product_id').val();
         $.ajax({
-          url: 'query/get_model.php',
+          url: 'query/get_all_image_product.php',
+          type: 'post',
           data: {
-            'brand_id': brand_id
+            'product_id': product_id
           },
-          method: 'post',
           dataType: 'json',
           success: function(result) {
             result.forEach((data) => {
-              $('#model_id').append(`<option value="${data.model_id}">${data.model_name}</option>`);
+              listImage.push(data.img_product);
+              image_list.append(`
+              <tr>
+                <td>
+                  <img src="upload/${data.img_product}" style="width: 150px;"> 
+                </td>    
+                <td>
+                  <button class="btn btn-danger" style="background-color: #dc3545;" onclick="deleteImage('${data.img_product}')">
+                    ลบ 
+                  </button>
+                </td>
+              </tr>
+              `);
             });
           }
-        });
-
-        $('#brand_id').on('change', function() {
-          brandChange();
         });
       });
-
-      function brandChange() {
-        $('#model_id').empty();
-        var brand_id = $('#brand_id').val();
-        $.ajax({
-          url: 'query/get_model.php',
-          data: {
-            'brand_id': brand_id
-          },
-          method: 'post',
-          dataType: 'json',
-          success: function(result) {
-            result.forEach((data) => {
-              $('#model_id').append(`<option value="${data.model_id}">${data.model_name}</option>`);
-            });
-          }
-        });
-      }
 
       async function uploadImage() {
         var fd = new FormData();
@@ -211,14 +201,15 @@ if (isset($_POST["txtSearch"])) {
               listImage.push(response);
               listImage.forEach((response) => {
                 image_list.append(`
-            <tr id="${response}" name="${response}">
-              <td>
-                <img src="upload/${response}" style="width: 150px;">
-              </td>
-              <td>
-                <button class="btn btn-danger" onclick="deleteImage('${response}')">ลบ</button>
-              </td>
-            </tr>`);
+                <tr id="${response}" name="${response}">
+                  <td>
+                    <img src="upload/${response}" style="width: 150px;">
+                  </td>
+                  <td>
+                    <button class="btn btn-danger" style="background-color: #dc3545;" onclick="deleteImage('${response}')">ลบ</button>
+                  </td>
+                </tr>
+                `);
               });
             }
           });
@@ -229,17 +220,20 @@ if (isset($_POST["txtSearch"])) {
         listImage = listImage.filter((value) => value != data);
         image_list.empty();
         listImage.forEach((response) => {
+          console.log(response);
           image_list.append(`
-        <tr id="${response}" name="${response}">
-          <td>
-            <img src="upload/${response}" style="width: 150px;">
-          </td>
-          <td>
-            <button class="btn btn-danger" onclick="deleteImage('${response}')">ลบ</button>
-          </td>
-        </tr>`);
+          <tr id="${response}" name="${response}">
+            <td>
+              <img src="upload/${response}" style="width: 150px;">
+            </td>
+            <td>
+              <button class="btn btn-danger" style="background-color: #dc3545;" onclick="deleteImage('${response}')">ลบ</button>
+            </td>
+          </tr>
+          `);
         });
       }
+
       function createProduct() {
         let product_name = $('#product_name').val();
         let brand_id = $('#brand_id').val();

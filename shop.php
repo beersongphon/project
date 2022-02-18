@@ -121,8 +121,9 @@ $rowcategory = $resultcategory->fetch_assoc();
                   <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                     <div class="card-body">
                       <ul>
+                        <li><a href="./shop.php">ทั้งหมด</a></li>
                         <?php foreach($resultcategory as $rowcategory) {  ?>
-                        <li><a href="./shop.php?category_id=<?= $rowcategory['category_id'];?>&category_name=<?= $rowcategory['category_name'];?>"><?= $rowcategory['category_name'];?></a></li>
+                        <li><a href="./shop.php?category_id=<?php echo $rowcategory['category_id'];?>&category_name=<?php echo $rowcategory['category_name'];?>"><?php echo $rowcategory['category_name'];?></a></li>
                         <?php } ?>
                       </ul>
                     </div>

@@ -93,11 +93,11 @@ if (isset($_POST["txtSearch"])) {
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="product_name" class=" form-control-label">name</label>
-                      <input type="text" id="product_name" name="product_name" placeholder="Enter your company name" class="form-control" value="<?php echo $row["product_name"]; ?>">
+                      <label for="product_name" class=" form-control-label">ชื่อสินค้า</label>
+                      <input type="text" id="product_name" name="product_name" placeholder="ชื่อสินค้า" class="form-control" value="<?php echo $row["product_name"]; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="brand_id" class=" form-control-label">brand_id</label>
+                      <label for="brand_id" class=" form-control-label">แบรนด์</label>
                       <select class="form-select" id="brand_id" name="brand_id" required>
                         <?php
                         $sql = "SELECT * FROM tb_brand";
@@ -113,7 +113,7 @@ if (isset($_POST["txtSearch"])) {
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="category_id" class=" form-control-label">category_id</label>
+                      <label for="category_id" class=" form-control-label">ประเภท</label>
                       <select class="form-select" id="category_id" name="category_id" required>
                         <?php
                         $sql = "SELECT * FROM tb_category";
@@ -129,16 +129,16 @@ if (isset($_POST["txtSearch"])) {
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="product_price" class=" form-control-label">price</label>
-                      <input type="text" id="product_price" name="product_price" placeholder="DE1234567890" class="form-control" value="<?php echo $row["product_price"]; ?>">
+                      <label for="product_price" class=" form-control-label">ราคา</label>
+                      <input type="text" id="product_price" name="product_price" placeholder="ราคา" class="form-control" value="<?php echo $row["product_price"]; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="product_qty" class=" form-control-label">qty</label>
-                      <input type="text" id="product_qty" name="product_qty" placeholder="product_qty" class="form-control" value="<?php echo $row["product_qty"]; ?>">
+                      <label for="product_qty" class=" form-control-label">จำนวน</label>
+                      <input type="text" id="product_qty" name="product_qty" placeholder="จำนวน" class="form-control" value="<?php echo $row["product_qty"]; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="product_description" class=" form-control-label">description</label>
-                      <input type="text" id="product_description" name="product_description" placeholder="Enter street name" class="form-control" value="<?php echo $row["product_description"]; ?>">
+                      <label for="product_description" class=" form-control-label">รายละเอียด</label>
+                      <input type="text" id="product_description" name="product_description" placeholder="รายละเอียด" class="form-control" value="<?php echo $row["product_description"]; ?>">
                     </div>
                     <button class="btn btn-primary btn-block" type="button" onclick="editProduct()">
                       บันทึก
@@ -165,50 +165,6 @@ if (isset($_POST["txtSearch"])) {
   var image_list = $("#image_list");
   var upload = $("#btn_upload");
 
-  $('document').ready(function() {
-    //
-    var brand_id = $('#brand_id').val();
-    $.ajax({
-      url: 'query/get_model.php',
-      data: {
-        'brand_id': brand_id
-      },
-      method: 'post',
-      dataType: 'json',
-      success: function(result) {
-        result.forEach((data) => {
-          if (parseInt(data.model_id) == parseInt($('#model_history').val())) {
-            $('#model_id').append(`<option value="${data.model_id}" selected>${data.model_name}</option>`);
-          } else {
-            $('#model_id').append(`<option value="${data.model_id}">${data.model_name}</option>`);
-          }
-        });
-      }
-    });
-
-    $('#brand_id').on('change', function() {
-      brandChange();
-    });
-  });
-
-  function brandChange() {
-    $('#model_id').empty();
-    var brand_id = $('#brand_id').val();
-    $.ajax({
-      url: 'query/get_model.php',
-      data: {
-        'brand_id': brand_id
-      },
-      method: 'post',
-      dataType: 'json',
-      success: function(result) {
-        result.forEach((data) => {
-          $('#model_id').append(`<option value="${data.model_id}">${data.model_name}</option>`);
-        });
-      }
-    });
-  }
-
   $(document).ready(function() {
     let product_id = $('#product_id').val();
     $.ajax({
@@ -222,17 +178,17 @@ if (isset($_POST["txtSearch"])) {
         result.forEach((data) => {
           listImage.push(data.img_product);
           image_list.append(`
-                        <tr>
-                            <td>
-                                <img src="upload/${data.img_product}" style="width: 150px;"> 
-                            </td>    
-                            <td>
-                                <button class="btn btn-danger" onclick="deleteImage('${data.img_product}')">
-                                    ลบ 
-                                </button>
-                            </td>
-                        </tr>
-                    `);
+          <tr>
+            <td>
+              <img src="upload/${data.img_product}" style="width: 150px;"> 
+            </td>    
+            <td>
+              <button class="btn btn-danger" style="background-color: #dc3545;" onclick="deleteImage('${data.img_product}')">
+                ลบ 
+              </button>
+            </td>
+          </tr>
+          `);
         });
       }
     });
@@ -260,9 +216,10 @@ if (isset($_POST["txtSearch"])) {
                 <img src="upload/${response}" style="width: 150px;">
               </td>
               <td>
-                <button class="btn btn-danger" onclick="deleteImage('${response}')">ลบ</button>
+                <button class="btn btn-danger" style="background-color: #dc3545;" onclick="deleteImage('${response}')">ลบ</button>
               </td>
-            </tr>`);
+            </tr>
+            `);
           });
         }
       });
@@ -275,14 +232,15 @@ if (isset($_POST["txtSearch"])) {
     listImage.forEach((response) => {
       console.log(response);
       image_list.append(`
-        <tr id="${response}" name="${response}">
-          <td>
-            <img src="upload/${response}" style="width: 150px;">
-          </td>
-          <td>
-            <button class="btn btn-danger" onclick="deleteImage('${response}')">ลบ</button>
-          </td>
-        </tr>`);
+      <tr id="${response}" name="${response}">
+        <td>
+          <img src="upload/${response}" style="width: 150px;">
+        </td>
+        <td>
+          <button class="btn btn-danger" style="background-color: #dc3545;" onclick="deleteImage('${response}')">ลบ</button>
+        </td>
+      </tr>
+      `);
     });
   }
 

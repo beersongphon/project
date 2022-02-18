@@ -296,7 +296,7 @@
       // alert("login");
       var usr = $("#user_name").val();
       var pwd_login = $("#pwd_login").val();
-      $.post("logins.php", {
+      $.post("query/logins.php", {
         usr: usr,
         pwd_login: pwd_login
       }, function(datacallback) {
@@ -323,7 +323,7 @@
       } else if (comments_con == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else {
-        $.post("contacts.php", {
+        $.post("query/contacts.php", {
           name_con: name_con,
           email_con: email_con,
           comments_con: comments_con
@@ -351,7 +351,7 @@
     let pay_tel = $('#pay_tel').val();
       $.ajax({
         type: "POST",
-        url: "payments.php",
+        url: "query/payments.php",
         data: formData,
         success: function(data) {
           if (data == "imageonly") {
@@ -428,7 +428,7 @@
         $("#pwd_regis").val("");
         $("#confirm_pwd").val("");
       } else {
-        $.post("registers.php", {
+        $.post("query/registers.php", {
           firstname_regis: firstname_regis,
           lastname_regis: lastname_regis,
           address_regis: address_regis,
@@ -499,7 +499,7 @@
         $("#pwd_profile").val("");
         $("#confirm_pwd").val("");
       } else {
-        $.post("profiles.php", {
+        $.post("query/profiles.php", {
           user_id_profile: user_id_profile,
           firstname_profile: firstname_profile,
           lastname_profile: lastname_profile,
