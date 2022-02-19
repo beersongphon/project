@@ -120,8 +120,8 @@ include("./header_front-end.php");
     </table>
   </div>
   <?php
-      }
-    ?>
+  }
+  ?>
 </div>
 
 <br>
