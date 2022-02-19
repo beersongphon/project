@@ -13,4 +13,5 @@
   }
   //กำหนด charset ให้เป็น utf8 เพื่อรองรับภาษาไทย
   mysqli_set_charset($conn,'UTF8');
+  test
 ?>
