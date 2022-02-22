@@ -66,8 +66,8 @@ if(ISSET($_POST['search'])){
                     <th class="text-center">วันที่</th>
                     <th>ชื่อ - นามสกุล</th>
                     <th>ที่อยู่</th>
+                    <th>อีเมลล์</th>
                     <th>เบอร์โทรศัพท์</th>
-                    <th>อีเมล</th>
                     <th class="text-center">สถานะ</th>
                     <th class="text-center">ราคารวม</th>
                     <!-- <th>ACTION</th> -->
