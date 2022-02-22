@@ -52,7 +52,7 @@ include("./header_front-end.php");
                 <th scope="row"><div align="center"><?php echo $i; ?></div></th>
                 <td><?php echo $row["order_date"]; ?></td>
                 <td><?php echo $row["status_name"]; ?></td>
-                <td><div align="center"><?php echo $row["order_total"]; ?></div></td>
+                <td><div align="center"><?php echo number_format($row["order_total"], 2); ?></div></td>
                 <td><a href="./purchase_order.php?order_id=<?php echo $row["order_id"]; ?>" class="btn btn-light">แสดงใบสั่งซื้อ</a></td>
               </tr>
               <?php

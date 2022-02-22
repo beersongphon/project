@@ -21,7 +21,6 @@ if (isset($_POST["usr"])) {
     $_SESSION["user_sex"] = $row["user_sex"];
     $_SESSION["user_username"] = $row["user_username"];
     $_SESSION["permission_id"] = $row["permission_id"];
-    $_SESSION["login_timestamp"] = time();
     echo "login_success";
   } else {
     //   echo "<script>";

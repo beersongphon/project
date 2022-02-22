@@ -96,14 +96,14 @@
           if (!isset($_SESSION['user_username'])) {
           ?>
             <li><a href="./login.php">บัญชีของฉัน</a></li>
-            <li><a href="./login.php">ติดตามการสั่งซื้อ</a></li>
+            <li><a href="./login.php">สถานะการสั่งซื้อ</a></li>
             <li><a href="./login.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
           } else {
           ?>
             <li><a href="./profile.php">บัญชีของฉัน</a></li>
-            <li><a href="./orders_tracking.php">ติดตามการสั่งซื้อ</a></li>
+            <li><a href="./orders_status.php">สถานะการสั่งซื้อ</a></li>
             <li><a href="./checkout.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
