@@ -346,6 +346,8 @@
     var formData = new FormData(this);
     // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
     let order_id = $('#order_id').val();
+    let order_name = $('#order_name').val();
+    let order_address = $('#order_address').val();
     let pay_total = $('#pay_total').val();
     let fileToUpload = $("#fileToUpload").val();
     let pay_tel = $('#pay_tel').val();
@@ -361,11 +363,15 @@
           } else if (data == "success") {
             alert("ดำเนินการเสร็จสิ้น");
             order_id
+            order_name
+            order_address
             pay_total
             fileToUpload
             pay_tel
             location.reload();
             console.log("order_id: " + order_id);
+            console.log("order_name: " + order_name);
+            console.log("order_address: " + order_address);
             console.log("pay_total: " + pay_total);
             console.log("pay_slip: " + fileToUpload);
             console.log("pay_tel: " + pay_tel);
@@ -373,6 +379,8 @@
           } else if (data == "error") {
             alert("เกิดปัญหาการ insert db ผิดพลาด");
             console.log("order_id: " + order_id);
+            console.log("order_name: " + order_name);
+            console.log("order_address: " + order_address);
             console.log("pay_total: " + pay_total);
             console.log("pay_slip: " + fileToUpload);
             console.log("pay_tel: " + pay_tel);
@@ -382,6 +390,8 @@
           } else {
             alert("ERROR: " + data);
             console.log("order_id: " + order_id);
+            console.log("order_name: " + order_name);
+            console.log("order_address: " + order_address);
             console.log("pay_total: " + pay_total);
             console.log("pay_slip: " + fileToUpload);
             console.log("pay_tel: " + pay_tel);

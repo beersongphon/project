@@ -50,7 +50,7 @@ include("./header_front-end.php");
     if (mysqli_multi_query($conn, $order_details)) {
       unset($_SESSION["shopping_cart"]);
       echo '<script>alert("You have successfully place an order...Thank you")</script>';
-      echo '<script>window.location.href="index.php"</script>';
+      echo '<script>window.location.href="payment.php"</script>';
     }
   }
 

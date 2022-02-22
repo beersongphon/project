@@ -3,6 +3,8 @@ include('./../connect.php');
 date_default_timezone_set("Asia/Bangkok");
 
 $order_id = $_POST['order_id'];
+$order_name = $_POST['order_name'];
+$order_address = $_POST['order_address'];
 $pay_total = $_POST['pay_total'];
 $pay_tel = $_POST['pay_tel'];
 $target_dir = "./../pay/";
@@ -20,7 +22,9 @@ if ($FileType != "jpg" && $FileType != "JPG" && $FileType != "jpeg" && $FileType
     $changeName = $target_dir . md5(basename($_FILES["fileToUpload"]["name"])) . ".jpg";
 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], iconv('utf-8', 'windows-874', $changeName))) {
-        $sql2 = "UPDATE tb_order SET  
+        $sql2 = "UPDATE tb_order SET 
+        order_name = '$order_name', 
+        order_address = '$order_address', 
         status_id = '2'
         WHERE order_id = '$order_id'";
         $result = $conn->query($sql2);

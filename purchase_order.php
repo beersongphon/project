@@ -4,7 +4,7 @@ include("./header_front-end.php");
 ?>
 <br />
 <div class="order-container">
-  <div class="order-title">ใบสั่งซื้อ</div>
+  <div class="order-title">ใบเสร็จ</div>
   <?php
   if (isset($_GET["order_id"])) {
     $customer_details = "";
@@ -40,9 +40,7 @@ include("./header_front-end.php");
                               <b>เลขที่ใบสั่งซื้อ</b>
                               <span class='order-underline'>" . $_GET["order_id"] ." </span><br />
                               <b>วันที่สั่งซื้อ</b>
-                              <span class='order-underline'>" . $row['order_date'] ." </span><br />
-                              <b>สถานะ</b>
-                              <span class='order-underline'>" . $row['status_name'] ." </span>
+                              <span class='order-underline'>" . $row['order_date'] ." </span>
                             </div>
                           </div>
                           ";

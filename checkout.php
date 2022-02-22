@@ -34,62 +34,33 @@ include("./header_front-end.php");
         <div class="col-lg-8">
           <h5>การสั่งซื้อ</h5>
           <div class="row">
-          <div class="col-lg-12">
+            <div class="col-lg-12">
               <div class="checkout__form__input">
                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="checkout__form__input">
-                <p>ชื่อ <span>*</span></p>
-                <input type="text" name="order_name" placeholder="ชื่อ">
+                <p>ชื่อ - นามสกุล <span>*</span></p>
+                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $_SESSION['user_firstname']; ?> <?php echo $_SESSION['user_lastname']; ?>">
               </div>
             </div>
-            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p>ชื่อ <span>*</span></p>
-                <input type="text" name="name" value="<?php //echo $_SESSION['user_firstname']; ?>">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p>Last Name <span>*</span></p>
-                <input type="text">
-              </div>
-            </div> -->
             <div class="col-lg-12">
-              <!-- <div class="checkout__form__input">
-                <p>Country <span>*</span></p>
-                <input type="text">
-              </div> -->
               <div class="checkout__form__input">
                 <p>ที่อยู่ <span>*</span></p>
-                <input type="text" name="order_address" placeholder="ที่อยู่">
-                <!-- <input type="text" placeholder="Apartment. suite, unite ect ( optinal )"> -->
-              </div>
-              <!-- <div class="checkout__form__input">
-                <p>Town/City <span>*</span></p>
-                <input type="text">
-              </div>
-              <div class="checkout__form__input">
-                <p>Country/State <span>*</span></p>
-                <input type="text">
-              </div>
-              <div class="checkout__form__input">
-                <p>Postcode/Zip <span>*</span></p>
-                <input type="text">
-              </div> -->
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p>เบอร์โทร <span>*</span></p>
-                <input type="text" name="order_tel" placeholder="เบอร์โทร">
+                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $_SESSION['user_address']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>อีเมล <span>*</span></p>
-                <input type="text" name="order_email" placeholder="อีเมล">
+                <input type="text" name="order_email" placeholder="อีเมล" value="<?php echo $_SESSION['user_email']; ?>">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="checkout__form__input">
+                <p>เบอร์โทร <span>*</span></p>
+                <input type="text" name="order_tel" placeholder="เบอร์โทร" value="<?php echo $_SESSION['user_tel']; ?>">
               </div>
             </div>
             <!-- <div class="col-lg-12">
