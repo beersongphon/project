@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Bangkok");
 $order_id = $_POST['order_id'];
 $pay_total = $_POST['pay_total'];
 $pay_tel = $_POST['pay_tel'];
-$target_dir = "pay/";
+$target_dir = "./../pay/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $FileType = pathinfo($target_file, PATHINFO_EXTENSION);
 
