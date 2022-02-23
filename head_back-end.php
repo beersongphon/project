@@ -24,7 +24,7 @@ include("./authguard.php");
   <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
   <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css">
   <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/css/app.css">
-  <link rel="shortcut icon" href="./assets/back-end/mazer/dist/assets/images/favicon.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
 
   <!-- <link rel="stylesheet" href="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.css"> -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>

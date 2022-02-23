@@ -1,25 +1,59 @@
-<html>
-<head>
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-<body>
-<?php 
-include('./test1.php');
-?> 
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script>
- $(function(){
-       $(".dropdown-toggle").text($(".dropdown-menu .active").text());
- });
-</script>
-<script>
- $(function(){
-    $(".dropdown-menu").on('click', 'li a', function(){
-      $(".dropdown-toggle").text($(this).text());
-   });
-});
-</script>
-</body>
-</html>
+<?php
+	//เรียกใช้ไฟล์ autoload.php ที่อยู่ใน Folder vendor
+	require_once __DIR__ . '/vendor/autoload.php';
+	
+	include('./connect.php');
+
+	$sql = "SELECT * FROM tb_order";
+	
+	$result = mysqli_query($conn, $sql);
+	$content = "";
+	if (mysqli_num_rows($result) > 0) {
+		$i = 1;
+		while($row = mysqli_fetch_assoc($result)) {
+			$content .= '<tr style="border:1px solid #000;">
+				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
+				<td style="border-right:1px solid #000;padding:3px;text-align:center;" >'.$row['order_id'].'</td>
+				<td style="border-right:1px solid #000;padding:3px;"  >'.$row['order_id'].'</td>
+				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$row['order_id'].'</td>
+				<td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['order_total'],2).'</td>
+			</tr>';
+			$i++;
+		}
+	}
+	
+	mysqli_close($conn);
+	
+$mpdf = new \Mpdf\Mpdf();
+
+$head = '
+<style>
+	body{
+		font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+	}
+</style>
+
+<h2 style="text-align:center">ใบรับสินค้า</h2>
+
+<table id="bg-table" width="100%" style="border-collapse: collapse;font-size:12pt;margin-top:8px;">
+    <tr style="border:1px solid #000;padding:4px;">
+        <td  style="border-right:1px solid #000;padding:4px;text-align:center;"   width="10%">ลำดับ</td>
+        <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">รหัสสินค้า</td>
+        <td  width="45%" style="border-right:1px solid #000;padding:4px;text-align:center;">&nbsp;รายละเอียดสินค้า</td>
+        <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">หน่วยนับ</td>
+        <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ราคา (฿)</td>
+    </tr>
+
+</thead>
+	<tbody>';
+	
+$end = "</tbody>
+</table>";
+
+$mpdf->WriteHTML($head);
+
+$mpdf->WriteHTML($content);
+
+$mpdf->WriteHTML($end);
+
+$mpdf->Output();

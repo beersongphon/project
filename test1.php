@@ -1,69 +1,129 @@
 <?php
 	//เรียกใช้ไฟล์ autoload.php ที่อยู่ใน Folder vendor
-	require_once __DIR__ . '../../vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 	
-	//ตั้งค่าการเชื่อมต่อฐานข้อมูล
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "product";
-	$conn = mysqli_connect($servername, $username, $password, $dbname);
-	
-	mysqli_set_charset($conn, "utf8");
+	include('./connect.php');
 
-	if (!$conn) {
-		die("Connection failed: " . mysqli_connect_error());
-	}
-
-	$sql = "SELECT * FROM items";
+  if (isset($_GET["order_id"])) {
+    $customer_details = "";
+    $order_details = "";
+    $total = 0;
+    $query = "SELECT * FROM tb_order 
+              INNER JOIN tb_order_detail 
+              ON tb_order_detail.order_id = tb_order.order_id 
+              INNER JOIN tb_product
+              ON tb_product.product_id = tb_order_detail.product_id 
+              INNER JOIN tb_brand
+              ON tb_brand.brand_id = tb_product.brand_id 
+              INNER JOIN tb_user 
+              ON tb_user.user_id = tb_order.user_id 
+              INNER JOIN tb_status 
+              ON tb_status.status_id = tb_order.status_id 
+              WHERE tb_order.order_id = '$_GET[order_id]'   
+              ";
+    $result = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_array($result)) {
+      $customer_details = "  
+                          <div class='order-head'>
+                            <div class='order-date'> 
+                              <b>เลขที่ใบสั่งซื้อ</b>
+                              <span class='order-underline'>" . $_GET["order_id"] ." </span><br />
+                              <b>วันที่สั่งซื้อ</b>
+                              <span class='order-underline'>" . $row['order_date'] ." </span>
+                            </div>
+                            <div class='order-customer'> <b>ชื่อ-สกุล</b> 
+                              <span class='order-underline'>" . $row["order_name"] ."</span><br />
+                              <b>ที่อยู่</b> 
+                              <span class='order-underline'>" . $row['order_address'] ." </span><br />
+                              <b>เบอร์โทรศัพท์</b> 
+                              <span class='order-underline'>" . $row['order_tel'] ." </span><br />
+                              <b>อีเมล</b> 
+                              <span class='order-underline'>" . $row['order_email'] ." </span>
+                            </div>
+                          </div>
+                          ";
+ 
+      $order_details .= "  
+                          <tr>  
+                            <td>".$row["product_name"]." ยี่ห้อ : ".$row["brand_name"]."</td>  
+                            <td align='center'>" . $row["order_price"] . "</td>  
+                            <td align='center'>" . $row["order_quantity"] . "</td>  
+                            <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
+                          </tr>  
+                        ";
+      $total = number_format($total + $row["order_quantity"] * $row["order_price"], 2);
+    }
 	
-	$result = mysqli_query($conn, $sql);
-	$content = "";
-	if (mysqli_num_rows($result) > 0) {
-		$i = 1;
-		while($row = mysqli_fetch_assoc($result)) {
-			$content .= '<tr style="border:1px solid #000;">
-				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
-				<td style="border-right:1px solid #000;padding:3px;text-align:center;" >'.$row['code'].'</td>
-				<td style="border-right:1px solid #000;padding:3px;"  >'.$row['name'].'</td>
-				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$row['units'].'</td>
-				<td style="border-right:1px solid #000;padding:3px;text-align:right;"  >'.number_format($row['price'],2).'</td>
-			</tr>';
-			$i++;
-		}
-	}
-	
-	mysqli_close($conn);
-	
-$mpdf = new mPDF();
+$mpdf = new \Mpdf\Mpdf();
 
 $head = '
-<style>
-	body{
-		font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
-	}
-</style>
+<style type="text/css">
+body{
+  font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+}
+.order-container {
+  font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+  margin:0px auto;
+  width:950px;
+  font-size:14px;
+}
+.order-head {
+  margin:50px 0 10px 0;
+}
+.order-title {
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
+.order-head .order-customer {
+  float:left;
+  margin:10px 0 10px 0;
+  padding:5px;
+}
+.order-head .order-date {
+  text-align:right;
+  margin:10px 0 10px 0;
+  float:right;
+  padding:5px;
+}
+.order-underline {
+  border-bottom:#000 1px dashed;
+}
+.clear {
+  clear:both;
+}
+</style>';
 
-<h2 style="text-align:center">ใบรับสินค้า</h2>
+$order = "
+<br />
+<div class='order-container'>
+  <div class='order-title'>ใบเสร็จ</div>
+  " . $customer_details ." 
+  <div class='clear'></div>
+  <div class='order-content'>
+    <table width='100%' border='1' cellpadding='3' cellspacing='0'>
+      <tr>
+        <td><strong>สินค้า</strong></td>
+        <td align='center'><strong>ราคา</strong></td>
+        <td align='center'><strong>จำนวน</strong></td>
+        <td align='right'><strong>ราคารวม</strong></td>
+      </tr>
+      " . $order_details ." 
+      <tr>
+        <td colspan='3' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
+        <td align='right'>" . $total ."</td>
+      </tr>
+    </table>
+  </div>";
+}
+$end = "
+</div>
+<br>";
 
-<table id="bg-table" width="100%" style="border-collapse: collapse;font-size:12pt;margin-top:8px;">
-    <tr style="border:1px solid #000;padding:4px;">
-        <td  style="border-right:1px solid #000;padding:4px;text-align:center;"   width="10%">ลำดับ</td>
-        <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">รหัสสินค้า</td>
-        <td  width="45%" style="border-right:1px solid #000;padding:4px;text-align:center;">&nbsp;รายละเอียดสินค้า</td>
-        <td  style="border-right:1px solid #000;padding:4px;text-align:center;"  width="15%">หน่วยนับ</td>
-        <td  style="border-right:1px solid #000;padding:4px;text-align:center;" width="15%">ราคา (฿)</td>
-    </tr>
-
-</thead>
-	<tbody>';
-	
-$end = "</tbody>
-</table>";
 
 $mpdf->WriteHTML($head);
 
-$mpdf->WriteHTML($content);
+$mpdf->WriteHTML($order);
 
 $mpdf->WriteHTML($end);
 
