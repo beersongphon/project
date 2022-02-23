@@ -1,5 +1,6 @@
 <?php
 include("./head_front-end.php");
+include("./authguard.php");
 include("./header_front-end.php");
 ?>
 
