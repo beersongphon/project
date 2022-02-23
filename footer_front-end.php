@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-1.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/273755015_348496047284153_1755625529480454519_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-2.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/272800576_376439770542370_3147845305683727133_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-3.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/273951449_660412938716153_7723872600536299228_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-4.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/272906207_283601377203483_3626855377821527351_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-5.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/273994721_373886497500356_1764593034202846293_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-6.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/270569392_392898942611735_5262826995142670967_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -547,6 +547,49 @@
 
     
   });
+</script>
+
+<script>
+var pay_total = $("#pay_total");
+
+$('document').ready(function() {
+  var order_id = $('#order_id').val();
+  $.ajax({
+    url: 'query/get_payment.php',
+    data: {
+      'order_id': order_id
+    },
+    method: 'post',
+    dataType: 'json',
+    success: function(result) {
+      result.forEach((data) => {
+        $('#pay_total').append(`<option value="${data.order_total}">${data.order_total}</option>`);
+      });
+    }
+  });
+
+  $('#order_id').on('change', function() {
+    totalChange();
+  });
+});
+
+function totalChange() {
+  $('#pay_total').empty();
+  var order_id = $('#order_id').val();
+  $.ajax({
+    url: 'query/get_payment.php',
+    data: {
+      'order_id': order_id
+    },
+    method: 'post',
+    dataType: 'json',
+    success: function(result) {
+      result.forEach((data) => {
+        $('#pay_total').append(`<option value="${data.order_total}">${data.order_total}</option>`);
+      });
+    }
+  });
+}
 </script>
 
 <!-- Js Plugins -->

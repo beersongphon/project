@@ -1,6 +1,16 @@
 <?php
 include("./head_front-end.php");
 include("./header_front-end.php");
+
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT user_id, 
+CONCAT(user_firstname ,' ' , user_lastname) as user_name, 
+user_address, 
+user_email, 
+user_tel 
+FROM tb_user WHERE user_id = '$user_id'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
 ?>
 
 <!-- Breadcrumb Begin -->
@@ -29,25 +39,25 @@ include("./header_front-end.php");
             <div class="col-lg-12">
               <div class="payment__form__input">
                 <!-- <p>ID <span>*</span></p> -->
-                <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="payment__form__input">
                 <p>ชื่อ - นามสกุล <span>*</span></p>
-                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $_SESSION['user_firstname']; ?> <?php echo $_SESSION['user_lastname']; ?>">
+                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $row['user_name']; ?>">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="payment__form__input">
                 <p>ที่อยู่ <span>*</span></p>
-                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $_SESSION['user_address']; ?>">
+                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $row['user_address']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>เบอร์โทรศัพท์ <span>*</span></p>
-                <input type="text" name="pay_tel" id="pay_tel" value="<?php echo $_SESSION['user_tel']; ?>">
+                <input type="text" name="pay_tel" id="pay_tel" value="<?php echo $row['user_tel']; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -85,28 +95,8 @@ include("./header_front-end.php");
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>จำนวนเงินที่โอน <span>*</span></p>
-                <select name="pay_total" id="pay_total" aria-label="Default select example">
-                  <?php
-                  $i = 1;
-                  $sql2 = "SELECT *
-                  FROM tb_order
-                  LEFT JOIN
-                  tb_user
-                  ON
-                  tb_order.user_id = tb_user.user_id
-                  WHERE tb_order.user_id = $_SESSION[user_id] AND tb_order.status_id = '1'
-                  LIMIT 1";
-                  $result2 = $conn->query($sql2);
-                  if ($result2->num_rows > 0) {
-                    // output data of each row
-                    while ($row2 = $result2->fetch_assoc()) {
-                  ?>
-                  <option value="<?php echo $row2["order_total"]; ?>"><?php echo number_format($row2["order_total"], 2); ?></option>
-                  <?php
-                      $i++;
-                    } //while condition closing bracket
-                  }  //if condition closing bracket
-                  ?>
+                <select name="pay_total" id="pay_total" aria-label="Default select example" readonly>
+
                 </select>
               </div>
             </div>
@@ -141,4 +131,5 @@ include("./header_front-end.php");
   </div>
 </section>
 <!-- Payment Section End -->
+
 <?php include("./footer_front-end.php"); ?>
