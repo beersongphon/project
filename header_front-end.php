@@ -126,7 +126,7 @@
               <ul class="dropdown">
                 <li><a href="./shop-cart.php">ตะกร้าสินค้า</a></li>
                 <li><a href="./checkout.php">การสั่งซื้อ</a></li>
-                <li><a href="./orders_status.php">สถานะการสั่งซื้อ</a></li>
+                <li><a href="./orders_status.php">ประวัติการสั่งซื้อ</a></li>
               </ul>
             </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->

@@ -91,8 +91,8 @@ if(ISSET($_POST['search'])){
                     <td class="text-center"><?php echo $row['order_date']; ?></td>
                     <td class="text-bold-500"><?php echo $row['user_firstname']; ?> <?php echo $row['user_lastname']; ?></td>
                     <td class="text-bold-500"><?php echo $row['order_address']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['order_tel']; ?></td>
                     <td class="text-bold-500"><?php echo $row['order_email']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['order_tel']; ?></td>
                     <td class="text-center"><?php echo $row['permission_id'];?></td>
                     <td class="text-center"><?php echo $row['order_total'];?></td>
                   </tr>
