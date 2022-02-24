@@ -107,9 +107,9 @@ if(ISSET($_POST['search'])){
                       <th class="text-center">ลำดับ</th>
                       <th class="text-left" align="left">วันที่</th>
                       <th width="200" align="left">ชื่อ - นามสกุล</th>
-                      <th align="left">ที่อยู่</th>
+                      <th width="200" align="left">ที่อยู่</th>
                       <th align="left">อีเมลล์</th>
-                      <th width="200" align="left">เบอร์โทรศัพท์</th>
+                      <th width="120" align="left">เบอร์โทรศัพท์</th>
                       <th width="100" align="left">สถานะ</th>
                       <th class="text-center" width="80" align="center">ราคารวม</th>
                       <!-- <th>ACTION</th> -->
