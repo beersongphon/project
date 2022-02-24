@@ -2,6 +2,8 @@
 include('./head_back-end.php');
 include('./header_back-end.php');
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 $strKeyword = null;
 
 if (isset($_POST["txtSearch"])) {
@@ -32,14 +34,54 @@ if (isset($_POST["txtSearch"])) {
       </div>
     </div>
   </div>
+  <?php 
+  ob_start();
+  $head = '
+  <style type="text/css">
+  body{
+    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+  }
+  .order-container {
+    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+    margin:0px auto;
+    width:950px;
+    font-size:14px;
+  }
+  .order-head {
+    margin:50px 0 10px 0;
+  }
+  .order-title {
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+  }
+  .order-head .order-customer {
+    float:left;
+    margin:10px 0 10px 0;
+    padding:5px;
+  }
+  .order-head .order-date {
+    text-align:right;
+    margin:10px 0 10px 0;
+    float:right;
+    padding:5px;
+  }
+  .order-underline {
+    border-bottom:#000 1px dashed;
+  }
+  .clear {
+    clear:both;
+  }
+  </style>';
+  ?>
     <!-- Hoverable rows start -->
   <section class="section">
     <div class="row" id="table-hover-row">
       <div class="col-12">
         <div class="card">
-          <!-- <div class="card-header">
-            <h4 class="card-title">ข้อมูลสินค้า</h4>
-          </div> -->
+          <div class="card-header">
+            <h4 class="card-title" align="center">รายงานสินค้าคงเหลือ</h4>
+          </div>
           <div class="card-content">
             <div class="card-body">
             </div>
@@ -49,10 +91,10 @@ if (isset($_POST["txtSearch"])) {
                 <thead>
                   <tr>
                     <th class="text-center">ลำดับ</th>
-                    <th class="text-center">รหัสสินค้า</th>
-                    <th>ชื่อสินค้า</th>
+                    <th class="text-center" width="100" >รหัสสินค้า</th>
+                    <th width="200" align="left">ชื่อสินค้า</th>
                     <th>ชื่อแบรนด์</th>
-                    <th>ประเภท</th>
+                    <th align="left">ประเภท</th>
                     <th class="text-center">เหลือ (ชิ้น)</th>
                     <!-- <th>ACTION</th> -->
                   </tr>
@@ -78,12 +120,12 @@ if (isset($_POST["txtSearch"])) {
                     while ($row = $result->fetch_assoc()) {
                   ?>
                   <tr>
-                    <td class="text-center"><?php echo $i; ?></td>
-                    <td class="text-center"><?php echo $row['product_id']; ?></td>
+                    <td class="text-center" align="center"><?php echo $i; ?></td>
+                    <td class="text-center" align="center"><?php echo $row['product_id']; ?></td>
                     <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
                     <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['category_name']; ?></td>
-                    <td class="text-center"><?php echo $row['product_qty'];?></td>
+                    <td class="text-bold-500" align="left"><?php echo $row['category_name']; ?></td>
+                    <td class="text-center" align="center"><?php echo $row['product_qty'];?></td>
                   </tr>
                   <?php
                   $i++;
@@ -93,9 +135,16 @@ if (isset($_POST["txtSearch"])) {
                 </tbody>
               </table>
               <!-- <button onclick="window.print()">Print </button>  -->
-              <hr>
             </div>
           </div>
+          <?php
+          $html=ob_get_contents();
+          $mpdf = new \Mpdf\Mpdf();
+          $mpdf->WriteHTML($head);
+          $mpdf->WriteHTML($html);
+          $mpdf->Output("report_product.pdf");
+          ?>
+          <a href="report_product.pdf" class="btn btn-primary">ออกรายงาน</a>
         </div>
       </div>
     </div>

@@ -1,96 +1,185 @@
 <?php
-//เรียกใช้ไฟล์ autoload.php ที่อยู่ใน Folder vendor
+include('./head_back-end.php');
+
+$strKeyword = null;
+
+if (isset($_POST["txtSearch"])) {
+  $strKeyword = $_POST["txtSearch"];
+}
 require_once __DIR__ . '/vendor/autoload.php';
-include('./connect.php');
-include("./authguard.php");
-$mpdf = new \Mpdf\Mpdf();
-
-ob_start();
 ?>
-<br />
-<div class="order-container">
-  <div class="order-title">ใบเสร็จ</div>
-  <?php
-  if (isset($_GET["order_id"])) {
-    $customer_details = "";
-    $order_details = "";
-    $total = 0;
-    $query = "SELECT * FROM tb_order 
-              INNER JOIN tb_order_detail 
-              ON tb_order_detail.order_id = tb_order.order_id 
-              INNER JOIN tb_product
-              ON tb_product.product_id = tb_order_detail.product_id 
-              INNER JOIN tb_brand
-              ON tb_brand.brand_id = tb_product.brand_id 
-              INNER JOIN tb_user 
-              ON tb_user.user_id = tb_order.user_id 
-              INNER JOIN tb_status 
-              ON tb_status.status_id = tb_order.status_id 
-              WHERE tb_order.order_id = '$_GET[order_id]'   
-              ";
-    $result = mysqli_query($conn, $query);
-    while ($row = mysqli_fetch_array($result)) {
-      $customer_details = "  
-                          <div class='order-head'>
-                            <div class='order-customer'> <b>ชื่อ-สกุล</b> 
-                              <span class='order-underline'>" . $row["order_name"] ."</span><br />
-                              <b>ที่อยู่</b> 
-                              <span class='order-underline'>" . $row['order_address'] ." </span><br />
-                              <b>เบอร์โทรศัพท์</b> 
-                              <span class='order-underline'>" . $row['order_tel'] ." </span><br />
-                              <b>อีเมล</b> 
-                              <span class='order-underline'>" . $row['order_email'] ." </span>
-                            </div>
-                            <div class='order-date'> 
-                              <b>เลขที่ใบสั่งซื้อ</b>
-                              <span class='order-underline'>" . $_GET["order_id"] ." </span><br />
-                              <b>วันที่สั่งซื้อ</b>
-                              <span class='order-underline'>" . $row['order_date'] ." </span>
-                            </div>
-                          </div>
-                          ";
- 
-      $order_details .= "  
-                          <tr>  
-                            <td>".$row["product_name"]." ยี่ห้อ : ".$row["brand_name"]."</td>  
-                            <td align='center'>" . $row["order_price"] . "</td>  
-                            <td align='center'>" . $row["order_quantity"] . "</td>  
-                            <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
-                          </tr>  
-                        ";
-      $total = number_format($total + $row["order_quantity"] * $row["order_price"], 2);
-    }
-  ?>
-
-  <?php echo $customer_details ?>
-
-  <div class="clear"></div>
-  <div class="order-content">
-    <table width="100%" border="1" cellpadding="3" cellspacing="0">
-      <tr>
-        <td><strong>สินค้า</strong></td>
-        <td align="center"><strong>ราคา</strong></td>
-        <td align="center"><strong>จำนวน</strong></td>
-        <td align="right"><strong>ราคารวม</strong></td>
-      </tr>
-      <?php echo $order_details ?>
-      <tr>
-        <td colspan="3" align="right"><strong>รวมเงินทั้งสิ้น</strong></td>
-        <td align="right"><?=$total?></td>
-      </tr>
-    </table>
+<div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+      <div class="sidebar-header">
+        <div class="d-flex justify-content-between">
+          <div class="logo">
+            <a href="./home.php" style="font-family: 'Finger Paint', cursive; font-size: 20px;">Luxury by Fon</a>
+            <!-- <a href="index.html"><img src="./assets/back-end/mazer/dist/assets/images/logo/logo.png" alt="Logo" srcset=""></a> -->
+          </div>
+          <div class="toggler">
+            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul class="menu">
+          <li class="sidebar-item active">
+            <a href="./product.php" class='sidebar-link'>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
   </div>
-  <?php
+  <div id="main">
+<header class="mb-3">
+  <a href="#" class="burger-btn d-block d-xl-none">
+    <i class="bi bi-justify fs-3"></i>
+  </a>
+</header>
+
+<div class="page-heading">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>รายงานสินค้าคงเหลือ</h3>
+        <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
+      </div>
+      <div class="col-12 col-md-6 order-md-2 order-first">
+        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./home.php">หน้าแรก</a></li>
+            <li class="breadcrumb-item active" aria-current="page">รายงานสินค้าคงเหลือ</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <?php 
+  ob_start();
+  $head = '
+  <style type="text/css">
+  body{
+    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
   }
+  .order-container {
+    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+    margin:0px auto;
+    width:950px;
+    font-size:14px;
+  }
+  .order-head {
+    margin:50px 0 10px 0;
+  }
+  .order-title {
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+  }
+  .order-head .order-customer {
+    float:left;
+    margin:10px 0 10px 0;
+    padding:5px;
+  }
+  .order-head .order-date {
+    text-align:right;
+    margin:10px 0 10px 0;
+    float:right;
+    padding:5px;
+  }
+  .order-underline {
+    border-bottom:#000 1px dashed;
+  }
+  .clear {
+    clear:both;
+  }
+  </style>';
   ?>
+  <!-- Hoverable rows start -->
+  <section class="section">
+    <div class="row" id="table-hover-row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title" align="center">รายงานสินค้าคงเหลือ</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+            </div>
+            <!-- table hover -->
+            <div class="table-responsive">
+              <table class="table table-hover table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center">ลำดับ</th>
+                    <th class="text-center" width="100" >รหัสสินค้า</th>
+                    <th width="200" align="left">ชื่อสินค้า</th>
+                    <th>ชื่อแบรนด์</th>
+                    <th align="left">ประเภท</th>
+                    <th class="text-center">เหลือ (ชิ้น)</th>
+                    <!-- <th>ACTION</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $i = 1;
+
+                  $sql = "SELECT * FROM tb_product 
+                  LEFT JOIN
+                  tb_brand
+                  ON
+                  tb_product.brand_id = tb_brand.brand_id
+                  LEFT JOIN
+                  tb_category
+                  ON
+                  tb_product.category_id = tb_category.category_id
+                  ";
+                  $result = $conn->query($sql);
+
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                  ?>
+                  <tr>
+                    <td class="text-center" align="center"><?php echo $i; ?></td>
+                    <td class="text-center" align="center"><?php echo $row['product_id']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
+                    <td class="text-bold-500" align="left"><?php echo $row['category_name']; ?></td>
+                    <td class="text-center" align="center"><?php echo $row['product_qty'];?></td>
+                  </tr>
+                  <?php
+                  $i++;
+                    } //while condition closing bracket
+                  }  //if condition closing bracket
+                  ?>
+                </tbody>
+              </table>
+              <!-- <button onclick="window.print()">Print </button>  -->
+              <hr>
+            </div>
+          </div>
+          <?php
+          $html=ob_get_contents();
+          $mpdf = new \Mpdf\Mpdf();
+          $mpdf->WriteHTML($head);
+          $mpdf->WriteHTML($html);
+          $mpdf->Output("report.pdf");
+          ?>
+          <a href="report.pdf" class="btn btn-primary">ออกรายงาน</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Hoverable rows end -->
 </div>
 
-<br>
-<?php 
-include("./footer_front-end.php"); 
-$html=ob_get_contents();
-    $mpdf->WriteHTML($html);
-    $mpdf->Output();
-    ob_end_flush();
-?>
-<a href="javascript:window.print()">บึนทึก</a>
+<script src="./assets/js/jquery-3.5.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
+
+<?php include("./footer_back-end.php"); ?>

@@ -55,6 +55,7 @@ include("./header_front-end.php");
       tb_img_product
       ON
       tb_product.product_id = tb_img_product.product_id
+      WHERE tb_product.product_qty NOT IN ('0')
       ORDER BY tb_product.product_id DESC
       LIMIT 8";
       $result = $conn->query($sql);

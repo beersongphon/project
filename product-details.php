@@ -1,6 +1,5 @@
 <?php
 include("./head_front-end.php");
-include("./authguard.php");
 include("./header_front-end.php");
 
 $product_id = $_GET["product_id"];
@@ -279,6 +278,7 @@ $row = mysqli_fetch_array($result);
         tb_img_product
         ON
         tb_product.product_id = tb_img_product.product_id 
+        WHERE tb_product.product_qty NOT IN ('0')
         ORDER BY product_id DESC LIMIT 4";
         $result = $conn->query($sql);
 
