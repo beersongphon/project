@@ -89,27 +89,4 @@ if (isset($_POST["txtSearch"])) {
       <!-- Hoverable rows end -->
     </div>
 
-    <script src="./assets/js/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script>
-      function createCategory() {
-        let category_name = $('#category_name').val();
-        $.ajax({
-          url: 'query/add_category.php',
-          type: 'post',
-          data: {
-            'category_name': category_name
-          },
-          success: function(response) {
-            console.log(response);
-            setTimeout(function() {
-              window.location.replace('category.php');
-              //console.log(product_name, product_price, product_qty, product_description, response);
-            }, 300);
-          }
-        });
-      }
-    </script>
-
     <?php include("./footer_back-end.php"); ?>

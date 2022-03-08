@@ -84,7 +84,7 @@ if (isset($_POST["txtSearch"])) {
                   <label for="brand_name" class=" form-control-label">name</label>
                   <input type="text" id="category_name" name="category_name" placeholder="Enter your company name" class="form-control" value="<?php echo $row["category_name"]; ?>">
                 </div>
-                <button class="btn btn-primary btn-block" type="button" onclick="editBrand()">
+                <button class="btn btn-primary btn-block" type="button" onclick="editCategory()">
                   บันทึก
                 </button>
               </form>
@@ -100,30 +100,5 @@ if (isset($_POST["txtSearch"])) {
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script src="./assets/js/jquery-3.5.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script>
-  function editBrand() {
-    let category_id = $('#category_id').val();
-    let category_name = $('#category_name').val();
-    $.ajax({
-      url: 'query/edit_category.php',
-      type: 'post',
-      data: {
-        'category_id': category_id,
-        'category_name': category_name
-      },
-      success: function(response) {
-        console.log(response);
-        setTimeout(function() {
-          window.location.replace('category.php');
-          //console.log(product_id, image2, product_name, product_price, product_description, response);
-        }, 300);
-      }
-    });
-  }
-</script>
 
 <?php include("./footer_back-end.php"); ?>

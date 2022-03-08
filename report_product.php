@@ -74,7 +74,7 @@ if (isset($_POST["txtSearch"])) {
   }
   </style>';
   ?>
-    <!-- Hoverable rows start -->
+  <!-- Hoverable rows start -->
   <section class="section">
     <div class="row" id="table-hover-row">
       <div class="col-12">
@@ -84,57 +84,57 @@ if (isset($_POST["txtSearch"])) {
           </div>
           <div class="card-content">
             <div class="card-body">
-            </div>
-            <!-- table hover -->
-            <div class="table-responsive">
-              <table class="table table-hover table-striped mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-center">ลำดับ</th>
-                    <th class="text-center" width="100" >รหัสสินค้า</th>
-                    <th width="200" align="left">ชื่อสินค้า</th>
-                    <th>ชื่อแบรนด์</th>
-                    <th align="left">ประเภท</th>
-                    <th class="text-center">เหลือ (ชิ้น)</th>
-                    <!-- <th>ACTION</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $i = 1;
+              <!-- table hover -->
+              <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center">ลำดับ</th>
+                      <th class="text-center" width="100" >รหัสสินค้า</th>
+                      <th width="200" align="left">ชื่อสินค้า</th>
+                      <th>ชื่อแบรนด์</th>
+                      <th align="left">ประเภท</th>
+                      <th class="text-center">เหลือ (ชิ้น)</th>
+                      <!-- <th>ACTION</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $i = 1;
 
-                  $sql = "SELECT * FROM tb_product 
-                  LEFT JOIN
-                  tb_brand
-                  ON
-                  tb_product.brand_id = tb_brand.brand_id
-                  LEFT JOIN
-                  tb_category
-                  ON
-                  tb_product.category_id = tb_category.category_id
-                  ";
-                  $result = $conn->query($sql);
+                    $sql = "SELECT * FROM tb_product 
+                    LEFT JOIN
+                    tb_brand
+                    ON
+                    tb_product.brand_id = tb_brand.brand_id
+                    LEFT JOIN
+                    tb_category
+                    ON
+                    tb_product.category_id = tb_category.category_id
+                    ";
+                    $result = $conn->query($sql);
 
-                  if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-                  ?>
-                  <tr>
-                    <td class="text-center" align="center"><?php echo $i; ?></td>
-                    <td class="text-center" align="center"><?php echo $row['product_id']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
-                    <td class="text-bold-500" align="left"><?php echo $row['category_name']; ?></td>
-                    <td class="text-center" align="center"><?php echo $row['product_qty'];?></td>
-                  </tr>
-                  <?php
-                  $i++;
-                    } //while condition closing bracket
-                  }  //if condition closing bracket
-                  ?>
-                </tbody>
-              </table>
-              <!-- <button onclick="window.print()">Print </button>  -->
+                    if ($result->num_rows > 0) {
+                      // output data of each row
+                      while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <tr>
+                      <td class="text-center" align="center"><?php echo $i; ?></td>
+                      <td class="text-center" align="center"><?php echo $row['product_id']; ?></td>
+                      <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
+                      <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
+                      <td class="text-bold-500" align="left"><?php echo $row['category_name']; ?></td>
+                      <td class="text-center" align="center"><?php echo $row['product_qty'];?></td>
+                    </tr>
+                    <?php
+                    $i++;
+                      } //while condition closing bracket
+                    }  //if condition closing bracket
+                    ?>
+                  </tbody>
+                </table>
+                <!-- <button onclick="window.print()">Print </button>  -->
+              </div>
             </div>
           </div>
           <?php

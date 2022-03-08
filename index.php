@@ -11,8 +11,20 @@ include("./header_front-end.php");
         <div class="categories__item categories__large__item set-bg" data-setbg="./assets/img/category-1.jpg">
           <div class="categories__text">
             <h1 style="font-family: Sriracha, cursive;">สินค้า</h1>
-            <!-- <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-              edolore magna aliquapendisse ultrices gravida.</p> -->
+            <?php
+            $sql = "SELECT COUNT(*) AS product_count 
+            FROM tb_product
+            WHERE product_qty NOT IN ('0')";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while ($row = $result->fetch_assoc()) {
+            ?>
+            <p>จำนวน <?php echo $row['product_count'];?></p>
+            <?php
+              } //while condition closing bracket
+            }  //if condition closing bracket
+            ?>
             <a href="./shop.php">Shop now</a>
           </div>
         </div>

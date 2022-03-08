@@ -32,7 +32,7 @@ if (isset($_POST["txtSearch"])) {
       </div>
     </div>
   </div>
-    <!-- Hoverable rows start -->
+  <!-- Hoverable rows start -->
   <section class="section">
     <div class="row" id="table-hover-row">
       <div class="col-12">
@@ -40,9 +40,9 @@ if (isset($_POST["txtSearch"])) {
           <!-- <div class="card-header">
             <h4 class="card-title">ข้อมูลสินค้า</h4>
           </div> -->
-          <!-- <div class="card-content">
+          <div class="card-content">
             <div class="card-body">
-              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+              <!-- <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                   <input type="search" name="txtSearch" class="form-control" placeholder="ค้นหา" aria-label="Search" aria-describedby="button-addon2" value="<?php echo $strKeyword; ?>">
@@ -52,45 +52,46 @@ if (isset($_POST["txtSearch"])) {
                     เพิ่มสินค้า
                   </a>
                 </div>
-              </form>
-            </div> -->
-            <!-- table hover -->
-            <ul class='list-group'>
-                  <?php
-                  $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-                  $sql = "SELECT * FROM tb_contact ORDER BY contact_id DESC limit 10";
-                  $result = $conn->query($sql);
+              </form> -->
+              <!-- table hover -->
+              <ul class='list-group'>
+                <?php
+                $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+                $sql = "SELECT * FROM tb_contact ORDER BY contact_id DESC limit 10";
+                $result = $conn->query($sql);
 
-                  if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-                      $date_set = date_create($row['contact_datetime']);
-                  ?>
-                  <li class='list-group-item'>
-                    รายละเอียด: ชื่อผู้ส่ง: <?php echo $row['contact_member']; ?>
-                    <br>
-                    Email: <?php echo $row['contact_email']; ?>
-                    <br>
-                    Feedback Detail: <?php echo $row['contact_comment']; ?>
-                    <br>
-                    วันที่ส่ง: <?php echo date_format($date_set, "d")."  ".$date_th[date_format($date_set, "n")]; ?>
-                    <?php echo date_format($date_set, "Y")." / ".date_format($date_set, "H:i"); ?>
-                  </li>
-                  <?php
-                    } //while condition closing bracket
-                  }  //if condition closing bracket
-                  else{
-                  ?>
-                  <li class='list-group-item'>
-                    <center>ไม่มีข้อมูล</center>
-                  </li>
-                  <?php
-                  }
-                  ?>
-                </tbody>
-              </table>
-              <hr>
+                if ($result->num_rows > 0) {
+                  // output data of each row
+                  while ($row = $result->fetch_assoc()) {
+                    $date_set = date_create($row['contact_datetime']);
+                ?>
+                <li class='list-group-item'>
+                  <label>รายละเอียด: ชื่อผู้ส่ง: <?php echo $row['contact_member']; ?></label>
+                  <br>
+                  <label>Email: <?php echo $row['contact_email']; ?></label>
+                  <br>
+                  <label>Feedback Detail: <?php echo $row['contact_comment']; ?></label>
+                  <br>
+                  <label>
+                    วันที่ส่ง: <?php echo date_format($date_set, "d") . "  " . $date_th[date_format($date_set, "n")]; ?>
+                    <?php echo date_format($date_set, "Y") . " / " . date_format($date_set, "H:i"); ?>
+                  </label>
+                </li>
+                <?php
+                  } //while condition closing bracket
+                }  //if condition closing bracket
+                else {
+                ?>
+                <li class='list-group-item'>
+                  <center>ไม่มีข้อมูล</center>
+                </li>
+                <?php
+                }
+                ?>
+                <hr>
+              </ul>
             </div>
+
           </div>
         </div>
       </div>
