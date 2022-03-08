@@ -34,56 +34,60 @@ if (isset($_POST["txtSearch"])) {
       </div>
     </div>
   </div>
-  <?php 
-  ob_start();
-  $head = '
-  <style type="text/css">
-  body{
-    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
-  }
-  .order-container {
-    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
-    margin:0px auto;
-    width:950px;
-    font-size:14px;
-  }
-  .order-head {
-    margin:50px 0 10px 0;
-  }
-  .order-title {
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-  }
-  .order-head .order-customer {
-    float:left;
-    margin:10px 0 10px 0;
-    padding:5px;
-  }
-  .order-head .order-date {
-    text-align:right;
-    margin:10px 0 10px 0;
-    float:right;
-    padding:5px;
-  }
-  .order-underline {
-    border-bottom:#000 1px dashed;
-  }
-  .clear {
-    clear:both;
-  }
-  </style>';
-  ?>
+
   <!-- Hoverable rows start -->
   <section class="section">
     <div class="row" id="table-hover-row">
       <div class="col-12">
         <div class="card">
+          <?php 
+          $header = '
           <div class="card-header">
-            <h4 class="card-title" align="center">รายงานสินค้าคงเหลือ</h4>
-          </div>
+            <h2 class="card-title" align="center">รายงานสินค้าคงเหลือ</h2>
+          </div>'
+          ?>
           <div class="card-content">
             <div class="card-body">
+              <?php 
+                ob_start();
+                $head = '
+                <style type="text/css">
+                body{
+                  font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+                }
+                .order-container {
+                  font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+                  margin:0px auto;
+                  width:950px;
+                  font-size:14px;
+                }
+                .order-head {
+                  margin:50px 0 10px 0;
+                }
+                .order-title {
+                  text-align:center;
+                  font-size:24px;
+                  font-weight:bold;
+                }
+                .order-head .order-customer {
+                  float:left;
+                  margin:10px 0 10px 0;
+                  padding:5px;
+                }
+                .order-head .order-date {
+                  text-align:right;
+                  margin:10px 0 10px 0;
+                  float:right;
+                  padding:5px;
+                }
+                .order-underline {
+                  border-bottom:#000 1px dashed;
+                }
+                .clear {
+                  clear:both;
+                }
+                </style>';
+              ?>
               <!-- table hover -->
               <div class="table-responsive">
                 <table class="table table-hover table-striped mb-0">
@@ -135,16 +139,19 @@ if (isset($_POST["txtSearch"])) {
                 </table>
                 <!-- <button onclick="window.print()">Print </button>  -->
               </div>
+              <br>
+              <?php
+              $html=ob_get_contents();
+              $mpdf = new \Mpdf\Mpdf();
+              $mpdf->WriteHTML($head);
+              $mpdf->WriteHTML($header);
+              $mpdf->WriteHTML($html);
+              $mpdf->Output("report_product.pdf");
+              ?>
+              <a href="report_product.pdf" class="btn btn-primary btn-block">ออกรายงาน</a>
             </div>
           </div>
-          <?php
-          $html=ob_get_contents();
-          $mpdf = new \Mpdf\Mpdf();
-          $mpdf->WriteHTML($head);
-          $mpdf->WriteHTML($html);
-          $mpdf->Output("report_product.pdf");
-          ?>
-          <a href="report_product.pdf" class="btn btn-primary">ออกรายงาน</a>
+          
         </div>
       </div>
     </div>

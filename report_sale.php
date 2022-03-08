@@ -41,9 +41,9 @@ if(ISSET($_POST['search'])){
       <div class="col-12">
         <div class="card">
           <?php 
-          echo $header = '
+          $header = '
           <div class="card-header">
-            <h4 class="card-title" align="center">รายงานการขายสินค้า</h4>
+            <h2 class="card-title" align="center">รายงานการขายสินค้า</h2>
           </div>'
           ?>
           <div class="card-content">
@@ -150,18 +150,18 @@ if(ISSET($_POST['search'])){
                   </table>
                 <!-- <button onclick="window.print()">Print </button>  -->
               </div>
-            </div>
-            
-          </div>
-          <?php
-          $html=ob_get_contents();
-          $mpdf = new \Mpdf\Mpdf();
-          $mpdf->WriteHTML($head);
-          $mpdf->WriteHTML($header);
-          $mpdf->WriteHTML($html);
-          $mpdf->Output("report_sale.pdf");
-          ?>
-          <a href="report_sale.pdf" class="btn btn-primary">ออกรายงาน</a>
+              <br>
+              <?php
+              $html=ob_get_contents();
+              $mpdf = new \Mpdf\Mpdf();
+              $mpdf->WriteHTML($head);
+              $mpdf->WriteHTML($header);
+              $mpdf->WriteHTML($html);
+              $mpdf->Output("report_sale.pdf");
+              ?>
+              <a href="report_sale.pdf" class="btn btn-primary btn-block">ออกรายงาน</a>
+            </div>  
+          </div>       
         </div>
       </div>
     </div>
