@@ -1,7 +1,14 @@
       <footer>
         <div class="footer clearfix mb-0 text-muted">
           <div class="float-start">
-            <p>2021 &copy; Luxury by Fon.</p>
+            <p>
+              Copyright &copy; 
+              <script>
+                document.write(new Date().getFullYear());
+              </script> 
+              All rights reserved | 
+              <a href="./index.php" target="_blank">Luxury by Fon.</a>
+            </p>
           </div>
           <!-- <div class="float-end">
             <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="http://ahmadsaugi.com">A. Saugi</a></p>
@@ -12,7 +19,7 @@
   </div>
   <script src="./assets/js/jquery-3.5.1.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script> -->
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -60,19 +67,19 @@
 
     async function uploadImage() {
 
-      var form_data = new FormData();
+      var fd = new FormData();
 
       // Read selected files
       var totalfiles = document.getElementById('files').files.length;
       for (var index = 0; index < totalfiles; index++) {
-        form_data.append("files[]", document.getElementById('files').files[index]);
+        fd.append("files[]", document.getElementById('files').files[index]);
       }
 
       // AJAX request
       $.ajax({
         url: 'upload_multiple_image.php',
         type: 'post',
-        data: form_data,
+        data: fd,
         dataType: 'json',
         contentType: false,
         processData: false,
@@ -218,6 +225,58 @@
       });
     }
 
+    function deleteProduct(id) {
+      Swal.fire({
+        title: 'คุณแน่ใจหรือไม่?',
+        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.value) {
+          //let category_name = $('#category_name').val();
+          $.ajax({
+            url: 'query/product_delete.php',
+            type: 'post',
+            data: {
+              delete_id : id
+            },
+            success: function(response) {
+              // console.log(response);
+              if (response == "success") {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'ลบข้อมูลสำเร็จ',
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    //$('#delete'+id).hide('slow');
+                    window.location.replace('product.php');
+                  }
+                })
+              } else {
+                console.log(response);
+                //alert("เกิดขึ้นผิดพลาด: " + response);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'เกิดขึ้นผิดพลาด: ' + response,
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    window.history.back;
+                  }
+                })
+              }
+            }
+          });
+        }
+      })
+    }
+
     function createBrand() {
       let brand_name = $('#brand_name').val();
       $.ajax({
@@ -256,6 +315,58 @@
       });
     }
 
+    function deleteBrand(id) {
+      Swal.fire({
+        title: 'คุณแน่ใจหรือไม่?',
+        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.value) {
+          //let category_name = $('#category_name').val();
+          $.ajax({
+            url: 'query/brand_delete.php',
+            type: 'post',
+            data: {
+              delete_id : id
+            },
+            success: function(response) {
+              // console.log(response);
+              if (response == "success") {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'ลบข้อมูลสำเร็จ',
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    //$('#delete'+id).hide();
+                    window.location.replace('brand.php');
+                  }
+                })
+              } else {
+                console.log(response);
+                //alert("เกิดขึ้นผิดพลาด: " + response);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'เกิดขึ้นผิดพลาด: ' + response,
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    window.history.back;
+                  }
+                })
+              }
+            }
+          });
+        }
+      })
+    }
+
     function createCategory() {
       let category_name = $('#category_name').val();
       $.ajax({
@@ -292,6 +403,58 @@
           }, 300);
         }
       });
+    }
+
+    function deleteCategory(id) {
+      Swal.fire({
+        title: 'คุณแน่ใจหรือไม่?',
+        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.value) {
+          //let category_name = $('#category_name').val();
+          $.ajax({
+            url: 'query/category_delete.php',
+            type: 'post',
+            data: {
+              delete_id : id
+            },
+            success: function(response) {
+              // console.log(response);
+              if (response == "success") {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'ลบข้อมูลสำเร็จ',
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    //$('#delete'+id).hide();
+                    window.location.replace('category.php');
+                  }
+                })
+              } else {
+                console.log(response);
+                //alert("เกิดขึ้นผิดพลาด: " + response);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'เกิดขึ้นผิดพลาด: ' + response,
+                  showConfirmButton: false,
+                  timer: 2000
+                }).then((result) => {
+                  if (result.isDismissed) {
+                    window.history.back;
+                  }
+                })
+              }
+            }
+          });
+        }
+      })
     }
   </script>
 </body>

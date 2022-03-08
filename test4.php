@@ -117,7 +117,7 @@ require_once __DIR__ . '/vendor/autoload.php';
                     <th class="text-center">ลำดับ</th>
                     <th class="text-center" width="100" >รหัสสินค้า</th>
                     <th width="200" align="left">ชื่อสินค้า</th>
-                    <th>ชื่อแบรนด์</th>
+                    <th>ยี่ห้อ</th>
                     <th align="left">ประเภท</th>
                     <th class="text-center">เหลือ (ชิ้น)</th>
                     <!-- <th>ACTION</th> -->

@@ -96,14 +96,14 @@
           if (!isset($_SESSION['user_username'])) {
           ?>
             <li><a href="./login.php">บัญชีของฉัน</a></li>
-            <li><a href="./login.php">สถานะการสั่งซื้อ</a></li>
+            <li><a href="./login.php">ประวัติการสั่งซื้อ</a></li>
             <li><a href="./login.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
           } else {
           ?>
             <li><a href="./profile.php">บัญชีของฉัน</a></li>
-            <li><a href="./orders_status.php">สถานะการสั่งซื้อ</a></li>
+            <li><a href="./orders_status.php">ประวัติการสั่งซื้อ</a></li>
             <li><a href="./checkout.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
@@ -216,7 +216,7 @@
     $(document).on('click', '.delete', function() {
       var product_id = $(this).attr("id");
       var action = "remove";
-      if (confirm("Are you sure you want to remove this product?")) {
+      // if (confirm("Are you sure you want to remove this product?")) {
         $.ajax({
           url: "action.php",
           method: "POST",
@@ -230,9 +230,9 @@
             $('.badge').text(data.cart_item);
           }
         });
-      } else {
-        return false;
-      }
+      // } else {
+      //   return false;
+      // }
     });
     $(document).on('keyup', '.quantity', function() {
       var product_id = $(this).data("product_id");

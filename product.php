@@ -123,7 +123,7 @@ if (isset($_POST["txtSearch"])) {
                             $txtTitle = "";
                           }
                     ?>
-                    <tr>
+                    <tr id="delete<?php echo $row['product_id'] ?>">
                       <td class="text-center"><?php echo $i; ?></td>
                       <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
                       <td class="text-center"><?php echo $row['product_price']; ?></td>
@@ -137,9 +137,12 @@ if (isset($_POST["txtSearch"])) {
                         <a class="btn btn-warning" href="./product_edit.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <!-- <a class="del-btn btn btn-danger" href="./product_delete.php?product_id=<?php echo $row["product_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
                           <i class="fa fa-trash"></i>
-                        </a>
+                        </a> -->
+                        <button class="btn btn-danger" onclick="deleteProduct(<?php echo $row['product_id']; ?>)">
+                          <i class="fa fa-trash"></i>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -254,11 +257,6 @@ if (isset($_POST["txtSearch"])) {
                   } ?>
                   </ul>
                 </nav>
-
-                <?php
-                if (isset($_GET['m'])) { ?>
-                  <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
-                <?php } ?>
               </div>
             </div>    
           </div>
@@ -268,43 +266,5 @@ if (isset($_POST["txtSearch"])) {
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script src="./assets/js/jquery-3.5.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-<script>
-    $('.del-btn').on('click', function(e) {
-      e.preventDefault();
-      const href = $(this).attr('href')
-      Swal.fire({
-        title: 'คุณแน่ใจหรือไม่?',
-        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.value) {
-          document.location.href = href;
-        }
-      })
-    })
-
-    const flashdata = $('.flash-data').data('flashdata')
-    if (flashdata) {
-      Swal.fire({
-        icon: 'success',
-        title: 'ลบข้อมูลสำเร็จ',
-        showConfirmButton: false,
-        timer: 2000
-      }).then((result) => {
-        if (result.isDismissed) {
-          window.location.href = 'product.php';
-        }
-      })
-    }
-</script>
 
 <?php include("./footer_back-end.php"); ?>

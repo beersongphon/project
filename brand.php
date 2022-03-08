@@ -19,14 +19,14 @@ if (isset($_POST["txtSearch"])) {
   <div class="page-title">
     <div class="row">
       <div class="col-12 col-md-6 order-md-1 order-last">
-        <h3>ข้อมูลแบรนด์</h3>
+        <h3>ข้อมูลยี่ห้อ</h3>
         <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
       </div>
       <div class="col-12 col-md-6 order-md-2 order-first">
         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="home.php">หน้าแรก</a></li>
-            <li class="breadcrumb-item active" aria-current="page">ข้อมูลแบรนด์</li>
+            <li class="breadcrumb-item active" aria-current="page">ข้อมูลยี่ห้อ</li>
           </ol>
         </nav>
       </div>
@@ -38,7 +38,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12">
         <div class="card">
           <!-- <div class="card-header">
-            <h4 class="card-title">ข้อมูลแบรนด์</h4>
+            <h4 class="card-title">ข้อมูลยี่ห้อ</h4>
           </div> -->
           <div class="card-content">
             <div class="card-body">
@@ -49,7 +49,7 @@ if (isset($_POST["txtSearch"])) {
                   <button class="input-group-text fa-1x" name="Search" type="submit" value="Search">ค้นหา</button>
                   <a class="btn btn-primary" style="float: right;" href="brand_add.php">
                     <i class="fa fa-plus-circle"></i>
-                    เพิ่มแบรนด์
+                    เพิ่มยี่ห้อ
                   </a>
                 </div>
               </form>
@@ -59,7 +59,7 @@ if (isset($_POST["txtSearch"])) {
                   <thead>
                     <tr>
                       <th class="text-center">ลำดับ</th>
-                      <th>ชื่อแบรนด์</th>
+                      <th>ชื่อยี่ห้อ</th>
                       <th class="text-right"></th>
                       <!-- <th>ACTION</th> -->
                     </tr>
@@ -99,12 +99,12 @@ if (isset($_POST["txtSearch"])) {
                       <td class="text-center"><?php echo $i; ?></td>
                       <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
                       <td>
-                          <a class="btn btn-warning" href="./brand_edit.php?brand_id=<?php echo $row["brand_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                          </a>
-                          <a class="del-btn btn btn-danger" href="./brand_delete.php?brand_id=<?php echo $row["brand_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                          </a>
+                        <a class="btn btn-warning" href="./brand_edit.php?brand_id=<?php echo $row["brand_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteBrand(<?php echo $row['brand_id']; ?>)">
+                          <i class="fa fa-trash"></i>
+                        </button>
                       </td>
                     </tr>
                     <?php
@@ -202,11 +202,6 @@ if (isset($_POST["txtSearch"])) {
                   } ?>
                   </ul>
                 </nav>
-
-                <?php
-                if (isset($_GET['m'])) { ?>
-                  <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
-                <?php } ?>
               </div>
             </div>
           </div>
@@ -216,44 +211,5 @@ if (isset($_POST["txtSearch"])) {
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script src="./assets/js/jquery-3.5.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    $('.del-btn').on('click', function(e) {
-      e.preventDefault();
-      const href = $(this).attr('href')
-      Swal.fire({
-        title: 'คุณแน่ใจหรือไม่?',
-        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.value) {
-          document.location.href = href;
-        }
-      })
-    })
-
-    const flashdata = $('.flash-data').data('flashdata')
-    if (flashdata) {
-      Swal.fire({
-        icon: 'success',
-        title: 'ลบข้อมูลสำเร็จ',
-        showConfirmButton: false,
-        timer: 2000
-      }).then((result) => {
-        if (result.isDismissed) {
-          window.location.href = 'brand.php';
-        }
-      })
-    }
-</script>
 
 <?php include("./footer_back-end.php"); ?>

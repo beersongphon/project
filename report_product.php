@@ -96,7 +96,7 @@ if (isset($_POST["txtSearch"])) {
                       <th class="text-center">ลำดับ</th>
                       <th class="text-center" width="100" >รหัสสินค้า</th>
                       <th width="200" align="left">ชื่อสินค้า</th>
-                      <th>ชื่อแบรนด์</th>
+                      <th>ยี่ห้อ</th>
                       <th align="left">ประเภท</th>
                       <th class="text-center">เหลือ (ชิ้น)</th>
                       <!-- <th>ACTION</th> -->
@@ -158,10 +158,5 @@ if (isset($_POST["txtSearch"])) {
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script src="./assets/js/jquery-3.5.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
 
 <?php include("./footer_back-end.php"); ?>

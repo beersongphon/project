@@ -97,7 +97,7 @@ if (isset($_POST["txtSearch"])) {
                           <input type="text" id="product_name" name="product_name" placeholder="ชื่อสินค้า" class="form-control" value="<?php echo $row["product_name"]; ?>">
                         </div>
                         <div class="form-group">
-                          <label for="brand_id" class=" form-control-label">แบรนด์</label>
+                          <label for="brand_id" class=" form-control-label">ยี่ห้อ</label>
                           <select class="form-select" id="brand_id" name="brand_id" required>
                             <?php
                             $sql = "SELECT * FROM tb_brand";

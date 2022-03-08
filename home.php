@@ -89,7 +89,7 @@ include('./header_back-end.php');
                   while ($row = $result->fetch_assoc()) {
                 ?>
                 <div class="col-md-8">
-                  <h6 class="text-muted font-semibold">ข้อมูลแบรนด์</h6>
+                  <h6 class="text-muted font-semibold">ข้อมูลยี่ห้อ</h6>
                   <h6 class="font-extrabold mb-0"><?php echo $row["brand_id"]; ?></h6>
                 </div>
                 <?php

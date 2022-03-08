@@ -66,20 +66,19 @@ if (isset($_POST["txtSearch"])) {
           <div class="col-12">
             <div class="card">
               <!-- <div class="card-header">
-                <h4 class="card-title">ข้อมูลแบรนด์</h4>
+                <h4 class="card-title">ข้อมูลประเภท</h4>
               </div> -->
               <div class="card-content">
                 <div class="card-body">
                   <form method="POST" action="" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label for="category_name" class=" form-control-label">name</label>
+                      <label for="category_name" class=" form-control-label">ชื่อประเภท</label>
                       <input type="text" id="category_name" name="category_name" placeholder="Enter your company name" class="form-control">
                     </div>
                     <button class="btn btn-primary btn-block" type="button" onclick="createCategory()">
                       ยืนยัน
                     </button>
                   </form>
-
                 </div>
               </div>
             </div>

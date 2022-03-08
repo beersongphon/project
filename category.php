@@ -38,7 +38,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="col-12">
         <div class="card">
           <!-- <div class="card-header">
-            <h4 class="card-title">ข้อมูลแบรนด์</h4>
+            <h4 class="card-title">ข้อมูลประเภท</h4>
           </div> -->
           <div class="card-content">
             <div class="card-body">
@@ -99,12 +99,12 @@ if (isset($_POST["txtSearch"])) {
                       <td class="text-center"><?php echo $i; ?></td>
                       <td class="text-bold-500"><?php echo $row['category_name']; ?></td>
                       <td>
-                          <a class="btn btn-warning" href="./category_edit.php?category_id=<?php echo $row["category_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                          </a>
-                          <a class="del-btn btn btn-danger" href="./category_delete.php?category_id=<?php echo $row["category_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                          </a>
+                        <a class="btn btn-warning" href="./category_edit.php?category_id=<?php echo $row["category_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <button class="btn btn-danger" onclick="deleteCategory(<?php echo $row['category_id']; ?>)">
+                          <i class="fa fa-trash"></i>
+                        </button>
                       </td>
                     </tr>
                     <?php
@@ -202,11 +202,6 @@ if (isset($_POST["txtSearch"])) {
                   } ?>
                   </ul>
                 </nav>
-
-                <?php
-                if (isset($_GET['m'])) { ?>
-                  <div class="flash-data" data-flashdata="<?php echo $_GET['m']; ?>"></div>
-                <?php } ?>
               </div>
             </div>
           </div>
@@ -216,44 +211,5 @@ if (isset($_POST["txtSearch"])) {
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script src="./assets/js/jquery-3.5.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    $('.del-btn').on('click', function(e) {
-      e.preventDefault();
-      const href = $(this).attr('href')
-      Swal.fire({
-        title: 'คุณแน่ใจหรือไม่?',
-        text: 'คุณจะไม่สามารถเปลี่ยนกลับได้!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.value) {
-          document.location.href = href;
-        }
-      })
-    })
-
-    const flashdata = $('.flash-data').data('flashdata')
-    if (flashdata) {
-      Swal.fire({
-        icon: 'success',
-        title: 'ลบข้อมูลสำเร็จ',
-        showConfirmButton: false,
-        timer: 2000
-      }).then((result) => {
-        if (result.isDismissed) {
-          window.location.href = 'category.php';
-        }
-      })
-    }
-</script>
 
 <?php include("./footer_back-end.php"); ?>

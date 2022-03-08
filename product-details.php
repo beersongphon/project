@@ -98,32 +98,7 @@ $row = mysqli_fetch_array($result);
             ?>
           </div>
         </div>
-        <!-- <div class="col-lg-6">
-          <div class="product__details__pic">
-            <div class="product__details__pic__left product__thumb nice-scroll">
-              <a class="pt active" href="#product-1">
-                <img src="./assets/front-end/img/product/details/thumb-1.jpg" alt="">
-              </a>
-              <a class="pt" href="#product-2">
-                <img src="./assets/front-end/img/product/details/thumb-2.jpg" alt="">
-              </a>
-              <a class="pt" href="#product-3">
-                <img src="./assets/front-end/img/product/details/thumb-3.jpg" alt="">
-              </a>
-              <a class="pt" href="#product-4">
-                <img src="./assets/front-end/img/product/details/thumb-4.jpg" alt="">
-              </a>
-            </div>
-            <div class="product__details__slider__content">
-              <div class="product__details__pic__slider owl-carousel">
-                <img data-hash="product-1" class="product__big__img" src="./assets/front-end/img/product/details/product-1.jpg" alt="">
-                <img data-hash="product-2" class="product__big__img" src="./assets/front-end/img/product/details/product-3.jpg" alt="">
-                <img data-hash="product-3" class="product__big__img" src="./assets/front-end/img/product/details/product-2.jpg" alt="">
-                <img data-hash="product-4" class="product__big__img" src="./assets/front-end/img/product/details/product-4.jpg" alt="">
-              </div>
-            </div>
-          </div>
-        </div> -->
+ 
         <div class="col-lg-6">
           <div class="product__details__text">
             <h3><?php echo $row["product_name"]; ?> <span>ยี่ห้อ: <?php echo $row["brand_name"]; ?> </span> <span>ประเภท: <?php echo $row["category_name"]; ?></span></h3>
@@ -154,62 +129,6 @@ $row = mysqli_fetch_array($result);
                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
               </ul> -->
             </div>
-            <!-- <div class="product__details__widget">
-              <ul>
-                <li>
-                  <span>Availability:</span>
-                  <div class="stock__checkbox">
-                    <label for="stockin">
-                      In Stock
-                      <input type="checkbox" id="stockin">
-                      <span class="checkmark"></span>
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <span>Available color:</span>
-                  <div class="color__checkbox">
-                    <label for="red">
-                      <input type="radio" name="color__radio" id="red" checked>
-                      <span class="checkmark"></span>
-                    </label>
-                    <label for="black">
-                      <input type="radio" name="color__radio" id="black">
-                      <span class="checkmark black-bg"></span>
-                    </label>
-                    <label for="grey">
-                      <input type="radio" name="color__radio" id="grey">
-                      <span class="checkmark grey-bg"></span>
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <span>Available size:</span>
-                  <div class="size__btn">
-                    <label for="xs-btn" class="active">
-                      <input type="radio" id="xs-btn">
-                      xs
-                    </label>
-                    <label for="s-btn">
-                      <input type="radio" id="s-btn">
-                      s
-                    </label>
-                    <label for="m-btn">
-                      <input type="radio" id="m-btn">
-                      m
-                    </label>
-                    <label for="l-btn">
-                      <input type="radio" id="l-btn">
-                      l
-                    </label>
-                  </div>
-                </li>
-                <li>
-                  <span>Promotions:</span>
-                  <p>Free shipping</p>
-                </li>
-              </ul>
-            </div> -->
           </div>
         </div>
         <div class="col-lg-12">
@@ -294,74 +213,6 @@ $row = mysqli_fetch_array($result);
           } //while condition closing bracket
         }  //if condition closing bracket
         ?>  
-
-        <!-- <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/product/related/rp-2.jpg">
-              <ul class="product__hover">
-                <li><a href="./assets/front-end/img/product/related/rp-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-              </ul>
-            </div>
-            <div class="product__item__text">
-              <h6><a href="#">Flowy striped skirt</a></h6>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <div class="product__price">$ 49.0</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/product/related/rp-3.jpg">
-              <div class="label stockout">out of stock</div>
-              <ul class="product__hover">
-                <li><a href="./assets/front-end/img/product/related/rp-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-              </ul>
-            </div>
-            <div class="product__item__text">
-              <h6><a href="#">Cotton T-Shirt</a></h6>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <div class="product__price">$ 59.0</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="./assets/front-end/img/product/related/rp-4.jpg">
-              <ul class="product__hover">
-                <li><a href="./assets/front-end/img/product/related/rp-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-              </ul>
-            </div>
-            <div class="product__item__text">
-              <h6><a href="#">Slim striped pocket shirt</a></h6>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <div class="product__price">$ 59.0</div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </section>

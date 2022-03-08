@@ -41,7 +41,7 @@
           <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "brand.php") ? "active" : ""; ?>">
             <a href="./brand.php" class='sidebar-link'>
               <!-- <i class="bi bi-grid-fill"></i> -->
-              <span>ข้อมูลแบรนด์</span>
+              <span>ข้อมูลยี่ห้อ</span>
             </a>
           </li>
           <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "category.php") ? "active" : ""; ?>">
