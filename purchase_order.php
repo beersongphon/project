@@ -50,7 +50,7 @@
                             <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
                           </tr>  
                         ";
-      $total = number_format($total + $row["order_quantity"] * $row["order_price"], 2);
+      $total = $total + $row["order_quantity"] * $row["order_price"];
     }
 	
 $mpdf = new \Mpdf\Mpdf();
@@ -110,7 +110,7 @@ $order = "
       " . $order_details ." 
       <tr>
         <td colspan='3' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
-        <td align='right'>" . $total ."</td>
+        <td align='right'>" . number_format($total, 2) ."</td>
       </tr>
     </table>
   </div>";

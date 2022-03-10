@@ -14,11 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pwd_regis = $_POST["pwd_regis"];
     $pwd_regis = md5($pwd_regis);
 
-
+    // check duplicate email
     $sql_chk = "SELECT * FROM tb_user WHERE user_username = '$username_regis'";
-    $result_chk = mysqli_query($conn, $sql_chk);
-    if (mysqli_num_rows($result_chk) == 0) {
-        $sql = "INSERT INTO tb_user (user_firstname, 
+    $result = $conn->query($sql_chk);
+    if ($result->num_rows > 0) {
+        echo "already";
+        exit();
+    }
+
+    // insert data
+    $sql = "INSERT INTO tb_user (user_firstname, 
         user_lastname, 
         user_address, 
         user_tel, 
@@ -26,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         user_sex, 
         user_username, 
         user_password, 
-        user_time_progress, 
         permission_id) 
       VALUES ('$firstname_regis',
         '$lastname_regis',
@@ -35,16 +39,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         '$email_regis',
         '$sex_regis',
         '$username_regis',
-        '$pwd_regis',
-        '0',
+        '$pwd_regis', 
         '3')";
-
-        if ($conn->query($sql) == TRUE) {
-            echo "success";
-        } else {
-            echo "error " . $conn->error;
-        }
+    $result = $conn->query($sql);
+    if ($result == TRUE) {
+        echo "success";
     } else {
-        echo "already";
+        echo "error " . $conn->error;
     }
+} else {
+    echo 'error REQUEST_METHOD ผิดพลาด';
 }
+

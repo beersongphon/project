@@ -27,10 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             user_password = '$pwd_profile'
         WHERE user_id = '$user_id_profile'
         ";
-
-    if ($conn->query($sql) == TRUE) {
+    $result = $conn->query($sql);
+    if ($result == TRUE) {
         echo "success";
     } else {
         echo "error " . $conn->error;
     }
+} else {
+    echo 'error REQUEST_METHOD ผิดพลาด';
 }
+

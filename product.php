@@ -63,7 +63,7 @@ if (isset($_POST["txtSearch"])) {
                       <th class="text-center">ราคา</th>
                       <th class="text-center">จำนวน</th>
                       <th class="text-left">รายละเอียดสินค้า</th>
-                      <th class="text-right"></th>
+                      <th class="text-right" width="150"></th>
                       <!-- <th>ACTION</th> -->
                     </tr>
                   </thead>
@@ -126,7 +126,7 @@ if (isset($_POST["txtSearch"])) {
                     <tr id="delete<?php echo $row['product_id'] ?>">
                       <td class="text-center"><?php echo $i; ?></td>
                       <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
-                      <td class="text-center"><?php echo $row['product_price']; ?></td>
+                      <td class="text-center"><?php echo number_format($row["product_price"], 2); ?></td>
                       <td class="<?= $tableClass;?>">
                         <?=$row['product_qty'];?>
                         <br>

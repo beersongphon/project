@@ -1,17 +1,16 @@
 <?php
 session_start();
-date_default_timezone_set('Asia/Bangkok');
 include("./../urldomain.php");
-if (isset($_POST["usr"])) {
-  include("./../connect.php");
+date_default_timezone_set('Asia/Bangkok');
+include("./../connect.php");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $Username = $_POST["usr"];
   $Password = md5($_POST["pwd_login"]);
+
   $sql = "SELECT * FROM tb_user WHERE user_username = '$Username' AND user_password = '$Password' ";
-  $result = mysqli_query($conn, $sql);
-
-  if (mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_array($result);
-
+  $result = $conn->query($sql);
+  if ($row = $result->fetch_assoc()) {
+    
     $_SESSION["user_id"] = $row["user_id"];
     $_SESSION["user_firstname"] = $row["user_firstname"];
     $_SESSION["user_lastname"] = $row["user_lastname"];
@@ -21,12 +20,12 @@ if (isset($_POST["usr"])) {
     $_SESSION["user_sex"] = $row["user_sex"];
     $_SESSION["user_username"] = $row["user_username"];
     $_SESSION["permission_id"] = $row["permission_id"];
+
     echo "login_success";
   } else {
-    //   echo "<script>";
-    echo "alert('Sorry Username or Password something is wrong! \\nTake you back homepage! ');";
-    // echo "window.history.back()";
-    //   echo "window.location.replace('http://".$domain."/".$url."');";
-    //   echo "</script>";
+    echo "login_error";
   }
+} else {
+  echo "error" . $conn->error;
 }
+

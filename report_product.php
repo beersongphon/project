@@ -96,7 +96,7 @@ if (isset($_POST["txtSearch"])) {
                       <th class="text-center">ลำดับ</th>
                       <th class="text-center" width="100" >รหัสสินค้า</th>
                       <th width="200" align="left">ชื่อสินค้า</th>
-                      <th>ยี่ห้อ</th>
+                      <th align="left">ยี่ห้อ</th>
                       <th align="left">ประเภท</th>
                       <th class="text-center">เหลือ (ชิ้น)</th>
                       <!-- <th>ACTION</th> -->

@@ -103,21 +103,28 @@ if(ISSET($_POST['search'])){
                 <table class="table table-hover table-striped mb-0">
                     <thead>
                       <tr>
-                        <th class="text-center">ลำดับ</th>
-                        <th class="text-left" align="left">วันที่</th>
-                        <th width="200" align="left">ชื่อ - นามสกุล</th>
-                        <th width="200" align="left">ที่อยู่</th>
-                        <th align="left">อีเมลล์</th>
-                        <th width="120" align="left">เบอร์โทรศัพท์</th>
-                        <th width="100" align="left">สถานะ</th>
-                        <th class="text-center" width="80" align="center">ราคารวม</th>
+                        <th class="text-center" align="center" width="20">ลำดับ</th>
+                        <th class="text-center" align="center" width="130">เลขที่สั่งซื้อ</th>
+                        <th class="text-left" align="left" width="110">วันที่</th>
+                        <th align="left">ชื่อ - นามสกุล</th>
+                        <th class="text-center" width="120" align="center">เบอร์โทรศัพท์</th>
+                        <th class="text-right" width="80" align="right">ราคารวม</th>
                         <!-- <th>ACTION</th> -->
                       </tr>
                     </thead>
                     <tbody>
                       <?php
+                      $date_th = ["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
                       $i = 1;
-                      $sql = "SELECT * FROM tb_order 
+                      $total = 0;
+                      $sql = "SELECT 
+                      tb_order.order_id, 
+                      tb_order.order_date, 
+                      tb_order.order_name, 
+                      tb_order.order_tel, 
+                      tb_status.status_name,
+                      tb_order.order_total
+                      FROM tb_order 
                       LEFT JOIN
                       tb_user
                       ON
@@ -125,27 +132,36 @@ if(ISSET($_POST['search'])){
                       LEFT JOIN
                       tb_status
                       ON
-                      tb_order.status_id = tb_status.status_id WHERE tb_order.order_date BETWEEN '$date1' AND '$date2'";
+                      tb_order.status_id = tb_status.status_id 
+                      WHERE tb_order.status_id = '2'
+                      AND tb_order.order_date BETWEEN '$date1' AND '$date2'";
                       $result = mysqli_query($conn, $sql);
 
                       if(!empty($result))	 { 
                         while($row = mysqli_fetch_array($result)) {
+                          $date_set = date_create($row['order_date']);
+                          $day = date_format($date_set, "d");
+                          $month = $date_th[date_format($date_set, "n")];
+                          $year = date_format($date_set, "Y")+543;
                       ?>
                       <tr>
                         <td class="text-center" align="center"><?php echo $i; ?></td>
-                        <td class="text-left"><?php echo $row['order_date']; ?></td>
-                        <td class="text-bold-500"><?php echo $row['user_firstname']; ?> <?php echo $row['user_lastname']; ?></td>
-                        <td class="text-bold-500"><?php echo $row['order_address']; ?></td>
-                        <td class="text-bold-500"><?php echo $row['order_email']; ?></td>
-                        <td class="text-bold-500"><?php echo $row['order_tel']; ?></td>
-                        <td class="text-left"><?php echo $row['status_name'];?></td>
-                        <td class="text-center" align="center"><?php echo $row['order_total'];?></td>
+                        <td class="text-center" align="center"><?php echo $row['order_id']; ?></td>
+                        <td class="text-left"><?php echo $day." ".$month." ".$year; ?></td>
+                        <td class="text-bold-500"><?php echo $row['order_name']; ?></td>
+                        <td class="text-center" align="center"><?php echo $row['order_tel']; ?></td>
+                        <td class="text-right" align="right"><?php echo number_format($row["order_total"], 2); ?></td>
                       </tr>
                       <?php
+                      $total += $row["order_total"];
                       $i++;
                         } //while condition closing bracket
                       }  //if condition closing bracket
                       ?>
+                      <tr>
+                        <td colspan='5' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
+                        <td align='right'><?php echo number_format($total, 2); ?></td>
+                      </tr>
                     </tbody>
                   </table>
                 <!-- <button onclick="window.print()">Print </button>  -->

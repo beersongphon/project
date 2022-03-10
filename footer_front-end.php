@@ -303,10 +303,13 @@
         if (datacallback == "login_success") {
           //location.reload();
           window.location.replace("index.php");
-        } else {
-          console.log(usr,pwd_login);
+        } else if (datacallback == "login_error") {
+          console.log(usr, pwd_login);
           alert("เกิดข้อผิดพลาด กรุณาตรวจสอบ Username หรือ Password");
-        }
+        } else {
+            console.log(datacallback);
+            alert("เกิดข้อผิดพลาด: " + datacallback);
+          }
       });
     });
 
@@ -331,8 +334,13 @@
           if (datacallback == "ส่งข้อมูลสำเร็จ") {
             alert(datacallback);
             location.reload();
-          } else {
+          } else if (datacallback == "เกิดข้อผิดพลาดในการส่งข้อมูล") {
+            console.log(datacallback);
             alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+            // alert(datacallback);
+          } else {
+            console.log(datacallback);
+            alert("เกิดข้อผิดพลาด: " + datacallback);
             // alert(datacallback);
           }
         });
@@ -369,13 +377,6 @@
             fileToUpload
             pay_tel
             location.reload();
-            console.log("order_id: " + order_id);
-            console.log("order_name: " + order_name);
-            console.log("order_address: " + order_address);
-            console.log("pay_total: " + pay_total);
-            console.log("pay_slip: " + fileToUpload);
-            console.log("pay_tel: " + pay_tel);
-            console.log("data: " + data);
           } else if (data == "error") {
             alert("เกิดปัญหาการ insert db ผิดพลาด");
             console.log("order_id: " + order_id);
@@ -386,16 +387,11 @@
             console.log("pay_tel: " + pay_tel);
             console.log("data: " + data);
           } else if (data == "movefilefail") {
+            console.log("data: " + data);
             alert("เกิดปัญหาการการย้ายไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
           } else {
-            alert("ERROR: " + data);
-            console.log("order_id: " + order_id);
-            console.log("order_name: " + order_name);
-            console.log("order_address: " + order_address);
-            console.log("pay_total: " + pay_total);
-            console.log("pay_slip: " + fileToUpload);
-            console.log("pay_tel: " + pay_tel);
             console.log("data: " + data);
+            alert("ERROR: " + data);
           }
         },
         cache: false,
@@ -466,6 +462,7 @@
             $("#pwd_regis").val("");
             $("#confirm_pwd").val("");
           } else {
+            console.log(datacallback);
             alert("เกิดขึ้นผิดพลาด: " + datacallback);
           }
         });
@@ -539,6 +536,7 @@
             $("#pwd_profile").val("");
             $("#confirm_pwd").val("");
           } else {
+            console.log(datacallback);
             alert("เกิดขึ้นผิดพลาด: " + datacallback);
           }
         });
