@@ -33,7 +33,7 @@ if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
   (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
   tb_product.product_name,
   tb_product.product_price,
-  tb_product.product_qty,
+  tb_product.product_quantity,
   tb_product.product_description
   FROM tb_product
   LEFT JOIN
@@ -59,7 +59,7 @@ if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
   $next_page = $page_no + 1;
   $adjacents = "2";
 
-  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product` WHERE tb_product.product_qty NOT IN ('0')");
+  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM tb_product WHERE product_quantity NOT IN ('0')");
   $total_records = mysqli_fetch_array($result_count);
   $total_records = $total_records['total_records'];
   $total_no_of_pages = ceil($total_records / $total_records_per_page);
@@ -69,7 +69,7 @@ if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
   (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
   tb_product.product_name,
   tb_product.product_price,
-  tb_product.product_qty,
+  tb_product.product_quantity,
   tb_product.product_description
   FROM tb_product
   LEFT JOIN
@@ -77,7 +77,7 @@ if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
   ON
   tb_product.product_id = tb_img_product.product_id 
   WHERE (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%')
-  AND tb_product.product_qty NOT IN ('0')
+  AND tb_product.product_quantity NOT IN ('0')
   ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();

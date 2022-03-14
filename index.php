@@ -14,7 +14,7 @@ include("./header_front-end.php");
             <?php
             $sql = "SELECT COUNT(*) AS product_count 
             FROM tb_product
-            WHERE product_qty NOT IN ('0')";
+            WHERE product_quantity NOT IN ('0')";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
               // output data of each row
@@ -60,14 +60,14 @@ include("./header_front-end.php");
       (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
       tb_product.product_name,
       tb_product.product_price,
-      tb_product.product_qty,
+      tb_product.product_quantity,
       tb_product.product_description
       FROM tb_product
       LEFT JOIN
       tb_img_product
       ON
       tb_product.product_id = tb_img_product.product_id
-      WHERE tb_product.product_qty NOT IN ('0')
+      WHERE tb_product.product_quantity NOT IN ('0')
       ORDER BY tb_product.product_id DESC
       LIMIT 8";
       $result = $conn->query($sql);

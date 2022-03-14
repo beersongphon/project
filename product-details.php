@@ -9,7 +9,7 @@ tb_product.product_name,
 tb_brand.brand_name,
 tb_category.category_name,
 tb_product.product_price,
-tb_product.product_qty,
+tb_product.product_quantity,
 tb_product.product_description
 FROM tb_product
 LEFT JOIN
@@ -121,9 +121,9 @@ $row = mysqli_fetch_array($result);
               </div>  
               <input type="hidden" name="hidden_img" id="img<?php echo $row["product_id"]; ?>" value="<?php echo $row["img_product"]; ?>" />
               <input type="hidden" name="hidden_name" id="name<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_name"]; ?>" />
-              <input type="hidden" name="hidden_qty" id="qty<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_qty"]; ?>" />
+              <input type="hidden" name="hidden_qty" id="qty<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_quantity"]; ?>" />
               <input type="hidden" name="hidden_price" id="price<?php echo $row["product_id"]; ?>" value="<?php echo $row["product_price"]; ?>" />
-              <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> ใส่ในรถเข็น</a>
+              <a type="button" href="#" class="cart-btn add_to_cart" name="add_to_cart" id="<?php echo $row["product_id"]; ?>"><span class="icon_bag_alt"></span> ใส่ในตะกร้า</a>
               <!-- <ul>
                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
@@ -190,14 +190,14 @@ $row = mysqli_fetch_array($result);
         (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
         tb_product.product_name,
         tb_product.product_price,
-        tb_product.product_qty,
+        tb_product.product_quantity,
         tb_product.product_description
         FROM tb_product
         LEFT JOIN
         tb_img_product
         ON
         tb_product.product_id = tb_img_product.product_id 
-        WHERE tb_product.product_qty NOT IN ('0')
+        WHERE tb_product.product_quantity NOT IN ('0')
         ORDER BY product_id DESC LIMIT 4";
         $result = $conn->query($sql);
 
