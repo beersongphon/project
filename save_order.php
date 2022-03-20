@@ -12,11 +12,12 @@ include("./header_front-end.php");
     $order_address = $_POST['order_address'];
     $order_tel = $_POST['order_tel'];
     $order_email = $_POST['order_email'];
+    $order_date = date('Y-m-d');
     $order_total = $_POST['order_total'];
 
     $insert_order = "
                     INSERT INTO tb_order(user_id, order_name, order_address, order_tel, order_email, order_date, order_total, status_id)  
-                    VALUES('$id', '$order_name', '$order_address', '$order_tel', '$order_email', '" . date('Y-m-d') . "', '$order_total', '1')  
+                    VALUES('$id', '$order_name', '$order_address', '$order_tel', '$order_email', '$order_date', '$order_total', '1')  
                     ";
     $order_id = "";
     if (mysqli_query($conn, $insert_order)) {
@@ -32,19 +33,19 @@ include("./header_front-end.php");
       $row	= mysqli_fetch_array($result);
       $count = mysqli_num_rows($result);
       for($i=0; $i<$count; $i++){
-        $have =  $row['product_qty'];
+        $have =  $row['product_quantity'];
         
-        $stc = $have - $values["product_quantity"];
+        $stc = $have - $values["order_quantity"];
         
         $sql2 = "UPDATE tb_product SET  
-        product_qty = $stc
+        product_quantity = $stc
         WHERE product_id = $values[product_id]";
         $query2 = mysqli_query($conn, $sql2);  
       }
 
       $order_details .= "
                         INSERT INTO tb_order_detail(order_id, product_id, order_price, order_quantity)  
-                        VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[product_quantity]');  
+                        VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[order_quantity]');  
                         ";
     }
     if (mysqli_multi_query($conn, $order_details)) {

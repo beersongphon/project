@@ -59,15 +59,15 @@ include("./header_front-end.php");
                 <td class="cart__quantity">
                   <div class="pro-qty">
                     <!-- <input type="text" value="1"> -->
-                    <input type="text" value="<?php echo $values["product_quantity"]; ?>" style="width: 60px;" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity" min="1">
-                    <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
+                    <input type="text" value="<?php echo $values["order_quantity"]; ?>" style="width: 60px;" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity" min="1">
+                    <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["order_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
                   </div>
                 </td>
-                <td class="cart__total">฿ <?php echo number_format($values["product_quantity"] * $values["product_price"], 2); ?></td>
+                <td class="cart__total">฿ <?php echo number_format($values["order_quantity"] * $values["product_price"], 2); ?></td>
                 <td class="cart__close"><span class="icon_close delete" name="delete" id="<?php echo $values["product_id"]; ?>"></span></td>
               </tr>
               <?php
-              $total = $total + ($values["product_quantity"] * $values["product_price"]);
+              $total = $total + ($values["order_quantity"] * $values["product_price"]);
               }
             }
             else{

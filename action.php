@@ -11,7 +11,7 @@ if (isset($_POST["product_id"])) {
       foreach ($_SESSION["shopping_cart"] as $keys => $values) {
         if ($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"]) {
           $is_available++;
-          $_SESSION["shopping_cart"][$keys]['product_quantity'] = $_SESSION["shopping_cart"][$keys]['product_quantity'] + $_POST["product_quantity"];
+          $_SESSION["shopping_cart"][$keys]['order_quantity'] = $_SESSION["shopping_cart"][$keys]['order_quantity'] + $_POST["order_quantity"];
         }
       }
       if ($is_available < 1) {
@@ -19,9 +19,9 @@ if (isset($_POST["product_id"])) {
           'product_id'               =>     $_POST["product_id"],
           'img_product'               =>     $_POST["img_product"],
           'product_name'               =>     $_POST["product_name"],
-          'product_qty'               =>     $_POST["product_qty"],
+          'product_quantity'               =>     $_POST["product_quantity"],
           'product_price'               =>     $_POST["product_price"],
-          'product_quantity'          =>     $_POST["product_quantity"]
+          'order_quantity'          =>     $_POST["order_quantity"]
         );
         $_SESSION["shopping_cart"][] = $item_array;
       }
@@ -30,9 +30,9 @@ if (isset($_POST["product_id"])) {
         'product_id'               =>     $_POST["product_id"],
         'img_product'               =>     $_POST["img_product"],
         'product_name'               =>     $_POST["product_name"],
-        'product_qty'               =>     $_POST["product_qty"],
+        'product_quantity'               =>     $_POST["product_quantity"],
         'product_price'               =>     $_POST["product_price"],
-        'product_quantity'          =>     $_POST["product_quantity"]
+        'order_quantity'          =>     $_POST["order_quantity"]
       );
       $_SESSION["shopping_cart"][] = $item_array;
     }
@@ -48,7 +48,7 @@ if (isset($_POST["product_id"])) {
   if ($_POST["action"] == "quantity_change") {
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
       if ($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"]) {
-        $_SESSION["shopping_cart"][$keys]['product_quantity'] = $_POST["quantity"];
+        $_SESSION["shopping_cart"][$keys]['order_quantity'] = $_POST["quantity"];
       }
     }
   }
@@ -90,15 +90,15 @@ if (isset($_POST["product_id"])) {
                   <td class="cart__price">฿ ' . number_format($values["product_price"], 2) . '</td>
                   <td class="cart__quantity">
                     <div class="pro-qty">
-                      <input type="text" value="' . $values["product_quantity"] . '" style="width: 60px;" name="quantity[]" id="quantity' . $values["product_id"] . '" data-product_id="' . $values["product_id"] . '" class="quantity">
-                      <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
+                      <input type="text" value="' . $values["order_quantity"] . '" style="width: 60px;" name="quantity[]" id="quantity' . $values["product_id"] . '" data-product_id="' . $values["product_id"] . '" class="quantity">
+                      <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["order_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
                     </div>
                   </td>
-                  <td class="cart__total">฿ ' . number_format($values["product_quantity"] * $values["product_price"], 2) . '</td>
+                  <td class="cart__total">฿ ' . number_format($values["order_quantity"] * $values["product_price"], 2) . '</td>
                   <td class="cart__close"> <span class="icon_close delete" name="delete" id="' . $values["product_id"] . '"></span></td>
                 </tr> 
                 ';
-      $total = $total + ($values["product_quantity"] * $values["product_price"]);
+      $total = $total + ($values["order_quantity"] * $values["product_price"]);
     }
   }
   else{

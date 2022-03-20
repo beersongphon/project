@@ -173,11 +173,11 @@
       var product_id = $(this).attr("id");
       var img_product = $('#img' + product_id).val();
       var product_name = $('#name' + product_id).val();
-      var product_qty = $('#qty' + product_id).val();
+      var product_quantity = $('#qty' + product_id).val();
       var product_price = $('#price' + product_id).val();
-      var product_quantity = $('#quantity' + product_id).val();
+      var order_quantity = $('#quantity' + product_id).val();
       var action = "add";
-      if (product_quantity > 0) {
+      if (order_quantity > 0) {
         $.ajax({
           url: "action.php",
           method: "POST",
@@ -186,9 +186,9 @@
             product_id: product_id,
             img_product: img_product,
             product_name: product_name,
-            product_qty: product_qty,
-            product_price: product_price,
             product_quantity: product_quantity,
+            product_price: product_price,
+            order_quantity: order_quantity,
             action: action
           },
           success: function(data) {
