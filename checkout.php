@@ -96,7 +96,7 @@ $row = $result->fetch_assoc();
                 ?> 
                 <li><?php echo $i; ?>. <?php echo $values['product_name']; ?> <span>฿ <?php echo number_format($values["product_price"], 2); ?></span></li>
                 <?php  
-                $total = $total + ($values["product_quantity"] * $values["product_price"]);  
+                $total = $total + ($values["order_quantity"] * $values["product_price"]);
                 $i++;
                 }
                 ?> 
