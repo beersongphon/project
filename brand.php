@@ -1,6 +1,6 @@
 <?php
-include('./head_back-end.php');
-include('./header_back-end.php');
+include("./head_back-end.php");
+include("./header_back-end.php");
 
 $strKeyword = null;
 
@@ -42,7 +42,7 @@ if (isset($_POST["txtSearch"])) {
           </div> -->
           <div class="card-content">
             <div class="card-body">
-              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                   <input type="search" name="txtSearch" class="form-control" placeholder="ค้นหา" aria-label="Search" aria-describedby="button-addon2" value="<?php echo $strKeyword; ?>">
@@ -97,7 +97,7 @@ if (isset($_POST["txtSearch"])) {
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $i; ?></td>
-                      <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
+                      <td class="text-bold-500"><?php echo $row["brand_name"]; ?></td>
                       <td>
                         <a class="btn btn-warning" href="./brand_edit.php?brand_id=<?php echo $row["brand_id"]; ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                           <i class="fa fa-edit"></i>

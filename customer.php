@@ -1,6 +1,6 @@
 <?php
-include('./head_back-end.php');
-include('./header_back-end.php');
+include("./head_back-end.php");
+include("./header_back-end.php");
 
 $strKeyword = null;
 
@@ -42,7 +42,7 @@ if (isset($_POST["txtSearch"])) {
           </div> -->
           <div class="card-content">
             <div class="card-body">
-              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                   <input type="search" name="txtSearch" class="form-control" placeholder="ค้นหา" aria-label="Search" aria-describedby="button-addon2" value="<?php echo $strKeyword; ?>">
@@ -103,19 +103,19 @@ if (isset($_POST["txtSearch"])) {
                     ?>
                         <tr>
                           <td class="text-center"><?php echo $i; ?></td>
-                          <td><?php echo $row['user_username']; ?></td>
-                          <td class="text-bold-500"><?php echo $row['user_firstname']; ?></td>
-                          <td class="text-bold-500"><?php echo $row['user_lastname']; ?></td>
-                          <td class="text-left"><?php echo $row['user_address']; ?></td>
-                          <td><?php echo $row['user_tel']; ?></td>
+                          <td><?php echo $row["user_username"]; ?></td>
+                          <td class="text-bold-500"><?php echo $row["user_firstname"]; ?></td>
+                          <td class="text-bold-500"><?php echo $row["user_lastname"]; ?></td>
+                          <td class="text-left"><?php echo $row["user_address"]; ?></td>
+                          <td><?php echo $row["user_tel"]; ?></td>
                           <?php
-                          if ($row['user_sex'] == "0") {
-                            echo    "<td>หญิง</td>";
+                          if ($row["user_sex"] == "0") {
+                            echo "<td>หญิง</td>";
                           } else {
-                            echo    "<td>ชาย</td>";
+                            echo "<td>ชาย</td>";
                           }
                           ?>
-                          <td><?php echo $row['user_datetime']; ?></td>
+                          <td><?php echo $row["user_datetime"]; ?></td>
                         </tr>
                       <?php
                         $i++;

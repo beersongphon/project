@@ -7,14 +7,15 @@ include("./header_front-end.php");
   <div class="order-title">ใบสั่งซื้อ</div>
   <?php
   if (isset($_POST["place_order"])) {
-    $id = $_POST['user_id'];
-    $order_name = $_POST['order_name'];
-    $order_address = $_POST['order_address'];
-    $order_tel = $_POST['order_tel'];
-    $order_email = $_POST['order_email'];
-    $order_date = date('Y-m-d');
-    $order_total = $_POST['order_total'];
+    $id = $_POST["user_id"];
+    $order_name = $_POST["order_name"];
+    $order_address = $_POST["order_address"];
+    $order_tel = $_POST["order_tel"];
+    $order_email = $_POST["order_email"];
+    $order_date = date("Y-m-d");
+    $order_total = $_POST["order_total"];
 
+    # เพิ่มข้อมูลการสั่งซื้อ
     $insert_order = "
                     INSERT INTO tb_order(user_id, order_name, order_address, order_tel, order_email, order_date, order_total, status_id)  
                     VALUES('$id', '$order_name', '$order_address', '$order_tel', '$order_email', '$order_date', '$order_total', '1')  
@@ -25,15 +26,15 @@ include("./header_front-end.php");
     }
 
     $_SESSION["order_id"] = $order_id;
-    $order_details = "";
+    $insert_order_details = "";
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-      
+      # ตัดสต็อคจำนวนสินค้า
       $sql	= "SELECT * FROM tb_product WHERE product_id = $values[product_id]";
       $result	= mysqli_query($conn, $sql);
       $row	= mysqli_fetch_array($result);
       $count = mysqli_num_rows($result);
       for($i=0; $i<$count; $i++){
-        $have =  $row['product_quantity'];
+        $have =  $row["product_quantity"];
         
         $stc = $have - $values["order_quantity"];
         
@@ -43,12 +44,13 @@ include("./header_front-end.php");
         $query2 = mysqli_query($conn, $sql2);  
       }
 
-      $order_details .= "
+      # เพิ่มข้อมูลรายละเอียดการสั่งซื้อ
+      $insert_order_details .= "
                         INSERT INTO tb_order_detail(order_id, product_id, order_price, order_quantity)  
                         VALUES('$order_id', '$values[product_id]', '$values[product_price]', '$values[order_quantity]');  
                         ";
     }
-    if (mysqli_multi_query($conn, $order_details)) {
+    if (mysqli_multi_query($conn, $insert_order_details)) {
       unset($_SESSION["shopping_cart"]);
       echo '<script>alert("You have successfully place an order...Thank you")</script>';
       echo '<script>window.location.href="payment.php"</script>';
@@ -70,34 +72,34 @@ include("./header_front-end.php");
               ";
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
-      $customer_details = "  
-                          <div class='order-head'>
-                            <div class='order-customer'> <b>ชื่อ-สกุล</b> 
-                              <span class='order-underline'>" . $row["order_name"] ."</span><br />
+      $customer_details = '  
+                          <div class="order-head">
+                            <div class="order-customer"> <b>ชื่อ-สกุล</b> 
+                              <span class="order-underline">'.$row["order_name"].'</span><br />
                               <b>ที่อยู่</b> 
-                              <span class='order-underline'>" . $row['order_address'] ." </span><br />
+                              <span class="order-underline">'.$row["order_address"].'</span><br />
                               <b>เบอร์โทรศัพท์</b> 
-                              <span class='order-underline'>" . $row['order_tel'] ." </span><br />
+                              <span class="order-underline">'.$row["order_tel"].'</span><br />
                               <b>อีเมล</b> 
-                              <span class='order-underline'>" . $row['order_email'] ." </span>
+                              <span class="order-underline">'.$row["order_email"].'</span>
                             </div>
-                            <div class='order-date'> 
+                            <div class="order-date"> 
                               <b>เลขที่ใบสั่งซื้อ</b>
-                              <span class='order-underline'>" . $_SESSION["order_id"] ." </span><br />
+                              <span class="order-underline">'.$_SESSION["order_id"].'</span><br />
                               <b>วันที่สั่งซื้อ</b>
-                              <span class='order-underline'>" . $row['order_date'] ." </span>
+                              <span class="order-underline">'.$row["order_date"].'</span>
                             </div>
                           </div>
-                          ";
+                          ';
  
-      $order_details .= "  
+      $order_details .= '  
                           <tr>  
-                            <td>" . $row["product_name"] . "</td>  
-                            <td align='center'>" . $row["order_price"] . "</td>  
-                            <td align='center'>" . $row["order_quantity"] . "</td>  
-                            <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
+                            <td>'.$row["product_name"].'</td>  
+                            <td align="center">'.$row["order_price"].'</td>  
+                            <td align="center">'.$row["order_quantity"].'</td>  
+                            <td align="right">'.number_format($row["order_quantity"] * $row["order_price"], 2).'</td>  
                           </tr>  
-                        ";
+                        ';
       $total = number_format($total + $row["order_quantity"] * $row["order_price"], 2);
     }
   ?>

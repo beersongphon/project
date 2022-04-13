@@ -7,9 +7,9 @@ $strKeyword = null;
 if (isset($_POST["txtSearch"])) {
   $strKeyword = $_POST["txtSearch"];
 }
-if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
+if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
   //คิวรี่ข้อมูลสินค้าตามประเภท
-  $category_id = $_GET['category_id'];
+  $category_id = $_GET["category_id"];
   //คิวรี่ข้อมูลสินค้าทุกรายการ
   if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
     $page_no = $_GET['page_no'];
@@ -124,7 +124,7 @@ $rowcategory = $resultcategory->fetch_assoc();
                       <ul>
                         <li><a href="./shop.php">ทั้งหมด</a></li>
                         <?php foreach($resultcategory as $rowcategory) {  ?>
-                        <li><a href="./shop.php?category_id=<?php echo $rowcategory['category_id'];?>&category_name=<?php echo $rowcategory['category_name'];?>"><?php echo $rowcategory['category_name'];?></a></li>
+                        <li><a href="./shop.php?category_id=<?php echo $rowcategory["category_id"]; ?>&category_name=<?php echo $rowcategory["category_name"]; ?>"><?php echo $rowcategory["category_name"]; ?></a></li>
                         <?php } ?>
                       </ul>
                     </div>
@@ -162,8 +162,8 @@ $rowcategory = $resultcategory->fetch_assoc();
                     echo "class='disabled'";
                   } ?>
                   <?php if ($page_no > 1) {
-                                        echo "href='?page_no=$previous_page'";
-                                      } ?>><i class="fa fa-angle-left"></i>
+                    echo "href='?page_no=$previous_page'";
+                  } ?>><i class="fa fa-angle-left"></i>
               </a>
 
               <?php
@@ -222,12 +222,12 @@ $rowcategory = $resultcategory->fetch_assoc();
                     echo "class='disabled'";
                   } ?>
                   <?php if ($page_no < $total_no_of_pages) {
-                                        echo "href='?page_no=$next_page'";
-                                      } ?>
-                                      ><i class="fa fa-angle-right"></i>
+                    echo "href='?page_no=$next_page'";
+                  } ?>
+                  ><i class="fa fa-angle-right"></i>
               </a>
               <?php if ($page_no < $total_no_of_pages) {
-                echo "<a href='?page_no=$total_no_of_pages'><i class='fa fa-angle-double-right'></i></a></li>";
+                echo '<a href="?page_no='.$total_no_of_pages.'"><i class="fa fa-angle-double-right"></i></a></li>';
               } ?>
             </div>
           </div>

@@ -16,56 +16,56 @@
         <ul class="menu">
           <li class="sidebar-title">รายการ</li>
 
-          <li class="sidebar-item <?php if (basename($_SERVER['PHP_SELF']) == "home.php") {
+          <li class="sidebar-item <?php if (basename($_SERVER["PHP_SELF"]) == "home.php") {
                                     echo "active";
                                   } else {
                                     echo "";
                                   } ?>">
-            <a href="./home.php" class='sidebar-link'>
+            <a href="./home.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>หน้าแรก</span>
             </a>
           </li>
-          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "customer.php") ? "active" : ""; ?>">
-            <a href="./customer.php" class='sidebar-link'>
+          <li class="sidebar-item <?= (basename($_SERVER["PHP_SELF"]) == "customer.php") ? "active" : ""; ?>">
+            <a href="./customer.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูลลูกค้า</span>
             </a>
           </li>
-          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "product.php") ? "active" : ""; ?>">
-            <a href="./product.php" class='sidebar-link'>
+          <li class="sidebar-item <?= (basename($_SERVER["PHP_SELF"]) == "product.php") ? "active" : ""; ?>">
+            <a href="./product.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูลสินค้า</span>
             </a>
           </li>
-          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "brand.php") ? "active" : ""; ?>">
-            <a href="./brand.php" class='sidebar-link'>
+          <li class="sidebar-item <?= (basename($_SERVER["PHP_SELF"]) == "brand.php") ? "active" : ""; ?>">
+            <a href="./brand.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูลยี่ห้อ</span>
             </a>
           </li>
-          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "category.php") ? "active" : ""; ?>">
-            <a href="./category.php" class='sidebar-link'>
+          <li class="sidebar-item <?= (basename($_SERVER["PHP_SELF"]) == "category.php") ? "active" : ""; ?>">
+            <a href="./category.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูลประเภท</span>
             </a>
           </li>
-          <li class="sidebar-item <?= (basename($_SERVER['PHP_SELF']) == "feedback.php") ? "active" : ""; ?>">
-            <a href="./feedback.php" class='sidebar-link'>
+          <li class="sidebar-item <?= (basename($_SERVER["PHP_SELF"]) == "feedback.php") ? "active" : ""; ?>">
+            <a href="./feedback.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ข้อมูล Feedback</span>
             </a>
           </li>
 
           <li class="sidebar-title">รายงาน</li>
-          <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_product.php") ? "active" : ""; ?>">
-            <a href="./report_product.php" class='sidebar-link'>
+          <li class="sidebar-item  <?= (basename($_SERVER["PHP_SELF"]) == "report_product.php") ? "active" : ""; ?>">
+            <a href="./report_product.php" class="sidebar-link">
               <!-- <i class="bi bi-file-earmark-medical-fill"></i> -->
               <span>รายงานสินค้าคงเหลือ</span>
             </a>
           </li>
-          <li class="sidebar-item  <?= (basename($_SERVER['PHP_SELF']) == "report_sale.php") ? "active" : ""; ?>">
-            <a href="./report_sale.php" class='sidebar-link'>
+          <li class="sidebar-item  <?= (basename($_SERVER["PHP_SELF"]) == "report_sale.php") ? "active" : ""; ?>">
+            <a href="./report_sale.php" class="sidebar-link">
               <!-- <i class="bi bi-file-earmark-medical-fill"></i> -->
               <span>รายงานการขายสินค้า</span>
             </a>
@@ -73,7 +73,7 @@
 
           <li class="sidebar-title"></li>
           <li class="sidebar-item ">
-            <a href="./logout.php" class='sidebar-link'>
+            <a href="./logout.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ออกจากระบบ</span>
             </a>

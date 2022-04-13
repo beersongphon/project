@@ -1,11 +1,5 @@
 <?php
-include('./head_back-end.php');
-
-$strKeyword = null;
-
-if (isset($_POST["txtSearch"])) {
-  $strKeyword = $_POST["txtSearch"];
-}
+include("./head_back-end.php");
 ?>
 <div id="app">
   <div id="sidebar" class="active">
@@ -24,7 +18,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="sidebar-menu">
         <ul class="menu">
           <li class="sidebar-item active">
-            <a href="./product.php" class='sidebar-link'>
+            <a href="./product.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ย้อนกลับ</span>
             </a>
@@ -72,14 +66,13 @@ if (isset($_POST["txtSearch"])) {
                 <div class="card-body">
                   <form method="POST" action="" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label for="brand_name" class=" form-control-label">name</label>
-                      <input type="text" id="brand_name" name="brand_name" placeholder="Enter your company name" class="form-control">
+                      <label for="brand_name" class=" form-control-label">ชื่อยี่ห้อ</label>
+                      <input type="text" id="brand_name" name="brand_name" placeholder="ชื่อยี่ห้อ" class="form-control" required>
                     </div>
                     <button class="btn btn-primary btn-block" type="button" onclick="createBrand()">
-                      ยืนยัน
+                      บันทึก
                     </button>
                   </form>
-
                 </div>
               </div>
             </div>

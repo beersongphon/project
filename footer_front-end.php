@@ -93,7 +93,7 @@
           <h6>บัญชี</h6>
           <ul>
           <?php
-          if (!isset($_SESSION['user_username'])) {
+          if (!isset($_SESSION["user_username"])) {
           ?>
             <li><a href="./login.php">บัญชีของฉัน</a></li>
             <li><a href="./login.php">ประวัติการสั่งซื้อ</a></li>
@@ -169,13 +169,13 @@
 
 <script>
   $(document).ready(function(data) {
-    $('.add_to_cart').click(function() {
+    $(".add_to_cart").click(function() {
       var product_id = $(this).attr("id");
-      var img_product = $('#img' + product_id).val();
-      var product_name = $('#name' + product_id).val();
-      var product_quantity = $('#qty' + product_id).val();
-      var product_price = $('#price' + product_id).val();
-      var order_quantity = $('#quantity' + product_id).val();
+      var img_product = $("#img" + product_id).val();
+      var product_name = $("#name" + product_id).val();
+      var product_quantity = $("#qty" + product_id).val();
+      var product_price = $("#price" + product_id).val();
+      var order_quantity = $("#quantity" + product_id).val();
       var action = "add";
       if (order_quantity > 0) {
         $.ajax({
@@ -183,20 +183,20 @@
           method: "POST",
           dataType: "json",
           data: {
-            product_id: product_id,
-            img_product: img_product,
-            product_name: product_name,
-            product_quantity: product_quantity,
-            product_price: product_price,
-            order_quantity: order_quantity,
-            action: action
+            product_id : product_id,
+            img_product : img_product,
+            product_name : product_name,
+            product_quantity : product_quantity,
+            product_price : product_price,
+            order_quantity : order_quantity,
+            action : action
           },
           success: function(data) {
-            $('#order_table').html(data.order_table);
-            $('.badge').text(data.cart_item);
+            $("#order_table").html(data.order_table);
+            $(".badge").text(data.cart_item);
             //alert("Product has been Added into Cart");  
             Swal.fire({
-              icon: 'success',
+              icon: "success",
               title: ("Product has been Added into Cart"),
               showConfirmButton: false,
               timer: 1500
@@ -218,16 +218,16 @@
       var action = "remove";
       // if (confirm("Are you sure you want to remove this product?")) {
         $.ajax({
-          url: "action.php",
-          method: "POST",
-          dataType: "json",
-          data: {
-            product_id: product_id,
-            action: action
+          url : "action.php",
+          method : "POST",
+          dataType : "json",
+          data : {
+            product_id : product_id,
+            action : action
           },
           success: function(data) {
-            $('#order_table').html(data.order_table);
-            $('.badge').text(data.cart_item);
+            $("#order_table").html(data.order_table);
+            $(".badge").text(data.cart_item);
           }
         });
       // } else {
@@ -240,16 +240,16 @@
       var action = "quantity_change";
       if (quantity != '') {
         $.ajax({
-          url: "action.php",
-          method: "POST",
-          dataType: "json",
-          data: {
-            product_id: product_id,
-            quantity: quantity,
-            action: action
+          url : "action.php",
+          method : "POST",
+          dataType : "json",
+          data : {
+            product_id : product_id,
+            quantity : quantity,
+            action : action
           },
           success: function(data) {
-            $('#order_table').html(data.order_table);
+            $("#order_table").html(data.order_table);
           }
         });
       }
@@ -292,13 +292,13 @@
       } // End if
     });
 
-    $("#login").click(function() {
+    $("#btn_login").click(function() {
       // alert("login");
       var usr = $("#user_name").val();
       var pwd_login = $("#pwd_login").val();
       $.post("query/logins.php", {
-        usr: usr,
-        pwd_login: pwd_login
+        usr : usr,
+        pwd_login : pwd_login
       }, function(datacallback) {
         if (datacallback == "login_success") {
           //location.reload();
@@ -307,9 +307,9 @@
           console.log(usr, pwd_login);
           alert("เกิดข้อผิดพลาด กรุณาตรวจสอบ Username หรือ Password");
         } else {
-            console.log(datacallback);
-            alert("เกิดข้อผิดพลาด: " + datacallback);
-          }
+          console.log(datacallback);
+          alert("เกิดข้อผิดพลาด: " + datacallback);
+        }
       });
     });
 
@@ -349,16 +349,16 @@
 
 
     $("#form_payment").submit(function(e) {
-    // alert("N");
-    e.preventDefault();
-    var formData = new FormData(this);
-    // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
-    let order_id = $('#order_id').val();
-    let order_name = $('#order_name').val();
-    let order_address = $('#order_address').val();
-    let pay_total = $('#pay_total').val();
-    let fileToUpload = $("#fileToUpload").val();
-    let pay_tel = $('#pay_tel').val();
+      // alert("N");
+      e.preventDefault();
+      var formData = new FormData(this);
+      // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
+      let order_id = $("#order_id").val();
+      let order_name = $("#order_name").val();
+      let order_address = $("#order_address").val();
+      let pay_total = $("#pay_total").val();
+      let fileToUpload = $("#fileToUpload").val();
+      let pay_tel = $("#pay_tel").val();
       $.ajax({
         type: "POST",
         url: "query/payments.php",
@@ -507,16 +507,16 @@
         $("#confirm_pwd").val("");
       } else {
         $.post("query/profiles.php", {
-          user_id_profile: user_id_profile,
-          firstname_profile: firstname_profile,
-          lastname_profile: lastname_profile,
-          address_profile: address_profile,
-          tel_profile: tel_profile,
-          email_profile: email_profile,
-          sex_profile: sex_profile,
-          username_profile: username_profile,
-          pwd_profile: pwd_profile,
-          confirm_pwd: confirm_pwd
+          user_id_profile : user_id_profile,
+          firstname_profile : firstname_profile,
+          lastname_profile : lastname_profile,
+          address_profile : address_profile,
+          tel_profile : tel_profile,
+          email_profile : email_profile,
+          sex_profile : sex_profile,
+          username_profile : username_profile,
+          pwd_profile : pwd_profile,
+          confirm_pwd : confirm_pwd
         }, function(datacallback) {
           if (datacallback == "success") {
             alert("แก้ไขข้อมูลสำเร็จ");
@@ -550,40 +550,40 @@
 <script>
 var pay_total = $("#pay_total");
 
-$('document').ready(function() {
-  var order_id = $('#order_id').val();
+$("document").ready(function() {
+  var order_id = $("#order_id").val();
   $.ajax({
-    url: 'query/get_payment.php',
+    url: "query/get_payment.php",
     data: {
-      'order_id': order_id
+      "order_id" : order_id
     },
-    method: 'post',
-    dataType: 'json',
+    method: "post",
+    dataType: "json",
     success: function(result) {
       result.forEach((data) => {
-        $('#pay_total').append(`<option value="${data.order_total}">${data.order_total}</option>`);
+        $("#pay_total").append(`<option value="${data.order_total}">${data.order_total}</option>`);
       });
     }
   });
 
-  $('#order_id').on('change', function() {
+  $("#order_id").on("change", function() {
     totalChange();
   });
 });
 
 function totalChange() {
-  $('#pay_total').empty();
-  var order_id = $('#order_id').val();
+  $("#pay_total").empty();
+  var order_id = $("#order_id").val();
   $.ajax({
-    url: 'query/get_payment.php',
+    url: "query/get_payment.php",
     data: {
-      'order_id': order_id
+      "order_id" : order_id
     },
-    method: 'post',
-    dataType: 'json',
+    method: "post",
+    dataType: "json",
     success: function(result) {
       result.forEach((data) => {
-        $('#pay_total').append(`<option value="${data.order_total}">${data.order_total}</option>`);
+        $("#pay_total").append(`<option value="${data.order_total}">${data.order_total}</option>`);
       });
     }
   });

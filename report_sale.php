@@ -139,17 +139,17 @@ if(ISSET($_POST['search'])){
 
                       if(!empty($result))	 { 
                         while($row = mysqli_fetch_array($result)) {
-                          $date_set = date_create($row['order_date']);
+                          $date_set = date_create($row["order_date"]);
                           $day = date_format($date_set, "d");
                           $month = $date_th[date_format($date_set, "n")];
                           $year = date_format($date_set, "Y")+543;
                       ?>
                       <tr>
                         <td class="text-center" align="center"><?php echo $i; ?></td>
-                        <td class="text-center" align="center"><?php echo $row['order_id']; ?></td>
+                        <td class="text-center" align="center"><?php echo $row["order_id"]; ?></td>
                         <td class="text-left"><?php echo $day." ".$month." ".$year; ?></td>
-                        <td class="text-bold-500"><?php echo $row['order_name']; ?></td>
-                        <td class="text-center" align="center"><?php echo $row['order_tel']; ?></td>
+                        <td class="text-bold-500"><?php echo $row["order_name"]; ?></td>
+                        <td class="text-center" align="center"><?php echo $row["order_tel"]; ?></td>
                         <td class="text-right" align="right"><?php echo number_format($row["order_total"], 2); ?></td>
                       </tr>
                       <?php
@@ -159,8 +159,8 @@ if(ISSET($_POST['search'])){
                       }  //if condition closing bracket
                       ?>
                       <tr>
-                        <td colspan='5' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
-                        <td align='right'><?php echo number_format($total, 2); ?></td>
+                        <td colspan="5" align="right"><strong>รวมเงินทั้งสิ้น</strong></td>
+                        <td align="right"><?php echo number_format($total, 2); ?></td>
                       </tr>
                     </tbody>
                   </table>

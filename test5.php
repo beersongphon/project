@@ -126,8 +126,8 @@ if (isset($_POST["txtSearch"])) {
                       <input type="text" id="product_price" name="product_price" placeholder="ราคา" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="product_qty" class=" form-control-label">จำนวน</label>
-                      <input type="text" id="product_qty" name="product_qty" placeholder="จำนวน" class="form-control">
+                      <label for="product_quantity" class=" form-control-label">จำนวน</label>
+                      <input type="text" id="product_quantity" name="product_quantity" placeholder="จำนวน" class="form-control">
                     </div>
                     <div class="form-group">
                       <label for="product_description" class=" form-control-label">รายละเอียด</label>
@@ -249,7 +249,7 @@ if (isset($_POST["txtSearch"])) {
         let brand_id = $('#brand_id').val();
         let category_id = $('#category_id').val();
         let product_price = $('#product_price').val();
-        let product_qty = $('#product_qty').val();
+        let product_quantity = $('#product_quantity').val();
         let product_description = $('#product_description').val();
         $.ajax({
           url: 'query/add_product.php',
@@ -259,7 +259,7 @@ if (isset($_POST["txtSearch"])) {
             'brand_id': brand_id,
             'category_id': category_id,
             'product_price': product_price,
-            'product_qty': product_qty,
+            'product_quantity': product_quantity,
             'product_description': product_description
           },
           success: function(response) {
@@ -280,7 +280,7 @@ if (isset($_POST["txtSearch"])) {
             });
             setTimeout(function() {
               window.location.replace('product.php');
-              //console.log(product_name, product_price, product_qty, product_description, response);
+              //console.log(product_name, product_price, product_quantity, product_description, response);
             }, 300);
           }
         });

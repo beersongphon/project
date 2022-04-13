@@ -1,6 +1,6 @@
 <?php
-include('./head_back-end.php');
-include('./header_back-end.php');
+include("./head_back-end.php");
+include("./header_back-end.php");
 
 $strKeyword = null;
 
@@ -42,7 +42,7 @@ if (isset($_POST["txtSearch"])) {
           </div> -->
           <div class="card-content">
             <div class="card-body">
-              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                   <input type="search" name="txtSearch" class="form-control" placeholder="ค้นหา" aria-label="Search" aria-describedby="button-addon2" value="<?php echo $strKeyword; ?>">
@@ -109,11 +109,11 @@ if (isset($_POST["txtSearch"])) {
                         foreach($result as $row) {
 
                           //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
-                          if($row['product_qty'] == 0){
+                          if($row['product_quantity'] == 0){
                             //สินค้าหมด
                             $tableClass = "text-center table-danger";
                             $txtTitle = "<font color='red'> สินค้าหมด !! </font>";
-                          }elseif($row['product_qty'] <= 5) {
+                          }elseif($row['product_quantity'] <= 5) {
                             //สินค้ากำลังจะหมด
                             $tableClass = "text-center table-warning";
                             $txtTitle = "";
@@ -128,7 +128,7 @@ if (isset($_POST["txtSearch"])) {
                       <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
                       <td class="text-center"><?php echo number_format($row["product_price"], 2); ?></td>
                       <td class="<?= $tableClass;?>">
-                        <?=$row['product_qty'];?>
+                        <?=$row['product_quantity'];?>
                         <br>
                         <?=$txtTitle;?>
                       </td>

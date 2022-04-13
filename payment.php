@@ -3,7 +3,7 @@ include("./head_front-end.php");
 include("./authguard.php");
 include("./header_front-end.php");
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION["user_id"];
 $sql = "SELECT user_id, 
 CONCAT(user_firstname ,' ' , user_lastname) as user_name, 
 user_address, 
@@ -46,19 +46,19 @@ $row = $result->fetch_assoc();
             <div class="col-lg-12">
               <div class="payment__form__input">
                 <p>ชื่อ - นามสกุล <span>*</span></p>
-                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $row['user_name']; ?>">
+                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $row["user_name"]; ?>">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="payment__form__input">
                 <p>ที่อยู่ <span>*</span></p>
-                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $row['user_address']; ?>">
+                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $row["user_address"]; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>เบอร์โทรศัพท์ <span>*</span></p>
-                <input type="text" name="pay_tel" id="pay_tel" value="<?php echo $row['user_tel']; ?>">
+                <input type="text" name="pay_tel" id="pay_tel" value="<?php echo $row["user_tel"]; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -110,16 +110,8 @@ $row = $result->fetch_assoc();
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="payment__form__input">
                 <p>หลักฐานการโอน <span>*</span></p>
-                <input id="fileToUpload" name="fileToUpload" type="file" required>
+                <input id="fileToUpload" name="fileToUpload" type="file" style="padding-top: 10px; padding-right: 10px; padding-bottom: 12px;" required>
               </div>
-              <!-- <div class="row">
-                <div class="input-group mb-3">
-                  <input id="fileToUpload" name="fileToUpload" type="file" class="form-control" required>
-                </div>
-              </div> -->
-              <!-- <div class="form-group">
-                <input type="file" name="fileToUpload" id="fileToUpload">
-              </div> -->
             </div> 
           </div>
           <button class="site-btn" type="submit" name="submit">

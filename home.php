@@ -1,6 +1,6 @@
 <?php
-include('./head_back-end.php');
-include('./header_back-end.php');
+include("./head_back-end.php");
+include("./header_back-end.php");
 ?>
 
 <header class="mb-3">
@@ -267,8 +267,8 @@ include('./header_back-end.php');
               while ($row = $result->fetch_assoc()) {
             ?>
             <div class="ms-3 name">
-              <h5 class="font-bold"><?php echo $row['user_name'] ?></h5>
-              <h6 class="text-muted mb-0"><?php echo $row['user_username'] ?></h6>
+              <h5 class="font-bold"><?php echo $row["user_name"] ?></h5>
+              <h6 class="text-muted mb-0"><?php echo $row["user_username"] ?></h6>
             </div>
             <?php
               } //while condition closing bracket
@@ -294,8 +294,8 @@ include('./header_back-end.php');
               <img src="./assets/back-end/mazer/dist/assets/images/faces/4.jpg">
             </div>
             <div class="name ms-4">
-              <h5 class="mb-1"><?php echo $row['contact_member'] ?></h5>
-              <!-- <h6 class="text-muted mb-0"><?php //echo $row['contact_email'] ?></h6> -->
+              <h5 class="mb-1"><?php echo $row["contact_member"] ?></h5>
+              <!-- <h6 class="text-muted mb-0"><?php //echo $row["contact_email"] ?></h6> -->
             </div>
           </div>
           <?php

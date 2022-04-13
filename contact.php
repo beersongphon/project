@@ -49,7 +49,7 @@ include("./header_front-end.php");
               <input type="email" id="email_contact" name="email" placeholder="อีเมล">
               <!-- <input type="text" placeholder="Website"> -->
               <textarea id="comments_contact" name="comments" placeholder="แสดงความคิดเห็น"></textarea>
-              <button type='button' id='btn_contact' class='site-btn'>ส่งข้อความ</button>
+              <button type="button" id="btn_contact" class="site-btn">ส่งข้อความ</button>
             </form>
           </div>
         </div>

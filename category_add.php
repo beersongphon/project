@@ -1,11 +1,5 @@
 <?php
-include('./head_back-end.php');
-
-$strKeyword = null;
-
-if (isset($_POST["txtSearch"])) {
-  $strKeyword = $_POST["txtSearch"];
-}
+include("./head_back-end.php");
 ?>
 <div id="app">
   <div id="sidebar" class="active">
@@ -24,7 +18,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="sidebar-menu">
         <ul class="menu">
           <li class="sidebar-item active">
-            <a href="./product.php" class='sidebar-link'>
+            <a href="./product.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ย้อนกลับ</span>
             </a>
@@ -73,10 +67,10 @@ if (isset($_POST["txtSearch"])) {
                   <form method="POST" action="" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="category_name" class=" form-control-label">ชื่อประเภท</label>
-                      <input type="text" id="category_name" name="category_name" placeholder="Enter your company name" class="form-control">
+                      <input type="text" id="category_name" name="category_name" placeholder="ชื่อประเภท" class="form-control">
                     </div>
                     <button class="btn btn-primary btn-block" type="button" onclick="createCategory()">
-                      ยืนยัน
+                      บันทึก
                     </button>
                   </form>
                 </div>

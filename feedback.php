@@ -1,12 +1,6 @@
 <?php
-include('./head_back-end.php');
-include('./header_back-end.php');
-
-$strKeyword = null;
-
-if (isset($_POST["txtSearch"])) {
-  $strKeyword = $_POST["txtSearch"];
-}
+include("./head_back-end.php");
+include("./header_back-end.php");
 ?>
 
 <header class="mb-3">
@@ -57,20 +51,20 @@ if (isset($_POST["txtSearch"])) {
               <ul class='list-group'>
                 <?php
                 $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-                $sql = "SELECT * FROM tb_contact ORDER BY contact_id DESC limit 10";
+                $sql = "SELECT * FROM tb_contact ORDER BY contact_id DESC LIMIT 10";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                   // output data of each row
                   while ($row = $result->fetch_assoc()) {
-                    $date_set = date_create($row['contact_datetime']);
+                    $date_set = date_create($row["contact_datetime"]);
                 ?>
                 <li class='list-group-item'>
-                  <label>รายละเอียด: ชื่อผู้ส่ง: <?php echo $row['contact_member']; ?></label>
+                  <label>รายละเอียด: ชื่อผู้ส่ง: <?php echo $row["contact_member"]; ?></label>
                   <br>
-                  <label>Email: <?php echo $row['contact_email']; ?></label>
+                  <label>Email: <?php echo $row["contact_email"]; ?></label>
                   <br>
-                  <label>Feedback Detail: <?php echo $row['contact_comment']; ?></label>
+                  <label>Feedback Detail: <?php echo $row["contact_comment"]; ?></label>
                   <br>
                   <label>
                     วันที่ส่ง: <?php echo date_format($date_set, "d") . "  " . $date_th[date_format($date_set, "n")]; ?>

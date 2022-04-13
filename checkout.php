@@ -4,7 +4,7 @@ include("./authguard.php");
 include("./header_front-end.php");
 
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION["user_id"];
 $sql = "SELECT user_id, 
 CONCAT(user_firstname ,' ' , user_lastname) as user_name, 
 user_address, 
@@ -54,25 +54,25 @@ $row = $result->fetch_assoc();
             <div class="col-lg-12">
               <div class="checkout__form__input">
                 <p>ชื่อ - นามสกุล <span>*</span></p>
-                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $row['user_name']; ?>">
+                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $row["user_name"]; ?>">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="checkout__form__input">
                 <p>ที่อยู่ <span>*</span></p>
-                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $row['user_address']; ?>">
+                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $row["user_address"]; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>อีเมล <span>*</span></p>
-                <input type="text" name="order_email" placeholder="อีเมล" value="<?php echo $row['user_email']; ?>">
+                <input type="text" name="order_email" placeholder="อีเมล" value="<?php echo $row["user_email"]; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>เบอร์โทร <span>*</span></p>
-                <input type="text" name="order_tel" placeholder="เบอร์โทร" value="<?php echo $row['user_tel']; ?>">
+                <input type="text" name="order_tel" placeholder="เบอร์โทร" value="<?php echo $row["user_tel"]; ?>">
               </div>
             </div>
           </div>

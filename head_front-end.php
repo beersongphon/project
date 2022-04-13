@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set("Asia/Bangkok");
 include("./urldomain.php");
-include('./connect.php');
+include("./connect.php");
 
 $strKeyword = null;
 

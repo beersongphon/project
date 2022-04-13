@@ -20,7 +20,7 @@ include("./header_front-end.php");
               // output data of each row
               while ($row = $result->fetch_assoc()) {
             ?>
-            <p>จำนวน <?php echo $row['product_count'];?></p>
+            <p>จำนวน <?php echo $row["product_count"]; ?></p>
             <?php
               } //while condition closing bracket
             }  //if condition closing bracket
@@ -106,7 +106,7 @@ include("./header_front-end.php");
               <!-- <span>The Chloe Collection</span> -->
               <h1><?php echo $row['category_name'];?></h1>
               <!-- <a href="./shop.php">Shop now</a> -->
-              <a href="./shop.php?category_id=<?= $row['category_id'];?>&category_name=<?= $row['category_name'];?>">Shop now</a>
+              <a href="./shop.php?category_id=<?= $row["category_id"]; ?>&category_name=<?= $row["category_name"]; ?>">Shop now</a>
             </div>
           </div>
           <?php

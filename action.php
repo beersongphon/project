@@ -9,9 +9,9 @@ if (isset($_POST["product_id"])) {
     if (isset($_SESSION["shopping_cart"])) {
       $is_available = 0;
       foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-        if ($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"]) {
+        if ($_SESSION["shopping_cart"][$keys]["product_id"] == $_POST["product_id"]) {
           $is_available++;
-          $_SESSION["shopping_cart"][$keys]['order_quantity'] = $_SESSION["shopping_cart"][$keys]['order_quantity'] + $_POST["order_quantity"];
+          $_SESSION["shopping_cart"][$keys]["order_quantity"] = $_SESSION["shopping_cart"][$keys]["order_quantity"] + $_POST["order_quantity"];
         }
       }
       if ($is_available < 1) {
@@ -47,8 +47,8 @@ if (isset($_POST["product_id"])) {
   }
   if ($_POST["action"] == "quantity_change") {
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-      if ($_SESSION["shopping_cart"][$keys]['product_id'] == $_POST["product_id"]) {
-        $_SESSION["shopping_cart"][$keys]['order_quantity'] = $_POST["quantity"];
+      if ($_SESSION["shopping_cart"][$keys]["product_id"] == $_POST["product_id"]) {
+        $_SESSION["shopping_cart"][$keys]["order_quantity"] = $_POST["quantity"];
       }
     }
   }
@@ -123,7 +123,7 @@ if (isset($_POST["product_id"])) {
      <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="cart__btn">
-          <a href="./shop.php">ช้อปปิ้งต่อ</a>
+          <a href="./shop.php">เลือกสินค้าต่อ</a>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6">

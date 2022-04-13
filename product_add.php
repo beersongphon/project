@@ -1,11 +1,5 @@
 <?php
-include('./head_back-end.php');
-
-$strKeyword = null;
-
-if (isset($_POST["txtSearch"])) {
-  $strKeyword = $_POST["txtSearch"];
-}
+include("./head_back-end.php");
 ?>
 <div id="app">
   <div id="sidebar" class="active">
@@ -24,7 +18,7 @@ if (isset($_POST["txtSearch"])) {
       <div class="sidebar-menu">
         <ul class="menu">
           <li class="sidebar-item active">
-            <a href="./product.php" class='sidebar-link'>
+            <a href="./product.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ย้อนกลับ</span>
             </a>
@@ -125,15 +119,15 @@ if (isset($_POST["txtSearch"])) {
                       <input type="text" id="product_price" name="product_price" placeholder="ราคา" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="product_qty" class=" form-control-label">จำนวน</label>
-                      <input type="text" id="product_qty" name="product_qty" placeholder="จำนวน" class="form-control">
+                      <label for="product_quantity" class=" form-control-label">จำนวน</label>
+                      <input type="text" id="product_quantity" name="product_quantity" placeholder="จำนวน" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="product_description" class=" form-control-label">รายละเอียด</label>
-                      <input type="text" id="product_description" name="product_description" placeholder="รายละเอียด" class="form-control">
+                      <label for="product_description" class=" form-control-label">รายละเอียดสินค้า</label>
+                      <input type="text" id="product_description" name="product_description" placeholder="รายละเอียดสินค้า" class="form-control">
                     </div>
                     <button class="btn btn-primary btn-block" type="button" onclick="createProduct()">
-                      ยืนยัน
+                      บันทึก
                     </button>
                   </form>
 
