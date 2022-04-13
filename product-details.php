@@ -57,7 +57,7 @@ $row = mysqli_fetch_array($result);
 			      $sliderHtml = '';
             if ($result->num_rows > 0) {
             ?> 
-            <div class="product__details__pic__left product__thumb nice-scroll">
+            <!--<div class="product__details__pic__left product__thumb nice-scroll">
               <?php
               // output data of each row
               while ($row1 = $result->fetch_assoc()) {
@@ -73,7 +73,7 @@ $row = mysqli_fetch_array($result);
               <?php  
               } //while condition closing bracket
               ?>
-            </div>
+            </div>-->
             <?php  
             }  //if condition closing bracket
 

@@ -128,7 +128,7 @@ if (isset($_POST["txtSearch"])) {
                       <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
                       <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
                       <td class="text-bold-500" align="left"><?php echo $row['category_name']; ?></td>
-                      <td class="text-center" align="center"><?php echo $row['product_qty'];?></td>
+                      <td class="text-center" align="center"><?php echo $row['product_quantity'];?></td>
                     </tr>
                     <?php
                     $i++;
