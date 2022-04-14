@@ -43,39 +43,38 @@ require_once __DIR__ . '/vendor/autoload.php';
           <div class="card-content">
             <div class="card-body">
             <?php
-            include('intro.php');
-            $p = (isset($_GET['use']) ? $_GET['use'] : '');
-            if($p=='daily'){
-              include('r_daily.php');
-            }elseif($p=='monthy'){
-              include('r_monthy.php');
-            }elseif($p=='yearly'){
-              include('r_yearly.php');
+            include("intro.php");
+            $use = (isset($_GET["use"]) ? $_GET["use"] : '');
+            if($use == "daily"){
+              include("report_product_daily.php");
+            }elseif($use == "monthy"){
+              include("report_product_monthy.php");
+            }elseif($use == "yearly"){
+              include("report_product_yearly.php");
             }else{
-              include('r_daily.php');
+              include("report_product_daily.php");
             }
             // if ($_GET) {
-            //   switch ($_GET['use']) {
-            //     case 'daily':
-            //       include('r_daily.php');
+            //   switch ($_GET["use"]) {
+            //     case "daily":
+            //       include("report_product_daily.php");
             //       break;
-            //     case 'monthy':
-            //       include('r_monthy.php');
+            //     case "monthy":
+            //       include("report_product_monthy.php");
             //       break;
-            //     case 'yearly':
-            //       include('r_yearly.php');
+            //     case "yearly":
+            //       include("report_product_yearly.php");
             //       break;
             //     default:
-            //       echo 'none have anything to do';
+            //       echo "none have anything to do";
             //       break;
             //   }
             // } else {
-            //   include('r_daily.php');
+            //   include("report_product_daily.php");
             // }
             ?>             
             </div>
           </div>
-          
         </div>
       </div>
     </div>

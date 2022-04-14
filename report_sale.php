@@ -135,10 +135,10 @@ if(ISSET($_POST['search'])){
                       tb_order.status_id = tb_status.status_id 
                       WHERE tb_order.status_id = '2'
                       AND tb_order.order_date BETWEEN '$date1' AND '$date2'";
-                      $result = mysqli_query($conn, $sql);
-
-                      if(!empty($result))	 { 
-                        while($row = mysqli_fetch_array($result)) {
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while ($row = $result->fetch_assoc()) {
                           $date_set = date_create($row["order_date"]);
                           $day = date_format($date_set, "d");
                           $month = $date_th[date_format($date_set, "n")];
@@ -157,6 +157,13 @@ if(ISSET($_POST['search'])){
                       $i++;
                         } //while condition closing bracket
                       }  //if condition closing bracket
+                      else {
+                      ?>
+                      <tr>
+                        <td class="text-center" align="center" colspan="6" >ไม่มีข้อมูล</td>
+                      <tr>
+                      <?php
+                      }
                       ?>
                       <tr>
                         <td colspan="5" align="right"><strong>รวมเงินทั้งสิ้น</strong></td>
