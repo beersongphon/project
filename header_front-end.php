@@ -8,22 +8,51 @@
 <div class="offcanvas-menu-wrapper">
   <div class="offcanvas__close">+</div>
   <ul class="offcanvas__widget">
-    <li><span class="icon_search search-switch"></span></li>
+    <li>
+      <span class="icon_search search-switch"></span>
+    </li>
+    <?php
+    if (!isset($_SESSION["user_username"])) {
+    ?>
     <!-- <li>
       <a href="#"><span class="icon_heart_alt"></span>
         <div class="tip">2</div>
       </a>
     </li> -->
-    <li><a href="./shop-cart.php"><span class="icon_bag_alt"></span>
+    <li>
+      <a href="#">
+        <span class="icon_bag_alt"></span>
+      </a>
+    </li>
+    <?php
+    } else {
+    ?>
+    <li>
+      <?php 
+      if(!isset($_SESSION["shopping_cart"])) { 
+      ?>
+      <a href="#">
+        <span class="icon_bag_alt"></span>
         <div class="tip">
-          <?php 
-          if(isset($_SESSION["shopping_cart"])) { 
-            echo count($_SESSION["shopping_cart"]); 
-          } else { 
-            echo '0';
-          }?>
+          0
         </div>
-      </a></li>
+      </a>
+      <?php
+      } else { 
+      ?>
+      <a href="./shop-cart.php">
+        <span class="icon_bag_alt"></span>
+        <div class="tip">
+          <?php echo count($_SESSION["shopping_cart"]); ?>
+        </div>
+      </a>
+      <?php
+      }     
+      ?>     
+    </li>
+    <?php
+    }
+    ?>
   </ul>
   <div class="offcanvas__logo">
     <a href="./index.php" style="font-family: 'Finger Paint', cursive; font-size: 20px; color:#000000;">Luxury by Fon</a>
@@ -32,13 +61,13 @@
   <div id="mobile-menu-wrap"></div>
   <div class="offcanvas__auth">
   <?php
-  if (!isset($_SESSION['user_username'])) {
+  if (!isset($_SESSION["user_username"])) {
   ?>
-    <a href="./login.php">Login</a>
-    <a href="./register.php">Register</a>
+    <a href="./login.php">เข้าสู่ระบบ</a>
+    <a href="./register.php">สมัครสมาชิก</a>
   <?php
   } else {
-    echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
+    echo '<a href="./profile.php">'.$_SESSION["user_username"].'</a>';
   ?>
     <a href="./logout.php">ออกจากระบบ</a>
   <?php
@@ -62,16 +91,16 @@
         <nav class="header__menu">
           <ul>
           <?php
-          if (!isset($_SESSION['user_username'])) {
+          if (!isset($_SESSION["user_username"])) {
             ?>
-            <li class="<?php if (basename($_SERVER['PHP_SELF']) == "index.php") {
+            <li class="<?php if (basename($_SERVER["PHP_SELF"]) == "index.php") {
                                                 echo "active";
                                               } else {
                                                 echo "";
                                               } ?>"><a href="./index.php">หน้าแรก</a></li>
             <!-- <li><a href="#">Women’s</a></li>
             <li><a href="#">Men’s</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
+            <li class="<?= (basename($_SERVER["PHP_SELF"]) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
             <!-- <li><a href="#">Pages</a>
               <ul class="dropdown">
                 <li><a href="./product-details.html">Product Details</a></li>
@@ -81,34 +110,38 @@
               </ul>
             </li>
             <li><a href="./blog.html">Blog</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
+            <li class="<?= (basename($_SERVER["PHP_SELF"]) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
             <?php
              } else {
              ?>
-            <li class="<?php if (basename($_SERVER['PHP_SELF']) == "index.php") {
+            <li class="<?php if (basename($_SERVER["PHP_SELF"]) == "index.php") {
                                                 echo "active";
                                               } else {
                                                 echo "";
                                               } ?>"><a href="./index.php">หน้าแรก</a></li>
             <!-- <li><a href="#">Women’s</a></li>
             <li><a href="#">Men’s</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
-            <li class="<?php if (basename($_SERVER['PHP_SELF']) == "shop-cart.php") {
+            <li class="<?= (basename($_SERVER["PHP_SELF"]) == "shop.php") ? "active" : ""; ?>"><a href="./shop.php">สินค้า</a></li>
+            <li class="<?php if (basename($_SERVER["PHP_SELF"]) == "shop-cart.php") {
                                                 echo "active";
-                                              } elseif (basename($_SERVER['PHP_SELF']) == "checkout.php") {
+                                              } elseif (basename($_SERVER["PHP_SELF"]) == "checkout.php") {
+                                                echo "active";
+                                              } elseif (basename($_SERVER["PHP_SELF"]) == "orders_status.php") {
+                                                echo "active";
+                                              } elseif (basename($_SERVER["PHP_SELF"]) == "checkout.php") {
                                                 echo "active";
                                               } else {
                                                 echo "";
-                                              } ?>"><a href="#">Pages</a>
+                                              } ?>"><a href="#">รายการ</a>
               <ul class="dropdown">
-                <li><a href="./product-details.html">Product Details</a></li>
-                <li><a href="./shop-cart.php">Shop Cart</a></li>
-                <li><a href="./checkout.php">Checkout</a></li>
-                <li><a href="./blog-details.html">Blog Details</a></li>
+                <li><a href="./shop-cart.php">ตะกร้าสินค้า</a></li>
+                <li><a href="./checkout.php">การสั่งซื้อ</a></li>
+                <li><a href="./orders_status.php">ประวัติการสั่งซื้อ</a></li>
               </ul>
             </li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
-            <li class="<?= (basename($_SERVER['PHP_SELF']) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
+            <li class="<?= (basename($_SERVER["PHP_SELF"]) == "payment.php") ? "active" : ""; ?>"><a href="./payment.php">แจ้งชำระเงิน</a></li>
+            <li class="<?= (basename($_SERVER["PHP_SELF"]) == "contact.php") ? "active" : ""; ?>"><a href="./contact.php">ติดต่อเรา</a></li>
              <?php
              }
              ?>
@@ -118,24 +151,26 @@
       <div class="col-lg-3">
         <div class="header__right">
           <div class="header__right__auth">
-          <?php
-          if (!isset($_SESSION['user_username'])) {
-          ?>
-            <a href="./login.php">Login</a>
-            <a href="./register.php">Register</a>
-          <?php
-          } else {
-            echo "<a href='#' id='user_detail'>".$_SESSION["user_username"]."</a>";
+            <?php
+            if (!isset($_SESSION["user_username"])) {
+            ?>
+            <a href="./login.php">เข้าสู่ระบบ</a>
+            <a href="./register.php">สมัครสมาชิก</a>
+            <?php
+            } else {
+            echo '<a href="./profile.php">'.$_SESSION["user_username"].'</a>';
             ?>
             <a href="./logout.php">ออกจากระบบ</a>
             <?php
-          }
-          ?>
+            }
+            ?>
           </div>
           <ul class="header__right__widget">
-            <li><span class="icon_search search-switch"></span></li>
+            <li>
+              <span class="icon_search search-switch"></span>
+            </li>
             <?php
-            if (!isset($_SESSION['user_username'])) {
+            if (!isset($_SESSION["user_username"])) {
             ?>
             <!-- <li>
               <a href="#">
@@ -149,7 +184,7 @@
             </li>
             <?php
             } else {
-            ?>
+            ?> 
             <!-- <li>
               <a href="#">
                 <span class="icon_heart_alt"></span>
@@ -159,21 +194,29 @@
               </a>
             </li> -->
             <li>
-              <a href="./shop-cart.php">
+              <?php
+                if(!isset($_SESSION["shopping_cart"])) { 
+              ?>
+              <a href="#">
                 <span class="icon_bag_alt"></span>
                 <div class="tip">
-                  <?php 
-                  if(isset($_SESSION["shopping_cart"])) { 
-                    echo count($_SESSION["shopping_cart"]); 
-                  } 
-                  else { 
-                    echo '0';
-                  }
-                  ?>
+                  0
                 </div>
               </a>
+              <?php
+              } else { 
+              ?>
+                <a href="./shop-cart.php">
+                <span class="icon_bag_alt"></span>
+                <div class="tip">
+                  <?php echo count($_SESSION["shopping_cart"]); ?>
+                </div>
+              </a>
+              <?php 
+                } 
+              ?>
             </li>
-            <?php
+            <?php 
             }
             ?>
           </ul>

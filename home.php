@@ -1,6 +1,6 @@
 <?php
-include('./head_back-end.php');
-include('./header_back-end.php');
+include("./head_back-end.php");
+include("./header_back-end.php");
 ?>
 
 <header class="mb-3">
@@ -10,7 +10,7 @@ include('./header_back-end.php');
 </header>
 
 <div class="page-heading">
-  <h3>Profile Statistics</h3>
+  <h3>หน้าแรก</h3>
 </div>
 <div class="page-content">
   <section class="row">
@@ -26,7 +26,7 @@ include('./header_back-end.php');
                   </div>
                 </div>
                 <?php
-                $sql = "SELECT COUNT(user_id) AS user_id FROM tb_user";
+                $sql = "SELECT COUNT(user_id) AS user_id FROM tb_user WHERE permission_id = '3'";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                   // output data of each row
@@ -81,10 +81,21 @@ include('./header_back-end.php');
                     <i class="iconly-boldAdd-User"></i>
                   </div>
                 </div>
+                <?php
+                $sql = "SELECT COUNT(brand_id) AS brand_id FROM tb_brand";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  // output data of each row
+                  while ($row = $result->fetch_assoc()) {
+                ?>
                 <div class="col-md-8">
-                  <h6 class="text-muted font-semibold">Following</h6>
-                  <h6 class="font-extrabold mb-0">80.000</h6>
+                  <h6 class="text-muted font-semibold">ข้อมูลยี่ห้อ</h6>
+                  <h6 class="font-extrabold mb-0"><?php echo $row["brand_id"]; ?></h6>
                 </div>
+                <?php
+                  } //while condition closing bracket
+                }  //if condition closing bracket
+                ?>
               </div>
             </div>
           </div>
@@ -98,16 +109,27 @@ include('./header_back-end.php');
                     <i class="iconly-boldBookmark"></i>
                   </div>
                 </div>
+                <?php
+                $sql = "SELECT COUNT(category_id) AS category_id FROM tb_category";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                  // output data of each row
+                  while ($row = $result->fetch_assoc()) {
+                ?>
                 <div class="col-md-8">
-                  <h6 class="text-muted font-semibold">Saved Post</h6>
-                  <h6 class="font-extrabold mb-0">112</h6>
+                  <h6 class="text-muted font-semibold">ข้อมูลประเภท</h6>
+                  <h6 class="font-extrabold mb-0"><?php echo $row["category_id"]; ?></h6>
                 </div>
+                <?php
+                  } //while condition closing bracket
+                }  //if condition closing bracket
+                ?>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
@@ -225,7 +247,7 @@ include('./header_back-end.php');
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="col-12 col-lg-3">
       <div class="card">
@@ -234,28 +256,53 @@ include('./header_back-end.php');
             <div class="avatar avatar-xl">
               <img src="./assets/back-end/mazer/dist/assets/images/faces/1.jpg" alt="Face 1">
             </div>
+            <?php
+            $sql = "SELECT user_id, 
+            CONCAT(user_firstname ,' ' , user_lastname) as user_name, 
+            user_username 
+            FROM tb_user WHERE user_id = $_SESSION[user_id]";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while ($row = $result->fetch_assoc()) {
+            ?>
             <div class="ms-3 name">
-              <h5 class="font-bold">John Duck</h5>
-              <h6 class="text-muted mb-0">@johnducky</h6>
+              <h5 class="font-bold"><?php echo $row["user_name"] ?></h5>
+              <h6 class="text-muted mb-0"><?php echo $row["user_username"] ?></h6>
             </div>
+            <?php
+              } //while condition closing bracket
+            }  //if condition closing bracket
+            ?>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-header">
-          <h4>Recent Messages</h4>
+          <h4>ข้อความล่าสุด</h4>
         </div>
         <div class="card-content pb-4">
+          <?php
+          $sql = "SELECT * FROM tb_contact WHERE user_id = '$_SESSION[user_id]' LIMIT 3";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+          ?>
           <div class="recent-message d-flex px-4 py-3">
             <div class="avatar avatar-lg">
               <img src="./assets/back-end/mazer/dist/assets/images/faces/4.jpg">
             </div>
             <div class="name ms-4">
-              <h5 class="mb-1">Hank Schrader</h5>
-              <h6 class="text-muted mb-0">@johnducky</h6>
+              <h5 class="mb-1"><?php echo $row["contact_member"] ?></h5>
+              <!-- <h6 class="text-muted mb-0"><?php //echo $row["contact_email"] ?></h6> -->
             </div>
           </div>
-          <div class="recent-message d-flex px-4 py-3">
+          <?php
+            } //while condition closing bracket
+          }  //if condition closing bracket
+          ?>
+          <!-- <div class="recent-message d-flex px-4 py-3">
             <div class="avatar avatar-lg">
               <img src="./assets/back-end/mazer/dist/assets/images/faces/5.jpg">
             </div>
@@ -272,26 +319,25 @@ include('./header_back-end.php');
               <h5 class="mb-1">John Dodol</h5>
               <h6 class="text-muted mb-0">@dodoljohn</h6>
             </div>
-          </div>
+          </div> -->
           <div class="px-4">
-            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-              Conversation</button>
+            <a href="./feedback.php" class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>ดูข้อมูล Feedback</a>
           </div>
         </div>
       </div>
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-header">
           <h4>Visitors Profile</h4>
         </div>
         <div class="card-body">
           <div id="chart-visitors-profile"></div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </div>
 
-<script src="./assets/back-end/mazer/dist/assets/vendors/apexcharts/apexcharts.js"></script>
-<script src="./assets/back-end/mazer/dist/assets/js/pages/dashboard.js"></script>
+<!-- <script src="./assets/back-end/mazer/dist/assets/vendors/apexcharts/apexcharts.js"></script>
+<script src="./assets/back-end/mazer/dist/assets/js/pages/dashboard.js"></script> -->
 
 <?php include("./footer_back-end.php"); ?>
