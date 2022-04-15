@@ -44,14 +44,23 @@ if(ISSET($_POST['search'])){
           $header = '
           <div class="card-header">
             <h2 class="card-title" align="center">รายงานการขายสินค้า</h2>
-          </div>'
+          </div>';
+          $date = '
+          <div class="input-group mb-3" align="center">
+            <label class="input-group-text" align="center">วันที่:</label>
+            <label type="date" class="form-control" placeholder="Start">'.$date1.'</label>
+            <label class="input-group-text">ถึง</label>
+            <label type="date" class="form-control" placeholder="End">'.$date2.'</label>
+          </div>
+          <br>
+          ';
           ?>
           <div class="card-content">
             <div class="card-body">
-              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+              <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>">
                 <div class="input-group mb-3">
                   <label class="input-group-text">วันที่:</label>
-                  <input type="date" class="form-control" placeholder="Start"  name="date1"/>
+                  <input type="date" class="form-control" placeholder="Start" name="date1"/>
                   <label class="input-group-text">ถึง</label>
                   <input type="date" class="form-control" placeholder="End"  name="date2"/>
                   <button class="btn-primary input-group-text" name="search"><i class="bi bi-search"></i></button>
@@ -179,6 +188,7 @@ if(ISSET($_POST['search'])){
               $mpdf = new \Mpdf\Mpdf();
               $mpdf->WriteHTML($head);
               $mpdf->WriteHTML($header);
+              $mpdf->WriteHTML($date);
               $mpdf->WriteHTML($html);
               $mpdf->Output("report_sale.pdf");
               ?>

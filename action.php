@@ -16,23 +16,23 @@ if (isset($_POST["product_id"])) {
       }
       if ($is_available < 1) {
         $item_array = array(
-          'product_id'               =>     $_POST["product_id"],
-          'img_product'               =>     $_POST["img_product"],
-          'product_name'               =>     $_POST["product_name"],
-          'product_quantity'               =>     $_POST["product_quantity"],
-          'product_price'               =>     $_POST["product_price"],
-          'order_quantity'          =>     $_POST["order_quantity"]
+          'product_id' => $_POST["product_id"],
+          'img_product' => $_POST["img_product"],
+          'product_name' => $_POST["product_name"],
+          'product_quantity' => $_POST["product_quantity"],
+          'product_price' => $_POST["product_price"],
+          'order_quantity' => $_POST["order_quantity"]
         );
         $_SESSION["shopping_cart"][] = $item_array;
       }
     } else {
       $item_array = array(
-        'product_id'               =>     $_POST["product_id"],
-        'img_product'               =>     $_POST["img_product"],
-        'product_name'               =>     $_POST["product_name"],
-        'product_quantity'               =>     $_POST["product_quantity"],
-        'product_price'               =>     $_POST["product_price"],
-        'order_quantity'          =>     $_POST["order_quantity"]
+        'product_id' => $_POST["product_id"],
+        'img_product' => $_POST["img_product"],
+        'product_name' => $_POST["product_name"],
+        'product_quantity' => $_POST["product_quantity"],
+        'product_price' => $_POST["product_price"],
+        'order_quantity' => $_POST["order_quantity"]
       );
       $_SESSION["shopping_cart"][] = $item_array;
     }
@@ -53,7 +53,7 @@ if (isset($_POST["product_id"])) {
     }
   }
   $order_table .= '  
-           ' . $message . '  
+           '.$message.'  
         <div class="row">
           <div class="col-lg-12">
             <div class="shop__cart__table">
@@ -75,9 +75,9 @@ if (isset($_POST["product_id"])) {
       $order_table .= ' 
                 <tr>
                   <td class="cart__product__item">
-                    <img class="col-2" src="./upload/' . $values["img_product"] . '" alt="">
+                    <img class="col-2" src="./upload/'.$values["img_product"].'" alt="">
                     <div class="cart__product__item__title">
-                      <h6>' . $values["product_name"] . '</h6>
+                      <h6>'.$values["product_name"].'</h6>
                       <!-- <div class="rating">
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -87,21 +87,20 @@ if (isset($_POST["product_id"])) {
                     </div> -->
                     </div>
                   </td>
-                  <td class="cart__price">฿ ' . number_format($values["product_price"], 2) . '</td>
+                  <td class="cart__price">฿ '.number_format($values["product_price"], 2).'</td>
                   <td class="cart__quantity">
                     <div class="pro-qty">
-                      <input type="text" value="' . $values["order_quantity"] . '" style="width: 60px;" name="quantity[]" id="quantity' . $values["product_id"] . '" data-product_id="' . $values["product_id"] . '" class="quantity">
+                      <input type="text" value="'.$values["order_quantity"].'" style="width: 60px;" name="quantity[]" id="quantity'.$values["product_id"].'" data-product_id="'.$values["product_id"].'" class="quantity">
                       <!-- <input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["order_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="quantity"> -->
                     </div>
                   </td>
-                  <td class="cart__total">฿ ' . number_format($values["order_quantity"] * $values["product_price"], 2) . '</td>
-                  <td class="cart__close"> <span class="icon_close delete" name="delete" id="' . $values["product_id"] . '"></span></td>
+                  <td class="cart__total">฿ '.number_format($values["order_quantity"] * $values["product_price"], 2).'</td>
+                  <td class="cart__close"> <span class="icon_close delete" name="delete" id="'.$values["product_id"].'"></span></td>
                 </tr> 
                 ';
       $total = $total + ($values["order_quantity"] * $values["product_price"]);
     }
-  }
-  else{
+  } else {
     $order_table .= '
                 <tr>
                 <td class="cart__not" colspan = "5">
@@ -111,14 +110,13 @@ if (isset($_POST["product_id"])) {
                 </td>
                 </tr>
                 ';
-              }
-              $order_table .= '
+  }
+  $order_table .= '
               </tbody>
             </table>
           </div>
         </div>
       </div>';
-  
   $order_table .= '
      <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6">
@@ -148,16 +146,16 @@ if (isset($_POST["product_id"])) {
           <ul>
             <!-- <li>Subtotal <span>฿ 750.0</span></li> -->
             <li>ราคารวม ';
-            if (!empty($_SESSION["shopping_cart"])) {
-            $order_table .= '
-              <span>฿ ' . number_format($total, 2) . '</span></li>';
-            }
-            else {
-              $total = 0;
-              $order_table .= '
-              <span>฿ ' . number_format($total, 2) . '</span></li>';
-            }
-          $order_table .= '
+  if (!empty($_SESSION["shopping_cart"])) {
+    $order_table .= '
+              <span>฿ '.number_format($total, 2).'</span>';
+  } else {
+    $total = 0;
+    $order_table .= '
+              <span>฿ '.number_format($total, 2).'</span>';
+  }
+  $order_table .= '
+            </li>
           </ul>
           <a href="./checkout.php" class="primary-btn">ดำเนินการชำระเงิน</a>
         </div>
@@ -165,9 +163,8 @@ if (isset($_POST["product_id"])) {
     </div>
     <script src="./assets/front-end/js/main.js"></script>';
   $output = array(
-    'order_table'     =>     $order_table,
-    'cart_item'          =>     count($_SESSION["shopping_cart"])
+    'order_table' => $order_table,
+    'cart_item' => count($_SESSION["shopping_cart"])
   );
   echo json_encode($output);
 }
-?>
