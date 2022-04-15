@@ -1,159 +1,185 @@
 <?php
-//เรียกไฟล์เชื่อมต่อฐานข้อมูล
-require_once 'connect.php';
+include('./head_back-end.php');
+
 $strKeyword = null;
 
 if (isset($_POST["txtSearch"])) {
-    $strKeyword = $_POST["txtSearch"];
+  $strKeyword = $_POST["txtSearch"];
 }
-if (isset($_GET['category_id']) & isset($_GET['category_name'])) {
-    //คิวรี่ข้อมูลสินค้าตามประเภท
-    $category_id = $_GET['category_id'];
-    //คิวรี่ข้อมูลสินค้าทุกรายการ
-    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-        $page_no = $_GET['page_no'];
-    } else {
-        $page_no = 1;
-    }
-
-    $total_records_per_page = 9;
-    $offset = ($page_no - 1) * $total_records_per_page;
-    $previous_page = $page_no - 1;
-    $next_page = $page_no + 1;
-    $adjacents = "2";
-
-    $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
-    $total_records = mysqli_fetch_array($result_count);
-    $total_records = $total_records['total_records'];
-    $total_no_of_pages = ceil($total_records / $total_records_per_page);
-    $second_last = $total_no_of_pages - 1; // total page minus 1
-
-    $sql = "SELECT DISTINCT tb_product.product_id,
-              (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
-              tb_product.product_name,
-              tb_product.product_price,
-              tb_product.product_qty,
-              tb_product.product_description
-              FROM tb_product
-              LEFT JOIN
-              tb_img_product
-              ON
-              tb_product.product_id = tb_img_product.product_id 
-              WHERE tb_product.category_id='$category_id'
-              AND (tb_product.product_id LIKE '%" . $strKeyword . "%' OR tb_product.product_name LIKE '%" . $strKeyword . "%')
-              ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-} else {
-    //คิวรี่ข้อมูลสินค้าทุกรายการ
-    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-        $page_no = $_GET['page_no'];
-    } else {
-        $page_no = 1;
-    }
-
-    $total_records_per_page = 9;
-    $offset = ($page_no - 1) * $total_records_per_page;
-    $previous_page = $page_no - 1;
-    $next_page = $page_no + 1;
-    $adjacents = "2";
-
-    $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
-    $total_records = mysqli_fetch_array($result_count);
-    $total_records = $total_records['total_records'];
-    $total_no_of_pages = ceil($total_records / $total_records_per_page);
-    $second_last = $total_no_of_pages - 1; // total page minus 1
-
-    $sql = "SELECT DISTINCT tb_product.product_id,
-              (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
-              tb_product.product_name,
-              tb_product.product_price,
-              tb_product.product_qty,
-              tb_product.product_description
-              FROM tb_product
-              LEFT JOIN
-              tb_img_product
-              ON
-              tb_product.product_id = tb_img_product.product_id 
-              WHERE tb_product.product_id LIKE '%" . $strKeyword . "%' OR tb_product.product_name LIKE '%" . $strKeyword . "%'
-              ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-}
-//คิวรี่ข้อมูลประเภทสินค้า
-$stmPrdType = "SELECT* FROM tb_category";
-$resultPrdType = $conn->query($stmPrdType);
-$rowPrdType = $resultPrdType->fetch_assoc();
-
+require_once __DIR__ . '/vendor/autoload.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <title>Basic PHP PDO แสดงสินค้าแยกตามหมวดหมู่-ประเภท by devbanban.com 2021</title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-primary" role="alert">
-                    <b> รายการสินค้า :: แสดงสินค้าแยกตามหมวดหมู่-ประเภท </b>
-                </div>
-            </div>
+<div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+      <div class="sidebar-header">
+        <div class="d-flex justify-content-between">
+          <div class="logo">
+            <a href="./home.php" style="font-family: 'Finger Paint', cursive; font-size: 20px;">Luxury by Fon</a>
+            <!-- <a href="index.html"><img src="./assets/back-end/mazer/dist/assets/images/logo/logo.png" alt="Logo" srcset=""></a> -->
+          </div>
+          <div class="toggler">
+            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="list-group">
-                    <a href="test4.php" class="list-group-item list-group-item-action active" aria-current="true">
-                        หมวดสินค้า/ประเภทสินค้า
-                    </a>
-                    <?php foreach ($resultPrdType as $rowPrdType) {  ?>
-                        <a href="test4.php?category_id=<?= $rowPrdType['category_id']; ?>&category_name=<?= $rowPrdType['category_name']; ?>" class="list-group-item list-group-item-action"> <?= $rowPrdType['category_name']; ?></a>
-                    <?php } ?>
-
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-
-                    <?php
-                    //ถ้ามีการคลิกเลือกประเภทสินค้า 
-                    if (isset($_GET['category_name'])) {
-                        echo '<h4 style="color:red"> หมวดสินค้า ' . $_GET['category_name'] . '</h4>';
-                    }
-                    //loop
-                    foreach ($result as $row) {  ?>
-
-                        <div class="col-sm-3" style="margin-bottom:50px;">
-                            <img src="./upload/<?= $row['img_product']; ?>" width="100%"><br>
-                            <?= $row['product_name']; ?> <br>
-                            QTY <?= $row['product_qty']; ?> คัน <br>
-                            ราคา <?= number_format($row['product_price'], 2); ?>
-                            บาท <br>
-
-                            <?php if ($row['product_qty'] > 0) {
-                                echo '<a href="#" style="width:100%" class="btn btn-success btn-sm">สั่งซื้อ</a>';
-                            } else {
-                                echo '<a href="#" style="width:100%" class="btn btn-danger btn-sm disabled" > สินค้าหมด !!</a>';
-                            }
-                            ?>
-                        </div> <!-- //col -->
-
-                    <?php } ?>
-                    <br><br>
-                </div>
-            </div>
-            <center>Basic PHP PDO แสดงสินค้าหน้าแรก by devbanban.com 2021
-                <br>
-                คอร์สออนไลน์...<a href="https://devbanban.com/?cat=250" title="click">click</a>
-            </center>
-        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul class="menu">
+          <li class="sidebar-item active">
+            <a href="./product.php" class='sidebar-link'>
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
     </div>
-</body>
+  </div>
+  <div id="main">
+<header class="mb-3">
+  <a href="#" class="burger-btn d-block d-xl-none">
+    <i class="bi bi-justify fs-3"></i>
+  </a>
+</header>
 
-</html>
+<div class="page-heading">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>รายงานสินค้าคงเหลือ</h3>
+        <!-- <p class="text-subtitle text-muted">For user to check they list</p> -->
+      </div>
+      <div class="col-12 col-md-6 order-md-2 order-first">
+        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./home.php">หน้าแรก</a></li>
+            <li class="breadcrumb-item active" aria-current="page">รายงานสินค้าคงเหลือ</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <?php 
+  ob_start();
+  $head = '
+  <style type="text/css">
+  body{
+    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+  }
+  .order-container {
+    font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+    margin:0px auto;
+    width:950px;
+    font-size:14px;
+  }
+  .order-head {
+    margin:50px 0 10px 0;
+  }
+  .order-title {
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+  }
+  .order-head .order-customer {
+    float:left;
+    margin:10px 0 10px 0;
+    padding:5px;
+  }
+  .order-head .order-date {
+    text-align:right;
+    margin:10px 0 10px 0;
+    float:right;
+    padding:5px;
+  }
+  .order-underline {
+    border-bottom:#000 1px dashed;
+  }
+  .clear {
+    clear:both;
+  }
+  </style>';
+  ?>
+  <!-- Hoverable rows start -->
+  <section class="section">
+    <div class="row" id="table-hover-row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title" align="center">รายงานสินค้าคงเหลือ</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+            </div>
+            <!-- table hover -->
+            <div class="table-responsive">
+              <table class="table table-hover table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-center">ลำดับ</th>
+                    <th class="text-center" width="100" >รหัสสินค้า</th>
+                    <th width="200" align="left">ชื่อสินค้า</th>
+                    <th>ยี่ห้อ</th>
+                    <th align="left">ประเภท</th>
+                    <th class="text-center">เหลือ (ชิ้น)</th>
+                    <!-- <th>ACTION</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $i = 1;
+
+                  $sql = "SELECT * FROM tb_product 
+                  LEFT JOIN
+                  tb_brand
+                  ON
+                  tb_product.brand_id = tb_brand.brand_id
+                  LEFT JOIN
+                  tb_category
+                  ON
+                  tb_product.category_id = tb_category.category_id
+                  ";
+                  $result = $conn->query($sql);
+
+                  if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                  ?>
+                  <tr>
+                    <td class="text-center" align="center"><?php echo $i; ?></td>
+                    <td class="text-center" align="center"><?php echo $row['product_id']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
+                    <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
+                    <td class="text-bold-500" align="left"><?php echo $row['category_name']; ?></td>
+                    <td class="text-center" align="center"><?php echo $row['product_quantity'];?></td>
+                  </tr>
+                  <?php
+                  $i++;
+                    } //while condition closing bracket
+                  }  //if condition closing bracket
+                  ?>
+                </tbody>
+              </table>
+              <!-- <button onclick="window.print()">Print </button>  -->
+              <hr>
+            </div>
+          </div>
+          <?php
+          $html=ob_get_contents();
+          $mpdf = new \Mpdf\Mpdf();
+          $mpdf->WriteHTML($head);
+          $mpdf->WriteHTML($html);
+          $mpdf->Output("report.pdf");
+          ?>
+          <a href="report.pdf" class="btn btn-primary">ออกรายงาน</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Hoverable rows end -->
+</div>
+
+<script src="./assets/js/jquery-3.5.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
+
+<?php include("./footer_back-end.php"); ?>

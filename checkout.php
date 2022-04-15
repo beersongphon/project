@@ -1,6 +1,18 @@
 <?php
 include("./head_front-end.php");
+include("./authguard.php");
 include("./header_front-end.php");
+
+
+$user_id = $_SESSION["user_id"];
+$sql = "SELECT user_id, 
+CONCAT(user_firstname ,' ' , user_lastname) as user_name, 
+user_address, 
+user_email, 
+user_tel 
+FROM tb_user WHERE user_id = '$user_id'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
 ?>
 
 <!-- Breadcrumb Begin -->
@@ -34,90 +46,35 @@ include("./header_front-end.php");
         <div class="col-lg-8">
           <h5>การสั่งซื้อ</h5>
           <div class="row">
-          <div class="col-lg-12">
+            <div class="col-lg-12">
               <div class="checkout__form__input">
-                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
               </div>
             </div>
             <div class="col-lg-12">
               <div class="checkout__form__input">
-                <p>ชื่อ <span>*</span></p>
-                <input type="text" name="order_name" placeholder="ชื่อ">
+                <p>ชื่อ - นามสกุล <span>*</span></p>
+                <input type="text" name="order_name" placeholder="ชื่อ - นามสกุล" value="<?php echo $row["user_name"]; ?>">
               </div>
             </div>
-            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p>ชื่อ <span>*</span></p>
-                <input type="text" name="name" value="<?php //echo $_SESSION['user_firstname']; ?>">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p>Last Name <span>*</span></p>
-                <input type="text">
-              </div>
-            </div> -->
             <div class="col-lg-12">
-              <!-- <div class="checkout__form__input">
-                <p>Country <span>*</span></p>
-                <input type="text">
-              </div> -->
               <div class="checkout__form__input">
                 <p>ที่อยู่ <span>*</span></p>
-                <input type="text" name="order_address" placeholder="ที่อยู่">
-                <!-- <input type="text" placeholder="Apartment. suite, unite ect ( optinal )"> -->
-              </div>
-              <!-- <div class="checkout__form__input">
-                <p>Town/City <span>*</span></p>
-                <input type="text">
-              </div>
-              <div class="checkout__form__input">
-                <p>Country/State <span>*</span></p>
-                <input type="text">
-              </div>
-              <div class="checkout__form__input">
-                <p>Postcode/Zip <span>*</span></p>
-                <input type="text">
-              </div> -->
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="checkout__form__input">
-                <p>เบอร์โทร <span>*</span></p>
-                <input type="text" name="order_tel" placeholder="เบอร์โทร">
+                <input type="text" name="order_address" placeholder="ที่อยู่" value="<?php echo $row["user_address"]; ?>">
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
                 <p>อีเมล <span>*</span></p>
-                <input type="text" name="order_email" placeholder="อีเมล">
+                <input type="text" name="order_email" placeholder="อีเมล" value="<?php echo $row["user_email"]; ?>">
               </div>
             </div>
-            <!-- <div class="col-lg-12">
-              <div class="checkout__form__checkbox">
-                <label for="acc">
-                  Create an acount?
-                  <input type="checkbox" id="acc">
-                  <span class="checkmark"></span>
-                </label>
-                <p>Create am acount by entering the information below. If you are a returing
-                  customer login at the <br />top of the page</p>
-              </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="checkout__form__input">
-                <p>Account Password <span>*</span></p>
-                <input type="text">
+                <p>เบอร์โทร <span>*</span></p>
+                <input type="text" name="order_tel" placeholder="เบอร์โทร" value="<?php echo $row["user_tel"]; ?>">
               </div>
-              <div class="checkout__form__checkbox">
-                <label for="note">
-                  Note about your order, e.g, special noe for delivery
-                  <input type="checkbox" id="note">
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="checkout__form__input">
-                <p>Oder notes <span>*</span></p>
-                <input type="text" placeholder="Note about your order, e.g, special noe for delivery">
-              </div>
-            </div> -->
+            </div>
           </div>
         </div>
         <div class="col-lg-4">
@@ -139,7 +96,7 @@ include("./header_front-end.php");
                 ?> 
                 <li><?php echo $i; ?>. <?php echo $values['product_name']; ?> <span>฿ <?php echo number_format($values["product_price"], 2); ?></span></li>
                 <?php  
-                $total = $total + ($values["product_quantity"] * $values["product_price"]);  
+                $total = $total + ($values["order_quantity"] * $values["product_price"]);
                 $i++;
                 }
                 ?> 

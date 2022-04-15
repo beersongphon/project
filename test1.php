@@ -1,63 +1,130 @@
-<?php $activePage = basename($_SERVER['PHP_SELF'], ".php"); ?>
-<li class="<?= ($activePage == 'about') ? 'active':''; ?>"><a href="/about/"><strong>About Us</strong></a></li>
-<li class="<?= ($activePage == 'contact') ? 'active':''; ?>"><a href="/contact/"><strong>Contact Us</strong></a></li>
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
 <?php
-if($activePage == 'Link1'){
-    echo "Link1";
-}elseif($activePage == 'Link2'){
-    echo "Link2";
-}
-?>
-<span class="caret"></span></a>
-<ul class="dropdown-menu" role="menu">
-    <li class="<?= ($activePage == 'Link1') ? 'active':''; ?>"><a href="/Link1/">Link1</a></li>
-    <li class="<?= ($activePage == 'Link2') ? 'active':''; ?>"><a href="/Link2/">Link2</a></li>
-    <li class="<?= ($activePage == 'Link3') ? 'active':''; ?>"><a href="/Link3/">Link3</a></li>
-</ul>
-</li>
+	//เรียกใช้ไฟล์ autoload.php ที่อยู่ใน Folder vendor
+	require_once __DIR__ . '/vendor/autoload.php';
+	
+	include('./connect.php');
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link <?= ($activePage == 'test2') ? 'active':''; ?>" aria-current="" href="./test2.php">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= ($activePage == 'test3') ? 'active':''; ?>" href="./test3.php">Link</a>
-        </li>
-        <li class="nav-item dropdown <?= ($activePage == ' test4') ? 'active':''; ?>">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-            <?php
-            if($activePage == 'test4'){
-                echo "test4";
-            }elseif($activePage == 'Link2'){
-                echo "Link2";
-            }
-            ?>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item <?= ($activePage == 'test4') ? 'active':''; ?>" href="./test4.php">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+  if (isset($_GET["order_id"])) {
+    $customer_details = "";
+    $order_details = "";
+    $total = 0;
+    $query = "SELECT * FROM tb_order 
+              INNER JOIN tb_order_detail 
+              ON tb_order_detail.order_id = tb_order.order_id 
+              INNER JOIN tb_product
+              ON tb_product.product_id = tb_order_detail.product_id 
+              INNER JOIN tb_brand
+              ON tb_brand.brand_id = tb_product.brand_id 
+              INNER JOIN tb_user 
+              ON tb_user.user_id = tb_order.user_id 
+              INNER JOIN tb_status 
+              ON tb_status.status_id = tb_order.status_id 
+              WHERE tb_order.order_id = '$_GET[order_id]'   
+              ";
+    $result = mysqli_query($conn, $query);
+    while ($row = mysqli_fetch_array($result)) {
+      $customer_details = "  
+                          <div class='order-head'>
+                            <div class='order-date'> 
+                              <b>เลขที่ใบสั่งซื้อ</b>
+                              <span class='order-underline'>" . $_GET["order_id"] ." </span><br />
+                              <b>วันที่สั่งซื้อ</b>
+                              <span class='order-underline'>" . $row['order_date'] ." </span>
+                            </div>
+                            <div class='order-customer'> <b>ชื่อ-สกุล</b> 
+                              <span class='order-underline'>" . $row["order_name"] ."</span><br />
+                              <b>ที่อยู่</b> 
+                              <span class='order-underline'>" . $row['order_address'] ." </span><br />
+                              <b>เบอร์โทรศัพท์</b> 
+                              <span class='order-underline'>" . $row['order_tel'] ." </span><br />
+                              <b>อีเมล</b> 
+                              <span class='order-underline'>" . $row['order_email'] ." </span>
+                            </div>
+                          </div>
+                          ";
+ 
+      $order_details .= "  
+                          <tr>  
+                            <td>".$row["product_name"]." ยี่ห้อ : ".$row["brand_name"]."</td>  
+                            <td align='center'>" . $row["order_price"] . "</td>  
+                            <td align='center'>" . $row["order_quantity"] . "</td>  
+                            <td align='right'>" . number_format($row["order_quantity"] * $row["order_price"], 2) . "</td>  
+                          </tr>  
+                        ";
+      $total = number_format($total + $row["order_quantity"] * $row["order_price"], 2);
+    }
+	
+$mpdf = new \Mpdf\Mpdf();
+
+$head = '
+<style type="text/css">
+body{
+  font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+}
+.order-container {
+  font-family: "Garuda";//เรียกใช้font Garuda สำหรับแสดงผล ภาษาไทย
+  margin:0px auto;
+  width:950px;
+  font-size:14px;
+}
+.order-head {
+  margin:50px 0 10px 0;
+}
+.order-title {
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
+.order-head .order-customer {
+  float:left;
+  margin:10px 0 10px 0;
+  padding:5px;
+}
+.order-head .order-date {
+  text-align:right;
+  margin:10px 0 10px 0;
+  float:right;
+  padding:5px;
+}
+.order-underline {
+  border-bottom:#000 1px dashed;
+}
+.clear {
+  clear:both;
+}
+</style>';
+
+$order = "
+<br />
+<div class='order-container'>
+  <div class='order-title'>ใบเสร็จ</div>
+  " . $customer_details ." 
+  <div class='clear'></div>
+  <div class='order-content'>
+    <table width='100%' border='1' cellpadding='3' cellspacing='0'>
+      <tr>
+        <td><strong>สินค้า</strong></td>
+        <td align='center'><strong>ราคา</strong></td>
+        <td align='center'><strong>จำนวน</strong></td>
+        <td align='right'><strong>ราคารวม</strong></td>
+      </tr>
+      " . $order_details ." 
+      <tr>
+        <td colspan='3' align='right'><strong>รวมเงินทั้งสิ้น</strong></td>
+        <td align='right'>" . $total ."</td>
+      </tr>
+    </table>
+  </div>";
+}
+$end = "
+</div>
+<br>";
+
+
+$mpdf->WriteHTML($head);
+
+$mpdf->WriteHTML($order);
+
+$mpdf->WriteHTML($end);
+
+$mpdf->Output();

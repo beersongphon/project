@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set("Asia/Bangkok");
 include("./urldomain.php");
-include('./connect.php');
+include("./connect.php");
 
 $strKeyword = null;
 
@@ -11,12 +11,8 @@ if (isset($_POST["txtSearch"])) {
 }
 
 if (isset($_SESSION["user_username"])) {
-  if ((time() - $_SESSION["login_timestamp"]) > $sessiontime) {
-    header("location: logout.php");
-  } else {
-    if ($_SESSION["permission_id"] == "1" || $_SESSION["permission_id"] == "2") {
-      header("location: ./home.php");
-    }
+  if ($_SESSION["permission_id"] == "1" || $_SESSION["permission_id"] == "2") {
+    header("location: ./home.php");
   }
 }
 ?>

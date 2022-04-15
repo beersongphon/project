@@ -35,7 +35,7 @@ include("./header_front-end.php");
                 <p for="pwd_login">รหัสผ่าน</p>
                 <input type="password" id="pwd_login" placeholder="รหัสผ่าน">
               </div>
-              <button type="button" class="site-btn" id="login">เข้าสู่ระบบ</button>
+              <button type="button" class="site-btn" id="btn_login">เข้าสู่ระบบ</button>
             </div>    
           </div>
         </div>

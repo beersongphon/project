@@ -2,11 +2,7 @@
 include('./head_back-end.php');
 include('./header_back-end.php');
 
-$strKeyword = null;
-
-if (isset($_POST["txtSearch"])) {
-  $strKeyword = $_POST["txtSearch"];
-}
+require_once __DIR__ . '/vendor/autoload.php';
 ?>
 
 <header class="mb-3">
@@ -32,68 +28,51 @@ if (isset($_POST["txtSearch"])) {
       </div>
     </div>
   </div>
-    <!-- Hoverable rows start -->
+
+  <!-- Hoverable rows start -->
   <section class="section">
     <div class="row" id="table-hover-row">
       <div class="col-12">
         <div class="card">
-          <!-- <div class="card-header">
-            <h4 class="card-title">ข้อมูลสินค้า</h4>
-          </div> -->
+          <?php 
+          $header = '
+          <div class="card-header">
+            <h2 class="card-title" align="center">รายงานสินค้าคงเหลือ</h2>
+          </div>'
+          ?>
           <div class="card-content">
             <div class="card-body">
-            </div>
-            <!-- table hover -->
-            <div class="table-responsive">
-              <table class="table table-hover table-striped mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-center">ลำดับ</th>
-                    <th class="text-center">รหัสสินค้า</th>
-                    <th>ชื่อสินค้า</th>
-                    <th>ชื่อแบรนด์</th>
-                    <th>ประเภท</th>
-                    <th class="text-center">เหลือ (ชิ้น)</th>
-                    <!-- <th>ACTION</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $i = 1;
-
-                  $sql = "SELECT * FROM tb_product 
-                  LEFT JOIN
-                  tb_brand
-                  ON
-                  tb_product.brand_id = tb_brand.brand_id
-                  LEFT JOIN
-                  tb_category
-                  ON
-                  tb_product.category_id = tb_category.category_id
-                  ";
-                  $result = $conn->query($sql);
-
-                  if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-                  ?>
-                  <tr>
-                    <td class="text-center"><?php echo $i; ?></td>
-                    <td class="text-center"><?php echo $row['product_id']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['product_name']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['brand_name']; ?></td>
-                    <td class="text-bold-500"><?php echo $row['category_name']; ?></td>
-                    <td class="text-center"><?php echo $row['product_qty'];?></td>
-                  </tr>
-                  <?php
-                  $i++;
-                    } //while condition closing bracket
-                  }  //if condition closing bracket
-                  ?>
-                </tbody>
-              </table>
-              <!-- <button onclick="window.print()">Print </button>  -->
-              <hr>
+            <?php
+            include("intro.php");
+            $use = (isset($_GET["use"]) ? $_GET["use"] : '');
+            if($use == "daily"){
+              include("report_product_daily.php");
+            }elseif($use == "monthy"){
+              include("report_product_monthy.php");
+            }elseif($use == "yearly"){
+              include("report_product_yearly.php");
+            }else{
+              include("report_product_daily.php");
+            }
+            // if ($_GET) {
+            //   switch ($_GET["use"]) {
+            //     case "daily":
+            //       include("report_product_daily.php");
+            //       break;
+            //     case "monthy":
+            //       include("report_product_monthy.php");
+            //       break;
+            //     case "yearly":
+            //       include("report_product_yearly.php");
+            //       break;
+            //     default:
+            //       echo "none have anything to do";
+            //       break;
+            //   }
+            // } else {
+            //   include("report_product_daily.php");
+            // }
+            ?>             
             </div>
           </div>
         </div>
@@ -102,10 +81,5 @@ if (isset($_POST["txtSearch"])) {
   </section>
   <!-- Hoverable rows end -->
 </div>
-
-<script src="./assets/js/jquery-3.5.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
 
 <?php include("./footer_back-end.php"); ?>

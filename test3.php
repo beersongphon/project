@@ -72,12 +72,12 @@ require_once("connect.php");
       $row	= mysqli_fetch_array($result);
       $count = mysqli_num_rows($result);
       for($i=0; $i<$count; $i++){
-        $have =  $row['product_qty'];
+        $have =  $row['product_quantity'];
         
         $stc = $have - $values["product_quantity"];
         
         $sql2 = "UPDATE tb_product SET  
-        product_qty = $stc
+        product_quantity = $stc
         WHERE product_id = $values[product_id]";
         $query2 = mysqli_query($conn, $sql2);  
       }

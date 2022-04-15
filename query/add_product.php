@@ -4,19 +4,19 @@ $product_name = $_POST['product_name'];
 $brand_id = $_POST['brand_id'];
 $category_id = $_POST['category_id'];
 $product_price = $_POST['product_price'];
-$product_qty = $_POST['product_qty'];
+$product_quantity = $_POST['product_quantity'];
 $product_description = $_POST['product_description'];
 
 $sql = "SELECT * FROM tb_product";
 $result = $conn->query($sql);
 $product_id = ($result->num_rows + 1);
-$sql = "INSERT INTO tb_product (product_name, brand_id, category_id, product_price, product_qty, product_description) VALUES 
+$sql = "INSERT INTO tb_product (product_name, brand_id, category_id, product_price, product_quantity, product_description) VALUES 
         (
            '$product_name',
            '$brand_id',
            '$category_id',
            '$product_price',
-           '$product_qty',
+           '$product_quantity',
            '$product_description'
         )
     ";

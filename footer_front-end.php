@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-1.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/273755015_348496047284153_1755625529480454519_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-2.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/272800576_376439770542370_3147845305683727133_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-3.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/273951449_660412938716153_7723872600536299228_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-4.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/272906207_283601377203483_3626855377821527351_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-5.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/273994721_373886497500356_1764593034202846293_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-        <div class="instagram__item set-bg" data-setbg="./assets/front-end/img/instagram/insta-6.jpg">
+        <div class="instagram__item set-bg" data-setbg="./assets/img/270569392_392898942611735_5262826995142670967_n.jpg">
           <div class="instagram__text">
             <i class="fa fa-facebook"></i>
             <a href="https://www.facebook.com/Luxury-by-Fon-106919777637043/" target="_blank">Luxury by Fon</a>
@@ -93,17 +93,17 @@
           <h6>บัญชี</h6>
           <ul>
           <?php
-          if (!isset($_SESSION['user_username'])) {
+          if (!isset($_SESSION["user_username"])) {
           ?>
             <li><a href="./login.php">บัญชีของฉัน</a></li>
-            <li><a href="./login.php">ติดตามการสั่งซื้อ</a></li>
+            <li><a href="./login.php">ประวัติการสั่งซื้อ</a></li>
             <li><a href="./login.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
           } else {
           ?>
             <li><a href="./profile.php">บัญชีของฉัน</a></li>
-            <li><a href="./orders_tracking.php">ติดตามการสั่งซื้อ</a></li>
+            <li><a href="./orders_status.php">ประวัติการสั่งซื้อ</a></li>
             <li><a href="./checkout.php">การชำระเงิน</a></li>
             <!-- <li><a href="#">Wishlist</a></li> -->
           <?php
@@ -169,34 +169,34 @@
 
 <script>
   $(document).ready(function(data) {
-    $('.add_to_cart').click(function() {
+    $(".add_to_cart").click(function() {
       var product_id = $(this).attr("id");
-      var img_product = $('#img' + product_id).val();
-      var product_name = $('#name' + product_id).val();
-      var product_qty = $('#qty' + product_id).val();
-      var product_price = $('#price' + product_id).val();
-      var product_quantity = $('#quantity' + product_id).val();
+      var img_product = $("#img" + product_id).val();
+      var product_name = $("#name" + product_id).val();
+      var product_quantity = $("#qty" + product_id).val();
+      var product_price = $("#price" + product_id).val();
+      var order_quantity = $("#quantity" + product_id).val();
       var action = "add";
-      if (product_quantity > 0) {
+      if (order_quantity > 0) {
         $.ajax({
           url: "action.php",
           method: "POST",
           dataType: "json",
           data: {
-            product_id: product_id,
-            img_product: img_product,
-            product_name: product_name,
-            product_qty: product_qty,
-            product_price: product_price,
-            product_quantity: product_quantity,
-            action: action
+            product_id : product_id,
+            img_product : img_product,
+            product_name : product_name,
+            product_quantity : product_quantity,
+            product_price : product_price,
+            order_quantity : order_quantity,
+            action : action
           },
           success: function(data) {
-            $('#order_table').html(data.order_table);
-            $('.badge').text(data.cart_item);
+            $("#order_table").html(data.order_table);
+            $(".badge").text(data.cart_item);
             //alert("Product has been Added into Cart");  
             Swal.fire({
-              icon: 'success',
+              icon: "success",
               title: ("Product has been Added into Cart"),
               showConfirmButton: false,
               timer: 1500
@@ -216,23 +216,23 @@
     $(document).on('click', '.delete', function() {
       var product_id = $(this).attr("id");
       var action = "remove";
-      if (confirm("Are you sure you want to remove this product?")) {
+      // if (confirm("Are you sure you want to remove this product?")) {
         $.ajax({
-          url: "action.php",
-          method: "POST",
-          dataType: "json",
-          data: {
-            product_id: product_id,
-            action: action
+          url : "action.php",
+          method : "POST",
+          dataType : "json",
+          data : {
+            product_id : product_id,
+            action : action
           },
           success: function(data) {
-            $('#order_table').html(data.order_table);
-            $('.badge').text(data.cart_item);
+            $("#order_table").html(data.order_table);
+            $(".badge").text(data.cart_item);
           }
         });
-      } else {
-        return false;
-      }
+      // } else {
+      //   return false;
+      // }
     });
     $(document).on('keyup', '.quantity', function() {
       var product_id = $(this).data("product_id");
@@ -240,16 +240,16 @@
       var action = "quantity_change";
       if (quantity != '') {
         $.ajax({
-          url: "action.php",
-          method: "POST",
-          dataType: "json",
-          data: {
-            product_id: product_id,
-            quantity: quantity,
-            action: action
+          url : "action.php",
+          method : "POST",
+          dataType : "json",
+          data : {
+            product_id : product_id,
+            quantity : quantity,
+            action : action
           },
           success: function(data) {
-            $('#order_table').html(data.order_table);
+            $("#order_table").html(data.order_table);
           }
         });
       }
@@ -292,20 +292,23 @@
       } // End if
     });
 
-    $("#login").click(function() {
+    $("#btn_login").click(function() {
       // alert("login");
       var usr = $("#user_name").val();
       var pwd_login = $("#pwd_login").val();
-      $.post("logins.php", {
-        usr: usr,
-        pwd_login: pwd_login
+      $.post("query/logins.php", {
+        usr : usr,
+        pwd_login : pwd_login
       }, function(datacallback) {
         if (datacallback == "login_success") {
           //location.reload();
           window.location.replace("index.php");
-        } else {
-          console.log(usr,pwd_login);
+        } else if (datacallback == "login_error") {
+          console.log(usr, pwd_login);
           alert("เกิดข้อผิดพลาด กรุณาตรวจสอบ Username หรือ Password");
+        } else {
+          console.log(datacallback);
+          alert("เกิดข้อผิดพลาด: " + datacallback);
         }
       });
     });
@@ -323,7 +326,7 @@
       } else if (comments_con == "") {
         alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       } else {
-        $.post("contacts.php", {
+        $.post("query/contacts.php", {
           name_con: name_con,
           email_con: email_con,
           comments_con: comments_con
@@ -331,8 +334,13 @@
           if (datacallback == "ส่งข้อมูลสำเร็จ") {
             alert(datacallback);
             location.reload();
-          } else {
+          } else if (datacallback == "เกิดข้อผิดพลาดในการส่งข้อมูล") {
+            console.log(datacallback);
             alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+            // alert(datacallback);
+          } else {
+            console.log(datacallback);
+            alert("เกิดข้อผิดพลาด: " + datacallback);
             // alert(datacallback);
           }
         });
@@ -341,17 +349,19 @@
 
 
     $("#form_payment").submit(function(e) {
-    // alert("N");
-    e.preventDefault();
-    var formData = new FormData(this);
-    // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
-    let order_id = $('#order_id').val();
-    let pay_total = $('#pay_total').val();
-    let fileToUpload = $("#fileToUpload").val();
-    let pay_tel = $('#pay_tel').val();
+      // alert("N");
+      e.preventDefault();
+      var formData = new FormData(this);
+      // ส่งค่าไปแค่ราคา 1ชั่วโมง:170บาท  ไปที่ payment.php
+      let order_id = $("#order_id").val();
+      let order_name = $("#order_name").val();
+      let order_address = $("#order_address").val();
+      let pay_total = $("#pay_total").val();
+      let fileToUpload = $("#fileToUpload").val();
+      let pay_tel = $("#pay_tel").val();
       $.ajax({
         type: "POST",
-        url: "payments.php",
+        url: "query/payments.php",
         data: formData,
         success: function(data) {
           if (data == "imageonly") {
@@ -361,31 +371,27 @@
           } else if (data == "success") {
             alert("ดำเนินการเสร็จสิ้น");
             order_id
+            order_name
+            order_address
             pay_total
             fileToUpload
             pay_tel
             location.reload();
-            console.log("order_id: " + order_id);
-            console.log("pay_total: " + pay_total);
-            console.log("pay_slip: " + fileToUpload);
-            console.log("pay_tel: " + pay_tel);
-            console.log("data: " + data);
           } else if (data == "error") {
             alert("เกิดปัญหาการ insert db ผิดพลาด");
             console.log("order_id: " + order_id);
+            console.log("order_name: " + order_name);
+            console.log("order_address: " + order_address);
             console.log("pay_total: " + pay_total);
             console.log("pay_slip: " + fileToUpload);
             console.log("pay_tel: " + pay_tel);
             console.log("data: " + data);
           } else if (data == "movefilefail") {
+            console.log("data: " + data);
             alert("เกิดปัญหาการการย้ายไฟล์ หรือตำแหน่งไดเรกทอรี่ผิดพลาด");
           } else {
-            alert("ERROR: " + data);
-            console.log("order_id: " + order_id);
-            console.log("pay_total: " + pay_total);
-            console.log("pay_slip: " + fileToUpload);
-            console.log("pay_tel: " + pay_tel);
             console.log("data: " + data);
+            alert("ERROR: " + data);
           }
         },
         cache: false,
@@ -428,7 +434,7 @@
         $("#pwd_regis").val("");
         $("#confirm_pwd").val("");
       } else {
-        $.post("registers.php", {
+        $.post("query/registers.php", {
           firstname_regis: firstname_regis,
           lastname_regis: lastname_regis,
           address_regis: address_regis,
@@ -456,6 +462,7 @@
             $("#pwd_regis").val("");
             $("#confirm_pwd").val("");
           } else {
+            console.log(datacallback);
             alert("เกิดขึ้นผิดพลาด: " + datacallback);
           }
         });
@@ -499,17 +506,17 @@
         $("#pwd_profile").val("");
         $("#confirm_pwd").val("");
       } else {
-        $.post("profiles.php", {
-          user_id_profile: user_id_profile,
-          firstname_profile: firstname_profile,
-          lastname_profile: lastname_profile,
-          address_profile: address_profile,
-          tel_profile: tel_profile,
-          email_profile: email_profile,
-          sex_profile: sex_profile,
-          username_profile: username_profile,
-          pwd_profile: pwd_profile,
-          confirm_pwd: confirm_pwd
+        $.post("query/profiles.php", {
+          user_id_profile : user_id_profile,
+          firstname_profile : firstname_profile,
+          lastname_profile : lastname_profile,
+          address_profile : address_profile,
+          tel_profile : tel_profile,
+          email_profile : email_profile,
+          sex_profile : sex_profile,
+          username_profile : username_profile,
+          pwd_profile : pwd_profile,
+          confirm_pwd : confirm_pwd
         }, function(datacallback) {
           if (datacallback == "success") {
             alert("แก้ไขข้อมูลสำเร็จ");
@@ -529,6 +536,7 @@
             $("#pwd_profile").val("");
             $("#confirm_pwd").val("");
           } else {
+            console.log(datacallback);
             alert("เกิดขึ้นผิดพลาด: " + datacallback);
           }
         });
@@ -537,6 +545,49 @@
 
     
   });
+</script>
+
+<script>
+var pay_total = $("#pay_total");
+
+$("document").ready(function() {
+  var order_id = $("#order_id").val();
+  $.ajax({
+    url: "query/get_payment.php",
+    data: {
+      "order_id" : order_id
+    },
+    method: "post",
+    dataType: "json",
+    success: function(result) {
+      result.forEach((data) => {
+        $("#pay_total").append(`<option value="${data.order_total}">${data.order_total}</option>`);
+      });
+    }
+  });
+
+  $("#order_id").on("change", function() {
+    totalChange();
+  });
+});
+
+function totalChange() {
+  $("#pay_total").empty();
+  var order_id = $("#order_id").val();
+  $.ajax({
+    url: "query/get_payment.php",
+    data: {
+      "order_id" : order_id
+    },
+    method: "post",
+    dataType: "json",
+    success: function(result) {
+      result.forEach((data) => {
+        $("#pay_total").append(`<option value="${data.order_total}">${data.order_total}</option>`);
+      });
+    }
+  });
+}
 </script>
 
 <!-- Js Plugins -->
