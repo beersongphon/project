@@ -15,12 +15,12 @@ $date_set1 = date_create($date1);
 $day1 = date_format($date_set1, "d");
 $month1 = $date_th[date_format($date_set1, "n")];
 $year1 = date_format($date_set1, "Y") + 543;
-$datesave1 = "".$day1. " " .$month1. " " .$year1. "";
+$datesave1 = "".$day1." ".$month1." " .$year1."";
 $date_set2 = date_create($date2);
 $day2 = date_format($date_set2, "d");
 $month2 = $date_th[date_format($date_set2, "n")];
 $year2 = date_format($date_set2, "Y") + 543;
-$datesave2 = "".$day2. " " .$month2. " " .$year2. "";
+$datesave2 = "".$day2." ".$month2." ".$year2."";
 ?>
 
 <header class="mb-3">
@@ -68,87 +68,6 @@ $datesave2 = "".$day2. " " .$month2. " " .$year2. "";
           ?>
           <div class="card-content">
             <div class="card-body">
-            <?php
-              $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-              $query = "SELECT 
-              tb_order.order_id, 
-              tb_order.order_date, 
-              SUM(tb_order.order_total) AS total_order, 
-              tb_order.order_name, 
-              tb_order.order_tel, 
-              tb_order.order_total
-              FROM tb_order 
-              LEFT JOIN
-              tb_status
-              ON
-              tb_order.status_id = tb_status.status_id 
-              WHERE tb_order.status_id = '2'
-              AND tb_order.order_date BETWEEN '$date1' AND '$date2'
-              GROUP BY DATE_FORMAT(tb_order.order_date, '%d%')
-              ORDER BY DATE_FORMAT(tb_order.order_date, '%Y-%m-%d') DESC";
-              $result = mysqli_query($conn, $query);
-              $resultchart = mysqli_query($conn, $query);
-              //for chart
-              $datesave = array();
-              $total = array();
-              while ($rs = mysqli_fetch_array($resultchart)) {
-                $date_sets = date_create($rs["order_date"]);
-                $days = date_format($date_sets, "d");
-                $months = $date_th[date_format($date_sets, "n")];
-                $years = date_format($date_sets, "Y") + 543;
-                $datesave[] = "\"" .$days. " " .$months. " " .$years. "\"";
-                $total[] = "\"" . $rs['total_order'] . "\"";
-              }
-              $datesave = implode(",", $datesave);
-              $total = implode(",", $total);
-              ?>
-              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-              <hr>
-              <p align="center">
-                <!--devbanban.com-->
-                <canvas id="myChart" width="800px" height="300px"></canvas>
-                <script>
-                  var ctx = document.getElementById("myChart").getContext('2d');
-                  var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                      labels: [<?php echo $datesave; ?>
-
-                      ],
-                      datasets: [{
-                        label: 'รายงานการขายสินค้า',
-                        data: [<?php echo $total; ?>],
-                        backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                          'rgba(255,99,132,1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        yAxes: [{
-                          ticks: {
-                            beginAtZero: true
-                          }
-                        }]
-                      }
-                    }
-                  });
-                </script>
-              </p>
               <form class="table-data__tool-right input-group" method="post" action="<?php echo $_SERVER["SCRIPT_NAME"]; ?>">
                 <div class="input-group mb-3">
                   <label class="input-group-text">วันที่</label>

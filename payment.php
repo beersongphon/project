@@ -5,7 +5,7 @@ include("./header_front-end.php");
 
 $user_id = $_SESSION["user_id"];
 $sql = "SELECT user_id, 
-CONCAT(user_firstname ,' ' , user_lastname) as user_name, 
+CONCAT(user_firstname , ' ', user_lastname) as user_name, 
 user_address, 
 user_email, 
 user_tel 

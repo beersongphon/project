@@ -43,8 +43,14 @@ require_once __DIR__ . '/vendor/autoload.php';
           <div class="card-content">
             <div class="card-body">
               <?php
-              $query = "SELECT product_id, product_name, SUM(product_quantity) AS total_quantity, DATE_FORMAT(DATE_ADD(product_date, INTERVAL 543 YEAR), '%d-%m-%Y') AS product_date
+              $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+              $query = "SELECT product_id, 
+              product_name, 
+              SUM(product_quantity) AS total_quantity, 
+              product_date
+              -- DATE_FORMAT(DATE_ADD(product_date, INTERVAL 543 YEAR), '%d-%m-%Y') AS product_date
               FROM tb_product 
+              -- WHERE product_quantity NOT IN ('0')
               GROUP BY DATE_FORMAT(product_date, '%d%')
               ORDER BY DATE_FORMAT(product_date, '%Y-%m-%d') DESC";
               $result = mysqli_query($conn, $query);
@@ -53,7 +59,11 @@ require_once __DIR__ . '/vendor/autoload.php';
               $datesave = array();
               $total = array();
               while ($rs = mysqli_fetch_array($resultchart)) {
-                $datesave[] = "\"" . $rs['product_date'] . "\"";
+                $date_sets = date_create($rs["product_date"]);
+                $days = date_format($date_sets, "d");
+                $months = $date_th[date_format($date_sets, "n")];
+                $years = date_format($date_sets, "Y") + 543;
+                $datesave[] = "\"" .$days. " " .$months. " " .$years. "\"";
                 $total[] = "\"" . $rs['total_quantity'] . "\"";
               }
               $datesave = implode(",", $datesave);
@@ -164,17 +174,18 @@ require_once __DIR__ . '/vendor/autoload.php';
                   <tbody>
                     <?php
                     $i = 1;
-                    $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
                     $sql = "SELECT * FROM tb_product 
-                                  LEFT JOIN
-                                  tb_brand
-                                  ON
-                                  tb_product.brand_id = tb_brand.brand_id
-                                  LEFT JOIN
-                                  tb_category
-                                  ON
-                                  tb_product.category_id = tb_category.category_id
-                                  ";
+                    LEFT JOIN
+                    tb_brand
+                    ON
+                    tb_product.brand_id = tb_brand.brand_id
+                    LEFT JOIN
+                    tb_category
+                    ON
+                    tb_product.category_id = tb_category.category_id
+                    -- WHERE product_quantity NOT IN ('0')
+                    ORDER BY product_date ASC
+                    ";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {

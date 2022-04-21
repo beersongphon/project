@@ -43,17 +43,24 @@ require_once __DIR__ . '/vendor/autoload.php';
           <div class="card-content">
             <div class="card-body">
               <?php
-              $query = "SELECT product_id, product_name, SUM(product_quantity) AS total_quantity, DATE_FORMAT(DATE_ADD(product_date, INTERVAL 543 YEAR), '%Y') AS product_date
-FROM tb_product 
-GROUP BY DATE_FORMAT(product_date, '%Y%')
-ORDER BY DATE_FORMAT(product_date, '%Y') DESC";
+              $query = "SELECT product_id, 
+              product_name, 
+              SUM(product_quantity) AS total_quantity, 
+              product_date
+              -- DATE_FORMAT(DATE_ADD(product_date, INTERVAL 543 YEAR), '%Y') AS product_date
+              FROM tb_product 
+              -- WHERE product_quantity NOT IN ('0') 
+              GROUP BY DATE_FORMAT(product_date, '%Y%')
+              ORDER BY DATE_FORMAT(product_date, '%Y') DESC";
               $result = mysqli_query($conn, $query);
               $resultchart = mysqli_query($conn, $query);
               //for chart
               $datesave = array();
               $total = array();
               while ($rs = mysqli_fetch_array($resultchart)) {
-                $datesave[] = "\"" . $rs['product_date'] . "\"";
+                $date_sets = date_create($rs["product_date"]);
+                $years = date_format($date_sets, "Y") + 543;
+                $datesave[] = "\"" .$years. "\"";
                 $total[] = "\"" . $rs['total_quantity'] . "\"";
               }
               $datesave = implode(",", $datesave);
@@ -164,7 +171,6 @@ ORDER BY DATE_FORMAT(product_date, '%Y') DESC";
                   <tbody>
                     <?php
                     $i = 1;
-                    $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
                     $sql = "SELECT * FROM tb_product 
                     LEFT JOIN
                     tb_brand
@@ -174,6 +180,8 @@ ORDER BY DATE_FORMAT(product_date, '%Y') DESC";
                     tb_category
                     ON
                     tb_product.category_id = tb_category.category_id
+                    -- WHERE product_quantity NOT IN ('0')
+                    ORDER BY product_date ASC
                     ";
                     $result = $conn->query($sql);
 
@@ -181,14 +189,12 @@ ORDER BY DATE_FORMAT(product_date, '%Y') DESC";
                       // output data of each row
                       while ($row = $result->fetch_assoc()) {
                         $date_set = date_create($row["product_date"]);
-                        $day = date_format($date_set, "d");
-                        $month = $date_th[date_format($date_set, "n")];
                         $year = date_format($date_set, "Y") + 543;
                     ?>
                         <tr>
                           <td class="text-center" align="center"><?php echo $i; ?></td>
                           <td class="text-center" align="center"><?php echo $row["product_id"]; ?></td>
-                          <td class="text-left"><?php echo $day . " " . $month . " " . $year; ?></td>
+                          <td class="text-left"><?php echo $year; ?></td>
                           <td class="text-bold-500"><?php echo $row["product_name"]; ?></td>
                           <td class="text-bold-500"><?php echo $row["brand_name"]; ?></td>
                           <td class="text-bold-500" align="left"><?php echo $row["category_name"]; ?></td>

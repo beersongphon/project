@@ -301,6 +301,15 @@ include("./header_back-end.php");
           <?php
             } //while condition closing bracket
           }  //if condition closing bracket
+          else {
+          ?>
+          <div class="recent-message d-flex px-4 py-3">
+            <div class="name ms-4">
+              <h5 class="mb-1">ไม่มีข้อมูล</h5>
+            </div>
+          </div>
+          <?php
+          }
           ?>
           <!-- <div class="recent-message d-flex px-4 py-3">
             <div class="avatar avatar-lg">

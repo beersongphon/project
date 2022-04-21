@@ -17,11 +17,14 @@
       </footer>
     </div>
   </div>
-  <script src="./assets/js/jquery-3.5.1.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- <script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script> -->
-
+  <!-- <script src="./assets/js/jquery-3.5.1.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./assets/back-end/mazer/dist/assets/js/bootstrap.bundle.min.js"></script>
+
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
   <script src="./assets/back-end/mazer/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -30,7 +33,24 @@
   <script src="./assets/back-end/mazer/dist/assets/js/mazer.js"></script>
 
   <!-- <script src="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.js"></script> -->
-
+  <script>
+  $(document).ready(function(){
+    $("#datepicker1").datepicker({
+      format: "yyyy",
+      viewMode: "years", 
+      minViewMode: "years",
+      autoclose:true
+    });   
+  })
+  $(document).ready(function(){
+    $("#datepicker2").datepicker({
+      format: "yyyy",
+      viewMode: "years", 
+      minViewMode: "years",
+      autoclose:true
+    });   
+  })
+</script>
   <script>
     var listImage = new Array();
     var image_list = $("#image_list");

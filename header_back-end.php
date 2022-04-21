@@ -103,6 +103,39 @@
               <span>รายงานการขายสินค้า</span>
             </a>
           </li>
+          <!-- <li class="sidebar-item <?php if (basename($_SERVER["PHP_SELF"]) == "report_sale_daily.php") {
+                                    echo "active";
+                                  } elseif (basename($_SERVER["PHP_SELF"]) == "report_sale_monthly.php") {
+                                    echo "active";
+                                  } elseif (basename($_SERVER["PHP_SELF"]) == "report_sale_yearly.php") {
+                                    echo "active";
+                                  }else {
+                                    echo "";
+                                  } ?> has-sub">
+            <a href="#" class='sidebar-link'> -->
+              <!-- <i class="bi bi-bar-chart-fill"></i> -->
+              <!-- <span>รายงานการขายสินค้า</span>
+            </a>
+            <ul class="submenu <?php if (basename($_SERVER["PHP_SELF"]) == "report_sale_daily.php") {
+                                    echo "active";
+                                  } elseif (basename($_SERVER["PHP_SELF"]) == "report_sale_monthly.php") {
+                                    echo "active";
+                                  } elseif (basename($_SERVER["PHP_SELF"]) == "report_sale_yearly.php") {
+                                    echo "active";
+                                  }else {
+                                    echo "";
+                                  } ?>">
+              <li class="submenu-item  <?= (basename($_SERVER["PHP_SELF"]) == "report_sale_daily.php") ? "active" : ""; ?>">
+                <a href="./report_sale_daily.php">รายงานการขายสินค้ารายวัน</a>
+              </li>
+              <li class="submenu-item <?= (basename($_SERVER["PHP_SELF"]) == "report_sale_monthly.php") ? "active" : ""; ?>">
+                <a href="./report_sale_monthly.php">รายงานการขายสินค้ารายเดือน</a>
+              </li>
+              <li class="submenu-item <?= (basename($_SERVER["PHP_SELF"]) == "report_sale_yearly.php") ? "active" : ""; ?>">
+                <a href="./report_sale_yearly.php">รายงานการขายสินค้ารายปี</a>
+              </li>
+            </ul>
+          </li> -->
 
           <li class="sidebar-title"></li>
           <li class="sidebar-item ">
