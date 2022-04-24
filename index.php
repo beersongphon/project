@@ -43,22 +43,67 @@ include("./header_front-end.php");
           <h4>สินค้าใหม่</h4>
         </div>
       </div>
-      <!-- <div class="col-lg-8 col-md-8">
+      <div class="col-lg-8 col-md-8">
         <ul class="filter__controls">
-          <li class="active" data-filter="*">All</li>
-          <li data-filter=".women">Women’s</li>
-          <li data-filter=".men">Men’s</li>
-          <li data-filter=".kid">Kid’s</li>
-          <li data-filter=".accessories">Accessories</li>
-          <li data-filter=".cosmetic">Cosmetics</li>
+          <li class="active" data-filter="*">ทั้งหมด</li>
+          <?php
+          // $s ="SELECT DISTINCT 
+          // (SELECT DISTINCT tb_product.product_id FROM tb_product
+          // WHERE tb_category.category_id = tb_product.category_id LIMIT 1) AS product_id,
+          // tb_category.category_name
+          // FROM tb_product
+          // LEFT JOIN
+          // tb_category
+          // ON
+          // tb_product.category_id = tb_category.category_id
+          // WHERE tb_product.product_quantity NOT IN ('0')
+          // ORDER BY tb_product.product_id DESC
+          // LIMIT 5
+          
+          // SELECT DISTINCT 
+          // (SELECT DISTINCT tb_product.product_id FROM tb_product
+          // WHERE tb_category.category_id = tb_product.category_id LIMIT 1) AS produc_id,
+          // tb_category.category_name
+          // FROM tb_product
+          // LEFT JOIN
+          // tb_category
+          // ON
+          // tb_product.category_id = tb_category.category_id
+          // WHERE tb_product.product_quantity NOT IN ('0')
+          // GROUP BY tb_product.product_id
+          // ORDER BY tb_product.product_id DESC
+          // LIMIT 5";
+          $sql = "SELECT DISTINCT 
+          (SELECT DISTINCT tb_product.product_id FROM tb_product
+          WHERE tb_category.category_id = tb_product.category_id LIMIT 1) AS product_id,
+          tb_category.category_name
+          FROM tb_product
+          LEFT JOIN
+          tb_category
+          ON
+          tb_product.category_id = tb_category.category_id
+          WHERE tb_product.product_quantity NOT IN ('0')
+          ORDER BY product_id DESC
+          LIMIT 5";
+          $result = $conn->query($sql);
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+          ?>
+          <li data-filter=".<?php echo $row["category_name"]; ?>"><?php echo $row["category_name"]; ?></li>
+          <?php 
+            }
+          }
+          ?>
         </ul>
-      </div> -->
+      </div>
     </div>
     <div class="row property__gallery">
       <?php
       $sql = "SELECT DISTINCT tb_product.product_id,
       (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
       tb_product.product_name,
+      tb_category.category_name, 
       tb_product.product_price,
       tb_product.product_quantity,
       tb_product.product_description
@@ -67,6 +112,10 @@ include("./header_front-end.php");
       tb_img_product
       ON
       tb_product.product_id = tb_img_product.product_id
+      LEFT JOIN
+      tb_category
+      ON
+      tb_product.category_id = tb_category.category_id
       WHERE tb_product.product_quantity NOT IN ('0')
       ORDER BY tb_product.product_id DESC
       LIMIT 8";
@@ -76,7 +125,7 @@ include("./header_front-end.php");
         while ($row = $result->fetch_assoc()) {
           include("./checkstock.php");
       ?>
-      <div class="col-lg-3 col-md-4 col-sm-6 mix women">
+      <div class="col-lg-3 col-md-4 col-sm-6 mix <?php echo $row["category_name"]; ?>">
         <?php include("./permission.php"); ?>
       </div>
       <?php

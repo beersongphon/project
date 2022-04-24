@@ -23,7 +23,7 @@ if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
   $next_page = $page_no + 1;
   $adjacents = "2";
 
-  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM `tb_product`");
+  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM tb_product WHERE category_id='$category_id' AND (product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%') AND product_quantity NOT IN ('0')");
   $total_records = mysqli_fetch_array($result_count);
   $total_records = $total_records['total_records'];
   $total_no_of_pages = ceil($total_records / $total_records_per_page);
@@ -40,11 +40,17 @@ if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
   tb_img_product
   ON
   tb_product.product_id = tb_img_product.product_id 
-  WHERE tb_product.category_id='$category_id'
-  AND (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%')
+  WHERE tb_product.category_id='$category_id' 
+  AND (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%') 
+  AND tb_product.product_quantity NOT IN ('0') 
   ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();
+
+  //คิวรี่ข้อมูลประเภทสินค้า
+  $sql_category = "SELECT* FROM tb_category WHERE category_id='$category_id'";
+  $result_category = $conn->query($sql_category);
+  $row_category = $result_category->fetch_assoc();
 } else {
   //คิวรี่ข้อมูลสินค้าทุกรายการ
   if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
@@ -59,7 +65,7 @@ if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
   $next_page = $page_no + 1;
   $adjacents = "2";
 
-  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM tb_product WHERE product_quantity NOT IN ('0')");
+  $result_count = mysqli_query($conn, "SELECT COUNT(*) As total_records FROM tb_product WHERE (product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%') AND product_quantity NOT IN ('0')");
   $total_records = mysqli_fetch_array($result_count);
   $total_records = $total_records['total_records'];
   $total_no_of_pages = ceil($total_records / $total_records_per_page);
@@ -86,7 +92,6 @@ if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
 $sqlcategory = "SELECT* FROM tb_category";
 $resultcategory = $conn->query($sqlcategory);
 $rowcategory = $resultcategory->fetch_assoc();
-
 ?>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
@@ -153,9 +158,88 @@ $rowcategory = $resultcategory->fetch_assoc();
           </div>
           <div class="col-lg-12 text-center">
             <div class="pagination__option">
-              <?php if ($page_no > 1) {
-                echo "<a href='?page_no=1'><i class='fa fa-angle-double-left'></i></a></li>";
+              <?php 
+              if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
+                if ($page_no > 1) {
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=1'><i class='fa fa-angle-double-left'></i></a></li>";
+                }
+              ?>
+
+              <a <?php if ($page_no <= 1) {
+                    echo "class='disabled'";
+                  } ?>
+                  <?php if ($page_no > 1) {
+                    echo "href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$previous_page'";
+                  } ?>><i class="fa fa-angle-left"></i>
+              </a>
+
+              <?php
+              if ($total_no_of_pages <= 10) {
+                for ($counter = 1; $counter <= $total_no_of_pages; $counter++) {
+                  if ($counter == $page_no) {
+                    echo "<a class='active'>$counter</a>";
+                  } else {
+                    echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$counter'>$counter</a>";
+                  }
+                }
+              } elseif ($total_no_of_pages > 10) {
+
+                if ($page_no <= 4) {
+                  for ($counter = 1; $counter < 8; $counter++) {
+                    if ($counter == $page_no) {
+                      echo "<a class='active'>$counter</a>";
+                    } else {
+                      echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$counter'>$counter</a>";
+                    }
+                  }
+                  echo "<a>...</a>";
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$second_last'>$second_last</a>";
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$total_no_of_pages'>$total_no_of_pages</a>";
+                } elseif ($page_no > 4 && $page_no < $total_no_of_pages - 4) {
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=1'>1</a>";
+                  echo "<a class='page-link' href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=2'>2</a>";
+                  echo "<a class='page-link'>...</a>";
+                  for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {
+                    if ($counter == $page_no) {
+                      echo "<a class='active'>$counter</a>";
+                    } else {
+                      echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$counter'>$counter</a>";
+                    }
+                  }
+                  echo "<a>...</a>";
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$second_last'>$second_last</a>";
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$total_no_of_pages'>$total_no_of_pages</a>";
+                } else {
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=1'>1</a>";
+                  echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=2'>2</a>";
+                  echo "<a>...</a>";
+
+                  for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
+                    if ($counter == $page_no) {
+                      echo "<a class='active'>$counter</a>";
+                    } else {
+                      echo "<a href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$counter'>$counter</a>";
+                    }
+                  }
+                }
               }
+              ?>
+
+              <a <?php if ($page_no >= $total_no_of_pages) {
+                    echo "class='disabled'";
+                  } ?>
+                  <?php if ($page_no < $total_no_of_pages) {
+                    echo "href='?category_id=$row_category[category_id]&category_name=$row_category[category_name]&page_no=$next_page'";
+                  } ?>
+                  ><i class="fa fa-angle-right"></i>
+              </a>
+              <?php if ($page_no < $total_no_of_pages) {
+                echo '<a href="?category_id='.$row_category["category_id"].'&category_name='.$row_category["category_name"].'&page_no='.$total_no_of_pages.'"><i class="fa fa-angle-double-right"></i></a></li>';
+                } 
+              } else {
+                if ($page_no > 1) {
+                  echo "<a href='?page_no=1'><i class='fa fa-angle-double-left'></i></a></li>";
+                }
               ?>
 
               <a <?php if ($page_no <= 1) {
@@ -228,7 +312,9 @@ $rowcategory = $resultcategory->fetch_assoc();
               </a>
               <?php if ($page_no < $total_no_of_pages) {
                 echo '<a href="?page_no='.$total_no_of_pages.'"><i class="fa fa-angle-double-right"></i></a></li>';
-              } ?>
+              } 
+            }
+            ?>
             </div>
           </div>
         </div>
