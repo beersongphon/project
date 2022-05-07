@@ -47,32 +47,6 @@ include("./header_front-end.php");
         <ul class="filter__controls">
           <li class="active" data-filter="*">ทั้งหมด</li>
           <?php
-          // $s ="SELECT DISTINCT 
-          // (SELECT DISTINCT tb_product.product_id FROM tb_product
-          // WHERE tb_category.category_id = tb_product.category_id LIMIT 1) AS product_id,
-          // tb_category.category_name
-          // FROM tb_product
-          // LEFT JOIN
-          // tb_category
-          // ON
-          // tb_product.category_id = tb_category.category_id
-          // WHERE tb_product.product_quantity NOT IN ('0')
-          // ORDER BY tb_product.product_id DESC
-          // LIMIT 5
-          
-          // SELECT DISTINCT 
-          // (SELECT DISTINCT tb_product.product_id FROM tb_product
-          // WHERE tb_category.category_id = tb_product.category_id LIMIT 1) AS produc_id,
-          // tb_category.category_name
-          // FROM tb_product
-          // LEFT JOIN
-          // tb_category
-          // ON
-          // tb_product.category_id = tb_category.category_id
-          // WHERE tb_product.product_quantity NOT IN ('0')
-          // GROUP BY tb_product.product_id
-          // ORDER BY tb_product.product_id DESC
-          // LIMIT 5";
           $sql = "SELECT DISTINCT 
           (SELECT DISTINCT tb_product.product_id FROM tb_product
           WHERE tb_category.category_id = tb_product.category_id LIMIT 1) AS product_id,
@@ -100,6 +74,8 @@ include("./header_front-end.php");
     </div>
     <div class="row property__gallery">
       <?php
+      // ASC เรียงน้อยไปมาก
+      // DESC เรียงมากไปน้อย
       $sql = "SELECT DISTINCT tb_product.product_id,
       (SELECT DISTINCT tb_img_product.img_product FROM tb_img_product WHERE tb_img_product.product_id = tb_product.product_id LIMIT 1) AS img_product,
       tb_product.product_name,
