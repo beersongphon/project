@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_front-end.php");
 include("./header_front-end.php");
 
@@ -7,10 +8,9 @@ $strKeyword = null;
 if (isset($_POST["txtSearch"])) {
   $strKeyword = $_POST["txtSearch"];
 }
+//คิวรี่ข้อมูลสินค้าตามประเภท
 if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
-  //คิวรี่ข้อมูลสินค้าตามประเภท
   $category_id = $_GET["category_id"];
-  //คิวรี่ข้อมูลสินค้าทุกรายการ
   if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
     $page_no = $_GET['page_no'];
   } else {
@@ -44,15 +44,15 @@ if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
   AND (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%') 
   AND tb_product.product_quantity NOT IN ('0') 
   ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
+  $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+  $row = $result->fetch_assoc(); # ส่งค่าทั้งแบบ assoc และ row
 
-  //คิวรี่ข้อมูลประเภทสินค้า
+  // คิวรี่ข้อมูลประเภทสินค้า
   $sql_category = "SELECT* FROM tb_category WHERE category_id='$category_id'";
-  $result_category = $conn->query($sql_category);
-  $row_category = $result_category->fetch_assoc();
+  $result_category = $conn->query($sql_category); # query ข้อมูลในฐานข้อมูลมาแสดง
+  $row_category = $result_category->fetch_assoc(); # ส่งค่าทั้งแบบ assoc และ row
 } else {
-  //คิวรี่ข้อมูลสินค้าทุกรายการ
+  // คิวรี่ข้อมูลสินค้าทุกรายการ
   if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
     $page_no = $_GET['page_no'];
   } else {
@@ -85,13 +85,13 @@ if (isset($_GET["category_id"]) & isset($_GET["category_name"])) {
   WHERE (tb_product.product_id LIKE '%$strKeyword%' OR tb_product.product_name LIKE '%$strKeyword%')
   AND tb_product.product_quantity NOT IN ('0')
   ORDER BY tb_product.product_id DESC LIMIT $offset, $total_records_per_page";
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
+  $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+  $row = $result->fetch_assoc(); # ส่งค่าทั้งแบบ assoc และ row
 }
 //คิวรี่ข้อมูลประเภทสินค้า
 $sqlcategory = "SELECT* FROM tb_category";
-$resultcategory = $conn->query($sqlcategory);
-$rowcategory = $resultcategory->fetch_assoc();
+$resultcategory = $conn->query($sqlcategory); # query ข้อมูลในฐานข้อมูลมาแสดง
+$rowcategory = $resultcategory->fetch_assoc(); # ส่งค่าทั้งแบบ assoc และ row
 ?>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">

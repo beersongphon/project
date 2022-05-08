@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./head_back-end.php');
 include('./header_back-end.php');
 

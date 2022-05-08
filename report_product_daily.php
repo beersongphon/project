@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./head_back-end.php');
 include('./header_back-end.php');
 
@@ -53,12 +54,12 @@ require_once __DIR__ . '/vendor/autoload.php';
               -- WHERE product_quantity NOT IN ('0')
               GROUP BY DATE_FORMAT(product_date, '%d%')
               ORDER BY DATE_FORMAT(product_date, '%Y-%m-%d') DESC";
-              $result = mysqli_query($conn, $query);
-              $resultchart = mysqli_query($conn, $query);
+              $result = $conn->query($query); # query ข้อมูลในฐานข้อมูลมาแสดง
+              $resultchart = $conn->query($query); # query ข้อมูลในฐานข้อมูลมาแสดง
               //for chart
               $datesave = array();
               $total = array();
-              while ($rs = mysqli_fetch_array($resultchart)) {
+              while ($rs = $resultchart->fetch_array()) { # ส่งค่ากลับมาแบบ array key เป็นชื่อ field
                 $date_sets = date_create($rs["product_date"]);
                 $days = date_format($date_sets, "d");
                 $months = $date_th[date_format($date_sets, "n")];

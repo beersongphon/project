@@ -1,6 +1,6 @@
 <?php
-//action.php  
-session_start();
+session_start(); # กำหนดไว้ กรณีอาจได้ใช้ตัวแปร session
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./connect.php");
 if (isset($_POST["product_id"])) {
   $order_table = '';
@@ -156,8 +156,16 @@ if (isset($_POST["product_id"])) {
   }
   $order_table .= '
             </li>
-          </ul>
-          <a href="./checkout.php" class="primary-btn">ดำเนินการชำระเงิน</a>
+          </ul>';
+          if (!empty($_SESSION["shopping_cart"])) {
+            $order_table .= '
+          <a href="./checkout.php" class="primary-btn">ดำเนินการชำระเงิน</a>';
+        } else {
+          $total = 0;
+          $order_table .= '
+          <a href="#" class="primary-btn">ดำเนินการชำระเงิน</a>';
+        }
+        $order_table .= ' 
         </div>
       </div>
     </div>

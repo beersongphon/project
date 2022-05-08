@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./../connect.php');
 $order_id = $_POST['order_id'];
 $sql = "SELECT * FROM tb_order WHERE order_id = '$order_id'";
@@ -12,5 +13,4 @@ while ($row = $result->fetch_assoc()) {
 }
 $js = json_encode($data);
 echo $js;
-
 ?>

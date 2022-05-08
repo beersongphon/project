@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_back-end.php");
 include("./header_back-end.php");
 
@@ -95,11 +96,11 @@ if (isset($_POST["txtSearch"])) {
                     $sql = "SELECT * FROM tb_user WHERE user_id LIKE '%$strKeyword%' OR user_firstname LIKE '%$strKeyword%'
                       LIMIT $offset, $total_records_per_page
                       ";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                      // output data of each row
-                      while ($row = $result->fetch_assoc()) {
+                    $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+                    if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+                      # output data of each row
+                      # วนลูปแสดงข้อมูล
+                      while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
                     ?>
                         <tr>
                           <td class="text-center"><?php echo $i; ?></td>

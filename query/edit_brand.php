@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./../connect.php');
 $brand_id = $_POST['brand_id'];
 $brand_name = $_POST['brand_name'];
@@ -14,3 +15,4 @@ if ($result == True) {
 } else {
   echo $sql;
 }
+?>

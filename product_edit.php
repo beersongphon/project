@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_back-end.php");
 include("./sibar_back-end.php");
 ?>
@@ -42,8 +43,10 @@ include("./sibar_back-end.php");
                 $product_id = $_GET['product_id'];
 
                 $sql = "SELECT * FROM tb_product WHERE product_id = '$product_id'";
-                $result = $conn->query($sql);
-                while ($row = $result->fetch_assoc()) {
+                $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+                # output data of each row
+                # วนลูปแสดงข้อมูล
+                while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
               ?>
                   <form method="POST" action="" enctype="multipart/form-data">
                     <div class="row p-5">

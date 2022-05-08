@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_front-end.php");
 include("./authguard.php");
 include("./header_front-end.php");
@@ -120,8 +121,7 @@ include("./header_front-end.php");
               ?>
               <span>฿ <?php echo number_format($total, 2); ?></span>
               <?php
-              }
-              else {
+              } else {
                 $total = 0;
               ?>
               <span>฿ <?php echo number_format($total, 2); ?></span>
@@ -130,10 +130,22 @@ include("./header_front-end.php");
               ?>
             </li>
           </ul>
+          <?php
+          if(!empty($_SESSION["shopping_cart"])) {
+          ?>
           <a href="./checkout.php" class="primary-btn">ดำเนินการชำระเงิน</a>
+          <?php
+          } else {
+            $total = 0;
+          ?>
+          <a href="#" class="primary-btn">ดำเนินการชำระเงิน</a>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </div>
+  </div>
 </section>
 <!-- Shop Cart Section End -->
 

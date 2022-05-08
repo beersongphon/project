@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./../connect.php');
 date_default_timezone_set("Asia/Bangkok");
 

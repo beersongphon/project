@@ -135,7 +135,8 @@
         <div class="footer__copyright__text">
           <p>Copyright &copy; <script>
               document.write(new Date().getFullYear());
-            </script> All rights reserved | <a href="./index.php" target="_blank">Luxury by Fon.</a></p>
+            </script> All rights reserved | <a href="./index.php" target="_blank">Luxury by Fon.</a>
+          </p>
         </div>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
       </div>
@@ -168,6 +169,7 @@
 </script>
 
 <script>
+  // เพิ่มตะกร้าสินค้า
   $(document).ready(function(data) {
     $(".add_to_cart").click(function() {
       var product_id = $(this).attr("id");
@@ -213,6 +215,7 @@
       }
     });
     
+    // ลบตะกร้าสินค้า
     $(document).on('click', '.delete', function() {
       var product_id = $(this).attr("id");
       var action = "remove";
@@ -234,6 +237,8 @@
       //   return false;
       // }
     });
+
+    // เปลี่ยนจำนวนสินค้าในตะกร้า
     $(document).on('keyup', '.quantity', function() {
       var product_id = $(this).data("product_id");
       var quantity = $(this).val();
@@ -259,39 +264,40 @@
 
 <!-- Action jQuery -->
 <script>
-  const price_per_hour = 150;
+  // const price_per_hour = 150;
   // $(function() {
   //     $('#datetimepicker1').datetimepicker();
   // });
 
   $(document).ready(function() {
-    // Footer - Initialize Tooltip - Link
-    $('[data-toggle="tooltip"]').tooltip();
+    // // Footer - Initialize Tooltip - Link
+    // $('[data-toggle="tooltip"]').tooltip();
 
-    // scrolling to all links in navbar + footer link [ ^ ]
-    $(".navbar a, footer a[href='#page-top']").on('click', function(event) {
+    // // scrolling to all links in navbar + footer link [ ^ ]
+    // $(".navbar a, footer a[href='#page-top']").on('click', function(event) {
 
-      // Make sure this.hash has a value before overriding default behavior
-      if (this.hash !== "") {
+    //   // Make sure this.hash has a value before overriding default behavior
+    //   if (this.hash !== "") {
 
-        // Prevent default anchor click behavior
-        event.preventDefault();
+    //     // Prevent default anchor click behavior
+    //     event.preventDefault();
 
-        // Store hash
-        var hash = this.hash;
+    //     // Store hash
+    //     var hash = this.hash;
 
-        // Action เลื่อนหน้าจอ jQuery
-        $('html, body').animate({
-          scrollTop: $(hash).offset().top
-        }, 900, function() {
+    //     // Action เลื่อนหน้าจอ jQuery
+    //     $('html, body').animate({
+    //       scrollTop: $(hash).offset().top
+    //     }, 900, function() {
 
-          // Add hash (#) to URL when done scrolling (default click behavior)
-          window.location.hash = hash;
+    //       // Add hash (#) to URL when done scrolling (default click behavior)
+    //       window.location.hash = hash;
 
-        });
-      } // End if
-    });
+    //     });
+    //   } // End if
+    // });
 
+    // เข้าสู่ระบบ
     $("#btn_login").click(function() {
       // alert("login");
       var usr = $("#user_name").val();
@@ -313,7 +319,7 @@
       });
     });
 
-
+    // การติดต่อ
     $("#btn_contact").click(function() {
       // alert("success");'
       var name_con = $("#name_contact").val();
@@ -347,7 +353,7 @@
       }
     });
 
-
+    // การชำระ
     $("#form_payment").submit(function(e) {
       // alert("N");
       e.preventDefault();
@@ -400,6 +406,7 @@
       });
     });
 
+    // สมัครสมาชิก
     $("#btn_regis").click(function() {
       var firstname_regis = $("#firstname_regis").val();
       var lastname_regis = $("#lastname_regis").val();
@@ -469,6 +476,7 @@
       }
     });
 
+    // แก้ไขโปรไฟล์
     $("#btn_profile").click(function() {
       var user_id_profile = $("#user_id_profile").val();
       var firstname_profile = $("#firstname_profile").val();
@@ -548,6 +556,7 @@
 </script>
 
 <script>
+// รับค่าราคารวมที่ชำระ
 var pay_total = $("#pay_total");
 
 $("document").ready(function() {
@@ -571,6 +580,7 @@ $("document").ready(function() {
   });
 });
 
+// เปลี่ยนรับค่าราคารวมที่ชำระ
 function totalChange() {
   $("#pay_total").empty();
   var order_id = $("#order_id").val();

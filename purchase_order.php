@@ -1,9 +1,11 @@
 <?php
 	//เรียกใช้ไฟล์ autoload.php ที่อยู่ใน Folder vendor
 	require_once __DIR__ . '/vendor/autoload.php';
+  # incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 	include('./connect.php');
 
   if (isset($_GET["order_id"])) {
+    $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
     $customer_details = "";
     $order_details = "";
     $total = 0;
@@ -20,15 +22,21 @@
               ON tb_status.status_id = tb_order.status_id 
               WHERE tb_order.order_id = '$_GET[order_id]'   
               ";
-    $result = mysqli_query($conn, $query);
-    while ($row = mysqli_fetch_array($result)) {
+    $result = $conn->query($query); # query ข้อมูลในฐานข้อมูลมาแสดง
+    $datesave = array();
+    while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
+      $date_set = date_create($row["order_date"]);
+      $day = date_format($date_set, "d");
+      $month = $date_th[date_format($date_set, "n")];
+      $year = date_format($date_set, "Y") + 543;
+      $datesave = "".$day. " " .$month. " " .$year. "";
       $customer_details = "  
                           <div class='order-head'>
                             <div class='order-date'> 
                               <b>เลขที่ใบสั่งซื้อ</b>
                               <span class='order-underline'>" . $_GET["order_id"] ." </span><br />
                               <b>วันที่สั่งซื้อ</b>
-                              <span class='order-underline'>" . $row['order_date'] ." </span>
+                              <span class='order-underline'>" . $datesave ." </span>
                             </div>
                             <div class='order-customer'> <b>ชื่อ-สกุล</b> 
                               <span class='order-underline'>" . $row["order_name"] ."</span><br />

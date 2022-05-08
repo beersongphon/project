@@ -1,5 +1,6 @@
 <?php
-session_start();
+session_start(); # กำหนดไว้ กรณีอาจได้ใช้ตัวแปร session
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./urldomain.php");
 include('./connect.php');
 

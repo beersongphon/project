@@ -1,40 +1,40 @@
 <?php
-//สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
+// สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
 if($row["product_quantity"] == 0){
-  //สินค้าหมด
+  // สินค้าหมด
   $confirm = "return false;";
   $tableClass = "label stockout";
   $txtTitle = "สินค้าหมด";
-  //$txtTitle = "Out Of Stock";
+  // $txtTitle = "Out Of Stock";
 }else{
-  //เหลือ > 30 ชิ้น
+  // เหลือ > 1 ชิ้น
   $confirm = "return true;";
   $tableClass = "label stockblue";
   $txtTitle = "สินค้าเหลือ $row[product_quantity]";
-  //$txtTitle = "New";
+  // $txtTitle = "New";
 }
 // if($row["product_quantity"] == 0){
-//   //สินค้าหมด
+//  // สินค้าหมด
 //   $confirm = "return false;";
 //   $tableClass = "label stockout";
 //   $txtTitle = "สินค้าหมด";
-//   //$txtTitle = "Out Of Stock";
+//   // $txtTitle = "Out Of Stock";
 // }elseif($row["product_quantity"] <= 5) {
-//   //สินค้ากำลังจะหมด
+//   // สินค้ากำลังจะหมด
 //   $confirm = "return true;";
 //   $tableClass = "label stockblue";
 //   $txtTitle = "สินค้ากำลังจะหมด";
-//   //$txtTitle = "Running Out";
+//   // $txtTitle = "Running Out";
 // }elseif($row["product_quantity"] <= 20) {
-//   //เหลือ > 20 ชิ้น
+//   // เหลือ > 20 ชิ้น
 //   $confirm = "return true;";
 //   $tableClass = "";
 //   $txtTitle = "";
 // }else{
-//   //เหลือ > 30 ชิ้น
+//   // เหลือ > 30 ชิ้น
 //   $confirm = "return true;";
 //   $tableClass = "label new";
 //   $txtTitle = "ใหม่";
-//   //$txtTitle = "New";
+//   // $txtTitle = "New";
 // }
 ?>

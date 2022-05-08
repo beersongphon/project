@@ -1,5 +1,4 @@
 <?php 
-
 // Count total files
 $countfiles = count($_FILES["files"]["name"]);
 

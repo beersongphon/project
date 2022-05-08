@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_back-end.php");
 include("./header_back-end.php");
 ?>
@@ -52,11 +53,11 @@ include("./header_back-end.php");
                 <?php
                 $date_th = ["", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
                 $sql = "SELECT * FROM tb_contact ORDER BY contact_id DESC LIMIT 10";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                  // output data of each row
-                  while ($row = $result->fetch_assoc()) {
+                $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+                if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+                  # output data of each row
+                  # วนลูปแสดงข้อมูล
+                  while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
                     $date_set = date_create($row["contact_datetime"]);
                 ?>
                 <li class='list-group-item'>

@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_front-end.php");
 include("./header_front-end.php");
 
@@ -25,8 +26,8 @@ tb_category
 ON
 tb_product.category_id = tb_category.category_id
 WHERE tb_product.product_id = '$product_id' ORDER BY tb_product.product_id ASC";  
-$result = mysqli_query($conn, $query);  
-$row = mysqli_fetch_array($result);
+$result = $conn->query($query); # query ข้อมูลในฐานข้อมูลมาแสดง
+$row = $result->fetch_assoc(); # ส่งค่าทั้งแบบ assoc และ row
 ?>
   <!-- Breadcrumb Begin -->
   <div class="breadcrumb-option">
@@ -52,14 +53,15 @@ $row = mysqli_fetch_array($result);
           <div class="product__details__pic">
             <?php
             $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 8";
-            $result = $conn->query($sql);
+            $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
             $setActive = 0;				
 			      $sliderHtml = '';
-            if ($result->num_rows > 0) {
+            if ($result->num_rows > 0) { # ส่งค่าทั้งแบบ assoc และ row
             ?> 
-            <!--<div class="product__details__pic__left product__thumb nice-scroll">
+            <div class="product__details__pic__left product__thumb nice-scroll">
               <?php
-              // output data of each row
+              # output data of each row
+              # วนลูปแสดงข้อมูล
               while ($row1 = $result->fetch_assoc()) {
                 $activeClass = "";			
                 if(!$setActive) {
@@ -68,33 +70,34 @@ $row = mysqli_fetch_array($result);
                 }	
               ?> 
               <a class="pt <?php echo "$activeClass"; ?>" href="#product-<?php echo $row1["img_pro_id"]; ?>">
-                <img src="./upload/<?php echo $row1["img_product"]; ?>" height="35" alt="">
+                <img src="./upload/<?php echo $row1["img_product"]; ?>" height="45" alt="">
               </a>
               <?php  
-              } //while condition closing bracket
+              } # while condition closing bracket
               ?>
-            </div>-->
+            </div>
             <?php  
-            }  //if condition closing bracket
+            } # if condition closing bracket
 
             $sql = "SELECT * FROM tb_img_product WHERE product_id = '$product_id' ORDER BY product_id ASC LIMIT 8";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
+            $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+            if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
             ?>
             <div class="product__details__slider__content">
               <div class="product__details__pic__slider owl-carousel">
                 <?php
-                  // output data of each row
-                  while ($row1 = $result->fetch_assoc()) { 
+                  # output data of each row
+                  # วนลูปแสดงข้อมูล
+                  while ($row1 = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
                 ?>
                 <img data-hash="product-<?php echo $row1["img_pro_id"]; ?>" class="product__big__img" src="./upload/<?php echo $row1["img_product"]; ?>" alt="">
                 <?php  
-                  } //while condition closing bracket
+                  } # while condition closing bracket
                 ?>
               </div>
             </div>  
             <?php  
-              } //while condition closing bracket
+              } # if condition closing bracket
             ?>
           </div>
         </div>
@@ -199,11 +202,11 @@ $row = mysqli_fetch_array($result);
         tb_product.product_id = tb_img_product.product_id 
         WHERE tb_product.product_quantity NOT IN ('0')
         ORDER BY product_id DESC LIMIT 4";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-          // output data of each row
-          while ($row = $result->fetch_assoc()) {
+        $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+        if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+          # output data of each row
+          # วนลูปแสดงข้อมูล
+          while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
             include("./checkstock.php");
         ?>
         <div class="col-lg-3 col-md-4 col-sm-6">

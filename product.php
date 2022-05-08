@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_back-end.php");
 include("./header_back-end.php");
 
@@ -101,24 +102,24 @@ if (isset($_POST["txtSearch"])) {
                     WHERE product_id LIKE '%$strKeyword%' OR product_name LIKE '%$strKeyword%'
                     LIMIT $offset, $total_records_per_page
                       ";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                      // output data of each row
-                      while ($row = $result->fetch_assoc()) {
+                    $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+                    if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+                      # output data of each row
+                      # วนลูปแสดงข้อมูล
+                      while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
                         foreach($result as $row) {
 
-                          //สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
+                          # สร้างเงื่อนไขตรวจสอบจำนวนคงเหลือในสต๊อกสินค้า
                           if($row['product_quantity'] == 0){
-                            //สินค้าหมด
+                            # สินค้าหมด
                             $tableClass = "text-center table-danger";
                             $txtTitle = "<font color='red'> สินค้าหมด !! </font>";
                           }elseif($row['product_quantity'] <= 5) {
-                            //สินค้ากำลังจะหมด
+                            # สินค้ากำลังจะหมด
                             $tableClass = "text-center table-warning";
                             $txtTitle = "";
                           }else{
-                            //เหลือ > 10 ชิ้น
+                            # เหลือ > 10 ชิ้น
                             $tableClass = "text-center table-info";
                             $txtTitle = "";
                           }

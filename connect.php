@@ -1,13 +1,14 @@
 <?php
 # Is this the production server or not?
 define("PRODUCTION", $_SERVER["SERVER_NAME"] == "web.rmutp.ac.th");
+# เริ่มต้นส่วนกำหนดการเชิ่อมต่อฐานข้อมูล
 # ตั้งค่าการเชื่อมต่อฐานข้อมูล
 if (PRODUCTION) {
   # Production
-  $servername = "localhost";
-  $username = "luxurybyfon";
-  $password = "mj95c2gx";
-  $dbname = "luxurybyfon";
+  $servername = "localhost"; # ชื่อ Server หรือ Domain name ปกติใช้ localhost
+  $username = "luxurybyfon"; # ชื่อผู้ใช้
+  $password = "mj95c2gx"; # รหัสผ่าน
+  $dbname = "luxurybyfon"; # ชื่อฐานข้อมูล
 } else {
   # Development
   $servername = "localhost";
@@ -15,6 +16,7 @@ if (PRODUCTION) {
   $password = "";
   $dbname = "dbproject";
 }
+# สิ้นสุุดส่วนกำหนดการเชิ่อมต่อฐานข้อมูล
 
 # Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

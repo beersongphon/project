@@ -1,5 +1,6 @@
 <?php
-session_start();
+session_start(); # กำหนดไว้ กรณีอาจได้ใช้ตัวแปร session
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./urldomain.php");
 date_default_timezone_set('Asia/Bangkok');
 include("./connect.php");

@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include("./head_front-end.php");
 include("./header_front-end.php");
 ?>
@@ -15,15 +16,16 @@ include("./header_front-end.php");
             $sql = "SELECT COUNT(*) AS product_count 
             FROM tb_product
             WHERE product_quantity NOT IN ('0')";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-              // output data of each row
-              while ($row = $result->fetch_assoc()) {
+            $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+            if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+              # output data of each row
+              # วนลูปแสดงข้อมูล
+              while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
             ?>
             <p>จำนวน <?php echo $row["product_count"]; ?></p>
             <?php
-              } //while condition closing bracket
-            }  //if condition closing bracket
+              } # while condition closing bracket
+            } # if condition closing bracket
             ?>
             <a href="./shop.php">Shop now</a>
           </div>
@@ -59,10 +61,11 @@ include("./header_front-end.php");
           WHERE tb_product.product_quantity NOT IN ('0')
           ORDER BY product_id DESC
           LIMIT 5";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
+          $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+          if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+            # output data of each row
+            # วนลูปแสดงข้อมูล
+            while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
           ?>
           <li data-filter=".<?php echo $row["category_name"]; ?>"><?php echo $row["category_name"]; ?></li>
           <?php 
@@ -95,10 +98,11 @@ include("./header_front-end.php");
       WHERE tb_product.product_quantity NOT IN ('0')
       ORDER BY tb_product.product_id DESC
       LIMIT 8";
-      $result = $conn->query($sql);
-      if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
+      $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+      if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+        # output data of each row
+        # วนลูปแสดงข้อมูล
+        while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
           include("./checkstock.php");
       ?>
       <div class="col-lg-3 col-md-4 col-sm-6 mix <?php echo $row["category_name"]; ?>">
@@ -120,11 +124,12 @@ include("./header_front-end.php");
       <div class="col-xl-7 col-lg-8 m-auto">
         <div class="banner__slider owl-carousel">
           <?php
-          $sql = "SELECT* FROM tb_category";
-          $result = $conn->query($sql);
-          if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
+          $sql = "SELECT * FROM tb_category";
+          $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+          if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+            # output data of each row
+            # วนลูปแสดงข้อมูล
+            while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
           ?>
           <div class="banner__item">
             <div class="banner__text">

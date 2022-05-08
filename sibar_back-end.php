@@ -14,12 +14,49 @@
       </div>
       <div class="sidebar-menu">
         <ul class="menu">
+        <? if(strstr($_SERVER['REQUEST_URI'],'product_add.php')) { ?>
           <li class="sidebar-item active">
             <a href="./product.php" class="sidebar-link">
               <!-- <i class="bi bi-grid-fill"></i> -->
               <span>ย้อนกลับ</span>
             </a>
           </li>
+          <? } elseif(strstr($_SERVER['REQUEST_URI'],'product_edit.php')) { ?>
+          <li class="sidebar-item active">
+            <a href="./product.php" class="sidebar-link">
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+          <? } elseif(strstr($_SERVER['REQUEST_URI'],'brand_add.php')) { ?>
+          <li class="sidebar-item active">
+            <a href="./brand.php" class="sidebar-link">
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+          <? } elseif(strstr($_SERVER['REQUEST_URI'],'brand_edit.php')) { ?>
+          <li class="sidebar-item active">
+            <a href="./brand.php" class="sidebar-link">
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+          <? } elseif(strstr($_SERVER['REQUEST_URI'],'category_add.php')) { ?>
+          <li class="sidebar-item active">
+            <a href="./category.php" class="sidebar-link">
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+          <? } elseif(strstr($_SERVER['REQUEST_URI'],'category_edit.php')) { ?>
+          <li class="sidebar-item active">
+            <a href="./category.php" class="sidebar-link">
+              <!-- <i class="bi bi-grid-fill"></i> -->
+              <span>ย้อนกลับ</span>
+            </a>
+          </li>
+          <? } ?>
         </ul>
       </div>
       <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

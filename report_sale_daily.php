@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./head_back-end.php');
 include('./header_back-end.php');
 
@@ -154,10 +155,11 @@ $datesave2 = "".$day2." ".$month2." ".$year2."";
                       tb_order.status_id = tb_status.status_id 
                       WHERE tb_order.status_id = '2'
                       AND tb_order.order_date BETWEEN '$date1' AND '$date2'";
-                      $result = $conn->query($sql);
-                      if ($result->num_rows > 0) {
-                        // output data of each row
-                        while ($row = $result->fetch_assoc()) {
+                      $result = $conn->query($sql); # query ข้อมูลในฐานข้อมูลมาแสดง
+                      if ($result->num_rows > 0) { # query ข้อมูลสำเร็จหรือไม่ และมีรายการข้อมูลหรือไม่
+                        # output data of each row
+                        # วนลูปแสดงข้อมูล
+                        while ($row = $result->fetch_assoc()) { # ส่งค่าทั้งแบบ assoc และ row
                           $date_set = date_create($row["order_date"]);
                           $day = date_format($date_set, "d");
                           $month = $date_th[date_format($date_set, "n")];

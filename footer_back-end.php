@@ -34,28 +34,11 @@
 
   <!-- <script src="./assets/back-end/mazer/dist/assets/vendors/fontawesome/all.min.js"></script> -->
   <script>
-  $(document).ready(function(){
-    $("#datepicker1").datepicker({
-      format: "yyyy",
-      viewMode: "years", 
-      minViewMode: "years",
-      autoclose:true
-    });   
-  })
-  $(document).ready(function(){
-    $("#datepicker2").datepicker({
-      format: "yyyy",
-      viewMode: "years", 
-      minViewMode: "years",
-      autoclose:true
-    });   
-  })
-</script>
-  <script>
     var listImage = new Array();
     var image_list = $("#image_list");
     var upload = $("#btn_upload");
 
+    // รับค่ารูปภาพทั้งหมดของแต่ละสินค้านั้นๆ
     $(document).ready(function() {
       let product_id = $("#product_id").val();
       $.ajax({
@@ -85,6 +68,7 @@
       });
     });
 
+    // อัปโหลดรูปภาพ
     async function uploadImage() {
 
       var fd = new FormData();
@@ -125,6 +109,7 @@
       });
     };
 
+    // ลบรูปภาพ
     function deleteImage(data) {
       listImage = listImage.filter((value) => value != data);
       image_list.empty();
@@ -143,6 +128,7 @@
       });
     }
 
+    // เพิ่มสินค้า
     function createProduct() {
       let product_name = $("#product_name").val();
       let brand_id = $("#brand_id").val();
@@ -185,6 +171,7 @@
       });
     }
 
+    // แก้ไขสินค้า
     function editProduct() {
       let product_id = $("#product_id").val();
       let product_name = $("#product_name").val();
@@ -231,6 +218,7 @@
       });
     }
 
+    // เพิ่มรูปภาพ
     async function addImage(image, product_id) {
       await $.ajax({
         url: "query/add_image_product.php",
@@ -243,6 +231,7 @@
       });
     }
 
+    // ลบสินค้า
     function deleteProduct(id) {
       Swal.fire({
         title: "คุณแน่ใจหรือไม่?",
@@ -295,6 +284,7 @@
       })
     }
 
+    // เพิ่มยี่ห้อ
     function createBrand() {
       let brand_name = $("#brand_name").val();
       $.ajax({
@@ -304,15 +294,28 @@
           "brand_name" : brand_name
         },
         success: function(response) {
-          console.log(response);
-          setTimeout(function() {
-            window.location.replace("brand.php");
-            //console.log(product_name, product_price, product_quantity, product_description, response);
-          }, 300);
+          if (response == "success") {
+            alert("ดำเนินการเสร็จสิ้น");
+            console.log(response);
+            setTimeout(function() {
+              window.location.replace("brand.php");
+              //console.log(product_name, product_price, product_quantity, product_description, response);
+            }, 300);
+          } else if (response == "error") {
+            alert("เกิดปัญหาการ insert db ผิดพลาด");
+            console.log("data: " + response);
+          } else if (response == "already") {
+            alert("มีชื่อยี่ห้อนี้อยู่ในระบบแล้ว");
+            $("#brand_name").val("");
+          } else {
+            console.log("data: " + response);
+            alert("ERROR: " + response);
+          }
         }
       });
     }
   
+    // แก้ไขยี่ห้อ
     function editBrand() {
       let brand_id = $("#brand_id").val();
       let brand_name = $("#brand_name").val();
@@ -333,6 +336,7 @@
       });
     }
 
+    // ลบยี่ห้อ
     function deleteBrand(id) {
       Swal.fire({
         title: "คุณแน่ใจหรือไม่?",
@@ -385,6 +389,7 @@
       })
     }
 
+    // เพิ่มประเภท
     function createCategory() {
       let category_name = $("#category_name").val();
       $.ajax({
@@ -394,15 +399,28 @@
           "category_name" : category_name
         },
         success: function(response) {
-          console.log(response);
-          setTimeout(function() {
-            window.location.replace("category.php");
-            //console.log(product_name, product_price, product_quantity, product_description, response);
-          }, 300);
+          if (response == "success") {
+            alert("ดำเนินการเสร็จสิ้น");
+            console.log(response);
+            setTimeout(function() {
+              window.location.replace("category.php");
+              //console.log(product_name, product_price, product_quantity, product_description, response);
+            }, 300);
+          } else if (response == "error") {
+            alert("เกิดปัญหาการ insert db ผิดพลาด");
+            console.log("data: " + response);
+          } else if (response == "already") {
+            alert("มีชื่อประเภทนี้อยู่ในระบบแล้ว");
+            $("#category_name").val("");
+          } else {
+            console.log("data: " + response);
+            alert("ERROR: " + response);
+          }
         }
       });
     }
 
+    // แก้ไขประเภท
     function editCategory() {
       let category_id = $("#category_id").val();
       let category_name = $("#category_name").val();
@@ -423,6 +441,7 @@
       });
     }
 
+    // ลบประเภท
     function deleteCategory(id) {
       Swal.fire({
         title: "คุณแน่ใจหรือไม่?",

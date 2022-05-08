@@ -1,4 +1,5 @@
 <?php
+# incude ครั้งเดียวในไฟล์ที่เรียกใช้งาน
 include('./../connect.php');
 $product_id = $_POST['product_id'];
 $product_name = $_POST['product_name'];
